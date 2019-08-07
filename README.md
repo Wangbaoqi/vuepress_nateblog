@@ -1,2 +1,0 @@
-# vuepress_nate
-blog
