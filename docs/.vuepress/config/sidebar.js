@@ -31,20 +31,19 @@ module.exports = {
       title: '数据结构',
       collapsable: false,
       children: [
-        '/algorithm/structure/',
+        '/algorithm/structure/array',
+        '/algorithm/structure/link',
       ]
     },
     {
       title: '前端算法',
       collapsable: false,
       children: [
-        '/algorithm/frontalgorithm/array',
-        '/algorithm/frontalgorithm/link',
-
+        ''
       ]
     },
   ],
   '/performance/': [
-    ''
+    '',
   ]
 }
