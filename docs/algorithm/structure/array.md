@@ -429,6 +429,8 @@ function arrayDelayering(array) {
 **public method**
 ```js
 // 交换相邻数据
+let arr = [2,1,5,4,9,4,6];
+
 function swap(arr, index, indexNext) {
   var cur = arr[index];
   arr[index] = arr[indexNext];
@@ -440,7 +442,6 @@ function swap(arr, index, indexNext) {
 冒泡排序是比较任何相邻的元素，比较两者大小，互相交换。这个也是性能最慢的一个，时间复杂度为O(n) = n * n
 
 ```js
-let arr = [2,1,5,4,9,4,6];
 
 // 冒泡排序
 function bubble(arr) {
@@ -484,9 +485,73 @@ function select(arr) {
     }
   }
 }
-
 ```
 
+### 插入排序
+
+插入排序每次排一个数据项 在时间复杂度上要高于冒泡排序 
+
+```js
+function insertion(arr) {
+  let len = arr.length,
+      j, temp;
+  for(var i = 1; i < len; i++) {
+    j = i;
+    temp = arr[i];
+    while(j > 0 && arr[j-1] > temp) {
+      arr[j] = arr[j-1]
+      j--
+    }
+    arr[j] = temp
+  }
+}
+```
+
+### 归并排序
+归并排序是第一个实际被使用的排序，上述三个性能都不好，归并排序的时间复杂度要稍微好一点O(n) = n*log^n
+归并排序是一种分治算法。其思想是将原始数组切分成较小的数组，直到每个小数组只有一个位置，接着将小数组归并成较大的数组，直到最后只有一个排序完毕的大数组
+
+```js
+function mergeSort() {
+  array = mergeSortFn(array);
+}
+// 递归函数
+function mergeSortFn(arr) {
+  let len = arr.length;
+  if(len == 1) return arr;
+
+  let mid = Math.floor(length / 2);
+  let left = arr.slice(0, mid);
+  let right = arr.slice(mid, len);
+
+  return merge(mergeSortFn(left), mergeSortFn(right))
+}
+// 归并函数
+function merge(left, right) {
+  let result = [];
+  let il = 0;
+  let ir = 0;
+
+  while(il < left.length && ir < right.length) {
+    if(left[il] < right[ir]) {
+      result.push(left[il++])
+    }else {
+      result.push(right[ir++])
+    }
+  }
+
+  while(il < left.length) {
+    result.push(left[il++])
+  }
+
+  while(ir < right.length) {
+    result.push(left[ir++])
+  }
+
+  return result
+}
+mergeSort()
+```
 
 
 
