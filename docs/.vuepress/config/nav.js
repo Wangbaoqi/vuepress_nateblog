@@ -22,10 +22,10 @@ module.exports = [
     text: '数据结构算法',
     items: [{
       text: '数据结构',
-      link: '/algorithm/structure/'
+      link: '/algorithm/structure/array/'
     },{
       text: '前端算法',
-      link: '/algorithm/'
+      link: '/algorithm/frontalgorithm/'
     }]
   },
   {

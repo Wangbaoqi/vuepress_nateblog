@@ -73,7 +73,7 @@ for(let i = 0, len = arr.length; i < len; i++){
 }
 ```
 
-**使用 <font color=#ff502c bgcolor=#fff5f5 size=4 >**forEach**</font> 语句**
+#### **使用 <font color=#ff502c bgcolor=#fff5f5 size=4 >**forEach**</font> 语句**
 
 ```javascript
 let arr = [0,1,3,4]
@@ -162,25 +162,13 @@ arr.filter(e => e.age > 20) // [{name: 'frank', age: 29}]
 
 **使用 <font color=#ff502c bgcolor=#fff5f5 size=3 >**reduce**</font> 语句**
 
-方法对累加器和数组中的每个元素（从左到右）应用一个函数，将其减少为单个值。
+方法对累加器和数组中的每个元素（从左到右）应用一个函数，将其减少为单个值；除了回调参数之外，第二个参数作为第一次调用 callback函数时的第一个参数的值。 如果没有提供初始值，则将使用数组中的第一个元素。 在没有初始值的空数组上调用 reduce 将报错。
 
 ```javascript
-let arr = [{
-  name: 'ruchal',
-  age: 20
-},{
-  name: 'nate',
-  age: 22
-},{
-  name: 'frank',
-  age: 29
-}]
-
 // pre 累加结果，cur 当前值，curIndex 当前索引，arr 当前数组
 [9,2,3,5].reduce((pre, cur, curIndex, arr) => {
   return pre + cur
-}) // 19
-
+}, []) // 19
 ```
 
 
@@ -241,33 +229,126 @@ console.timeEnd('map time') // map time: 68.803955078125ms
 > <font color=#ff502c bgcolor=#fff5f5 size=3 >**for**</font> > <font color=#ff502c bgcolor=#fff5f5 size=3 >**foreach**</font> > <font color=#ff502c bgcolor=#fff5f5 size=3 >**for-of**</font> > <font color=#ff502c bgcolor=#fff5f5 size=3 >**map**</font> > <font color=#ff502c bgcolor=#fff5f5 size=3 >**for-in**</font>
 
 
-### 数据的排序
+
+### 数组去重
+
+在很多的业务场景下，数组都会需要去重，但是去重的场景也是不尽相同的，譬如：
+
+1. 数组value是同一种类型
+2. 数组value是不同的类型
+3. 数组value是引用类型
+
+
+**双层循环**
+
+双层循环主要是定义一个要 return 的数组（已去重），遍历原数组以及新数组，如果两者的元素不等时，则此元素就不是重复元素
+
+```js
+var arr = [1, 2, '1', 3, 1];
+
+var newArr = [];
+
+for(var i = 0; i < arr.length; i++) {
+  for(var j = 0; j < newArr.length; j++) {
+    if(arr[i] === newArr[j]) {
+      break;
+    }
+  }
+  if(j === newArr.length) {
+    newArr.push(arr[i])
+  }
+}
+```
+
+**indexOf - 01**
+
+indexOf主要是遍历原数组，如果新数组中没有此元素，则添加到新数组中
 
 
 ```js
-let kk = '33'
-console.log(kk)
+let arr = [1, 2, '1', 3, 1];
+
+let newArr = [];
+
+for(var i = 0; i < arr.length; i++) {
+  if(newArr.indexOf(arr[i]) === -1) {
+    newArr.push(arr[i])
+  }
+}
+
+```
+
+**indexOf - 02**
+
+indexOf第二种方法判断重复元素第一次出现的位置和现在得位置是否相同
 
 
-// 生成新数组的迭代器的方法
+```js
+function unique() {
+  let arr = [1, 2, '1', 3, 1];
+  return Array.prototype.filter.call(arr, (item, index) => {
+    return arr.indexOf(item) === index
+  })
+}
+```
 
-// map
-// filter
+**相邻元素**
+
+相邻元素去重主要是先对数组进行排序，之后对相邻元素进行判断，如果不等，则添加
+
+<font color=#ff502c bgcolor=#fff5f5 size=3 >**这个方法有局限性：**</font>数组元素的数据类型必须是同类型
+
+```js
+let arr = [1, 2, '1', 3, 1]; // print [1,'1',1, 2, 3]
+
+let newArr = [];
+
+let sarr = arr.sort()
+
+for(let i = 0; i < sarr.length; i++) {
+  if(sarr[i] !== sarr[i-1]) {
+    newArr.push(sarr[i])
+  }
+}
+```
+
+**ES6语法基本类型**
+
+```js
+let arr = [1, 2, '1', 3, 1]; 
+// 扩展运算符andset数据结构
+let newArr = [...new Set(arr)];
+
+// Array.from and set 数据结构
+let newArr1 = Array.from(new Set(arr))
+```
 
 
+**E6语法引用类型**
 
 
-// 不生成新数组的迭代器方法
+```javascript
+function removeDuplicates( arr, prop ) {
+  let obj = {};
+  return Object.keys(arr.reduce((prev, next) => {
+    if(!obj[next[prop]]) obj[next[prop]] = next;
+    return obj;
+  }, obj)).map((i) => obj[i]);
+}
 
-// forEach
-// some
-// every
-// reduce
+function uniqueArray(a) {
+  return [...new Set(a.map(o => JSON.stringify(o)))].map(s => JSON.parse(s))
+}
+```
 
+## 二维数组多维数组
 
-/**
- * 二维数组
- */
+二维数组的访问以及二维数组的扁平化
+
+### 二维数组的定义以及访问
+
+```js
+
 Array.matrix = function(numrows, numcols, initial) {
   var arr = [];
   for(let i = 0; i < numrows; i++) {
@@ -303,6 +384,110 @@ for(let r = 0; r < dataList.length; r++) {
   }
   console.log(`col${r+1}:${col}`)
 }
+```
 
+### 多维数组的扁平化
+
+<font color=#ff502c bgcolor=#fff5f5 size=3 >**面试题**</font>
+
+```js
+var arr = [1,2[3,4,[5,6,7],8,9],10]
+
+// 嵌套数组的深度 默认是1
+var depth = Infinity; 
+
+// 使用 Array.prototype.flat IE不支持
+var flatArr = arr.flat(depth)
+
+
+// 使用reduce concat 
+function flattenDeepd(arr) {
+  return arr.reduce((acc, val) => { 
+    return Array.isArray(val) ? acc.concat(flattenDeep(val)) : acc.concat(val)
+  }, [])
+}
+
+// 使用map
+function arrayDelayering(array) {
+  var newArr = [];
+  arr.map((item) => {
+    if(Array.isArray(item)) {
+      newArr.push.apply(newArr, this.arrayDelayering(item));
+    }else {
+      newArr.push(item);
+    }
+  })
+  return newArr
+}
+```
+
+
+## 数组的排序算法
+
+数组的排序是日常业务跟需求中用到最广泛的，因此非常有必要掌握
+
+**public method**
+```js
+// 交换相邻数据
+function swap(arr, index, indexNext) {
+  var cur = arr[index];
+  arr[index] = arr[indexNext];
+  arr[indexNext] = cur;
+}
+```
+### 冒泡排序
+
+冒泡排序是比较任何相邻的元素，比较两者大小，互相交换。这个也是性能最慢的一个，时间复杂度为O(n) = n * n
+
+```js
+let arr = [2,1,5,4,9,4,6];
+
+// 冒泡排序
+function bubble(arr) {
+  let len = arr.length;
+  for(let i = 0; i < len; i++) {
+    for(let j = 0; j < len - 1; j++) {
+      if(arr[j] > arr[j+1]) {
+        swap(arr, j, j+1)
+      }
+    }
+  }
+}
+
+// 改进点；循环之前已经排好序了 之后的几次循环也会执行的，因此在内循环的次数可以改成 len - 1 - i
+for(let i = 0; i < len; i++) {
+  for(let j = 0; j < len - 1 - i; j++) {
+    if(arr[j] > arr[j+1]) {
+      swap(arr, j, j+1)
+    }
+  }
+}
+```
+
+### 选择排序
+
+选择排序是一种原址排序算法，大致思路是找到最小的值并将其放置第一位，接着找到第二小的值将其放到第二位，以此类推。。
+
+```js
+function select(arr) {
+  let len = arr.length,
+      indexMin;
+  for(let i = 0; i < len - 1; i++) {
+    indexMin = i;
+    for(let j = i; j < len; j++) {
+      if(arr[indexMin] > arr[j]) {
+        indexMin = j
+      }
+    }
+    if(indexMin !== i) {
+      swap(arr, i, indexMin)
+    }
+  }
+}
 
 ```
+
+
+
+
+
