@@ -14,7 +14,7 @@ module.exports = [
         link: '/front/css/'
       },{
         text: 'Javascript',
-        link: '/front/javascript/primary/'
+        link: '/front/javascript/primary/JS 数据类型/'
       }]
     }],
   },
@@ -25,7 +25,7 @@ module.exports = [
       link: '/algorithm/structure/array/'
     },{
       text: '前端算法',
-      link: '/algorithm/frontalgorithm/'
+      link: '/algorithm/frontalgorithm/search'
     }]
   },
   {

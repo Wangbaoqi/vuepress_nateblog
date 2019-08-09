@@ -526,7 +526,7 @@ function mergeSortFn(arr) {
 
   return merge(mergeSortFn(left), mergeSortFn(right))
 }
-// 归并函数
+// 归并函数 比较两个元素的大小
 function merge(left, right) {
   let result = [];
   let il = 0;
@@ -550,7 +550,6 @@ function merge(left, right) {
 
   return result
 }
-mergeSort()
 ```
 
 

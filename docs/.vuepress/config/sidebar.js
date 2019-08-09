@@ -12,6 +12,12 @@ module.exports = {
       collapsable: false,
       children: [
         '/front/css/',
+        '/front/css/box',
+        '/front/css/layout',
+        '/front/css/centered',
+        '/front/css/BFC',
+        '/front/css/response',
+
       ]
     },
     {
@@ -21,7 +27,8 @@ module.exports = {
         '/front/javascript/primary/JS 数据类型',
         '/front/javascript/primary/JS 作用域以及闭包',
         '/front/javascript/primary/JS this以及原型',
-        '/front/javascript/intermediate/',
+        '/front/javascript/primary/JS eventLoop',
+        '/front/javascript/primary/JS 异步',
 
       ]
     },
@@ -33,13 +40,18 @@ module.exports = {
       children: [
         '/algorithm/structure/array',
         '/algorithm/structure/link',
+        '/algorithm/structure/stack',
       ]
     },
     {
       title: '前端算法',
       collapsable: false,
       children: [
-        ''
+        '/algorithm/frontalgorithm/search',
+        '/algorithm/frontalgorithm/recursion',
+        '/algorithm/frontalgorithm/dynamic',
+        '/algorithm/frontalgorithm/greedy',
+
       ]
     },
   ],
