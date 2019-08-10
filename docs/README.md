@@ -1,6 +1,6 @@
 ---
 home: true
-heroImage: /logo.png
+# heroImage: /logo.png
 actionText: 起步 →
 actionLink: /front/html/
 features:
