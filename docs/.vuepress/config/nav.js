@@ -8,7 +8,7 @@ module.exports = [
       text: 'Web大前端',
       items: [{
         text: 'HTML',
-        link: '/front/html/'
+        link: '/front/html/web语义/'
       },{
         text: 'CSS',
         link: '/front/css/'
@@ -25,7 +25,20 @@ module.exports = [
       link: '/algorithm/structure/array/'
     },{
       text: '前端算法',
-      link: '/algorithm/frontalgorithm/search'
+      link: '/algorithm/frontalgorithm/search/'
+    }]
+  },
+  {
+    text: 'web 框架',
+    items: [{
+      text: '框架思想',
+      link: '/frame/mind/mvvm'
+    },{
+      text: 'Vue 全家桶',
+      link: '/frame/vue/component'
+    },{
+      text: 'react 全家桶',
+      link: '/frame/react/component'
     }]
   },
   {

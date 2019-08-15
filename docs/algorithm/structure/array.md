@@ -14,6 +14,8 @@
 借用一张img 来掌握array的方法 
 ![array-methods](https://user-gold-cdn.xitu.io/2017/12/20/1607405dab59a110?imageslim)
 
+
+
 **常见的操作数组的API有** 
 
 | method        | description                                  

@@ -1,14 +1,20 @@
 module.exports = {
   '/front/': [
     {
-      title: 'HTML跟HTML5的前世今生',
+      title: 'HTML5新增功能组',
       collapsable: false,
       children: [
-        '/front/html/',
+        '/front/html/web语义',
+        '/front/html/web通信',
+        '/front/html/web离线存储',
+        '/front/html/web多媒体',
+        '/front/html/web3D图像',
+        '/front/html/web性能集成',
+        '/front/html/web设备访问',
       ]
     },
     {
-      title: 'CSS跟CSS3的前世今生',
+      title: 'CSS3新增特性组',
       collapsable: false,
       children: [
         '/front/css/',
@@ -57,5 +63,28 @@ module.exports = {
   ],
   '/performance/': [
     '',
-  ]
+  ],
+  '/frame/': [
+    {
+      title: '框架思想',
+      collapsable: false,
+      children: [
+        '/frame/mind/mvvm',
+      ]
+    },
+    {
+      title: 'Vue 全家桶',
+      collapsable: false,
+      children: [
+        '/frame/vue/component',
+      ]
+    },
+    {
+      title: 'React 全家桶',
+      collapsable: false,
+      children: [
+        '/frame/react/component',
+      ]
+    },
+  ],
 }
