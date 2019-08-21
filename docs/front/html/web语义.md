@@ -31,4 +31,35 @@ web 表单的改进：强制校验API，一些新的属性，一些新的 input�
 [more-API-prefer-here](https://developer.mozilla.org/zh-CN/docs/Learn/HTML/Forms/Data_form_validation)
 
 
+## 块级元素 行内元素 空元素
+
+**块级元素**
+```html
+<!-- 块级元素 以下 以及设置display: block 的元素 -->
+<p>
+<div>
+<header>
+<article>
+<aside>
+<section>
+<footer>
+<ul>
+```
+
+**行内元素**
+
+```html
+<!-- 行内元素 以及设置display: inline 的元素 -->
+<span>
+<a>
+<img>
+<input>
+```
+
+**空元素**
+
+```html
+<br>
+<hr>
+```
 
