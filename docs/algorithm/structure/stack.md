@@ -84,7 +84,44 @@ const isValid = (arr) => {
   }
   return !newStack.size()
 }
+```
 
+### String 压缩 
 
+::: tip
+例如: 输入 absssffdvv 输出 abs3f2dv2
+:::
+
+```js
+/**
+ * 字符串压缩
+ * @param {*} str 
+ */
+function strCombination(str) {
+  // 校验英文字符以及长度
+  if (!/^[A-Za-z]{1,100}$/.test(str)) {
+    return '请输入由英文字符组成且不能超过100';
+  }
+
+  let newStr = '';
+  const currentArr = str.split('');
+  const stack = new Stack();
+
+  // 字符串压缩
+  const combin = (str) => {
+    return str + stack.peek() + (stack.size() > 1 ? stack.size() : '');
+  }
+
+  for (let item of currentArr) {
+    // 入栈元素跟栈顶元素不同 则压缩字符串并且清空栈
+    if (item !== stack.peek() && stack.size()) {
+      newStr = combin(newStr);
+      stack.clear();
+    }
+    // 入栈
+    stack.append(item);
+  }
+  return combin(newStr);
+}
 
 ```
