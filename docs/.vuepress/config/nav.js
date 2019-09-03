@@ -109,6 +109,10 @@ module.exports = [
           {
             text: "echarts",
             link: "https://echarts.baidu.com/"
+          },
+          {
+            text: "service work",
+            link: "/docs/pages/serviceWorker/index.html"
           }
         ]
       },

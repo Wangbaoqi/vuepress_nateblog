@@ -23,7 +23,7 @@ module.exports = {
         '/front/css/centered',
         '/front/css/BFC',
         '/front/css/response',
-
+        '/front/css/css技术收纳',
       ]
     },
     {
