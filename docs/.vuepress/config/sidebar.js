@@ -57,6 +57,7 @@ module.exports = {
         '/algorithm/frontalgorithm/recursion',
         '/algorithm/frontalgorithm/dynamic',
         '/algorithm/frontalgorithm/greedy',
+        '/algorithm/frontalgorithm/timer',
 
       ]
     },

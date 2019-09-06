@@ -201,3 +201,39 @@ var obj = {
 obj.foo()
 
 ```
+
+
+
+
+## 原型 
+
+
+
+
+
+
+
+
+
+
+### 面对对象 oop
+
+
+#### 继承
+
+```js
+function Parent(value) {
+  this.value = value
+}
+
+Parent.prototype.getVal = function() {
+  return this.value
+}
+
+function Child(value) {
+  Parent.call(this, value)
+}
+
+Child.prototype = new Parent();
+
+``` 
