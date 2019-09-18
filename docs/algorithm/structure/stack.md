@@ -56,7 +56,7 @@ stack.append('2')
 stack.append('2')
 
 ```
-## 面试题
+## 栈的应用
 
 
 ### String 中，大，中，小括号是否合法
@@ -125,3 +125,10 @@ function strCombination(str) {
 }
 
 ```
+
+
+### 从十进制到二进制
+
+::: tip
+十进制转化成二进制（满二进一）
+:::
