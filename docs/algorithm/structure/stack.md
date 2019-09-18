@@ -132,3 +132,21 @@ function strCombination(str) {
 ::: tip
 十进制转化成二进制（满二进一）
 :::
+
+```js
+function divideBy2(decNumber) {
+  let stack = new Stack();
+  let binaryStr = '';
+
+  while(decNumber > 0) {
+    stack.append(Math.floor(decNumber%2))
+    decNumber = Math.floor(decNumber/2)
+  }
+
+  while(stack.size()) {
+    binaryStr += stack.peek().toString()
+  }
+  return binaryStr;
+}
+
+```
