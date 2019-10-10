@@ -1,7 +1,7 @@
 ---
 home: true
-# heroImage: /javascript.gif
-actionText: 起步 →
+heroImage: /logo.gif
+actionText: 开始 →
 actionLink: /front/
 features:
 - title: 技术文章
