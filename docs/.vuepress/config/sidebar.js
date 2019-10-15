@@ -1,7 +1,7 @@
 module.exports = {
   '/front/': [
     {
-      title: 'HTML5新增功能组',
+      title: 'HTML5特性',
       collapsable: false,
       children: [
         '/front/html/web语义',
@@ -14,10 +14,9 @@ module.exports = {
       ]
     },
     {
-      title: 'CSS3新增特性组',
+      title: 'CSS3特性',
       collapsable: false,
       children: [
-        '/front/css/',
         '/front/css/box',
         '/front/css/layout',
         '/front/css/centered',
@@ -30,11 +29,11 @@ module.exports = {
       title: 'JavaScript 忍者秘籍',
       collapsable: false,
       children: [
-        '/front/javascript/primary/JS 数据类型',
-        '/front/javascript/primary/JS 作用域以及闭包',
-        '/front/javascript/primary/JS this以及原型',
-        '/front/javascript/primary/JS eventLoop',
-        '/front/javascript/primary/JS 异步',
+        '/front/javascript/primary/JS数据类型',
+        '/front/javascript/primary/JS作用域以及闭包',
+        '/front/javascript/primary/JSthis以及原型',
+        '/front/javascript/primary/JSeventLoop',
+        '/front/javascript/primary/JS异步',
 
       ]
     },
@@ -64,6 +63,8 @@ module.exports = {
   ],
   '/performance/': [
     '',
+  ],
+  '/network/': [
   ],
   '/frame/': [
     {
