@@ -86,6 +86,8 @@ module.exports = {
       collapsable: false,
       children: [
         '/frame/react/component',
+        '/frame/react/reduxSelf',
+
       ]
     },
   ],
