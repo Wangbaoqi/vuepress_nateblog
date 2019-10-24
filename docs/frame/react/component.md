@@ -1,4 +1,41 @@
-# react 组件化
+# React 组件化
+
+## 理解React组件
+![react-component](https://cdn.img.wenhairu.com/images/2019/10/23/ANsAP.png)
+
+* react组件可以说是内部维护的状态和外部传入的props组成的
+* react组件也可以说是一个纯函数(返回的值完全由传入的值决定)
+* react组件也遵循的是单项数据流
+
+### 如何创建一个React组件
+
+**<font color=#46bd87 bgcolor=#46bd87 size=4 >创建思路以及原则</font>**
+
+**创建思路**
+
+1. 创建静态UI
+2. 思考组件的状态组成 
+3. 思考组件的交互方式
+
+**创建原则** 
+
+* 单一职责原则(每个组件只做一件事，组件变的复杂，可以拆分)
+* 尽量无状态原则(组件所需数据尽量通过props传入，提高复用性，这种组件也可以说是 Pure 或者 Dumb 组件)
+
+
+**受控组件**
+这两中一般在表单元素中使用的多
+受控组件一般是由使用者控制维护
+![react-component](https://cdn.img.wenhairu.com/images/2019/10/23/AN34t.png)
+
+非受控组件一般是由DOM自身维护
+**和非受控组件**
+![react-component](https://cdn.img.wenhairu.com/images/2019/10/23/ANzEC.png)
+
+
+
+
+
 
 
 ## 容器组件 VS 展示组件

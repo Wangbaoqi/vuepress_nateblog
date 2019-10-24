@@ -87,6 +87,8 @@ module.exports = {
       children: [
         '/frame/react/component',
         '/frame/react/reduxSelf',
+        '/frame/react/reactRedux',
+
 
       ]
     },
