@@ -542,3 +542,13 @@ export default Theme;
 
 ## React-redux 实现总结
 
+react-redux 其实就是context结合了redux 变成了react专有的状态管理机制。
+
+**<font color=#46bd87 bgcolor=#46bd87 size=4 >实现思路：</font>**
+
+1. 首先实现了createStore, 接收了函数reducer为参数，其功能包含了获取状态（getState）、订阅监听（subscribe）、修改状态（dispatch）
+2. 紧接着实现了reducer, 它是一个纯函数，接收state和action为参数，初始化state，并根据action.type 来修改state
+3. 之后为了解决子组件中context代码冗余问题，提出了高阶组件Connect，是专门将context和PureComponent连接了起来
+4. 最后为了将context从业务组件中抽离，提出了Provider组件，专门处理有关context给到store的操作
+
+react-redux大致的实现思路是这样，有关这个完整的例子，请看[这里](https://github.com/Wangbaoqi/react-nuggets/tree/master/src/reactStudy/redux)

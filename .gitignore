@@ -3,4 +3,6 @@
 build_artifacts
 node_modules
 zip
+dist
+nateblog
 .vscode
