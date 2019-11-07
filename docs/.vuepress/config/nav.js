@@ -78,6 +78,10 @@ module.exports = [
             link: "https://vuepress.vuejs.org/zh/"
           },
           {
+            text: "Vssue",
+            link: "https://vssue.js.org/zh/"
+          },
+          {
             text: "git",
             link: "https://git-scm.com/"
           },

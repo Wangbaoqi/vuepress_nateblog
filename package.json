@@ -3,5 +3,9 @@
     "dev": "vuepress dev docs",
     "docs:build": "vuepress build docs",
     "deploy": "bash deploy.sh"
+  },
+  "dependencies": {
+    "@vssue/api-github-v3": "^1.1.2",
+    "@vssue/vuepress-plugin-vssue": "^1.2.0"
   }
 }

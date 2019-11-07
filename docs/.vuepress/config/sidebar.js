@@ -88,6 +88,7 @@ module.exports = {
         '/frame/react/component',
         '/frame/react/reduxSelf',
         '/frame/react/reactRedux',
+        '/frame/react/reactError',
 
 
       ]

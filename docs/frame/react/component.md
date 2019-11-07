@@ -34,9 +34,56 @@
 
 
 
+### React 组件的生命周期
+
+在掌握的react的生命周期之前可以看下生命周期图谱 
+
+![react-component-lifeCycle](https://cdn.img.wenhairu.com/images/2019/11/05/ADSX6.png)
 
 
+#### 组件挂载
 
+在组件挂载的阶段(组件被创建并且插入DOM树中), 生命周期钩子函数调用的顺序
+
+* **[constructor()](https://zh-hans.reactjs.org/docs/react-component.html#constructor)**
+* [static getDerivedStateFromProps()](https://zh-hans.reactjs.org/docs/react-component.html#static-getderivedstatefromprops)
+* **[render()](https://zh-hans.reactjs.org/docs/react-component.html#render)**
+* **[componentDidMount](https://zh-hans.reactjs.org/docs/react-component.html#componentdidmount)**
+
+::: warning
+注意：
+componentWillMount 钩子即将过时，避免使用
+:::
+
+#### 组件更新
+
+当组件的props或者state发生变化时，组件会重新渲染，其调用生命周期钩子函数的顺序
+
+* [static getDerivedStateFromProps()](https://zh-hans.reactjs.org/docs/react-component.html#static-getderivedstatefromprops)
+* [shouldComponentUpdate()](https://zh-hans.reactjs.org/docs/react-component.html#shouldcomponentupdate)
+* **[render()](https://zh-hans.reactjs.org/docs/react-component.html#render)**
+* [getSnapshotBeforeUpdate()](https://zh-hans.reactjs.org/docs/react-component.html#getsnapshotbeforeupdate)
+* **[componentDidUpdate()](https://zh-hans.reactjs.org/docs/react-component.html#componentdidupdate)**
+
+
+::: warning
+注意：
+componentWillUpdate
+componentWillReciveProps 钩子即将过时，避免使用
+:::
+
+#### 组件卸载
+
+当组件从DOM树中移除时，调用此钩子函数
+
+* **[componentWillUnmount()](https://zh-hans.reactjs.org/docs/react-component.html#componentwillunmount)
+
+#### 错误处理
+
+当渲染过程，生命周期，或子组件的构造函数中抛出错误时，会调用如下方法
+
+* [static getDerivedStateFromError()](https://zh-hans.reactjs.org/docs/react-component.html#static-getderivedstatefromerror)
+* [componentDidCatch()](https://zh-hans.reactjs.org/docs/react-component.html#componentdidcatch)
 
 ## 容器组件 VS 展示组件
 
@@ -147,5 +194,6 @@ React v16.6.0 之后的版本 可以使用一个新功能 React.memo来完美Rea
 
 
 
-## 组件复合 
 
+
+<Vssue title="React Component" />

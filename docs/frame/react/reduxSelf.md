@@ -199,3 +199,6 @@ function render() {
 }
 
 ```
+
+
+<Vssue title="Redux 手动实现" />
