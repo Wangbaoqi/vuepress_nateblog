@@ -46,11 +46,11 @@ module.exports = [
   },
   {
     text: '网络协议',
-    link: '/network/'
+    link: '/network/httpProto/http协议'
   },
   {
     text: '性能优化',
-    link: '/performance/',
+    link: '/performance/frontPerformance/front优化',
   },
   {
     text: "官网链接",

@@ -62,9 +62,22 @@ module.exports = {
     },
   ],
   '/performance/': [
-    '',
+    {
+      title: '前端优化',
+      collapsable: false,
+      children: [
+        '/performance/frontPerformance/front优化'
+      ]
+    },
   ],
   '/network/': [
+    {
+      title: 'HTTP协议',
+      collapsable: false,
+      children: [
+        '/network/httpProto/http协议',
+      ]
+    },
   ],
   '/frame/': [
     {
