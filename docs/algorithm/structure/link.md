@@ -2,142 +2,135 @@
 
 
 
+
+
 ```js
-// 列表
 
-// what why 
-
-
-// 实现列表类
-
-function List() {
-  this.listSize = 0;
-  this.dataStore = [];
-  this.remove = remove;
-  this.append = append;
-  this.toString = toString;
-  this.length = length;
-  this.find = find;
-  this.insert = insert;
-  this.clear = clear;
-  this.contains = contains;
-  this.front = front;
-  this.end = end;
-  this.pos = pos;
-  this.prev = prev;
-  this.next = next;
-  this.curPos = curPos;
-  this.moveTo = moveTo;
-  this.getEle = getEle
-}
-
-function append(e) {
-  this.dataStore[this.listSize++] = e;
-}
-
-function find(e) {
-  console.log(this.dataStore)
-  for(var i = 0; i < this.dataStore.length; i++) {
-    if(this.dataStore[i] === e) {
-      return i
+// 链表
+// 伪代码 结构
+var linkList = {
+  data: 'head',
+  next: {
+    data: 'first',
+    next: {
+      data: 'second',
+      next: null
     }
   }
-  return -1
 }
 
-function remove(e) {
-  const findAt = this.find(e);
-  if(findAt > -1) {
-    this.dataStore.splice(findAt, 1);
-    --this.listSize;
-    return true;
+// 结点 - 内存块
+function Node(element) {
+  this.data = element;
+  this.next = null;
+}
+
+function LinkList() {
+  // 头结点
+  this.head = new Node('head');
+
+}
+
+// 链表尾结点新增结点
+LinkList.prototype.append = function (newElement) {
+  var newNode = new Node(newElement);
+  var curNode = this.head;
+  while (curNode.next) {
+    curNode = curNode.next;
   }
-  return false
+  curNode.next = newNode;
 }
 
-function toString() {
-  return this.dataStore;
-}
 
-function length() {
-  return this.listSize
-}
+// 通过结点值查找结点
+LinkList.prototype.findByValue = function (value) {
+  // 遍历 从头结点
 
-function insert(e, a) {
-  const findAt = this.find(a);
-  if(findAt > -1) {
-    this.dataStore.splice(findAt+1, 0, e);
-    ++this.listSize;
-    return true;
+  var curNode = this.head.next;
+  while (curNode != null && curNode.data != value) {
+    curNode = curNode.next;
   }
-  return false;
+  return curNode === null ? -1 : curNode;
 }
 
-function clear() {
-  delete this.dataStore;
-  this.dataStore = [];
-  this.listSize = 0
-}
-
-function contains(e) {
-  for(let i = 0; i < this.dataStore.length; i++) {
-    if(this.dataStore[i] == e) {
-      return true;
-    }
+// 通过index查找结点
+LinkList.prototype.findByid = function (index) {
+  var curNode = this.head.next;
+  var pos = 0;
+  while (curNode !== null && pos !== index) {
+    curNode = curNode.next;
+    pos++;
   }
-  return false
+  return curNode === null ? -1 : curNode;
 }
 
-function front() {
-  this.pos = 0
+// 查找指定结点的上一个结点
+LinkList.prototype.findPrev = function (value) {
+  var curNode = this.head;
+
+  while (curNode.next !== null && curNode.next.data !== value) {
+    curNode = curNode.next;
+  }
+  if (curNode.next === null) {
+    return -1;
+  }
+  return curNode;
 }
 
-function end() {
-  this.pos = this.listSize - 1;
+// 移除指定结点
+LinkList.prototype.remove = function (value) {
+  var prevNode = this.findPrev(value);
+  if (prevNode == -1) {
+    console.log('未找到结点');
+    return
+  }
+  prevNode.next = prevNode.next.next;
 }
- 
-function prev() {
-  if(this.pos > 0) {
-    --this.pos;
+
+// 遍历链表结构
+LinkList.prototype.diaplay = function () {
+  var curNode = this.head.next;
+  while (curNode !== null) {
+    console.log(curNode.data);
+    curNode = curNode.next
   }
 }
 
-function next() {
-  if(this.pos < this.listSize -1) {
-    ++this.pos;
+
+// 指定结点之后插入结点
+LinkList.prototype.insert = function (newElement, element) {
+  var curNode = this.findByValue(element);
+
+  if (curNode == -1) {
+    console.log('未找到结点');
+    return;
   }
+  var newNode = new Node(newElement);
+  newNode.next = curNode.next;
+  curNode.next = newNode;
 }
 
-function curPos() {
-  return this.pos;
-}
 
-function moveTo(p) {
-  this.pos = p
-}
+var LLinkList = new LinkList();
 
-function getEle() {
-  return this.dataStore[this.pos]
-}
-// test
+console.log(LLinkList)
 
-const list = new List()
-list.append('1')
-list.append('2')
-list.append('3')
+LLinkList.append('first');
+LLinkList.append('second');
+LLinkList.append('third');
+LLinkList.append('five');
 
-console.log(list.toString(), list.length())
 
-list.remove('1')
+LLinkList.insert('four', 'third');
+var findValue = LLinkList.findByValue('second');
+console.log(findValue)
 
-console.log(list.toString(), list.length())
+var findPrev = LLinkList.findPrev('four');
+console.log(findPrev)
 
-list.insert('4', '2')
+LLinkList.remove('first')
 
-console.log(list.toString(), list.length())
-
-list.clear()
-console.log(list.toString(), list.length())
+LLinkList.diaplay()
 
 
 

@@ -205,21 +205,227 @@ obj.foo()
 
 
 
-## 原型 
+## 面对对象 oo 
+
+
+
+
+### 理解对象
+
+
+首先使用new操作符创建一个简单的对象
+
+```js{1}
+let person = new Object()
+person.name = 'nate'
+person.age = 24
+
+person.getName = function() {
+  return this.name
+}
+```
+这些属性（name、age、getName）在创建的时候都带有一些特定的类型
+
+#### 属性类型
+
+> ECMA-262 定义这些特性是为了实现 JavaScript 引擎用的，因此在 JavaScript 中不能直接访问它们。为了 表示特性是内部值，该规范把它们放在了两对儿方括号中，例如[[Enumerable]]
+
+
+1. 数据属性
+
+数据属性包含了一个数据值的位置，在这个位置可以读取可以写入，有四个可以描述其行为的特性:
+
+* <font color=#7ec699 bgcolor=#7ec699 size=4 >[[Configurable]]</font> 表示能否通过 delete 删除属性从而重新定义属性，能否修改属性的特性，或者能否把属性修改为访问器属性, 默认值为true
+
+* <font color=#7ec699 bgcolor=#7ec699 size=4 >[[Enumerable]]</font>  表示是否可以通过for-in循环返回属性，默认值为true
+
+* <font color=#7ec699 bgcolor=#7ec699 size=4 >[[Writable]]</font>  表示是否可以修改属性的值，默认值为true
+
+* <font color=#7ec699 bgcolor=#7ec699 size=4 >[[Value]]</font>  表示这个属性的值 
+
+
+**如果要修改属性默认的值，必须通过object.defineProperty()**
+
+```js 
+var person = {}
+// 参数 目标对象，对象属性，属性的描述符对象
+object.defineProperty(person, 'name', {
+  configurable: false, // 不能删除属性
+  enumerable: true,
+  writable: false, // 只读属性
+  value: 'nate.wang'
+})
+person.name = 'newNate' 
+```
+
+
+2. 访问器属性
+
+访问器属性不包含数据值，他们包含一对getter和setter函数 
+
+* <font color=#7ec699 bgcolor=#7ec699 size=4 >[[Get]]</font>  表示读取属性调用 默认值 undefined
+* <font color=#7ec699 bgcolor=#7ec699 size=4 >[[Set]]</font>  表示设置属性调用 默认值 undefined
+
+```js
+
+let person = {
+  _name: '',
+  age: 20
+}
+
+object.defineProperty(person, 'name', {
+  set: function(val) {
+    this._name = val;
+    this.age = 24
+  },
+  get: function() {
+    return this._name
+  }
+})
+person.name = 'nate.wang'
+
+
+// 定义多个属性
+object.defineProperties(person, {
+  _name: {
+    value: 'nate'
+  },
+  age: {
+    value: 20
+  },
+  name: {
+    set: function(val) {
+      this._name = val;
+      this.age = 24
+    },
+    get: function() {
+      return this._name
+    }
+  }
+})
+```
+
+#### 读取属性的特性
+
+> 使用 ECMAScript 5 的 Object.getOwnPropertyDescriptor()方法，可以取得给定属性的描述 符。这个方法接收两个参数:属性所在的对象和要读取其描述符的属性名称。返回值是一个对象，如果 是访问器属性，这个对象的属性有 configurable、enumerable、get 和 set;如果是数据属性，这 个对象的属性有 configurable、enumerable、writable 和 value。
+
+```js 
+let description = object.getOwnPropertyDesciptor(person, '_name')
+// description.value
+// description.configurable
+// description.enumerable
+// description.writable
+
+// description.set
+// description.get
+
+```
+
+
+### 创建对象
+
+object构造函数或字面量形式都可以创建对象，但这些方式有个明显的缺点:使用同一个接口创建很多对象，会产生大量的重复代码。
+因此出现了工厂模式和构造函数模式
+
+1. 工厂模式
+这里使用工厂模式 用特定的函数来封装创建对象的细节
+
+```js
+function createObject(name, age, job) {
+  let obj = new Object()
+  obj.name = name;
+  obj.age = age;
+  obj.job = job;
+
+  return obj;
+} 
+
+```
+**这种方式存在一个问题** 怎么样知道一个对象的类型, 这种方式继承应该如何实现？
+
+2. 构造函数模式
+
+类似于Object、Array这样的原生的构造函数，在运行的时候会自动出现在执行环境中。
+
+
+```js
+function Person(name, age) {
+  this.name = name;
+  this.age = age;
+  this.sayName = function() {
+    return this.name
+  }
+  this.getName = getName
+}
+
+// new 操作符创建实例
+let p1 = new Person('nate', 23)
+let p2 = new Person('john', 25)
+```
+
+**new 操作符创建实例的过程**
+
+* 创建一个新对象
+* 构造函数的作用域赋给新对象 （this就指向了新对象）
+* 执行构造函数中的代码
+* 返回新对象 
+
+**构造函数的问题**
+使用构造函数的主要问题，每个方法都要在每个实例上重新创建一遍
+
+```js
+p1.sayName === p2.sayName //false
+
+// 暂时解决方式
+function getName() {
+  return this.name
+}
+```
+可以把函数定义转移到构造函数外面，这样可以共享同一个方法，但是如果存在多个方法，就要定义多个全局函数，于是我们这个自定义的引用类型就丝毫没有封装性可言了。因此，这些问题可以使用原型来解决
+
+
+### 原型模式 
+
+创建的每一个函数都有一个prototype（原型）属性，它是一个指针，指向一个对象（包含了所有的实例共享的属性和方法）；字面意思来讲，prototype就是通过构造函数创建的对象实例的原型对象。
+
+使用原型对象可以让所有对象实例共享他的属性和方法
+
+```js
+function Person() {}
+
+Person.prototype.name = 'nate'
+Person.prototype.age = 20
+Person.prototype.getName = function () {
+  return this.name 
+}
+
+let person1 = new Person()
+
+person1.name; // nate
+
+```
+
+
+#### 理解原型对象
+
+创建一个函数，根据特定的规则会给函数创建一个prototype属性，这个属性指向了函数的原型的对象, 如下图：
+
+![function-prototype](https://cdn.img.wenhairu.com/images/2019/11/13/Auaco.png)
+
+
+可以看到指针指向了一个对象（原型对象），它包含了一个constructor属性，而这个属性指向创建的函数。初次之外，原型对象默认只会取得constructor属性，其他属性都是继承于Object的
+
+
+接下来，通过构造函数创建一个对象实例，该对象实例也会包含一个指针（__proto__），该指针也指向了构造函数的原型对象。这个__proto__连接存在于实例于构造函数的原型对象之间。如下图：
+
+
+![object-proto](https://cdn.img.wenhairu.com/images/2019/11/13/AuHI6.png)
 
 
 
 
 
-
-
-
-
-
-### 面对对象 oop
-
-
-#### 继承
+## 继承
 
 ```js
 function Parent(value) {
@@ -237,3 +443,5 @@ function Child(value) {
 Child.prototype = new Parent();
 
 ``` 
+
+<Vssue title="JavaScript this以及原型" />
