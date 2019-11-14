@@ -21,7 +21,7 @@ module.exports = [
   },
   {
     text: '数据结构算法',
-    link: '/algorithm/',
+    link: '/algorithm/structure/array/',
     // items: [{
     //   text: '数据结构',
     //   link: '/algorithm/structure/array/'
@@ -32,7 +32,7 @@ module.exports = [
   },
   {
     text: 'Web框架',
-    link: '/frame/',
+    link: '/frame/mind/mvvm',
     // items: [{
     //   text: '框架思想',
     //   link: '/frame/mind/mvvm'

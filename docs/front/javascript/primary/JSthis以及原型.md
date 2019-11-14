@@ -422,6 +422,54 @@ person1.name; // nate
 ![object-proto](https://cdn.img.wenhairu.com/images/2019/11/13/AuHI6.png)
 
 
+**检测原型和实例的方法**
+
+* isPrototypeOf(person1)
+* Object.getPrototypeOf(person1)
+* hasOwnProperty() 检测属性是否来自于实例中
+* in 操作符 检测属性是否存在于原型中
+
+1. 简单的原型语法
+
+将以对象字面量的形式创建的对象给到原型，但是这样有个例外，constructor不会再指向Person了
+```js
+function Person() {}
+
+Person.prototype = {
+  constructor: Person,
+  name: 'nate',
+  age: 20,
+  getName: function() {
+    return this.name
+  }
+}
+
+let p1 = new Person()
+```
+在这里特意加了contructor属性，并指定了其值是Person，但是这样一来，constructor就是原型上的属性了，通过Object.keys(Person.prototype)就可以枚举出来,默认情况下，原生constructor是不可枚举的。但是可以通过object.defineProperty()修改constructor的enumerable值.如下图：
+
+![simple-proto](https://cdn.img.wenhairu.com/images/2019/11/14/A9CCP.png)
+
+再看个例子：
+```js
+function Person() {}
+
+let p1 = new Person()
+
+Person.prototype = {
+  constructor: Person,
+  name: 'nate',
+  age: 20,
+  getName: function() {
+    return this.name
+  }
+}
+
+p1.getName() // error
+```
+这个例子是首先创建了实例，之后再重写原型，其结果琢磨之后，会发现跟前者是不同的, 可以看下来自红皮书中的截图：
+
+![custom-proto](https://cdn.img.wenhairu.com/images/2019/11/14/A9JkD.png)
 
 
 
