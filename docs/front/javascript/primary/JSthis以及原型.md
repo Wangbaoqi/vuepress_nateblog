@@ -492,4 +492,3 @@ Child.prototype = new Parent();
 
 ``` 
 
-<Vssue title="JavaScript this以及原型" />

@@ -2,7 +2,6 @@
 home: true
 heroImage: /logo.gif
 actionText: 开始 →
-actionLink: /front/
 features:
 - title: 技术文章
   details: 基于不断的技术更新, 注重前端基础，打磨核心技能，造轮子需自身硬！
@@ -12,4 +11,3 @@ features:
   details: 不断致力于性能优化的大军中，终极目标在掌握这些技能的同时提升用户体验
 footer: MIT Licensed | Copyright © 2019-present Nate.wang
 ---
-

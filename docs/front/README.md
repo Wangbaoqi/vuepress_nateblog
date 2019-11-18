@@ -1,9 +1,10 @@
 ---
-pageClass: custom-page-wang
+tag: custom-page-wang
 ---
 
 
-<commit />
+<!-- <commit /> -->
+
 
 
 

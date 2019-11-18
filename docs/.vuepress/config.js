@@ -1,4 +1,4 @@
-module.exports = module.exports = {
+module.exports = {
   base: '/dist/',
   title: 'Nate.wang',
   description: '你写的每一行代码都是你的名片',
@@ -10,10 +10,12 @@ module.exports = module.exports = {
   markdown: {
     lineNumbers: true
   },
+  theme: 'reform',
   themeConfig: {
     nav: require('./config/nav'),
     sidebar: require('./config/sidebar'),
     sidebarDepth: 2,
+    logo: '/dist/favion.png',
     lastUpdated: 'Last Updated',
     searchMaxSuggestoins: 10,
     serviceWorker: {
@@ -23,17 +25,29 @@ module.exports = module.exports = {
       }
     },
     editLinks: true,
-    editLinkText: '在 GitHub 上编辑此页 ！'
+    editLinkText: '在 GitHub 上编辑此页 ！',
+    gitalk: {
+      // gitalk的主要参数
+      clientID: `a23f205915aa92389c63`,
+      clientSecret: `50c3b3127e01f7f17c582b38f64fd721faae1688`,
+      repo: `vuepress_nateblog`,
+      owner: "Wangbaoqi",
+      admin: ["Wangbaoqi"],
+      labelRule: `(title,path)=> {
+        let paths=path.split('/')
+        if(paths.length>0){
+          let res = paths.pop()
+          if(res===''){
+            res=paths.pop()
+          }
+          res = res.slice(-50)
+          return res
+        }else{
+          return title
+        }
+      }`
+    },
   },
-  // 插件
-  plugins: [
-    ['@vssue/vuepress-plugin-vssue', {
-      platform: 'github',
-      owner: 'Wangbaoqi',
-      repo: 'vuepress_nateblog',
-      clientId: 'a23f205915aa92389c63',
-      clientSecret: '50c3b3127e01f7f17c582b38f64fd721faae1688',
-    }],
-  ],
+  
 }
 

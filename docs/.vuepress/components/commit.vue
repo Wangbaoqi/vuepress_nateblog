@@ -46,6 +46,7 @@ export default {
     
   },
   mounted() {
+    debugger
     const allNav = this.handleNavType(this.$site.themeConfig.sidebar || []);
     const allActive = this.$site.pages || [];
 

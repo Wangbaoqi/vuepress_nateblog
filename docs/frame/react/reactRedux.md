@@ -554,4 +554,3 @@ react-redux 其实就是context结合了redux 变成了react专有的状态管�
 react-redux大致的实现思路是这样，有关这个完整的例子，请看[这里](https://github.com/Wangbaoqi/react-nuggets/tree/master/src/reactStudy/redux)
 
 
-<Vssue title="React-redux" />

@@ -70,6 +70,15 @@ module.exports = {
       ]
     },
   ],
+  '/everyday/': [
+    {
+      title: '壹题攻克',
+      collapsable: false,
+      children: [
+        '/everyday/frontConquered/conquered'
+      ]
+    },
+  ],
   '/network/': [
     {
       title: 'HTTP协议',
