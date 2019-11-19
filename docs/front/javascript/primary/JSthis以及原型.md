@@ -429,7 +429,7 @@ person1.name; // nate
 * hasOwnProperty() 检测属性是否来自于实例中
 * in 操作符 检测属性是否存在于原型中
 
-1. 简单的原型语法
+**原型语法**
 
 将以对象字面量的形式创建的对象给到原型，但是这样有个例外，constructor不会再指向Person了
 ```js
@@ -450,7 +450,25 @@ let p1 = new Person()
 
 ![simple-proto](https://cdn.img.wenhairu.com/images/2019/11/14/A9CCP.png)
 
-再看个例子：
+**原型的动态性**
+先看一个🌰：
+```js
+function Person() {}
+
+let p3 = new Person()
+
+Person.prototype.sayHay = function() {
+  console.log('say hello')
+}
+p3.sayHay() // say hello 
+```
+** 即使实例是在原型添加方法之前创建的，仍然可以访问到其添加的方法，可以归结为原型和实例之间的松散关系。实例和原型连接的是一个指针，并非副本，因此实例寻找sayHay方法在自身没有找到之后，在其原型上可以找到。
+
+<font color=#7ec699 bgcolor=#7ec699 size=4 >例外情况</font>: 上述情况是没有重写原型对象的基础上，可以随时添加原型属性。但是一旦重写原型对象，情况就变了。
+
+调用构造函数时会为实例添加一个指向最初原型的[[Prototype]]指针，如果重写原型，就是切断了实例跟最初原型的联系。下面的例子：
+
+
 ```js
 function Person() {}
 
@@ -471,6 +489,118 @@ p1.getName() // error
 
 ![custom-proto](https://cdn.img.wenhairu.com/images/2019/11/14/A9JkD.png)
 
+**原型对象的问题**
+原型对象省略了为构造函数初始化参数的过程，导致了所有的实例共享同一属性值，如果这种共享对于函数来讲，可能会有一定的方便性，如果对引用类型的值来讲，可能会存在一定的问题。看个例子：
+
+```js
+function Person() {}
+
+Person.prototype = {
+  constructor: Person,
+  name: 'natewang',
+  friends: ['john', 'wang'],
+  sayFriend: function() {
+    consoloe.log(this.friends)
+  }
+}
+
+let p1 = new Person()
+let p2 = new Person()
+
+p1.friends.push('nate')
+console.log(p1.friends) // ['john', 'wang', 'nate']
+console.log(p2.friends) // ['john', 'wang', 'nate']
+```
+
+### 组合构造函数和原型模式
+
+最常见的方式就是使用组合构造函数和原型模式，构造函数用于定义实例属性，原型模式用于定义方法和共享属性
+
+```js
+function Person(name, age) {
+  this.name = name;
+  this.age = age
+  this.friends = ['john', 'wang']
+}
+
+Person.prototype = {
+  constructor: Person,
+  sayName: function() {
+    console.log(this.name)
+  }
+}
+
+let p1 = new Person('john', 20)
+let p2 = new Person('nate', 23)
+
+p1.friends.push('nate')
+
+console.log(p1.friends);  // ['john', 'wang', 'nate']
+console.log(p2.friends);  // ['john', 'wang']
+
+console.log(p1.friends === p2.friends) // false
+console.log(p1.sayName === p2.sayName) // true
+
+```
+
+### 动态原型模式
+
+这种方式把所有的信息都封装到了构造函数中，通过构造函数来初始化原型
+
+```js
+function Person(name, age) {
+  this.name = name;
+  this.age = age;
+
+  if(type of this.sayName !== 'function') {
+    Person.prototype.sayName = function() {
+      console.log(this.name)
+    }
+  }
+}
+
+let p1 = new Person('nate', 23)
+console.log(p1.sayName()) // nate
+```
+
+### 寄生构造函数模式
+这种模式基本思想是封装创建对象的代码，然后在返回创建的对象;
+
+**注意** 这种模式实例跟构造函数或者构造函数的原型没有任何关系, 不建议使用这种模式
+
+```js
+function Person(name, age) {
+  let o = new Object()
+  o.name = name;
+  o.age = age;
+  o.sayName = function() {
+    console.log(this.name)
+  }
+  return o
+}
+
+let p1 = new Person('name', 25) 
+// 存在的问题 不能使用instanceof来判断类型
+console.log(p1 instanceof Person) // false 
+```
+
+### 稳妥构造函数模式
+
+先看个例子：
+
+```js
+function Person(name, age) {
+  let o = new Object()
+
+  o.sayName = function() {
+    return name
+  }
+  return o
+}
+let p1 = Person('nate', 28)
+console.log(p1.sayName)
+```
+可以看到，这种模式没有this，new，没有共享模式，想要访问某一个属性，必须通过某个特定的方法，因此这种方式提供了安全性。
 
 
 ## 继承

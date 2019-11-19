@@ -66,7 +66,7 @@ module.exports = {
       title: '前端优化',
       collapsable: false,
       children: [
-        '/performance/frontPerformance/front优化'
+        '/performance/frontPerformance/front'
       ]
     },
   ],
@@ -84,7 +84,7 @@ module.exports = {
       title: 'HTTP协议',
       collapsable: false,
       children: [
-        '/network/httpProto/http协议',
+        '/network/httpProto/http',
       ]
     },
   ],
