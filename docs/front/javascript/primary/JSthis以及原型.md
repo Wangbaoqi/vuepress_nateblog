@@ -605,20 +605,150 @@ console.log(p1.sayName)
 
 ## 继承
 
+::: tip
+许多语言都支持两种继承方式，接口继承和实现继承；接口继承只继承方法签名，实现继承则继承实际的方法，函数没有签名，JS只支持实现继承
+:::
+
+### 原型链
+
+> 原型链是实现继承的主要方法，基本思想是利用原型让一个引用类型继承另一个引用类型的属性和方法
+
+首先用文字描述的方式来阐述一下原型链：
+
+回顾一下构造函数、实例和原型之间的关系，每个构造函数都有一个原型对象，原型对象包含了一个指向构造函数的指针，而实例包含了一个指向原型对象的内部指针[[Prototype]], 如果让原型对象等于另一个类型（构造函数）的实例，会有什么样的结果呢？结果就是这个原型对象也包含了另一个原型的指针，因此这个原型对象实例化的实例对象也就继承了另一个原型的属性和方法。
+
+**实现原型链的基本模式**
+
 ```js
-function Parent(value) {
-  this.value = value
+function Parent() {
+  this.parent = 0
 }
 
 Parent.prototype.getVal = function() {
-  return this.value
+  return this.parent
 }
 
-function Child(value) {
-  Parent.call(this, value)
+function Child() {
+  this.child = 0
 }
-
+// Parent 的实例赋给了Child的原型 
+// 重写了Child的原型对象
 Child.prototype = new Parent();
 
-``` 
+// 注意 新增的方法要在 14line 之后
+Child.prototype.getVal = function() {
+  return this.child
+}
 
+
+let child = new Child();
+
+``` 
+可以看下Parent和Child之间的关系：
+构造函数Child的原型对象是没有constructor的，它的原型对象被重写了，直接被Parent的实例覆盖了，因此，child.constructor指向了Parent
+
+![simple-extends](https://cdn.img.wenhairu.com/images/2019/11/20/A11QT.png)
+
+这个例子通过原型链简单的实现了继承，下面引用一张红皮书(6.3.1)的原型链的图
+
+![prototype-chain](https://cdn.img.wenhairu.com/images/2019/11/20/A10pq.png)
+
+
+**确定原型和实例的关系**
+
+1. instanceof 操作符
+2. isPrototypeof(instance)
+
+**原型链的问题**
+主要的问题来自包含引用类型值的原型
+
+先看个例子：
+```js
+function Person() {
+  this.lists = ['1', '2', '3'];
+}
+
+Person.prototype.getList = function() {
+  return this.lists
+}
+
+function Child() {}
+
+Child.prototype = new Person()
+
+let c1 = new Child()
+c1.lists.push('4')
+console.log(c1.lists) // ['1', '2', '3', '4']
+
+let c2 = new Child()
+console.log(c2.lists) // ['1', '2', '3', '4']
+```
+这种方式带来的问题就是原型值为引用类型造成的数据共享，为了解决这个问题，借用构造函数（伪造对象或者经典继承也算是一种解决方案
+
+
+### 借用构造函数
+> 这种技术是在子类型构造函数内部调用超类型构造函数，不过需要在特定环境执行函数，需要使用call或者apply来执行超类型构造函数
+
+
+```js
+function Person() {
+  this.lists = ['1', '2', '3'];
+}
+
+function Child() {
+  // 继承了Person 美实例化一个Child instance的时候，都会重新初始化一下Person中的值
+  Person.call(this)
+}
+
+let c1 = new Child()
+c1.lists.push('4'); // ['1', '2', '3', '4']
+let c2 = new Child()
+console.log(c2); // ['1', '2', '3']
+```
+这样一来，每个实例的lists都会是一个副本
+
+**传递参数**
+
+```js
+function Person(name) {
+  this.name = name;
+}
+
+function Child(name) {
+  Person.call(this, name)
+}
+
+let c1 = new Child('nate')
+c.name // nate
+```
+
+**借用构造函数的问题**
+使用构造函数，也就是无法避免构造函数模式存在的问题--方法在构造函数中定义，因此就无法复用。还有就是在超类型原型中定义的方法，在子类型的实例中也是无法调用的（因为没有原型继承）
+
+
+### 组合继承
+
+组合继承伪经典模式，就是将借用构造函数和经典模式组合到一起。背后的原理是使用原型继承实现原型属性和方法的继承，而通过借用构造函数来实现实例属性的继承
+
+```js
+function Person(name) {
+  this.name = name
+}
+
+Person.prototype.getName = function() {
+  return this.name
+}
+
+function Child(name){
+  // 继承了实例的属性
+  Person.call(this, name)
+}
+
+// 继承了原型的属性和方法
+Child.prototype = new Person();
+Child.prototype.constructor = Child;
+```
+
+这种模式融合了原型链和借用构造函数的优点，成为常用的继承模式。
+
+### 原型式继承
