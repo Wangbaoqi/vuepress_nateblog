@@ -1,5 +1,5 @@
 module.exports = {
-  base: '/dist/',
+  base: '/',
   title: 'Nate.wang',
   description: '你写的每一行代码都是你的名片',
   dest: './dist',
@@ -15,7 +15,7 @@ module.exports = {
     nav: require('./config/nav'),
     sidebar: require('./config/sidebar'),
     sidebarDepth: 2,
-    logo: '/dist/favion.png',
+    logo: '/favion.png',
     lastUpdated: 'Last Updated',
     searchMaxSuggestoins: 10,
     serviceWorker: {
