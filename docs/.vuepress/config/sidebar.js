@@ -79,6 +79,15 @@ module.exports = {
       ]
     },
   ],
+  '/builddeploy/': [
+    {
+      title: '构建部署',
+      collapsable: false,
+      children: [
+        '/builddeploy/centosJenkins/jenkins'
+      ]
+    },
+  ],
   '/network/': [
     {
       title: 'HTTP协议',
@@ -111,8 +120,6 @@ module.exports = {
         '/frame/react/reduxSelf',
         '/frame/react/reactRedux',
         '/frame/react/reactError',
-
-
       ]
     },
   ],

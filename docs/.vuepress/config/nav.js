@@ -25,7 +25,10 @@ module.exports = [
   {
     text: '壹题攻克',
     link: '/everyday/frontConquered/conquered'
-
+  },
+  {
+    text: '构建部署',
+    link: '/builddeploy/centosJenkins/jenkins'
   },
   {
     text: "官网链接",
