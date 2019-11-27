@@ -2,15 +2,9 @@
   <main class="page">
     <slot name="top"/>
 
-    <section class="tags" v-if="this.$site.themeConfig.tags&&tags&&tags.length>0">
-      <!-- tags是this.$page.frontmatter.tags，这是通过vuepress编译markdown文件中的tags生成的标签数组。 -->
-      <span class="tagPopup" v-for="tag in tags">
-        <!-- $site.themeConfig.tags是config.js中配置的tags目录 -->
-        <router-link :to="'/'+$site.themeConfig.tags+'/?tag='+tag" class="tag">{{tag}}</router-link>
-      </span>
-    </section>
+    <Classify v-if="type==='typeHome'" />
 
-    <Content class="content theme-default-content"/>
+    <Content v-if="type!=='typeHome'" class="content theme-default-content"/>
 
     <footer class="page-edit">
       <div class="edit-link" v-if="editLink">
@@ -45,23 +39,23 @@
 import { resolvePage, outboundRE, endingSlashRE } from "@parent-theme/util";
 import Gitalk from "gitalk";
 import dayJs from 'dayjs';
+import Classify from "@theme/components/classify.vue";
 import imagesZoom from "@theme/util/imageScale";
 import "gitalk/dist/gitalk.css";
 export default {
+  components: { Classify },
   props: ["sidebarItems"],
   data() {
     return {
-      path: ""
+      path: "",
+      type: ""
     };
   },
   computed: {
     lastUpdated() {
-      console.log(this.$page.lastUpdated);
       return this.$page.lastUpdated || dayJs().format('YYYY-MM-DD HH:mm:ss');
     },
-    tags() {
-      return this.$page.frontmatter.tags;
-    },
+    
     lastUpdatedText() {
       if (typeof this.$themeLocaleConfig.lastUpdated === "string") {
         return this.$themeLocaleConfig.lastUpdated;
@@ -128,6 +122,11 @@ export default {
 
   
   methods: {
+    updated() {
+      const { frontmatter = {} } = this.$page;
+      this.type = frontmatter.type
+      this.initGitalk();
+    },
     createEditLink(repo, docsRepo, docsDir, docsBranch, path) {
       const bitbucket = /bitbucket.org/;
       if (bitbucket.test(repo)) {
@@ -218,13 +217,16 @@ export default {
     }
   },
   mounted() {
-    this.initGitalk();
-    console.log(this.$page);
-
+    this.updated();
+    
   },
-  updated() {
-    this.initGitalk();
-  }
+  watch: {
+    $route: function(params) {
+      this.updated();
+    }
+  },
+
+  
 };
 
 function resolvePrev(page, items) {
@@ -267,34 +269,7 @@ function flatten(items, res) {
   margin-top: 2rem;
 }
 
-.tags {
-  max-width: 55rem;
-  margin: 0 auto;
-  margin-top: 5rem;
-  margin-bottom: -4rem;
-  padding: 2rem;
 
-  // padding-left:0;
-  .tagPopup {
-    margin-right: 0.8rem;
-    display: inline-block;
-    padding: 0;
-    font-size: 13px;
-    margin-bottom: 5px;
-
-    .tag {
-      display: inline-block;
-      padding: 0 13px;
-      color: $accentColor;
-      background-color: rgba(1, 126, 102, 0.08);
-      height: 25px;
-      line-height: 25px;
-      font-weight: normal;
-      font-size: 13px;
-      text-align: center;
-    }
-  }
-}
 
 .page-edit {
   @extend $wrapper;
@@ -346,12 +321,7 @@ function flatten(items, res) {
 }
 
 @media (max-width: $MQMobile) {
-  .tags {
-    width: 100%;
-    padding: 1rem;
-    padding-left: 1.5rem;
-    margin-bottom: -4rem;
-  }
+  
 
   .page-edit {
     .edit-link {

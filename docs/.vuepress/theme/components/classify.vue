@@ -1,5 +1,6 @@
 <template>
   <div class="classify">
+    <Tags @changeTag="changeTag"/>
     <section class="main-content">
       <div class="blog-content">
         <template v-for="(tag,index) in blog" v-if="index<infoLength">
@@ -16,10 +17,17 @@
 
 <script>
 import Article from "@theme/components/Article.vue";
+import Tags from "@theme/components/Tags.vue";
 let defaultLength = 10; //默认显示条数
+let copyBlogs = []; //缓存所有博客
+
 export default {
   components: {
-    Article
+    Article,
+    Tags
+  },
+  computed: {
+   
   },
   data() {
     return {
@@ -30,15 +38,11 @@ export default {
   },
   mounted() {
     this.filerArticle();
+
   },
   methods: {
     filerArticle() {
-      let go = this.$site.pages.filter(v => {
-        if (v.title && v.path.includes(this.$page.path)) {
-          return v;
-        }
-      });
-      go = go.sort((pre, next) => {
+      let go = this.$site.pages.sort((pre, next) => {
         if (pre.lastUpdated === undefined) return 1;
         if (next.lastUpdated === undefined) return -1;
         return (
@@ -46,10 +50,14 @@ export default {
           new Date(pre.lastUpdated).getTime()
         );
       });
-      this.blog = go;
+      this.blog = go.filter(v => v.frontmatter.tag);
+      copyBlogs = go;
       if (this.blog.length > defaultLength) {
         this.show = true;
       }
+    },
+    changeTag(tag) {
+      this.blog = copyBlogs.filter(e => e.frontmatter.tag === tag)
     },
     format(timer) {
       //shijianchuo是整数，否则要parseInt转换
@@ -92,7 +100,7 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-$color = #3eaf7c;
+$color = #339ef4;
 
 .classify {
   padding-top: 5rem;
@@ -120,6 +128,9 @@ $color = #3eaf7c;
   }
 }
 
+
+
+
 @media (max-width: 719px) {
   .home .main-content .blog-content {
     width: 100%;
@@ -128,5 +139,7 @@ $color = #3eaf7c;
   .home {
     width: 90%;
   }
+
+  
 }
 </style>

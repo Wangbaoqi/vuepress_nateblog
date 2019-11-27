@@ -1,18 +1,12 @@
 <template>
-  <div>
-    <div class="content default"></div>
-    <div class="tag">
-      <div class="items">
-        <span
-          v-for="taginfo in tags"
-          :style="{backgroundColor:color()}"
-          @click="change(taginfo.tag)"
-          :class="taginfo.tag===tg?'active':''"
-        >{{taginfo.tag}}({{taginfo.number}})</span>
-      </div>
-      <div class="article-list">
-        <Article v-for="tag in info" :tag="tag" :tg="tg" @turnTo="change"/>
-      </div>
+  <div class="tag">
+    <div class="items">
+      <span
+        v-for="taginfo in tags"
+        :style="{backgroundColor:color()}"
+        @click="change(taginfo.tag)"
+        :class="taginfo.tag===tg?'active':''"
+      >{{taginfo.tag}}({{taginfo.number}})</span>
     </div>
   </div>
 </template>
@@ -33,14 +27,9 @@ export default {
     tags() {
       //核心代码，整合markdown中tags的数目
       let allTags = [];
-      this.$site.pages.forEach(v => {
-        if (v.frontmatter.tags) {
-          allTags.push(v.frontmatter.tags);
-        } else if (v.frontmatter.tag) {
-          allTags.push(v.frontmatter.tag);
-        }
-      });
-      allTags = allTags.join(",").split(",");
+      const hasTags = this.$site.pages.filter(e => e.frontmatter.tag )
+      allTags = hasTags.map(e => e.frontmatter.tag)
+      
       let flatTags = Array.from(new Set(allTags));
       let all = [
         {
@@ -59,26 +48,8 @@ export default {
   },
   methods: {
     change(tag) {
-      //点击标签下面文章显示对应的内容
       this.tg = tag;
-      if (tag === "全部") {
-        this.info = this.$site.pages.filter(v => v.title);
-      } else {
-        this.info = this.$site.pages.filter(v => {
-          let tags = v.frontmatter.tags;
-          if (tags) {
-            return tags.some(v => v === tag);
-          }
-        });
-      }
-      this.info = this.info.sort((pre, next) => {
-        if (pre.lastUpdated === undefined) return 1;
-        if (next.lastUpdated === undefined) return -1;
-        return (
-          new Date(next.lastUpdated).getTime() -
-          new Date(pre.lastUpdated).getTime()
-        );
-      });
+      this.$emit('changeTag', tag)
     },
     color() {
       // 标签button颜色
@@ -95,13 +66,7 @@ export default {
     }
   },
   mounted() {
-    //当路由?tag='xxx'时能自动跳转到对应内容
-    let tag = this.$route.query.tag;
-    if (tag) {
-      this.change(tag);
-    } else {
-      this.change("全部");
-    }
+    
   }
 };
 </script>

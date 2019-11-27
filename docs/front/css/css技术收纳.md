@@ -1,3 +1,8 @@
+---
+type: front-css
+tag: css
+excerpt: 'css 技术点归纳, 元素继承、CSS 特别样式、CSS的解析规则。。。'
+---
 # css 技术点归纳
 
 ## 元素继承

@@ -1,3 +1,8 @@
+---
+type: data-structure
+tag: 数据结构 
+excerpt: '栈结构以及栈的使用'
+---
 # 栈结构以及栈的使用
 
 ::: tip

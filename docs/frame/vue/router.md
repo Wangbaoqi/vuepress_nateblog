@@ -1,3 +1,8 @@
+---
+type: web-vue
+tag: vueJS
+excerpt: 'Vue-router'
+---
 # Vue-router
 
 ## vue router 功能

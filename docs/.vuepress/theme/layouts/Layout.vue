@@ -19,7 +19,6 @@
     <MyHome v-else-if="$page.frontmatter.defaultHome"></MyHome>
     <!-- 如果md文件中有 home:true 就使用该组件 -->
     <!-- <Tags v-else-if="tags"/> -->
-    <!-- <Classify v-else-if="type==='classify'"></Classify> -->
     <Page v-else :sidebar-items="sidebarItems">
       <slot name="page-top" slot="top"/>
       <slot name="page-bottom" slot="bottom"/>
@@ -35,12 +34,11 @@ import Page from "@theme/components/Page.vue";
 import Sidebar from "@theme/components/Sidebar.vue";
 import Tags from "@theme/components/Tags.vue";
 import MyHome from "@theme/components/MyHome.vue";
-import Classify from "@theme/components/classify.vue";
 import { resolveSidebarItems } from "@theme/util";
 
 import '@theme/styles/iconfont/iconfont.css';
 export default {
-  components: { Home, Page, Sidebar, Navbar, Tags, MyHome, Classify },
+  components: { Home, Page, Sidebar, Navbar, Tags, MyHome },
 
   data() {
     return {
@@ -150,6 +148,8 @@ export default {
       // if (this.$page.frontmatter.defaultHome) {
       //   this.$page.frontmatter.sidebar = false; //主页不需要侧标栏
       // }
+
+      
     }
   },
   watch: {

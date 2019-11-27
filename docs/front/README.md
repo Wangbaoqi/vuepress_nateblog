@@ -1,9 +1,8 @@
 ---
-tag: custom-page-wang
+type: typeHome
 ---
 
 
-this 
 <!-- <commit /> -->
 
 

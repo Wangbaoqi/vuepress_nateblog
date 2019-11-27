@@ -1,3 +1,8 @@
+---
+type: front-JavaScript
+tag: JavaScript
+excerpt: '我们将“作用域”定义为一套规则，这套规则用来管理引擎如何在当前作用域以及嵌套的子作用域中根据标识符名称进行变量查找'
+---
 # JS 作用域以及闭包
 
 ::: tip

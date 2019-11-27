@@ -1,3 +1,9 @@
+---
+type: web-react
+tag: reactJs
+excerpt: 'Redux 手动实现, Context的使用，store，reducer，dispatch的实现。。。。'
+---
+
 # Redux 手动实现
 
 

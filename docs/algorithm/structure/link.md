@@ -1,8 +1,10 @@
+---
+type: data-structure
+tag: 数据结构 
+excerpt: '链表结构以及链表的使用'
+---
+
 # 链表结构以及链表的使用
-
-
-
-
 
 ```js
 

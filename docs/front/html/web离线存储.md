@@ -1,3 +1,9 @@
+---
+type: front-html
+tag: html
+excerpt: '提供一种 应用程序缓存 机制，使得基于web的应用程序可以离线运行。开发者可以使用 Application Cache (AppCache) 接口设定浏览器应该缓存的资源并使得离线用户可用。 在处于离线状态时，即使用户点击刷新按钮，应用也能正常加载与工作'
+---
+
 # 离线存储
 
 ::: tip

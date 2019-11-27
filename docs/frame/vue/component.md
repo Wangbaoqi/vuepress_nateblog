@@ -1,3 +1,9 @@
+---
+type: web-vue
+tag: vueJS
+excerpt: 'Vue 组件化开发'
+---
+
 # Vue 组件化开发
 
 

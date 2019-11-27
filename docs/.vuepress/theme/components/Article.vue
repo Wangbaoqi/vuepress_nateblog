@@ -4,15 +4,9 @@
       <div class="text-hover">
         <router-link :to="tag.path">{{tag.title}}</router-link>
       </div>
-      <!---->
       <div class="abstract">
-        <div class="tip custom-block" v-if="tag.excerpt">
-          <!-- <p class="custom-block-title">{{tag.title}}</p>
-          <p>个人一些自动的 vs code 配置(Settings.json)</p>
-          <ul>
-            <li>VsCode 常用插件配置</li>
-          </ul>-->
-          <div v-html="tag.excerpt"></div>
+        <div  v-if="tag.frontmatter.excerpt">
+          <div v-html="tag.frontmatter.excerpt"></div>
         </div>
       </div>
       <div class="details-btn">
@@ -32,12 +26,6 @@
           <em class="text-item active" v-if="t==tg">{{t}}</em>
           <em class="text-item" v-else @click="$emit('turnTo',t)">{{t}}</em>
         </i>
-        <!-- <i
-          class="iconfont h-classify article-info-item"
-          class="what"
-        >
-          <em class="text-item">IDE</em>
-        </i>-->
       </div>
     </div>
   </div>
