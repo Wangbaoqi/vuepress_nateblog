@@ -57,6 +57,10 @@ export default {
       }
     },
     changeTag(tag) {
+      if(tag == '全部') {
+        this.blog = copyBlogs;
+        return
+      }
       this.blog = copyBlogs.filter(e => e.frontmatter.tag === tag)
     },
     format(timer) {

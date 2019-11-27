@@ -20,7 +20,7 @@ export default {
   data() {
     return {
       info: [],
-      tg: ""
+      tg: "全部"
     };
   },
   computed: {
