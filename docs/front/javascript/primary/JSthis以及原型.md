@@ -755,3 +755,118 @@ Child.prototype.constructor = Child;
 这种模式融合了原型链和借用构造函数的优点，成为常用的继承模式。
 
 ### 原型式继承
+
+这种方式是借助了已有的对象创建新对象，同时不必创建自定义类型。
+
+```js
+function object(obj) {
+  function Fun() {}
+  Fun.prototype = obj
+  return new Fun()
+}
+
+var person = {
+  name: 'nate',
+  friends: ['john', 'weili', 'baoqi']
+}
+
+var otherPerson = object(person)
+otherPerson.name = 'natewang'
+otherPerson.friends.push('new john') // ['john', 'weili', 'baoqi', 'new john']
+```
+
+ECMAScript 5 新增了Object.create()规范了原型式继承，接收两个参数，如果只传一个参数，跟object的功能是一样的。如果传了第二个参数，格式跟object.definedProperty()的第二个参数格式相同。
+
+
+```js
+var anotherPerson = Object.create(person)
+// {} => __proto_:person
+
+var secondPerson = Object.create(person, {
+  name: {
+    value: 'natewbq'
+  }
+})
+// {name: 'natewbq', __proto__: person}
+```
+### 寄生式继承
+
+寄生式继承是和原型式继承紧密相关的一种思路，这种思路跟跟寄生构造函数和工厂模式相似，创建仅用于封装继承过程的函数，该函数在内部可以增强对象。
+
+```js
+function createAnther(org) {
+  var clone = object(org)
+  clone.sayName = function() {
+    console.log('inherit')
+  }
+  return clone
+}
+
+var newPerson = createAnther(person)
+newPerson.sayName() // inherit
+```
+### 寄生组合继承
+
+组合继承是JavaScript最常用的继承方式。但是其不足之处是都会调用两次超类型构造函数
+下面是组合继承中调用两次的例子：
+
+```js
+function Person(name) {
+  this.name = name
+  this.friends = ['lisi', 'wangwu', 'nateliu']
+}
+
+Person.prototype.sayName = function() {
+  console.log(this.name)
+}
+
+function Child(name, age) {
+  // 第二次次调用超类型 Person
+  Person.call(this, name)
+  this.age = age
+}
+
+// 第一次调用超类型 Person
+Child.prototype = new Person()
+```
+
+寄生组合继承，即通过构造函数借用构造函数来继承属性，通过原型链的混成形式来继承。
+背后的思想：不必为了指定子类型的原型而调用超类型的构造函数，所需要的只是超类型原型的副本而已，本质上就是使用寄生式继承来继承超类型的原型
+
+
+```js
+function object(obj) {
+  function Fun() {}
+  Fun.prototype = obj
+  return Fun
+}
+
+function inheritPrototype(superType, subType) {
+  // 处理超类型的副本
+  var prototype = object(superType.prototype)
+  prototype.constructor = subType
+  subType.prototype = prototype
+}
+
+function Person(name) {
+  this.name = name
+  this.friends = ['lisi', 'wangwu', 'nateliu']
+}
+
+Person.prototype.sayName = function() {
+  console.log(this.name)
+}
+
+function Child(name, age) {
+  Person.call(this, name)
+  this.age = age
+}
+
+inheritPrototype(Person, Child)
+
+Child.prototype.sayAge = function() {
+  console.log(this.age)
+}
+
+```
+使用寄生组合继承方式，减少了调用超类型构造函数的次数。而且能保持原型链不变，能够正常使用instanceof和isPrototypeOf(),这种方式是引用类型最理想的继承方式
