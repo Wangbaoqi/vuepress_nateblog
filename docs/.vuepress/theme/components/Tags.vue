@@ -25,16 +25,22 @@ export default {
   },
   computed: {
     tags() {
-      //核心代码，整合markdown中tags的数目
       let allTags = [];
-      const hasTags = this.$site.pages.filter(e => e.frontmatter.tag )
-      allTags = hasTags.map(e => e.frontmatter.tag)
+      let hasTags = [];
+
+      if(this.$page.frontmatter.type === 'typeTopic') {
+        hasTags = this.$site.pages.filter(e => e.frontmatter.subTag)
+        allTags = hasTags.map(e => e.frontmatter.subTag)
+      }else {
+        hasTags = this.$site.pages.filter(e => e.frontmatter.tag )
+        allTags = hasTags.map(e => e.frontmatter.tag)
+      }
       
       let flatTags = Array.from(new Set(allTags));
       let all = [
         {
           tag: "全部",
-          number: this.$site.pages.filter(v => v.title).length
+          number: allTags.length
         }
       ];
       return flatTags.reduce((res, v) => {

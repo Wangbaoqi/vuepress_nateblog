@@ -72,10 +72,17 @@ module.exports = {
   ],
   '/everyday/': [
     {
-      title: '壹题攻克',
+      title: 'JavaScript',
       collapsable: false,
       children: [
-        '/everyday/frontConquered/conquered'
+        '/everyday/jsConquered/conquered'
+      ]
+    },
+    {
+      title: 'CSS',
+      collapsable: false,
+      children: [
+        '/everyday/cssConquered/css'
       ]
     },
   ],

@@ -1,13 +1,11 @@
 <template>
-  <div class="abstract">
+  <div class="abstract" v-if="tag.title">
     <div class="abstract-item">
       <div class="text-hover">
         <router-link :to="tag.path">{{tag.title}}</router-link>
       </div>
-      <div class="abstract">
-        <div  v-if="tag.frontmatter.excerpt">
-          <div v-html="tag.frontmatter.excerpt"></div>
-        </div>
+      <div class="abstract" v-if="tag.frontmatter.excerpt">
+        <div v-html="tag.frontmatter.excerpt"></div>
       </div>
       <div class="details-btn">
         <router-link :to="tag.path">

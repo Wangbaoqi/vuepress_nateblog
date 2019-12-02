@@ -2,9 +2,9 @@
   <main class="page">
     <slot name="top"/>
 
-    <Classify v-if="type==='typeHome'" />
+    <Classify v-if="type" />
 
-    <Content v-if="type!=='typeHome'" class="content theme-default-content"/>
+    <Content v-else class="content theme-default-content"/>
 
     <footer class="page-edit">
       <div class="edit-link" v-if="editLink">
@@ -124,7 +124,8 @@ export default {
   methods: {
     updated() {
       const { frontmatter = {} } = this.$page;
-      this.type = frontmatter.type
+      const types = ['typeHome', 'typeTopic']
+      this.type = types.includes(frontmatter.type) 
       this.initGitalk();
     },
     createEditLink(repo, docsRepo, docsDir, docsBranch, path) {

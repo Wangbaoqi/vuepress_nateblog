@@ -24,7 +24,7 @@ module.exports = [
   },
   {
     text: '壹题攻克',
-    link: '/everyday/frontConquered/conquered'
+    link: '/everyday/'
   },
   {
     text: '构建部署',

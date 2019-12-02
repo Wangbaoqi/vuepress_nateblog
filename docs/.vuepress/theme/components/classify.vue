@@ -50,6 +50,10 @@ export default {
           new Date(pre.lastUpdated).getTime()
         );
       });
+      // 每一壹题
+      if(this.$page.frontmatter.type && this.$page.frontmatter.type === 'typeTopic') {
+        go = go.filter(e => e.frontmatter.type === 'web-topic')
+      }
       this.blog = go.filter(v => v.frontmatter.tag);
       copyBlogs = go;
       if (this.blog.length > defaultLength) {
@@ -57,11 +61,18 @@ export default {
       }
     },
     changeTag(tag) {
+      const { type = ''} = this.$page.frontmatter
       if(tag == '全部') {
         this.blog = copyBlogs;
         return
       }
-      this.blog = copyBlogs.filter(e => e.frontmatter.tag === tag)
+      this.blog = copyBlogs.filter(e => {
+        if(type == 'typeTopic') {
+          return e.frontmatter.subTag === tag
+        }else {
+          return e.frontmatter.tag === tag
+        }
+      })
     },
     format(timer) {
       //shijianchuo是整数，否则要parseInt转换
