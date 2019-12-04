@@ -6,6 +6,8 @@
 
     <Content v-else class="content theme-default-content"/>
 
+    <Issue v-if="issueType"/>
+
     <footer class="page-edit">
       <div class="edit-link" v-if="editLink">
         <a :href="editLink" target="_blank" rel="noopener noreferrer">{{ editLinkText }}</a>
@@ -40,15 +42,17 @@ import { resolvePage, outboundRE, endingSlashRE } from "@parent-theme/util";
 import Gitalk from "gitalk";
 import dayJs from 'dayjs';
 import Classify from "@theme/components/classify.vue";
+import Issue from "@theme/components/GoodIssue.vue";
 import imagesZoom from "@theme/util/imageScale";
 import "gitalk/dist/gitalk.css";
 export default {
-  components: { Classify },
+  components: { Classify, Issue },
   props: ["sidebarItems"],
   data() {
     return {
       path: "",
-      type: ""
+      type: "",
+      issueType: ""
     };
   },
   computed: {
@@ -126,6 +130,7 @@ export default {
       const { frontmatter = {} } = this.$page;
       const types = ['typeHome', 'typeTopic']
       this.type = types.includes(frontmatter.type) 
+      this.issueType = frontmatter.subType == 'oneTopic'
       this.initGitalk();
     },
     createEditLink(repo, docsRepo, docsDir, docsBranch, path) {

@@ -3,11 +3,12 @@
     <div class="abstract-item">
       <div class="text-hover">
         <router-link :to="tag.path">{{tag.title}}</router-link>
+        <span class="icon">{{tag.frontmatter.tag}}</span>
       </div>
       <div class="abstract" v-if="tag.frontmatter.excerpt">
         <div v-html="tag.frontmatter.excerpt"></div>
       </div>
-      <div class="details-btn">
+      <div class="details-btn" v-if="tag.frontmatter.excerpt">
         <router-link :to="tag.path">
           <div data-v-e422eb16 class="v-btn">
             <i data-v-e422eb16 class="what"></i>
@@ -15,7 +16,7 @@
           </div>
         </router-link>
       </div>
-      <div class="v-divider"></div>
+      <div class="v-divider" v-if="tag.frontmatter.excerpt"></div>
       <div class="article-info article-info-item">
         <i class="what">
           <em v-if="tag.lastUpdated">{{tag.lastUpdated}}</em>
@@ -42,9 +43,9 @@ export default {
 $color = $accentColor;
 
 .abstract {
-  margin-top: 1rem;
   width: 100%;
-
+  color #666666;
+  font-size 1rem;
   .abstract-item {
     margin: 0 auto 1.2rem;
     padding: 1rem 1.2rem;
@@ -60,16 +61,14 @@ $color = $accentColor;
     background-color: #fff;
     position: relative;
 
-    .abstract {
-    }
-
     .text-hover {
-      position: relative;
       font-size: 1.2rem;
-      line-height: 2rem;
-      display: inline-block;
+      display: inline-flex;
+      align-items center
+      margin-bottom: 1rem;
 
       a {
+        position: relative;
         &:after {
           content: '';
           position: absolute;
@@ -91,11 +90,19 @@ $color = $accentColor;
           transform: scaleX(1);
         }
       }
+      .icon {
+        font-size 0.8rem
+        color rgba(62,175,124,1)
+        background rgba(62,175,124,0.2)
+        padding .2rem .3rem
+        border-radius 0.2rem
+        margin-left 0.4rem
+      }
     }
 
     .details-btn {
       text-align: right;
-      margin: 0.6rem 0;
+      margin: 0.3rem 0;
 
       .v-btn {
         display: inline-block;

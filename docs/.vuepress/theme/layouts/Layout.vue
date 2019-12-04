@@ -15,15 +15,14 @@
       <slot name="sidebar-bottom" slot="bottom"/>
     </Sidebar>
     <!-- 侧边栏 -->
+
+    <RightBar></RightBar>
     <Home v-if="$page.frontmatter.home"/>
     <MyHome v-else-if="$page.frontmatter.defaultHome"></MyHome>
-    <!-- 如果md文件中有 home:true 就使用该组件 -->
-    <!-- <Tags v-else-if="tags"/> -->
     <Page v-else :sidebar-items="sidebarItems">
       <slot name="page-top" slot="top"/>
       <slot name="page-bottom" slot="bottom"/>
     </Page>
-    <!-- 一般的md文件使用的组件 -->
   </div>
 </template>
 
@@ -34,11 +33,12 @@ import Page from "@theme/components/Page.vue";
 import Sidebar from "@theme/components/Sidebar.vue";
 import Tags from "@theme/components/Tags.vue";
 import MyHome from "@theme/components/MyHome.vue";
+import RightBar from "@theme/components/RightBar.vue";
 import { resolveSidebarItems } from "@theme/util";
 
 import '@theme/styles/iconfont/iconfont.css';
 export default {
-  components: { Home, Page, Sidebar, Navbar, Tags, MyHome },
+  components: { Home, Page, Sidebar, Navbar, Tags, MyHome, RightBar },
 
   data() {
     return {
