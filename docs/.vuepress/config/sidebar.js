@@ -75,7 +75,8 @@ module.exports = {
       title: 'JavaScript',
       collapsable: false,
       children: [
-        '/everyday/jsConquered/conquered'
+        '/everyday/jsConquered/conquered',
+        '/everyday/jsConquered/apply'
       ]
     },
     {
