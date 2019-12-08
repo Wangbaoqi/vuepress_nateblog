@@ -123,5 +123,4 @@ function sbind(fn, obj) {
     return fn.apply(obj, [...arguments])
   }
 }
-
 ```
