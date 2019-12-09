@@ -17,9 +17,8 @@ excerpt: '数组结构以及数组的广泛使用，数据结构有线性结构�
 ## 数组的使用操作API
 
 借用一张img 来掌握array的方法 
-[array-methods](!https://user-gold-cdn.xitu.io/2017/12/20/1607405dab59a110?imageslim)
+![array-methods](https://user-gold-cdn.xitu.io/2017/12/20/1607405dab59a110?imageslim)
 
-test
 
 **常见的操作数组的API有** 
 
@@ -60,6 +59,46 @@ test
 | keys          | 返回包含数组所有索引的@@iterator            
 | of            | 根据传入的参数创建一个新数组          
 | values        | 返回包含数组所有值得@@iterator               
+
+
+
+## 数组常见API的原生实现
+
+
+### Array.prototype.filter
+
+```js
+// this 是执行callback fn 中使用的this的值
+Array.prototype.sfilter = function(fn, thisArg) {
+  let self = thisArg || this;
+  let arr = [];
+
+  for(var i = 0; i < self.length; i++) {
+    // callback 执行的结果
+    /** param 
+     * this[i] 当前的值
+     * i 当前的位置索引
+     * this 当前的引用的数组
+     */
+    fn(self[i], i, self) && arr.push(self[i])
+  }
+  return arr;
+}
+
+// test 1
+let filterArr = arr.sfilter((item, index, arr) => {
+  return item > 4
+}, arr)
+
+// test 2
+let ffArr = Array.prototype.sfilter.call(arr, (item, index, arr) => {
+  return item > 4
+})
+```
+
+
+
+
 
 
 

@@ -28,3 +28,51 @@ Array.from(new Set(arr)) // [1, 2, 3, 5, 9, 4, 8, "1", "8", {}, {}]
 
 
 ## 双重循环去重
+
+**利用splice ES5**
+
+```js
+for(var i = 0; i < arr.length; i++) {
+  for(var j = i + 1; j < arr.length; j++) {
+    // 如果有重复元素 删掉重复元素 标识从上一个开始
+    // === 是否强制类型转换
+    if(arr[i] === arr[j]) {
+      arr.splice(j, 1);
+      j--;
+    }
+  }
+}
+arr; // [1, 2, 3, 5, 9, 4, 8, "1", "8", {}, {}]
+```
+
+## indexOf去重
+
+判断新数组中是否有该元素，没有就添加到新数组
+
+```js
+var newArr = [];
+for(var i = 0; i < arr.length; i++) {
+  if(newArr.indexOf(arr[i]) == -1) {
+    newArr.push(arr[i])
+  }
+}
+
+newArr; // [1, 2, 3, 5, 9, 4, 8, "1", "8", {}, {}]
+```
+
+## filter去重
+
+利用[MDN - Array.prototype.filter](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)中的索引，第一次出现的位置跟第二次出现的位置是否一致。
+
+这里提下[filter的原生实现](/algorithm/structure/array.html#array-prototype-filter)，可能更有助于理解这种方式
+
+```js
+function unique(arr) {
+  return Array.prototype.filter.call(arr, (item, index) => {
+    return arr.indexOf(item) === index
+  })
+}
+unique(); // [1, 2, 3, 5, 9, 4, 8, "1", "8", {}, {}]
+```
+
+## map去重

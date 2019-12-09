@@ -10,7 +10,7 @@ tag: 壹题攻克
 这几个函数的功能其实都是改变this的指向，前面在学习[this全面解析-显示绑定](/front/javascript/primary/jsthis以及原型.html#this-全面解析)的时候简单的阐述过。接下来全面的学习一下这几个函数。💪
 
 
-**apply和call**
+## apply和call
 
 都知道apply和call的之间的区别，是传的参数不同，apply传的是数组参数，而call传的是列表参数，这两个函数是直接执行的
 
@@ -30,7 +30,7 @@ foo.apply(person, ['baoqi', 18]) // 'baoqi' 18 nate
 结果是显而易见的，但是想知道这种方式是怎么执行的，是需要花费点时间研究的。下面手动实现以下apply和call
 
 
-**手动实现apply**
+## 手动实现apply
 ```js
 // call 手动实现
 Function.prototype.sapply = function(context) {
@@ -62,7 +62,7 @@ Function.prototype.sapply = function(context) {
 foo.sapply(person, ['baoqiwang', 18]) // baoqiwang 24 nate undefined
 ```
 
-**手动实现call**
+## 手动实现call
 
 call的实现原理和apply基本是一致的，不过还是有点细微的差异
 
@@ -88,7 +88,8 @@ Function.prototype.scall = function(context) {
 }
 ```
 接下来就开始扯一扯bind了
-**bind**
+
+## bind
 
 bind的内部运行原理基本和apply、call是类似的，但是他是返回了一个函数, 先看下原生的bind
 
@@ -99,7 +100,7 @@ newFoo('baoqi', 18) //  baoqiwang 24 nate
 
 接下里手动实现bind, bind 可以接受多个参数
 
-**手动实现bind**
+## 手动实现bind
 1. 原型链的方式
 2. 封装function的方式
 
