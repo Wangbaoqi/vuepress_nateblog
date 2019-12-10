@@ -11,7 +11,7 @@ tag: 壹题攻克
 
 这里收集了不同的数组去重的方法，接下来逐一去攻克。。
 
-## ES6 Set去重
+## ES6 Set数据结构去重
 
 想必ES6去重应该在开发中使用的是最多的（简便明了）👍
 
@@ -75,4 +75,37 @@ function unique(arr) {
 unique(); // [1, 2, 3, 5, 9, 4, 8, "1", "8", {}, {}]
 ```
 
-## map去重
+## Es6 Map数据结构去重
+
+利用[MDN - Map数据结构](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Map)的键值是唯一的特性进行去重。
+
+
+```js
+function uniqueMap(arr) {
+  let map = new Map()
+  let resArr = []
+
+  for(let i = 0; i < arr.length; i++) {
+    if(map.has(arr[i])) {
+      map.set(arr[i], true)
+    }else {
+      map.set(arr[i], false)
+      resArr.push(arr[i])
+    }
+  }
+  return resArr
+}
+uniqueMap(arr) // [1, 2, 3, 5, 9, 4, 8, "1", "8", {}, {}]
+```
+
+## 引用类型去重
+
+上述的几种方法可以看到，对于基本类型可以去重，但是引用类型是无效的，在开发场景中，对于引用类型的去重也是非常常见的
+
+```js
+function uniqueArray(arr) {
+  return [...new Set(arr.map(e => JSON.stringify(e)))].map(e => JSON.parse(e))
+}
+```
+
+

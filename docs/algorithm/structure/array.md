@@ -95,6 +95,38 @@ let ffArr = Array.prototype.sfilter.call(arr, (item, index, arr) => {
   return item > 4
 })
 ```
+### Array.prototype.map
+
+```js
+/**
+ * fn callback
+ * thisArg 可选参数
+ */ 
+Array.prototype.smap = function(fn, thisArg) {
+  let self = thisArg || this;
+  let arr = [];
+  for(let i = 0; i < self.length; i++) {
+    // callback 执行的结果被添加到新数组中
+    arr.push(fn(self[i], i, self))
+  }
+  return arr;
+}
+
+let newArr = arr.smap((item, index, arr) => {
+  return `${item}nate`
+})
+```
+### Array.prototype.reduce
+
+```js
+Array.prototype.sreduce = function(fn, initVal) {
+  for(let i = 0; i < this.length; i++) {
+    initVal = fn(initVal, this[i], i, this)
+  }
+  return initVal
+}
+
+```
 
 
 
