@@ -32,9 +32,8 @@ module.exports = {
         '/front/javascript/primary/JS数据类型',
         '/front/javascript/primary/JS作用域以及闭包',
         '/front/javascript/primary/JSthis以及原型',
-        '/front/javascript/primary/JSeventLoop',
         '/front/javascript/primary/JS异步',
-
+        '/front/javascript/primary/JSeventLoop',
       ]
     },
   ],
