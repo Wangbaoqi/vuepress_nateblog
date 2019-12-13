@@ -175,6 +175,9 @@ checkScope2()();
 
 就拿上述两个函数checkScope1 和 checkScope2 来讲，严格意义上checkScope2函数就产生了闭包，当前嵌套函数scope在当前词法作用域之外执行
 
+使用执行上下文的概念来用图解释下作用域链
+
+![词法作用域](https://cdn.img.wenhairu.com/images/2019/12/13/APkU3.png)
 
 ```js
 var fn;

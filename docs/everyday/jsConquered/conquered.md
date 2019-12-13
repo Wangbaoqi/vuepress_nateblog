@@ -105,3 +105,78 @@ foo = function() {
 }
 ```
 
+## 提升带来的问题
+
+1. 变量在没有察觉的时候被覆盖了 
+
+```JS
+var global = 'global'
+function foo() {
+  console.log(global)
+  if(1) {
+    var global = 'inner'
+  }
+  console.log(global)
+}
+foo()
+```
+**这个例子由于global=inner被提升了，因此，打印结果是 undefined inner**
+
+下面改动一下：
+```JS
+var global = 'global'
+function foo() {
+  console.log(global)
+  if(1) {
+    let global = 'inner'
+  }
+  console.log(global)
+}
+foo()
+```
+**上面将var改成了let, 因此有了块级作用域，变量将不能被提升，打印结果是 global global**
+
+2. 本应该销毁的变量没有销毁
+
+```js
+function foo() {
+  for(var i = 0; i < 6; i++) {
+    // ...
+  }
+  console.log(i)
+}
+foo()
+```
+如果是c语言或者类似大部分语言，for循环结束之后，i变量就会销毁了，但是在JS中，并没有销毁，就是因为变量提升的原因
+
+## JS是如何支持块级作用域的
+
+众所周知，ES6 中的let和const都可以实现块级作用域，那么块级作用域和变量提升是怎么并存的呢？
+
+可以看一段代码, 用执行上下文来解释：
+
+
+```js
+function foo() {
+  let a = 1;
+  var b = 2;
+  if(1){
+    let a = 3;
+    var c = 4;
+    let d = 5;
+    console.log(a)
+    console.log(b)
+  }
+  console.log(a)
+  console.log(c)
+  console.log(d)
+}
+foo()
+```
+
+![foo-执行上下文](https://cdn.img.wenhairu.com/images/2019/12/12/APUUn.png)
+
+
+通过图发现，在编译foo函数阶段，所有通过var声明的变量都在变量环境对象中，而通过let声明的变量只有
+a = undefined，在词法环境中，在执行foo函数阶段，可以看到上图执行阶段，let声明的变量在词法环境中重新
+开辟了一块，而此时的a变量是不会提升的.
