@@ -21,6 +21,10 @@ JS是单线程的语言，如果在执行过程中遇到异步的代码，不可
 
 ![JS执行顺序](https://cdn.img.wenhairu.com/images/2019/12/11/AcypI.png)
 
+**执行上下文**
+
+![执行上下文](https://cdn.img.wenhairu.com/images/2019/12/16/A48lg.png)
+
 ### 编译阶段
 
 在一段代码编译之后，会生成两部分内容：

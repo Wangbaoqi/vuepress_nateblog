@@ -33,6 +33,7 @@ module.exports = {
         '/front/javascript/primary/JS作用域以及闭包',
         '/front/javascript/primary/JSthis以及原型',
         '/front/javascript/primary/JSeventLoop',
+        '/front/javascript/intermediate/JS内存机制',
         '/front/javascript/primary/JS异步',
       ]
     },
