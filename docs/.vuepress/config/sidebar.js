@@ -77,7 +77,9 @@ module.exports = {
       children: [
         '/everyday/jsConquered/conquered',
         '/everyday/jsConquered/apply',
-        '/everyday/jsConquered/array'
+        '/everyday/jsConquered/array',
+        '/everyday/jsConquered/deepClone',
+
       ]
     },
     {
