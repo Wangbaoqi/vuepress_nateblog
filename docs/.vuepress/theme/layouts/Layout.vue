@@ -16,7 +16,7 @@
     </Sidebar>
     <!-- 侧边栏 -->
 
-    <RightBar></RightBar>
+    <!-- <RightBar></RightBar> -->
     <Home v-if="$page.frontmatter.home"/>
     <MyHome v-else-if="$page.frontmatter.defaultHome"></MyHome>
     <Page v-else :sidebar-items="sidebarItems">

@@ -27,6 +27,10 @@ module.exports = [
     link: '/everyday/'
   },
   {
+    text: '项目案例',
+    link: '/project/react-nugget'
+  },
+  {
     text: '构建部署',
     link: '/builddeploy/centosJenkins/jenkins'
   },

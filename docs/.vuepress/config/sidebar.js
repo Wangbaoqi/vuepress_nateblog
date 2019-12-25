@@ -108,6 +108,15 @@ module.exports = {
       ]
     },
   ],
+  '/project/': [
+    {
+      title: 'React Project',
+      collapsable: false,
+      children: [
+        '/project/react-nugget',
+      ]
+    },
+  ],
   '/frame/': [
     {
       title: '框架思想',
