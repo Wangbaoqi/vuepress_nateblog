@@ -218,8 +218,59 @@ var newObjs = deepClone(objs)
 
 ## 破解递归爆栈
 
+使用递归可能出现的情况就爆栈（如果深度比较深的话）。解决方法常见的有**消除尾递归**和**采用循环**
 
+1. [消除尾递归]()
+2. 采用循环的方式 不会出现爆栈的情景 
 
+在这里使用循环的方式来破解递归爆栈
+
+先附上code
+```js
+function deepLoop(source) {
+  const root = {}
+  // 栈顶的元素
+  const loopList = [
+    {
+      parent: root,
+      key: undefined,
+      data: source
+    }
+  ]
+
+  while(loopList.length) {
+    const node = loopList.pop();
+    const parent = node.parent;
+    const key = node.key;
+    const data = node.data;
+    
+    // 初始化
+    let res = parent;
+
+    if(typeof key !== 'undefined') {
+      res = parent[key] = {}
+    }
+
+    for(let i in data) {
+      if(data.hasOwnProperty(i)) {
+        if(typeof data[i] === 'object') {
+          loopList.push({
+            parent: res,
+            key: i,
+            data: data[i]
+          })
+        }else {
+          res[i] = data[i]
+        }
+      }
+    }
+  }
+  return root;
+}
+```
+这里采用了数据结构[栈](/algorithm/structure/stack.html)的方式。
+
+结束循环的条件是栈为空。
 
 
 
