@@ -107,6 +107,13 @@ module.exports = {
         '/network/httpProto/http',
       ]
     },
+    {
+      title: 'HTTP问题收纳',
+      collapsable: false,
+      children: [
+        '/network/httpQuestion/question',
+      ]
+    },
   ],
   '/project/': [
     {
