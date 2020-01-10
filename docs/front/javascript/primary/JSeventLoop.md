@@ -117,11 +117,32 @@ variable environment {
 **缘由: 渲染进程都会有一个主线程，而这个主线程会处理不同的任务，DOM渲染，计算样式，脚本执行，用户输入，异步任务等**
 
 
-
 1. 在单线程中处理已安排好的任务 
 
+```js
+function MainThread() {
+  const a = 1 + 1;
+  const b = 2/1;
+  const c = 4*3;
+  console.log(a,b,c)
+}
+```
 
 2. 在单线程中处理新加入的任务 
+
+**要在线程运行的过程中处理新加入的任务，就需要采用事件循环机制了**
+
+```js
+function getInput(val) {
+  return val
+}
+// 主线程 等待用户的输入
+function MainThread() {
+  for(;;) {
+    
+  }
+}
+```
 
 
 3. 在单线程中处理其他线程发送的任务

@@ -46,6 +46,8 @@ module.exports = {
         '/algorithm/structure/array',
         '/algorithm/structure/link',
         '/algorithm/structure/stack',
+        '/algorithm/structure/queue',
+        '/algorithm/structure/dictionary',
       ]
     },
     {
