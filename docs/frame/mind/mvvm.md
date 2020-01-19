@@ -4,5 +4,5 @@ tag: framework
 excerpt: 'framework MVVM'
 ---
 
-# MVVM
+# 为什么会产生框架
 

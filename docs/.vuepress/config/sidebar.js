@@ -81,7 +81,6 @@ module.exports = {
         '/everyday/jsConquered/apply',
         '/everyday/jsConquered/array',
         '/everyday/jsConquered/deepClone',
-
       ]
     },
     {
@@ -89,6 +88,17 @@ module.exports = {
       collapsable: false,
       children: [
         '/everyday/cssConquered/css'
+      ]
+    },
+    {
+      title: 'React',
+      collapsable: false,
+      children: [
+        '/everyday/reactConquered/react',
+        '/everyday/reactConquered/reactComponent',
+        '/everyday/reactConquered/reactRouter',
+        '/everyday/reactConquered/reactRedux',
+        '/everyday/reactConquered/reactPerformance',
       ]
     },
   ],
@@ -132,6 +142,8 @@ module.exports = {
       collapsable: false,
       children: [
         '/frame/mind/mvvm',
+        '/frame/mind/visualDom',
+
       ]
     },
     {

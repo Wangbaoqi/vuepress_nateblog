@@ -21,3 +21,20 @@ tag: 实战项目
 * **react-redux** [状态管理](https://react-redux.js.org/introduction/quick-start) [手写简单的react-redux](/frame/react/reactRedux.html)
 * **classnames** [样式类处理](https://www.npmjs.com/package/classnames)
 * **webpack** [打包工具](https://www.webpackjs.com/concepts/)
+
+
+
+
+
+
+
+## 归纳问题
+
+### 访问图片 403 forbidden
+
+获取到掘金图片数据之后，渲染时发现图片请求是403 - forbidden，这个是设置了防盗链 
+
+可以在页面中加入
+```html
+<meta name="referrer" content="no-referrer" />
+```

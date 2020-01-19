@@ -12,6 +12,8 @@ excerpt: 'JS EventLoop 机制'
 JS是单线程的语言，如果在执行过程中遇到异步的代码，不可能一直等待（浪费资源。。。）, 至此，事件循环机制就运用而生了。
 :::
 
+[[toc]]
+
 在了解EventLoop之前，首先再稳固一下JavaScript代码的执行机制
 
 ## JavaScript 执行顺序
@@ -139,12 +141,21 @@ function getInput(val) {
 // 主线程 等待用户的输入
 function MainThread() {
   for(;;) {
-    
+    let firstNum = getInput(3)
+    let secondNum = getInput(4)
+    console.log(firstNum + secondNum)
   }
 }
 ```
 
-
 3. 在单线程中处理其他线程发送的任务
+
+**用第二版线程是无法处理其他线程发送的任务的，因此，消息队列就产生了**
+
+
+<font color=#ff502c bgcolor=#fff5f5 size=4 >**消息队列**</font> 
+
+消息队列中有很多的任务类型（）
+
 
 
