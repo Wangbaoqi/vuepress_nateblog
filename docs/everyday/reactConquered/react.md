@@ -10,13 +10,26 @@ tag: 壹题攻克
 collect React interview soul questions
 ::: 
 
-
 [[toc]]
 
 
 ## 什么是声明式编程
 
+**声明式编程**强调的是要**做什么**，而不是**如何做（命令式编程）**
+
 **命令式编程**
+
+```js
+const list = [1,2,4,5,6]
+// 声明式编程 - 要做什么 list每一项*2
+const declara = list.map(i => i * 2)
+// 命令式编程 - 如何做 获取list每一项 然后再*2 最后push
+const order = []
+for(let i = 0; i < list.length; i++) {
+  order.push(list[i] * 2)
+}
+```
+
 
 ## 什么是函数式编程
 
