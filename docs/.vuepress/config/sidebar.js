@@ -35,6 +35,8 @@ module.exports = {
         '/front/javascript/primary/JSeventLoop',
         '/front/javascript/intermediate/JS内存机制',
         '/front/javascript/primary/JS异步',
+        '/front/javascript/intermediate/JS函数式编程',
+
       ]
     },
   ],
