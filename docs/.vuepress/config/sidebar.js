@@ -106,6 +106,13 @@ module.exports = {
   ],
   '/builddeploy/': [
     {
+      title: '构建打包',
+      collapsable: false,
+      children: [
+        '/builddeploy/buildPack/webpack'
+      ]
+    },
+    {
       title: '构建部署',
       collapsable: false,
       children: [
