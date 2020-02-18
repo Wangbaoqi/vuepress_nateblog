@@ -299,3 +299,78 @@ glob.sync(path.join(__dirname), './src/*/index.js')
 source map 类型
 
 ![sourcemap](https://cdn.img.wenhairu.com/images/2020/02/16/muJxp.png)
+
+
+### 提取公共资源 
+
+* 基础库分离 spliteChunkPlugin 代替了 commonsChunkPlugin(v3)
+
+```js
+optimization: {
+  splitChunks: {
+    chunks: 'async',
+    minSize: 30000,
+    maxSize: 0,
+    minChunks: 1,
+    maxAsyncRequests: 5,
+    maxInitialRequests: 3,
+    automaticNameDelimiter: '~',
+    name: true,
+    cacheGroups: {
+      vendors: {
+        test: /(react|react-dom)/,
+        name: 'vendors',
+        chunks: 'all'
+      },
+    }
+  }
+},
+
+```
+
+* 将react、react-dom 包通过CDN引入 - HtmlWebpackExternalsPlugin
+
+```js
+new HtmlWebpackExternalsPlugin({
+  externals: [
+    {
+      module: 'react',
+      entry: 'https://11.url.cn/now/lib/16.2.0/react.min.js',
+      global: 'React'
+    },
+    {
+      module: 'react-dom',
+      entry: 'https://11.url.cn/now/lib/16.2.0/react-dom.min.js',
+      global: 'ReactDOM'
+    }
+  ]
+})
+```
+
+
+## 常用 plugins 
+
+
+### HtmlWebpackPlugin
+
+
+[HtmlWebpackPlugin](https://webpack.docschina.org/plugins/html-webpack-plugin/)简化了HTML的创建
+
+
+### CleanWebpackPlugin
+
+
+
+### MiniCssExtractPlugin
+
+
+### OptimizeCssAssetsPlugin
+
+
+### HtmlWebpackExternalsPlugin
+
+
+### SplitChunksPlugin
+
+
+### HotModuleReplacementPlugin
