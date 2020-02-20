@@ -2,7 +2,8 @@
   "scripts": {
     "dev": "vuepress dev docs",
     "build": "vuepress build docs",
-    "gitalk": "vuepress gitalk ./docs"
+    "gitalk": "vuepress gitalk ./docs",
+    "deploy": "bash deploy.sh"
   },
   "devDependencies": {
     "vuepress": "^1.2.0"

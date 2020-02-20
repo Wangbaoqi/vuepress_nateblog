@@ -374,3 +374,59 @@ new HtmlWebpackExternalsPlugin({
 
 
 ### HotModuleReplacementPlugin
+
+
+
+## tree shaking 
+
+tree shaking 摇树优化  ES6 ， 静态的分析代码是不是有用到，没有用到的代码会删除掉 
+
+* DCE 
+代码不会被执行，不可执行
+代码执行的结果不会被用到 
+
+
+
+## scopehosting 
+
+构建之后的代码会有大量的闭包代码 - 体积增大，内存开销
+
+* 模块转化 
+
+
+**scope hoisting原理**
+
+将所有的模块的代码按照引用顺序放在一个函数作用域里，额庵后适当的重命名一些变量以防止变量名冲突 
+
+对比通过scope hoisting 可以减少函数声明代码和内存开销  
+
+**必须是ES6语法** mode - production 
+
+
+
+## 代码分割 
+
+* 抽离相同代码到共享快
+* 懒加载脚本 初始代码大小更小
+
+1. 懒加载脚本的方式
+  commonJS require.ensure 
+  ES6 动态 import - 需要babel转化 
+
+2. 使用动态 import
+
+* 安装babel插件 @babel/plugin-syntax-dynamic-import 
+
+* ES6 动态import 
+
+```js
+{
+  "plugins": [
+    "@babel/plugin-syntax-dynamic-import"
+  ]
+}
+
+```
+
+
+
