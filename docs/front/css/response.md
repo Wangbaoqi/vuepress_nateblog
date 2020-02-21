@@ -1,7 +1,7 @@
 ---
 type: front-css
 tag: css
-excerpt: '响应式设计。。。'
+excerpt: 'Responsive Design'
 ---
 
-# 响应式设计
+# Responsive Design

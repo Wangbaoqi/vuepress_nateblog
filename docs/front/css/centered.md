@@ -3,10 +3,12 @@ type: front-css
 tag: css
 excerpt: '居中的场景在业务中是很常见的...'
 ---
-# 水平垂直居中方式
+
+# The Way of Horizonal and vertical
+
 > 居中的场景在业务中是很常见的
 
-## absolute 负margin
+## absolute negative-margin
 
 ```html
 <div class="width-hr">

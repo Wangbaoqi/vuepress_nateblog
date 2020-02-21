@@ -1,20 +1,20 @@
 module.exports = {
   '/front/': [
     {
-      title: 'HTML5特性',
+      title: 'HTML5 Features',
       collapsable: false,
       children: [
-        '/front/html/web语义',
-        '/front/html/web通信',
-        '/front/html/web离线存储',
-        '/front/html/web多媒体',
-        '/front/html/web3D图像',
-        '/front/html/web性能集成',
-        '/front/html/web设备访问',
+        '/front/html/web semantic',
+        '/front/html/web communication',
+        '/front/html/web offline',
+        '/front/html/web multmedia',
+        '/front/html/web 3dimage',
+        '/front/html/web performance-integrate',
+        '/front/html/web device-access',
       ]
     },
     {
-      title: 'CSS3特性',
+      title: 'CSS3 Features',
       collapsable: false,
       children: [
         '/front/css/box',
@@ -22,27 +22,27 @@ module.exports = {
         '/front/css/centered',
         '/front/css/BFC',
         '/front/css/response',
-        '/front/css/css技术收纳',
+        '/front/css/css induction',
       ]
     },
     {
-      title: 'JavaScript 忍者秘籍',
+      title: 'JavaScript Ninja-Cheats',
       collapsable: false,
       children: [
-        '/front/javascript/primary/JS数据类型',
-        '/front/javascript/primary/JS作用域以及闭包',
-        '/front/javascript/primary/JSthis以及原型',
-        '/front/javascript/primary/JSeventLoop',
-        '/front/javascript/intermediate/JS内存机制',
-        '/front/javascript/primary/JS异步',
-        '/front/javascript/intermediate/JS函数式编程',
+        '/front/javascript/primary/JS data-type',
+        '/front/javascript/primary/JS scope-Closure',
+        '/front/javascript/primary/JS this-prototype',
+        '/front/javascript/primary/JS eventLoop',
+        '/front/javascript/intermediate/JS memory-mechanism',
+        '/front/javascript/primary/JS async',
+        '/front/javascript/intermediate/JS Functional-program',
 
       ]
     },
   ],
   '/algorithm/': [
     {
-      title: '数据结构',
+      title: 'Data Structure',
       collapsable: false,
       children: [
         '/algorithm/structure/array',
@@ -53,7 +53,7 @@ module.exports = {
       ]
     },
     {
-      title: '前端算法',
+      title: 'Front Algorithm',
       collapsable: false,
       children: [
         '/algorithm/frontalgorithm/search',
@@ -67,7 +67,7 @@ module.exports = {
   ],
   '/performance/': [
     {
-      title: '前端优化',
+      title: 'Front Performance',
       collapsable: false,
       children: [
         '/performance/frontPerformance/front'
@@ -106,14 +106,14 @@ module.exports = {
   ],
   '/builddeploy/': [
     {
-      title: '构建打包',
+      title: 'Build Pack',
       collapsable: false,
       children: [
         '/builddeploy/buildPack/webpack'
       ]
     },
     {
-      title: '构建部署',
+      title: 'Build Deploy',
       collapsable: false,
       children: [
         '/builddeploy/centosJenkins/jenkins'
@@ -122,14 +122,14 @@ module.exports = {
   ],
   '/network/': [
     {
-      title: 'HTTP协议',
+      title: 'HTTP Protocol',
       collapsable: false,
       children: [
         '/network/httpProto/http',
       ]
     },
     {
-      title: 'HTTP问题收纳',
+      title: 'HTTP Induction',
       collapsable: false,
       children: [
         '/network/httpQuestion/question',
@@ -147,7 +147,7 @@ module.exports = {
   ],
   '/frame/': [
     {
-      title: '框架思想',
+      title: 'Frame Minf',
       collapsable: false,
       children: [
         '/frame/mind/mvvm',
@@ -156,14 +156,14 @@ module.exports = {
       ]
     },
     {
-      title: 'Vue 全家桶',
+      title: 'Vue Family-Bucket',
       collapsable: false,
       children: [
         '/frame/vue/component',
       ]
     },
     {
-      title: 'React 全家桶',
+      title: 'React Family-Bucket',
       collapsable: false,
       children: [
         '/frame/react/component',

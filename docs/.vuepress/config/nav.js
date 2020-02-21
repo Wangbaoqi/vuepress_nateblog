@@ -3,44 +3,44 @@ module.exports = [
     text: 'Home', link: '/'
   },
   {
-    text: '前端技术', 
+    text: 'Front', 
     link: '/front/',
   },
   {
-    text: '数据结构算法',
+    text: 'Data Structure',
     link: '/algorithm/structure/array',
   },
   {
-    text: 'Web框架',
+    text: 'Web Frame',
     link: '/frame/mind/mvvm',
   },
   {
-    text: '网络协议',
+    text: 'Http',
     link: '/network/httpProto/http'
   },
   {
-    text: '性能优化',
+    text: 'Performance',
     link: '/performance/frontPerformance/front',
   },
   {
-    text: '壹题攻克',
+    text: 'Every question',
     link: '/everyday/'
   },
   {
-    text: '项目案例',
+    text: 'Project',
     link: '/project/react-nugget'
   },
   {
-    text: '构建部署',
+    text: 'Build',
     link: '/builddeploy/centosJenkins/jenkins'
   },
   {
-    text: "官网链接",
+    text: "Document Link",
     items: [{
-        text: "官方文档",
+        text: "Document",
         items: [
           {
-            text: "npm 中文文档",
+            text: "npm china",
             link: "https://www.npmjs.cn/"
           },
           {
@@ -114,9 +114,9 @@ module.exports = [
         ]
       },
       {
-        text: "学习社区",
+        text: "Learn community",
         items: [{
-            text: "MDN Web 文档",
+            text: "MDN Web document",
             link: "https://developer.mozilla.org/zh-CN/"
           },
           {
@@ -124,43 +124,27 @@ module.exports = [
             link: "http://www.dcloud.io/"
           },
           {
-            text: "D2日报",
-            link: "https://daily.fairyever.com/"
-          },
-          {
-            text: "菜鸟教程",
+            text: "W3C",
             link: "http://www.runoob.com/"
           },
           {
-            text: "前端库",
+            text: "awesomes",
             link: "https://www.awesomes.cn/"
-          },
-          {
-            text: "阿里云",
-            link: "https://www.aliyun.com/?spm=a2c4e.11154921.1280361.1.668724dcivLtu3"
-          },
-          {
-            text: "百度地图",
-            link: "http://lbsyun.baidu.com/index.php?title=%E9%A6%96%E9%A1%B5"
-          },
-          {
-            text: "ikcamp",
-            link: "https://www.ikcamp.com/"
           },
           {
             text: "Easy Mock",
             link: "https://www.easy-mock.com/"
           },
           {
-            text: "码云",
+            text: "gitee",
             link: "https://gitee.com/"
           },
           {
-            text: "图灵社区",
+            text: "ituring",
             link: "http://www.ituring.com.cn/"
           },
           {
-            text: "github排行榜",
+            text: "gitstar",
             link: "https://gitstar-ranking.com/"
           }
         ]

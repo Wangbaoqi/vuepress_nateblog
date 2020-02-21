@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>service worker</title>
+</head>
+<body>
+  <h3>一些提示信息</h3>
+  <ul>
+    <li>浏览器是否支持：<span id="isSupport"></span></li>
+    <li>service worker是否注册成功：<span id="isSuccess"></span></li>
+    <li>当前注册状态：<span id="state"></span></li>
+    <li>当前service worker状态：<span id="swState"></span></li>
+  </ul>
+
+
+
+
+  <script>
+    var sup = document.getElementById('isSupport');
+    var reg = document.getElementById('isSuccess');
+    var regsta = document.getElementById('state');
+    var sta = document.getElementById('swState');
+
+    if('serviceWorker' in navigator) {
+      sup.innerHTML = 'current brower is supported'
+
+      navigator.serviceWorker.register('./index.js', { scope: '/'})
+        .then((reg) => {
+          console.log(reg, 'reg')
+        })
+    }else {
+      sup.innerHTML = 'current brower is not supported'
+    }
+  </script>
+</body>
+</html>

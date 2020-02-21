@@ -11,10 +11,26 @@ module.exports = {
     lineNumbers: true
   },
   theme: 'reform',
+  locales: {
+    // 键名是该语言所属的子路径
+    // 作为特例，默认语言可以使用 '/' 作为其路径。
+    '/': {
+      lang: 'en-US', // 将会被设置为 <html> 的 lang 属性
+      title: 'Nate.Wang',
+      description: 'The business card of code that you write'
+    },
+    '/zh/': {
+      lang: 'zh-CN',
+      title: 'Nate.Wang',
+      description: '你写的每一行代码都是你的名片'
+    }
+  },
   themeConfig: {
-    nav: require('./config/nav'),
-    sidebar: require('./config/sidebar'),
-    sidebarDepth: 2,
+    // nav: require('./config/nav'),
+    // sidebar: require('./config/sidebar'),
+    // sidebarDepth: 2,
+
+    locales: require('./config/locales'),
     logo: '/favion.png',
     lastUpdated: 'Last Updated',
     searchMaxSuggestoins: 10,

@@ -3,7 +3,8 @@ type: front-css
 tag: css
 excerpt: 'CSS 页面布局, 单列布局、两列自适应布局、三栏布局、等高布局、粘连布局。。。'
 ---
-# 页面布局
+
+# Page Layout
 
 1. 单列布局
 2. 两列自适应布局
@@ -12,7 +13,7 @@ excerpt: 'CSS 页面布局, 单列布局、两列自适应布局、三栏布局�
 5. 粘连布局
 
 
-## 单列布局
+## single row layout
 
 常见的单列布局
 
@@ -20,7 +21,7 @@ excerpt: 'CSS 页面布局, 单列布局、两列自适应布局、三栏布局�
 * header footer 等宽全屏 content 略窄中间
 
 
-### 单列布局（等宽）
+### single row layout（monospace）
 
 ```html
 <div class="header"></div>
