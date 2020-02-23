@@ -17,10 +17,13 @@ export default {
   components: {
     Article
   },
+  props: {
+    lang: ''
+  },
   data() {
     return {
       info: [],
-      tg: "全部"
+      tg: "全部",
     };
   },
   computed: {
@@ -28,11 +31,12 @@ export default {
       let allTags = [];
       let hasTags = [];
 
+
       if(this.$page.frontmatter.type === 'typeTopic') {
-        hasTags = this.$site.pages.filter(e => e.frontmatter.subTag)
+        hasTags = this.$site.pages.filter(e => e.frontmatter.subTag && e.frontmatter.lang === this.lang)
         allTags = hasTags.map(e => e.frontmatter.subTag)
       }else {
-        hasTags = this.$site.pages.filter(e => e.frontmatter.tag )
+        hasTags = this.$site.pages.filter(e => e.frontmatter.tag && e.frontmatter.lang === this.lang)
         allTags = hasTags.map(e => e.frontmatter.tag)
       }
       

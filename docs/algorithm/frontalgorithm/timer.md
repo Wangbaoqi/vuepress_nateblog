@@ -1,6 +1,7 @@
 ---
 type: data-structure
 tag: 数据结构 
+lang: us
 excerpt: '时钟类似算法归纳'
 ---
 # 时钟类似算法归纳

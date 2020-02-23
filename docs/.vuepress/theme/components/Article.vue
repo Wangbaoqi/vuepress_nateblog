@@ -12,7 +12,7 @@
         <router-link :to="tag.path">
           <div data-v-e422eb16 class="v-btn">
             <i data-v-e422eb16 class="what"></i>
-            阅读全文
+            {{ lang === 'zh' ? '阅读全文' : 'read the full acticle'}}
           </div>
         </router-link>
       </div>
@@ -34,7 +34,8 @@
 export default {
   props: {
     tag: {}, //索引到的数据
-    tg: ""
+    tg: "",
+    lang: ""
   }
 };
 </script>

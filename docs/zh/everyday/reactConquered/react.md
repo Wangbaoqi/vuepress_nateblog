@@ -3,6 +3,7 @@ type: web-topic
 subType: oneTopic
 subTag: React相关
 tag: 壹题攻克
+lang: zh
 ---
 
 # React灵魂之问-react
@@ -37,6 +38,7 @@ for(let i = 0; i < list.length; i++) {
 
 
 ## React设计思路
+
 
 
 

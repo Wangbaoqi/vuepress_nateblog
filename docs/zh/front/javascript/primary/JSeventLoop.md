@@ -1,6 +1,7 @@
 ---
 type: front-JavaScript
 tag: JavaScript
+lang: zh
 excerpt: 'JS EventLoop 机制'
 ---
 

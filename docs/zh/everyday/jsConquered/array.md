@@ -2,6 +2,7 @@
 type: web-topic
 subType: oneTopic
 subTag: JavaScript相关
+lang: zh
 tag: 壹题攻克
 ---
 

@@ -1,6 +1,7 @@
 ---
 type: web-vue
 tag: vueJS
+lang: us
 excerpt: 'Vue 组件化开发'
 ---
 

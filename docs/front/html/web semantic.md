@@ -1,6 +1,7 @@
 ---
 type: front-html
 tag: html
+lang: us
 excerpt: HTML5 is the latest version that defines the HTML standard; it is a new version of the HTML language with new elements, attributes, and behaviors, and it has a larger set of technologies that allow the construction of more diverse and powerful websites and applications
 ---
 

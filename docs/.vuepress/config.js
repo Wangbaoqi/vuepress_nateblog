@@ -1,5 +1,5 @@
 module.exports = {
-  base: '/',
+  base: '/nate.wang/',
   title: 'Nate.wang',
   description: '你写的每一行代码都是你的名片',
   dest: './dist',
@@ -31,7 +31,7 @@ module.exports = {
     // sidebarDepth: 2,
 
     locales: require('./config/locales'),
-    logo: '/favion.png',
+    logo: '/nate.wang/favion.png',
     lastUpdated: 'Last Updated',
     searchMaxSuggestoins: 10,
     serviceWorker: {
@@ -49,6 +49,7 @@ module.exports = {
       repo: `vuepress_nateblog`,
       owner: "Wangbaoqi",
       admin: ["Wangbaoqi"],
+      language: "en",
       labelRule: `(title,path)=> {
         let paths=path.split('/')
         if(paths.length>0){

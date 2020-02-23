@@ -1,5 +1,6 @@
 ---
 type: typeHome
+lang: us
 ---
 
 

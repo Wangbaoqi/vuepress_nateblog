@@ -2,6 +2,7 @@
 type: project
 subType: react
 subTag: JavaScript相关
+lang: us
 tag: 实战项目
 ---
 

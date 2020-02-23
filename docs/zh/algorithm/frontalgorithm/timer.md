@@ -2,6 +2,7 @@
 type: data-structure
 tag: 数据结构 
 excerpt: '时钟类似算法归纳'
+lang: zh
 ---
 # 时钟类似算法归纳
 

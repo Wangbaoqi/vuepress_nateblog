@@ -1,6 +1,7 @@
 ---
 type: front-css
 tag: css
+lang: zh
 excerpt: '居中的场景在业务中是很常见的...'
 ---
 # 水平垂直居中方式

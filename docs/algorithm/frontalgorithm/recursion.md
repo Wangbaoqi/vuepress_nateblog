@@ -1,6 +1,7 @@
 ---
 type: data-structure
 tag: 数据结构 
+lang: us
 excerpt: '递归算法模式'
 ---
 # 递归算法模式

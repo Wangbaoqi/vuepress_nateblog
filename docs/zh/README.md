@@ -2,7 +2,7 @@
 home: true
 heroImage: /logo.gif
 actionText: 开始 →
-actionLink: /front/
+actionLink: /zh/front/
 features:
 - title: 技术文章
   details: 基于不断的技术更新, 注重前端基础，打磨核心技能，造轮子需自身硬！

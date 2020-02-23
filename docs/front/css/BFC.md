@@ -1,6 +1,7 @@
 ---
 type: front-css
 tag: css
+lang: us
 excerpt: 'float 的破坏性 —— float 破坏了父标签的原本结构，使得父标签出现了坍塌现象。导致这一现象的最根本原因在于：被设置了 float 的元素会脱离文档流。其根本原因在于 float 的设计初衷是解决文字环绕图片的问题'
 ---
 # Float and using of BFC

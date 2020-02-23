@@ -1,6 +1,7 @@
 ---
 type: web-vue
 tag: vueJS
+lang: zh
 excerpt: 'Vue 组件化开发'
 ---
 

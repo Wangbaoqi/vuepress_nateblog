@@ -1,6 +1,7 @@
 ---
 type: front-css
 tag: css
+lang: us
 excerpt: 'CSS 页面布局, 单列布局、两列自适应布局、三栏布局、等高布局、粘连布局。。。'
 ---
 

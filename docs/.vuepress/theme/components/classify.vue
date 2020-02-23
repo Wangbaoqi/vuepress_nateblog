@@ -1,13 +1,13 @@
 <template>
   <div class="classify">
-    <Tags @changeTag="changeTag"/>
+    <Tags @changeTag="changeTag" :lang="lang"/>
     <section class="main-content">
       <div class="blog-content">
         <template v-for="(tag,index) in blog" v-if="index<infoLength">
-          <Article :tag="tag" @turnTo="change"></Article>
+          <Article :tag="tag" @turnTo="change" :lang="lang"></Article>
         </template>
         <div class="more" v-if="show" @click="infoLength=blog.length;show=false">
-          查看全部
+          {{ lang == 'zh' ? '查看全部' : 'show all'}}
           <span class="reform-xiala"></span>
         </div>
       </div>
@@ -33,15 +33,23 @@ export default {
     return {
       blog: [], //博客
       infoLength: defaultLength, //默认显示条数
-      show: false
+      show: false,
+      lang: 'es'
     };
   },
   mounted() {
+    
+    this.handleLang()
     this.filerArticle();
 
   },
   methods: {
+    handleLang() {
+      this.lang = this.$page.frontmatter.lang
+    },
     filerArticle() {
+      const { lang = '' } = this.$page.frontmatter
+
       let go = this.$site.pages.sort((pre, next) => {
         if (pre.lastUpdated === undefined) return 1;
         if (next.lastUpdated === undefined) return -1;
@@ -52,10 +60,15 @@ export default {
       });
       // 每一壹题
       if(this.$page.frontmatter.type && this.$page.frontmatter.type === 'typeTopic') {
-        go = go.filter(e => e.frontmatter.type === 'web-topic')
+        go = go.filter(e => e.frontmatter.type === 'web-topic' )
       }
+
+      go = go.filter(e => e.frontmatter.lang && e.frontmatter.lang === lang)
+      
       this.blog = go.filter(v => v.frontmatter.tag);
+
       copyBlogs = go;
+
       if (this.blog.length > defaultLength) {
         this.show = true;
       }
@@ -73,6 +86,9 @@ export default {
           return e.frontmatter.tag === tag
         }
       })
+      console.log(this.blog, 'filter blog');
+
+
     },
     format(timer) {
       //shijianchuo是整数，否则要parseInt转换
@@ -109,6 +125,7 @@ export default {
   watch: {
     $route() {
       this.filerArticle();
+      this.handleLang();
     }
   }
 };

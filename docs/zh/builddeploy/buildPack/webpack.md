@@ -3,6 +3,7 @@ type: webpack
 subType: oneTopic
 subTag: webpack
 tag: 构建打包
+lang: zh
 ---
 
 # Webpack 打包
@@ -428,5 +429,27 @@ tree shaking 摇树优化  ES6 ， 静态的分析代码是不是有用到，没
 
 ```
 
+
+
+## ESLint 和 webpack的结合
+
+1. [eslint-config-airbnb](https://www.npmjs.com/package/eslint-config-airbnb)
+
+```js
+// use eslint-config-airbnb
+npm i eslint-config-airbnb eslint eslint-plugin-import eslint-plugin-react eslint-plugin-react-hooks eslint-plugin-jsx-a11y eslint-loader 
+```
+新建 .eslintrc.js 文件
+
+```js
+module.exports = {
+  "parser": "babel-eslint",
+  "extends": "airbnb",
+  "env": {
+    "browser": true,
+    "node": true
+  }
+}
+```
 
 

@@ -1,6 +1,7 @@
 ---
 type: front-JavaScript
 tag: JavaScript
+lang: us
 excerpt: 'JavaScript 异步编程'
 ---
 # JS Async Program

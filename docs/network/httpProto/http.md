@@ -1,6 +1,7 @@
 ---
 type: web-http
 tag: http
+lang: us
 excerpt: 'Http协议'
 ---
 

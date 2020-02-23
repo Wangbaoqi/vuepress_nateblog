@@ -1,14 +1,14 @@
 ---
 type: web-react
 tag: reactJs
-excerpt: 'React 开发中采坑问题收集...'
+lang: zh
+excerpt: React 开发中采坑问题收集...
 ---
 
 # React 开发中采坑问题收集
 
 ## React.js 开发问题
 
-1. **index.js:1 Warning: validateDOMNesting(...): <a> cannot appear as a descendant of <a>.**
 
 问题来源： 
 

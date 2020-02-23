@@ -1,6 +1,7 @@
 ---
 type: web-framework
 tag: framework
+lang: zh
 excerpt: 'framework MVVM'
 ---
 

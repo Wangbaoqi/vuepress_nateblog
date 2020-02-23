@@ -1,6 +1,7 @@
 ---
 type: web-server
 tag: jenkins 
+lang: us
 excerpt: '使用Docker、Jenkins、GitHub在centos中部署Vue'
 ---
 # Docker、Jenkins部署Vue

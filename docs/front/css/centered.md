@@ -1,6 +1,7 @@
 ---
 type: front-css
 tag: css
+lang: us
 excerpt: '居中的场景在业务中是很常见的...'
 ---
 

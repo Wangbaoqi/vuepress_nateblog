@@ -1,6 +1,7 @@
 ---
 type: front-JavaScript
 tag: JavaScript
+lang: us
 excerpt: 'ECMAScript 语言中所有的值都有一个对应的语言类型。ECMAScript 语言类型包 括 Undefined、Null、Boolean、String、Number 和 Object。'
 ---
 # JS Data Type

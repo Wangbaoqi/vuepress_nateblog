@@ -1,6 +1,7 @@
 ---
 type: web-vue
 tag: vueJS
+lang: zh
 excerpt: 'Vue-router'
 ---
 # Vue-router
