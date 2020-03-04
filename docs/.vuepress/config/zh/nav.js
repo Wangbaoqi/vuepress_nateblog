@@ -1,6 +1,6 @@
 module.exports = [
   {
-    text: 'Home', link: '/zh/'
+    text: '首页', link: '/zh/'
   },
   {
     text: '前端技术', 

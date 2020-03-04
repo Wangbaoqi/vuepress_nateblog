@@ -67,6 +67,13 @@ module.exports = {
   ],
   '/zh/performance/': [
     {
+      title: '浏览器相关',
+      collapsable: false,
+      children: [
+        '/zh/performance/browser/browserLoop'
+      ]
+    },
+    {
       title: '前端优化',
       collapsable: false,
       children: [
@@ -90,6 +97,18 @@ module.exports = {
       collapsable: false,
       children: [
         '/zh/everyday/cssConquered/css'
+      ]
+    },
+    {
+      title: 'Vue',
+      collapsable: false,
+      children: [
+        '/zh/everyday/vueConquered/vue',
+        '/zh/everyday/vueConquered/vueComponent',
+        '/zh/everyday/vueConquered/vueRouter',
+        '/zh/everyday/vueConquered/vuex',
+        '/zh/everyday/vueConquered/vueSsr',
+        '/zh/everyday/vueConquered/vuePerformance',
       ]
     },
     {
@@ -152,6 +171,7 @@ module.exports = {
       children: [
         '/zh/frame/mind/mvvm',
         '/zh/frame/mind/visualDom',
+        '/zh/frame/mind/spaPage',
 
       ]
     },
@@ -160,6 +180,10 @@ module.exports = {
       collapsable: false,
       children: [
         '/zh/frame/vue/component',
+        '/zh/frame/vue/router',
+        '/zh/frame/vue/vuex',
+        '/zh/frame/vue/vueResponse',
+
       ]
     },
     {
@@ -173,4 +197,7 @@ module.exports = {
       ]
     },
   ],
+  '/zh/pages/': [
+    '/zh/pages/lazyLoad'
+  ]
 }
