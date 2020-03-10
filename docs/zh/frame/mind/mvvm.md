@@ -5,7 +5,7 @@ lang: zh
 excerpt: 'framework mind'
 ---
 
-# 前端框架
+# 框架架构
 
 ::: tip
 现在基本所有的前端开发都会采用框架来进行开发，那为什么要使用框架呢?
@@ -230,7 +230,7 @@ ViewModel层:
 双向数据绑定:
 * 实现view和model的同步自动化 Vue（数据劫持+观察者模式），angular（脏检查）
 
-实现简易的MVVM架构模式[测试地址]()
+实现简易的MVVM架构模式 - 简易的Vue [测试地址]()
 
 ```js
 // observer 监听每个数据 
@@ -241,7 +241,7 @@ function observe(data) {
     defineReactive(data, key, data[key])
   })
 }
-
+// 数据劫持 
 function defineReactive(data, key, val) {
   observe(val)
   Object.defineProperty(data, key, {
@@ -257,3 +257,222 @@ function defineReactive(data, key, val) {
   })
 }
 ```
+
+
+**模板渲染脚本**
+
+Vue的使用HTML模板
+```html
+<div id="app">
+  <input type="text" v-model="someStr">
+  <input type="text" v-model="child.someStr">
+  <button v-on:click="clickBtn">change model</button>
+</div>
+```
+Vue的实例创建
+```js
+// 入口脚本
+var vm = new MVVM({
+  el: '#app',
+  data: {}
+})
+// 创建MVVM
+function MVVM(options){
+  this.$options = options
+  var data = this._data = options
+  // 模板渲染处理
+  new Compile(options.el || document.body, this)
+}
+```
+
+在使用Vue时，会有挂载元素的标识```el```，获取该节点下的所有节点元素，对所有元素进行遍历处理，接下来看模板编译的简单示例
+
+
+```js
+// compile
+function Compile(el, vm){
+  this.$vm = vm; 
+  // 获取挂载元素节点
+  this.$el = this.isElementNode(el) ? el : document.querySelector(el);
+
+  if(this.$el) {
+    // 将原生节点拷贝到虚拟节点对象上
+    this.$fragment = this.nodeFragment(this.$el)
+    // 初始化虚拟元素
+    this.initFragment()
+  }
+}
+
+Compile.prototype = {
+  constructor: Compile,
+  // 原生节点拷贝虚拟节点
+  nodeFragment(el) {
+    // 创建虚拟对象节点
+    var fragment = document.createDocumentFragment()
+    var childNode = null
+    // 拷贝原生节点到虚拟节点对象
+    while(childNode = el.firstChild) {
+      fragment.appendChild(childNode)
+    }
+    return fragment
+  },
+  // 初始化虚拟节点
+  initFragment() {
+    // 编译虚拟元素 遍历虚拟元素 处理绑定的指令和事件
+    this.compileFragment(this.$fragment)
+  },
+  // 
+  compileFragment(el) {
+    var that = this;
+    // 获取节点下的所有子节点集合
+    var childNodes = el.childNodes;
+    // 遍历子节点结合
+    [].slice.call(childNodes).forEach(function(node) {
+      // 获取子节点文本内容
+      var text = node.textContent;
+      // 正则匹配 {{}} 语法
+      var reg = /\{\{(.*)\}\}/;
+      // 元素节点
+      if(that.isElementNode(node)) {
+        // 编译元素节点
+        that.compileElement(node)
+      }else if(that.isTextNode(node) && reg.test(text)) {
+        // 编译文本节点 
+        that.complieText(node, RegExp.$1.trim())
+      }
+      // 如果该节点还有子元素节点集合 递归遍历处理
+      if(node.childNodes && node.childNodes.length){
+        that.compileFragment(node)
+      }
+
+
+    })
+
+  },
+  // 编译元素节点
+  compileElement(node) {
+    var that = this;
+    // 获取元素属性集合
+    var nodeAttrs = node.attributes;
+    // 遍历属性集合
+    [].slice.call(nodeAttrs).forEach(function(attr) {
+      // 获取属性name
+      var attrName = attr.name
+      // 判断是否是 v- 指令
+      if(that.isDirective(attrName)) {
+        // 获取指令的 value值 例如 someStr
+        var attrValue = attr.value;
+        // 获取指令的 末尾值 例如 model
+        var dir = attrName.substring(2)
+        // 事件指令
+        if(that.isEventDirective(dir)) {
+          // 处理事件指令
+          compileUtil.eventHandle(node, that.$vm, attrValue, dir)
+        }else {
+          // 普通指令 v-
+          compileUtil[dir] && compileUtil[dir](node, that.$vm, attrValue)
+        }
+
+        node.removeAttribute(attrName)
+      }
+
+    })
+
+  }
+  // 是否是元素节点
+  isElementNode(node) {
+    return node.nodeType == 1
+  },
+  // 是否是v- 指令
+  isDirective(attr) {
+    return attr.indexOf('v-') == 0
+  },
+  // 是否是事件指令 on- 指令
+  isEventDirective(dir) {
+    return dir.indexOf('on-') == 0
+  }
+
+}
+// 指令处理集合 
+var compileUtil = {
+
+  bind: function(node, vm, exp, dir) {
+    var updateFn = updater[dir + 'Updater']
+    updateFn && updateFn(node, this._getVmValue(vm, exp))
+
+    new Watcher(vm, exp, function(value, oldValue){
+      updateFn && updateFn(node, value, oldValue)
+    })
+  },
+  // 数据绑定处理
+  model: function(node, vm, exp) {
+    // 数据绑定
+    this.bind(node, vm, exp, 'model')
+
+    var that = this;
+    var val = this._getVmValue(vm, exp)
+
+    node.addEventListener('input', function(e) {
+      var newVal = e.target.value
+      if(newVal = val) return
+      that._setVmValue(vm, exp, newValue)
+      val = newVal
+    })
+
+  },
+  // 事件绑定处理
+  eventHandle: function(node, vm, exp, dir) {
+    // 获取事件类型
+    var eventType = dir.split(':')[1]
+    // 获取事件方法
+    var eventFn = vm.$options.methods && vm.$options.methods[exp]
+    // 该节点订阅事件方法
+    if(eventType && eventFn) {
+      node.addEventListener(eventType, eventFn.bind(this), false)
+    }
+  }
+  // 获取VM的值
+  _getVmValue(vm, exp) {
+    var valVm = vm;
+    exp = exp.split('.')
+    exp.forEach(function(item) {
+      valVm = valVm[item]
+    })
+    return valVm
+  },
+  // 设置VM的值
+  _setVmValue(vm, exp, newVal) {
+    var valVm = vm;
+    exp = exp.split('.')
+    exp.forEach(function(k, i) {
+      if (i < exp.length - 1) {
+          val = val[k];
+      } else {
+          val[k] = value;
+      }
+    })
+  }
+}
+
+var updater = {
+  modelUpdater: function(node, value, oldValue) {
+    node.value = typeof value === 'undefined' ? '' : value
+  }
+}
+
+```
+
+1. 将原生节点拷贝到虚拟节点对象上
+原生元素和虚拟节点对象的对比, 拷贝到虚拟节点上之后
+
+```html
+<!-- el 原始节点-->
+<div id="app"></div>
+
+<!-- fragment 虚拟节点-->
+<input type="text" v-model="someStr">
+<input type="text" v-model="child.someStr">
+<button v-on:click="clickBtn">change model</button>
+```
+
+2. 编译所有虚拟节点集合 

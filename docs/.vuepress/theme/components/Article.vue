@@ -63,7 +63,7 @@ $color = $accentColor;
     position: relative;
 
     .text-hover {
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       display: inline-flex;
       align-items center
       margin-bottom: 1rem;
