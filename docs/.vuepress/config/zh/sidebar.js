@@ -39,6 +39,15 @@ module.exports = {
 
       ]
     },
+    {
+      title: 'JavaScript 设计模式',
+      collapsable: false,
+      children: [
+        '/zh/front/designModel/faceObject',
+        '/zh/front/designModel/publish',
+        
+      ]
+    },
   ],
   '/zh/algorithm/': [
     {

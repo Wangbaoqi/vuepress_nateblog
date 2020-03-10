@@ -8,7 +8,8 @@ module.exports = {
     ['link', { rel: 'icon', href: '/favion.png' }]
   ],
   markdown: {
-    lineNumbers: true
+    lineNumbers: true,
+    
   },
   theme: 'reform',
   locales: {
