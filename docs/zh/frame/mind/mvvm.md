@@ -230,7 +230,7 @@ ViewModel层:
 双向数据绑定:
 * 实现view和model的同步自动化 Vue（数据劫持+观察者模式），angular（脏检查）
 
-实现简易的MVVM架构模式 - 简易的Vue [测试地址]()
+实现简易的MVVM架构模式 
 
 ```js
 // observer 监听每个数据 
@@ -462,7 +462,6 @@ var updater = {
 
 ```
 
-1. 将原生节点拷贝到虚拟节点对象上
 原生元素和虚拟节点对象的对比, 拷贝到虚拟节点上之后
 
 ```html
@@ -475,4 +474,4 @@ var updater = {
 <button v-on:click="clickBtn">change model</button>
 ```
 
-2. 编译所有虚拟节点集合 
+完整的简易MVVM模式-Vue [测试地址](https://wangbaoqi.github.io/nateCase/mvvmFront/index.html)

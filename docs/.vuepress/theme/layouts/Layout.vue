@@ -42,7 +42,7 @@ export default {
 
   data() {
     return {
-      isSidebarOpen: true,
+      isSidebarOpen: false,
       tags: true,
       type: ""
     };

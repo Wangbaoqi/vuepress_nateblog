@@ -193,24 +193,19 @@ bar.a; // 2
 
 ### this词法
 
-
 ```js
 function foo() {
-
   setTimeout(function() {
     console.log(this.a)
   })
+  // 改进 1. 保存this 2. => 
 }
-
 var obj = {
   a: 2,
   foo: foo
 }
-obj.foo()
-
+obj.foo() // undefined this -> window
 ```
-
-
 
 
 ## 面对对象 oo 
@@ -220,7 +215,7 @@ obj.foo()
 
 首先使用new操作符创建一个简单的对象
 
-```js{1}
+```js
 let person = new Object()
 person.name = 'nate'
 person.age = 24

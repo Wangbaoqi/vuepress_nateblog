@@ -6,3 +6,197 @@ excerpt: 'framework VisualDom'
 ---
 
 # 虚拟 DOM
+
+::: tip
+
+:::
+
+[[toc]]
+
+## 真实DOM和其解析流程 
+
+```webkit```渲染引擎渲染DOM 
+![real-dom](https://cdn.img.wenhairu.com/images/2020/03/11/mOhyT.png)
+
+浏览器的渲染过程大致分为:
+创建```DOM```树 -> 创建```style rules``` -> 构建```render``` 树 -> 布局```Layout``` -> 绘制```painting```
+
+* 构架DOM树，使用HTML分析器，分析HTML元素，构建一个DOM树
+* 生成样式表，使用CSS分析器，分析CSS文件和元素的样式，生成样式表
+* 构架render树，将DOM树和CSS规则关联起来，构建一颗render树
+* 确定节点坐标，根据render树结构，每个元素在屏幕上显示的精确坐标
+* 绘制页面，根据节点坐标，调用每个节点的paint方法，绘制出来
+
+而基于浏览器这样的渲染流程，在操作DOM的过程中，存在的问题:
+* 操作DOM 会导致页面进行重绘或者回流
+* 频繁操作DOM可能会导致页面的卡顿，影响用户体验
+* 影响性能 
+
+## Visual-DOM转化真实DOM
+
+虚拟```DOM```之所以会存在，就是解决了频繁操作DOM带来的性能损耗，为解决浏览器渲染性能而提出来的 
+
+它其实就是无论之前操作过多少次DOM，到最后某个时刻会一次性渲染，避免了频繁操作DOM带来损耗
+
+**visual-dom 转换成真实的DOM**
+
+如何生成visual-dom, 首先有一个真实的DOM结构，visual-dom生成之后进行对比
+
+```html
+<div id='visual-dom'>
+  <ul id='list'>
+    <li class="list-item">item01</li>
+    <li class="list-item">item03</li>
+    <li class="list-item">item03</li>
+  </ul>
+  <p class='content'>visual dom</p>
+</div>
+```
+1. 使用对象来表示```dom```节点
+
+```js
+/**
+ * 每个节点表示的对象
+ *  @param {String} tagName 标签名称
+ *  @param {String} props 标签属性
+ *  @param {String} children 子元素
+ **/
+function Element(tagName, props, children) {
+  this.tagName = tagName
+  this.props = props
+  this.children = children
+
+  if(props.key) {
+    this.key = props.key
+  }
+  // 子元素个数
+  var count = 0 
+  children.forEach(function(child, index) {
+    if(child instanceof Element) {
+      count += child.count
+    }else {
+      children[index] = '' + child
+    }
+    count++
+  })
+  this.count = count
+}
+
+function createElement(tagName, props, children) {
+  return new Element(tagName, props, children)
+}
+
+// 调用createElement 生成虚拟dom对象
+var visualObj = createElement(
+  'div', {id: 'visual-dom'},
+  [
+    createElement('ul', {id: 'list'}, [
+      createElement('li', {class: 'list-item'}, ['item01']),
+      createElement('li', {class: 'list-item'}, ['item02']),
+      createElement('li', {class: 'list-item'}, ['item03'])
+    ]),
+    createElement('p', {class: 'content'}, ['visual dom'])
+  ]
+)
+```
+调用之后，查看```visual-dom```的数据结构
+
+```js
+{
+  "tagName": "div",
+  "props": {
+    "id": "visual-dom"
+  },
+  "children": [{
+    "tagName": "ul",
+    "props": {
+        "id": "list"
+    },
+    "children": [
+      {
+        "tagName": "li",
+        "props": {
+          "class": "list-item"
+        },
+        "children": [
+          "item01"
+        ],
+        "count": 1
+      },
+      {
+        "tagName": "li",
+        "props": {
+          "class": "list-item"
+        },
+        "children": [
+          "item02"
+        ],
+        "count": 1
+      },
+      {
+        "tagName": "li",
+        "props": {
+          "class": "list-item"
+        },
+        "children": [
+          "item03"
+        ],
+        "count": 1
+      }
+    ],
+      "count": 6
+    },
+    {
+      "tagName": "p",
+      "props": {
+        "class": "content"
+      },
+      "children": [
+        "visual dom"
+      ],
+      "count": 1
+    }
+  ],
+  "count": 9
+}
+```
+
+2. 使用```visual-dom```对象渲染真实DOM结构
+
+现在虚拟DOM对象已经有了，接下来就是将虚拟DOM对象渲染到页面上 
+
+```js
+// 虚拟DOM对象生成真实DOM
+Element.prototype.render = function() {
+  // 创建对应标签
+  var el = document.createElement(this.tagName)
+  // 获取对应标签节点属性
+  var props = this.props
+  // 设置节点的属性
+  for(var item in props) {
+    el.setAttribute(item, props[item])
+  }
+  // 获取子节点集合
+  var children = this.children
+  // 遍历子节点
+  children.forEach(function(child) {
+    // 子元素是非文本节点 继续递归render 是文本节点 创建文本dom节点
+    var childEl = (child instanceof Element) ?
+      child.render() : document.createTextNode(child)
+
+    el.appendChild(childEl)
+  })
+  return el
+}
+```
+最后将构建好的真实DOM渲染到页面中
+```js
+var realDom = visualObj.render()
+document.body.appendChild(realDom)
+```
+页面展示跟上述真实节点是一致的，完整的[visual-dom转换真实dom](https://wangbaoqi.github.io/nateCase/visualDom/index.html)
+
+## diff算法-比较虚拟Dom之间差异
+
+
+
