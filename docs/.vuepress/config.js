@@ -1,5 +1,5 @@
 module.exports = {
-  base: '/nate.wang/',
+  base: '/',
   title: 'Nate.wang',
   description: '你写的每一行代码都是你的名片',
   dest: './dist',
@@ -32,7 +32,7 @@ module.exports = {
     // sidebarDepth: 2,
 
     locales: require('./config/locales'),
-    logo: '/nate.wang/favion.png',
+    logo: '/favion.png',
     lastUpdated: 'Last Updated',
     searchMaxSuggestoins: 10,
     serviceWorker: {
