@@ -8,7 +8,7 @@ excerpt: 'framework VisualDom'
 # 虚拟 DOM
 
 ::: tip
-
+visual-dom 产生是为了解决DOM操作的性能损耗大的手段。将真实的DOM解析成JS对象，然后通过diff算法计算新老虚拟dom对象的差异，最后将这些差异更新到真实DOM上
 :::
 
 [[toc]]
@@ -196,7 +196,33 @@ document.body.appendChild(realDom)
 ```
 页面展示跟上述真实节点是一致的，完整的[visual-dom转换真实dom](https://wangbaoqi.github.io/nateCase/visualDom/index.html)
 
-## diff算法-比较虚拟Dom之间差异
 
+## diff算法-比较虚拟Dom对象之间差异
+
+在diff算法中，对比新老虚拟dom对象的差异，而这种对比的方式并不是遍历整个DOM树，造成大量的不必要的操作和性能损耗，DOM树的层级越多，性能的损耗会更严重，从时间复杂度来讲，一个层级为3层的DOM树，时间复杂度会达到```O(n^3)```。因此，鉴于对DOM的操作很少有跨层级的，对比的方式也就变成了在```同级```之间对比，时间复杂度也会降低```O(n)```
+
+**1. 深度优先遍历，记录新老虚拟DOM的差异**
+
+在这个过程中，代码的设计使用了```循环-递归```的方式,```循环```是每个节点都会有子节点（子元素），```递归```是在循环的过程中，对新老虚拟DOM的对应的子节点进行差异对比，在每次递归结束之后，将差异记录下来。
+
+首先是对比的入口代码: 
+
+```js
+/**
+ * 虚拟dom树差异对比
+ *  @param {Object} oldTree 现有的虚拟DOM树
+ *  @param {Object} newTree 修改之后的虚拟DOM树
+ *  @return {Object} patchs 返回两者间的差异
+ **/
+function diffTree(oldTree, newTree) {
+  // 记录当前节点
+  var index = 0;
+  // 记录两者的差异对象
+  var patchs = {};
+  // 深度优先遍历 同层级节点进行对比
+  diffWalk(oldNode, newNode, index, patchs);
+  return patchs;
+}
+```
 
 
