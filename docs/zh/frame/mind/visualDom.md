@@ -224,5 +224,99 @@ function diffTree(oldTree, newTree) {
   return patchs;
 }
 ```
+接下来对两颗虚拟DOM树进行深度优先遍历，对比同层级节点差异。
+节点的修改以及变动基本可以归纳为几种情况，这里采用```枚举```来表示节点变动类型 
 
+```js
+var patchEnum = {};
+// 替换原来的节点 
+patchEnum.REPLACE = 0
+// 重新排序
+patchEnum.REORDER = 1
+// 修改子节点的属性
+patchEnum.PROPS = 2
+// 修改文本节点内容
+patchEnum.TEXT = 3
+```
+有了这些差异类型，在之后将差异更新到真实DOM的时候，就有了一个规则。接下来是具体实现深度优先遍历的操作
+
+```js 
+function diffWalk(oldNode, newNode, index, patchs) {
+  // 记录当前层级节点的差异
+  var currentPatchs = [];
+  // 对比文本节点
+  if(typeof oldNode === 'string' && typeof newNode === 'string') {
+    // 文本内容不一致，记录新节点的值
+    if(oldNode !== newNode) {
+      currentPatchs.push({
+        type: patchEnum.TEXT,
+        content: newNode
+      })
+    }
+  }else if(newNode !== null && newNode[tagName] === oldNode[tageName] && oldNode[key] === newNode[key]) {
+    // 同层级的节点类型一致 对比两者节点属性
+    var patchProps = diffProps(oldNode, newNode);
+    // 节点属性有差异，记录
+    if(patchProps) {
+      currentPatchs.push({
+        type: patchEnum.PROPS,
+        props: patchProps
+      })
+    }
+    if(!isIgnoreChildren(newNode)) {
+      diffChildren(oldNode, newNode, index, patchs, currentPatchs)
+    }
+  }else if(newNode !== null) {
+    // 同层级节点类型不一致 代替老节点
+    currentPatchs.push({
+      type: patchEnum.REPLACE,
+      node: newNode
+    })
+  }
+}
+```
+上述就是同层级节点进行差异对比，差异进行记录。接下来着重分析同层级节点相同的差异对比，这里除了节点属性对比之外，还采用递归
+对子元素也进行同样的差异对比，下面看子元素差异对比的分析, 首先看节点属性之间差异对比
+
+```js
+// 对比节点的属性
+// 主要有两点 1. 新节点属性有没有改变 2. 新节点有没有新增属性
+function diffProps(oldNode, newNode) {
+  // 记录属性有没有改变
+  var count = 0;
+  // 记录差异节点对象
+  var patchProps = {};
+  var oldProps = oldNode.props;
+  var newProps = newNode.props;
+
+  // 遍历老节点属性跟新节点属性，不一致的属性进行记录
+  for(var props in oldProps) {
+    if(oldProps[props] !== newProps[props]) {
+      count++;
+      patchProps[props] = newProps[props];
+    }
+  }
+  // 遍历新节点属性跟老节点属性，有没有新增的属性
+  for(var props in newProps) {
+    if(!oldProps.hasOwnProperty(props)) {
+      count++;
+      patchProps[props] = newProps[props]
+    }
+  }
+
+  if(!count) return null
+  return patchProps
+}
+```
+然后再来看下子元素的差异对比, 
+
+```js
+function diffChildren(oldNode, newNode, index, patchs, currentPatchs) {
+  var oldChildren = oldNode.children;
+  var newChildren = newNode.children;
+
+  var listDiff = listDiff(oldNode, newNode, 'key')
+}
+
+```
 
