@@ -268,3 +268,173 @@ setTimeout(() => {
 
 ```XMLHttpRequest```是前后端分离的最开始的实践，在这之前，如果服务端数据更新了，浏览器需要整体刷新页面，才能渲染最新的数据。但是```XMLHttpRequest```的出现，可以更新页面的局部数据，这样对用户的使用就比较友好了，而且提高了效率
 
+**回调函数和系统调用栈**
+回调函数都不会陌生，它有两种方式: 同步回调和异步回调
+
+1. 同步回调 - 主函数中执行
+
+```js
+function main(cb) {
+  var a = 9
+  console.log(a + 9)
+  cb()
+  console.log(a + 8)
+}
+function foo() (
+  console.log(6)
+)
+main(foo)
+```
+2. 异步回调 = 主函数之外执行
+
+```js
+function main(cb) {
+  var a = 9
+  console.log(a + 9)
+  setTimeout(cb, 0)
+  console.log(a + 8)
+}
+function foo() (
+  console.log(6)
+)
+main(foo)
+```
+**XMLHttpRequest 运行机制**
+
+![xmlHttpRequest](https://cdn.img.wenhairu.com/images/2020/03/24/qMH3f.png)
+
+上图是XMLHttpRequest的总执行图, 下面看XMLHttpRequest的详细用法
+
+
+```js
+function fetchData(url) {
+  // 1. create xmlHttpRequset Object
+  let xhr = new XMLHttpRequest()
+
+  // 2. register callback fucntion 
+  xhr.onreadystatechange = function() {
+    switch(xhr.readyState) {
+      case 0:  // 请求未初始化
+        console.log('请求未初始化');
+        break
+      case 1: // opened
+        console.log('opened');
+        break
+      case 2: // headers_received
+        console.log('headers_received');
+        break
+      case 3: // loading
+        console.log('loading');
+        break
+      case 4: // DONE
+        console.log('DONE');
+        if(this.status == 200 || this.status == 304) {
+          conosle.log(this.responseText)
+        }
+        break
+    }
+  }
+
+  xhr.ontimeout = function(e) { console.log('ontimeout' )}
+  xhr.onerror = function(e) { console.log('onerror' )}
+
+  // 3. open request
+  xhr.open('Get', url, true) // create async request
+
+
+  // 4. config param
+  xhr.timeout = 3000 // set timeout
+  xhr.responseType = 'text' // set response data type 
+  xhr.setRequestHeader('X_Test', 'time.cn') 
+
+  // 5. send request
+  xhr.send()
+}
+```
+**使用XMLHttpRequest的问题**
+
+1. 跨域问题
+由于浏览器的安全策略以及同源策略限制，只能请求同源的服务地址
+2. HTTPS混入问题
+HTTPs页面中使用了HTTP资源，包括图片，视频等，这时浏览器会发出警告
+
+## 宏任务和微任务
+
+上述学习了页面的运转是由消息队列和循环系统来驱动的，通过setTimeout和XMLHTTPrequest两个webAPI深入了解了消息队列（包括异步队列），这些队列中会有很多的任务，而这些任务都是宏任务。随着浏览器的应用越来越广泛，对```实时性```和```效率```要求越来越高。
+
+而这些```实时性```和```效率```的出现，也就随之出现了```微任务```，微任务可以在实时性和效率之间做一个权衡。
+
+但是，什么技术会用到微任务呢，或者说是微任务的应用场景有哪些呢？是怎么样权衡实时性和效率之间的平衡的呢？
+
+带着这些问题来学习一些宏任务和微任务。
+
+1. 宏任务
+
+页面中的大部分任务都是在主线程上执行的，这些任务包括：
+* 渲染事件 - 解析DOM 计算布局 绘制
+* 用户交互 - 点击 页面滚动 
+* JS脚本执行 
+* 网络请求、文件文件读写完成 
+
+为了协调这些任务有条不紊的执行，页面进程引进了消息队列和事件循环系统。主进程采用for循环，不断的从消息队列或者延迟队列中取出任务并执行任务。
+
+这些任务就是```宏任务```
+
+宏任务的时间粒度是比较大的，如果遇到一些对实时性要求比较高的任务（实时监听DOM），宏任务并不能满足，因此产生了微任务
+
+2. 微任务
+
+**微任务就是一个需要执行的异步函数，执行时机是在主函数执行结束之后，当前宏任务结束之前**
+
+结合V8层面理解微任务
+
+遇到一段JS代码，V8会创建全局上下文，同时创建微任务队列用来存放微任务，在当前宏任务执行的过程中，会产生多个微任务，这个微任务队列是给V8引擎背部使用的，JS不能调用
+
+**微任务产生时机和执行时机**
+
+1. 产生时机 - 现代浏览器
+
+* 使用MutationObserve监听某个DOM节点，通过JS修改这个节点，DOM节点发生变化，就会产生DOM变化的微任务
+* 使用Promise 调用Promise.resolve 和 Promise.reject
+
+2. 执行时机 
+
+在当前宏任务中JS执行快完成时，就在JavaScript引擎准备退出全局执行上下文并清空调用栈的时候，JS引擎会检查全局上下文中的微任务队列，然后按照顺序执行队列中的任务，执行微任务的时间点```检查点```
+
+如果在执行微任务的同时，产生了新的微任务，则将改微任务添加到微任务队列中，V8引擎会循环执行微任务队列
+
+直观的看个例子
+![微任务执行时机](https://static001.geekbang.org/resource/image/83/88/839f468be3d683019c309e0acd8cd788.png)
+
+![微任务执行时机](https://static001.geekbang.org/resource/image/1d/92/1db319c879610816c0cfea22723fc492.png)
+
+从上述可以得到以下结论：
+
+* 微任务和宏任务是绑定的 每个宏任务在执行时，会创建自己的微任务队列
+* 微任务执行的时长，会影响当前宏任务的执行时长。
+* 在一个宏任务中创建了一个用于回调的宏任务和微任务，无论什么情况下，微任务都会早于宏任务执行
+
+**监听DOM变化**
+
+随着现在web应用的复杂度提升，对页面的性能要求高的前提下，对于DOM的操作也逐渐的再更新。
+早期对于页面DOM的监听，是使用轮询的方式，使用定时器来检测DOM是否有变化。后来引入了mutationEvent，采用观察者模式。之后又引入了mutationObserver,解决了mutationEvent所带来的的问题
+
+1. 轮询的方式 - 带来的问题
+* 定时器的设置时长不确定，太长浪费时间成本，DOM相应不及时
+* 设置时间太短，浪费无用的工作检查DOM
+
+2. mutationEvent - 带来的问题
+* 采用观察者模式，DOM一变化，调用对应的回调更新，这种回调是同步回调
+* 一旦一次动态修改多个节点内容，就会触发多个回调，每个回调执行时间固定的话，那更新DOM的总共耗时就会变的很长，最终会导致页面性能的问题
+
+3. mutationObserver 
+* 将mutationEvent的回调方式改变成了异步，不用每次去触发异步调用，而是等多次DOM操作之后，再去触发DOM更新
+* 采用 ```异步 + 微任务```策略
+* 异步解决了性能问题
+* 微任务解决了实时性的问题
+
+**mutationObserver和微任务联系**
+
+mutationObserver将DOM更新封装成异步。当前宏任务中有操作DOM的操作，就会将这些更新DOM的异步回调添加到当前宏任务中的微任务队列中，当前宏任务执行结束之后（检查点），就会执行这些微任务，也就是更新微任务的回调
+
+

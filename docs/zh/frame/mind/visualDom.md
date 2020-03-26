@@ -224,6 +224,9 @@ function diffTree(oldTree, newTree) {
   return patchs;
 }
 ```
+
+**2. 差异类型**
+
 接下来对两颗虚拟DOM树进行深度优先遍历，对比同层级节点差异。
 节点的修改以及变动基本可以归纳为几种情况，这里采用```枚举```来表示节点变动类型 
 
@@ -238,6 +241,9 @@ patchEnum.PROPS = 2
 // 修改文本节点内容
 patchEnum.TEXT = 3
 ```
+
+**3. 循环递归记录每个节点的差异**
+
 有了这些差异类型，在之后将差异更新到真实DOM的时候，就有了一个规则。接下来是具体实现深度优先遍历的操作
 
 ```js 
@@ -272,6 +278,10 @@ function diffWalk(oldNode, newNode, index, patchs) {
       type: patchEnum.REPLACE,
       node: newNode
     })
+  }
+  // 记录新老节点同一层级的差异
+  if(currentPatch.length) {
+    patchs[index] = currentPatch
   }
 }
 ```
@@ -308,15 +318,172 @@ function diffProps(oldNode, newNode) {
   return patchProps
 }
 ```
-然后再来看下子元素的差异对比, 
+然后再来看下子元素的差异对比, 列表对比算法
+假如旧的节点顺序： a, b, c, d
+新的节点顺序: b, a, d, e, f
+
+可以看到新的节点中，有新增的元素，删除旧的元素，旧的元素顺序改变了
+
+求最小的插入、删除操作。这个问题抽象成字符串的最小编辑距离[Edition Distance]()，通过动态规划求解，时间复杂度O(n)=O(m*n), 但不是最小的操作，可以优化一些简单的移动情况，牺牲DOM操作，让时间复杂度达到线性的O(Max(m,n)), 具体的[算法实现]()
 
 ```js
 function diffChildren(oldNode, newNode, index, patchs, currentPatchs) {
   var oldChildren = oldNode.children;
   var newChildren = newNode.children;
-
+  // 获取子节点最小更改量 
   var listDiff = listDiff(oldNode, newNode, 'key')
+  // 子节点中顺序发生变化 记录差异
+  if(listDiff.moves.length) {
+    var recoderPatch = { type: patchEnum.REORDER, moves: diffs.moves }
+    currentPatch.push(recoderPatch)
+  }
+
+  var leftNode = null
+  var currentNodeIndex = index
+
+  // 子节点递归寻找差异
+  oldChildren.forEach((child, index) => {
+    var newChild = newChildren[index]
+    currentNodeIndex = (leftNode && leftNode.count) 
+      ? currentNodeIndex + leftNode.count + 1
+      : currentNodeIndex + 1
+    diffWalk(child, newChild, currentNodeIndex, patchs)
+    leftNode = child
+  })
+}
+```
+至此，新老节点所有的差异都已经记录完成了, 接下来就是将这些差异应用到真实DOM上
+![patchs]()
+
+
+## diff算法-把patchs应用到真实DOM上
+
+将patchs应用到真实的DOM上，也要对旧的DOM进行深度优先遍历，遍历中将patchs作用到DOM上
+
+patchs入口脚本
+```js
+function patch(node, patches) {
+  var walker = {index: 0}
+  dsfWalk(node, walker, patches)
 }
 
-```
+function dsfWalk(node, walker, patches) {
+  // 获取当前节点的差异
+  var currentPatches = patches[walker.index]
+  var len = node.childNodes ? node.childNodes.length : 0
 
+  for(var i = 0; i < len; i++) {
+    var child = node.childNodes[i]
+    walker.index ++
+    dsfWalk(child, walker, patches)
+  }
+
+  if(currentPatches) {
+    // 对当前节点进行DOM操作
+    applyPatches(node, currentPatches)
+  }
+}
+```
+对每一个节点进行递归深度遍历，如果patches中有差异，则对当前节点进行DOM操作
+
+```js
+function applyPatches(node, currentPatches) {
+  currentPatches.forEach(currentPatche => {
+    switch(currentPatche.type) {
+      case patchEnum.REPLACE:
+        var newNode = (typeof currentPatch.node === 'string')
+          ? document.createTextNode(currentPatch.node)
+          : currentPatch.node.render()
+        node.parentNode.replaceChild(newNode, node)
+        break
+      case patchEnum.REORDER:
+        reorderChildren(node, currentPatch.moves)
+        break
+      case patchEnum.PROPS:
+        setProps(node, currentPatch.props)
+        break
+      case patchEnum.TEXT:
+        node.textContent = currentPatch.content
+        break
+      default:
+        throw new Error('Unknown patch type ' + currentPatch.type)
+    }
+  })
+}
+```
+对当前节点中的差异进行DOMrender，接下来看属性的操作
+
+```js
+function setProps(node, props) {
+  for (var key in props) {
+    if (!props[key]) {
+      node.removeAttribute(key)
+    } else {
+      var value = props[key]
+      setAttr(node, key, value)
+    }
+  }
+}
+
+function setAttr(node, key, value) {
+  switch (key) {
+    case 'style':
+      node.style.cssText = value
+      break
+    case 'value':
+      var tagName = node.tagName || ''
+      tagName = tagName.toLowerCase()
+      if (
+        tagName === 'input' || tagName === 'textarea'
+      ) {
+        node.value = value
+      } else {
+        // if it is not a input or textarea, use `setAttribute` to set
+        node.setAttribute(key, value)
+      }
+      break
+    default:
+      node.setAttribute(key, value)
+      break
+  }
+}
+```
+最后就是对节点的重排操作了
+
+```js
+function reorderChildren(node, moves) {
+  var staticNodeList = Array.from(node.childNodes);
+  var maps = {}
+
+  staticNodeList.forEach(node => {
+    // 如果是一个元素节点
+    if (node.nodeType === 1) {
+      var key = node.getAttribute('key')
+      if (key) {
+        maps[key] = node
+      }
+    }
+  })
+
+  moves.forEach(move =>{
+    var index = move.index
+    if (move.type === 0) {
+      // type为 0，表示新的dom对象已经删除该节点
+      if (staticNodeList[index] === node.childNodes[index]) { // maybe have been removed for inserting
+        node.removeChild(node.childNodes[index])
+      }
+      staticNodeList.splice(index, 1)
+    } else if (move.type === 1) {
+      // type为 1，表示新的dom对象插入该节点 
+      var insertNode = maps[move.item.key]
+        ? maps[move.item.key].cloneNode(true) // reuse old item
+        : (typeof move.item === 'object')
+            ? move.item.render()
+            : document.createTextNode(move.item)
+      staticNodeList.splice(index, 0, insertNode)
+      node.insertBefore(insertNode, node.childNodes[index] || null)
+    }
+  })
+}
+```
+完整的实现查看[这里](https://wangbaoqi.github.io/nateCase/visualDom/index.html)
