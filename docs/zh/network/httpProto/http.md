@@ -87,3 +87,50 @@ web server来提供客户端所请求的文档，server只是一个虚拟的机�
 * 认证 - 一些页面仅让特定的用户访问 可以通过HTTP来控制 
 * 代理和隧道 - 对外隐藏内网中的IP地址
 * 会话 - cookie允许用一个服务端的状态发起请求，这就创建了会话 
+
+**HTTP流**
+
+当客户端跟服务端进行信息交互时，主要有以下几个步骤:
+
+1. 首先建立一个TCP连接: TCP连接用来发送一个或者多个请求，也可以打开多个TCP连接，或者一个TCP连接进行复用
+2. 之后发送HTTP报文: 在HTTP/2之前是可读的，HTTP/2将报文封装在帧中，不能被直接读取，但是原理是一样的
+请求报文
+```sh
+GET / HTTP/1.1
+HOST: localhost:8080
+Accept-Language: zh-CN
+```
+3. 读取服务端返回的报文信息
+响应报文
+```sh
+HTTP/1.1 200 OK
+Date: Thu, 26 Mar 2020 13:47:20 GMT
+Content-Type: application/json; charset=utf-8
+Server: Github.com
+```
+4. 关闭连接或者为后续的请求复用连接
+
+**HTTP报文**
+HTTP/1.1及以前的版本的报文是语义可读的，在HTTP/2.0中，报文的信息被放到了新的二进制结构中，也就是帧。
+有两种的报文类型： 请求报文和相应报文
+
+* 请求报文
+
+![request](https://mdn.mozillademos.org/files/13687/HTTP_Request.png)
+
+请求报文的组成部分:
+1. method - 请求方法 一般有 GET POST PUT DELETE 
+2. path - 获取资源的路径 没有协议http:// 只有域名 - domain 或者是端口号 
+3. HTTP版本号
+4. 请求头信息
+5. 对于post请求，body就包含了发送的资源
+
+* 响应报文
+
+![request](https://mdn.mozillademos.org/files/13691/HTTP_Response.png)
+响应报文的组成部分:
+1. 协议的版本号
+2. 状态码 200 304 等
+3. 状态信息 可以自行定义
+4. 响应头信息 
+5. 响应体 

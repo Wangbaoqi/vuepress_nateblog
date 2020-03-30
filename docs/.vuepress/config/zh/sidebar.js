@@ -72,6 +72,12 @@ module.exports = {
         '/zh/algorithm/frontalgorithm/timer',
 
       ]
+    },{
+      title: '前端编程',
+      collapsable: false,
+      children: [
+        '/zh/algorithm/programCode/arrayFlat',
+      ]
     },
   ],
   '/zh/performance/': [

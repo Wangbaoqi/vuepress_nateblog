@@ -437,4 +437,244 @@ HTTPs页面中使用了HTTP资源，包括图片，视频等，这时浏览器�
 
 mutationObserver将DOM更新封装成异步。当前宏任务中有操作DOM的操作，就会将这些更新DOM的异步回调添加到当前宏任务中的微任务队列中，当前宏任务执行结束之后（检查点），就会执行这些微任务，也就是更新微任务的回调
 
+## Promise 告别回调
+
+promise已经成为了前端解决异步的主力，接下来具体的学习promise
+
+**异步编程的问题-代码逻辑不连续**
+
+
+![异步编程模型](https://static001.geekbang.org/resource/image/01/85/01e40e30db7e8a91eb70ce02fd8a6985.png)
+
+上述是web异步编程模型 接下来看下传统的异步回调带来的问题
+
+```js
+function requset(url) {
+  return {
+    url: url,
+    method: 'GET',
+    timeout: 3000,
+    aync: true,
+    responseType: 'text',
+  }
+}
+// 封装XMLHttpRequest 请求
+function Fetch(request, resolve, reject) {
+  var xhr = new XMLHttpRequset()
+
+  xhr.onreadystatechange = function() {
+    if(this.status == 200) {
+      resolve(xhr.respose)
+    }
+  }
+  xhr.ontimeout = function() { reject() }
+  xhr.onerror = function() { reject() }
+  xhr.open(requset.method, request.url, request.sync)
+  xhr.timeout = request.timeout
+  xhr.responseType = request.responseType
+  xhr.send()
+}
+
+// 调用封装请求
+Fetch(request('/api/list'), (data) => {
+  console.log(data)
+}, (error) => {
+  console.log(error)
+})
+```
+截止目前，封装后的请求对于单个请求或者简单请求是完美的，但是如果遇到嵌套调用，如果有很多嵌套时，就会陷入回调地狱，比如下面的代码：
+
+```js
+Fetch(request('/api/list'), (data) => {
+  console.log(data)
+  Fetch(request('/api/list'), (data) => {
+    console.log(data)
+    Fetch(request('/api/list'), (data) => {
+      console.log(data)
+    }, (error) => {
+      console.log(error)
+    })
+  }, (error) => {
+    console.log(error)
+  })
+}, (error) => {
+  console.log(error)
+})
+```
+嵌套层级一多，就会给人一种凌乱的感觉，代码结构很乱。所以，需要解决这种问题。
+
+* 嵌套层级多 - 解决嵌套调用
+* 任务的不确定性 每次请求都会有错误处理 - 合并错误处理
+
+随着这两个问题出现，```Promise```就登场了，下面代码是怎么解决这两个问题的 
+
+```js
+// 将XMLHttpRequest 使用Promise封装
+function XFetch(request) {
+  return new Promise((resolve, reject) => {
+    var xhr = new XMLHttpRequset()
+
+    xhr.onreadystatechange = function() {
+      if(this.status == 200 && this.readyStatus === 4) {
+        resolve(this.response)
+      }else {
+        reject({
+          error: this.response
+        })
+      }
+    }
+    xhr.ontimeout = function() { reject() }
+    xhr.onerror = function() { reject() }
+    xhr.open(requset.method, request.url, request.sync)
+    xhr.timeout = request.timeout
+    xhr.responseType = request.responseType
+    xhr.send()
+  })
+}
+
+let x1 = XFetch(request('/api/list'))
+let x2 = x1.then(res => {
+  console.log(res)
+  return XFetch(request('/api/list?type=1'))
+})
+x2.then(res => {
+  console.log(res)
+}).catch(err => {
+  console.log(err)
+})
+```
+**Promise 怎么解决嵌套回调问题**
+
+1. Promise 实现了回调函数延时绑定
+```js
+// 执行业务逻辑
+function executor(resolve, reject) {
+  resolve(2)
+}
+let x1 = new Promise(executor)
+// 延迟绑定回调函数 
+function cbResolve(val) {
+  console.log(val)
+}
+// 通过then延时绑定
+x1.then(cbResolve)
+```
+
+2. 回调函数返回值穿透到最外层 
+
+```js
+// 执行业务逻辑
+function executor(resolve, reject) {
+  resolve(2)
+}
+let x1 = new Promise(executor)
+// 延迟绑定回调函数 
+function cbResolve(val) {
+  console.log(val)
+  return new Promise((resolve, reject) => {
+    resolve(300 + val)
+  })
+}
+// 通过then延时绑定 返回promise对象 将内部返回值穿透到最外层
+let x2 = x1.then(cbResolve)
+x2.then(result => {
+  console.log(result)
+})
+```
+
+**Promise和微任务**
+
+下面简单的实现promise, 了解回调函数的延迟绑定技术，以及了解promise的内部的原理
+```js
+function BPromise(executor) {
+  let _onResolve = null
+  let _onReject = null
+
+  this.then = function(onresolve, onreject) {
+    _onResolve = onresolve
+  }
+  function resolve(val) {
+    // 设置延迟绑定回调 
+    // promise将定时器 改成了微任务的方式
+    setTimeout(() => {
+      _onResolve()
+    }, 0)
+  }
+  executor(resolve, null)
+}
+
+function executor(resolve, reject) {
+  resolve(200)
+}
+let bpromise = new BPromise(executor)
+
+bpromise.then(val => {
+  console.log(val)
+})
+```
+
+## async/await 同步的方式写异步代码
+
+使用promise能够很好的解决回调地狱的问题，但是也会有语义化不明显的问题，处理流程复杂或者业务逻辑多，使用then就会带来不能明显表示执行流程，比如嵌套调用api层级较多时。
+
+基于这个原因，ES7引入了async和await, **在不阻塞主线程的情况下使用同步代码实现异步访问资源的能力，是代码逻辑更清晰**
+
+```js
+async function foo() {
+  let result = await fetch(url)
+  let resultall = await fetch(url1)
+  conosle.log(result)
+  conosle.log(resultall)
+}
+```
+使用这种方式，可以以同步的方式获取资源内容，很直观的代码编写方式。
+下面来进一步学习，底层是怎么工作的
+
+**生成器和协程**
+
+* 生成器函数
+它是一个带星号的函数，可以暂停和恢复执行的
+
+```js
+function* genDemo() {
+  console.log('first executer')
+  yield 'generator 1'
+
+  console.log('second executer')
+  yield 'generator 2'
+
+  console.log('third executer')
+  yield 'generator 3'
+
+  console.log('end executer')
+  return 'generator 4'
+}
+console.log('start main0')
+let gen = genDemo()
+console.log(gen.next().value)
+
+console.log('start main1')
+console.log(gen.next().value)
+```
+可以从打印结果看到，generator函数并不是一次性执行结束的，使用方式:
+
+* 遇到 yield的关键字，JS引擎就会返回关键字后面的内容给外部。并暂定该函数的执行
+* 外部函数通过next()方法恢复函数的执行
+
+**JS 引擎是如何实现一个函数暂停和恢复的**
+
+首先要了解```协程```的概念: 是一种比线程更加轻量级的存在。
+
+1. 协程看做是泡仔线程上的任务
+2. 一个线程可以存在多个协程，在线程上只能执行一个协程
+3. 如果A协程启动B协程，就把A协程称为B协程的父协程
+4. 协程是由用户态控制的
+5. 通过return退出协程
+
+可以看一下协程的执行图
+![协程流程图](https://static001.geekbang.org/resource/image/5e/37/5ef98bd693bcd5645e83418b0856e437.png)
+
+![协程调用栈](https://static001.geekbang.org/resource/image/92/40/925f4a9a1c85374352ee93c5e3c41440.png)
+
+
 
