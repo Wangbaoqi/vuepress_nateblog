@@ -7,10 +7,10 @@ module.exports = {
         '/zh/front/html/web语义',
         '/zh/front/html/web通信',
         '/zh/front/html/web离线存储',
-        '/zh/front/html/web多媒体',
-        '/zh/front/html/web3D图像',
-        '/zh/front/html/web性能集成',
-        '/zh/front/html/web设备访问',
+        // '/zh/front/html/web多媒体',
+        // '/zh/front/html/web3D图像',
+        // '/zh/front/html/web性能集成',
+        // '/zh/front/html/web设备访问',
       ]
     },
     {
@@ -30,6 +30,7 @@ module.exports = {
       collapsable: false,
       children: [
         '/zh/front/javascript/primary/JS数据类型',
+        '/zh/front/javascript/primary/JSES',
         '/zh/front/javascript/primary/JS作用域以及闭包',
         '/zh/front/javascript/primary/JSthis以及原型',
         '/zh/front/javascript/primary/JSeventLoop',
