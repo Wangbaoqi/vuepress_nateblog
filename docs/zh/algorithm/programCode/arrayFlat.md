@@ -60,7 +60,9 @@ function falttenDeep(arrs) {
 }
 ```
 
-## [A1, A2, B1, B2]和[A, B]合并[A1, A2, A, B1, B2, B]
+## 数组合并
+
+[A1, A2, B1, B2]和[A, B]合并[A1, A2, A, B1, B2, B]
 
 测试用例
 ```js
@@ -84,3 +86,156 @@ const arr3 = arr2.map(i => i + 3);
 ```
 
    
+## 两数之和
+
+测试用例
+```js
+const nums = [2, 4, 8, 3]
+const target = 5
+nums[0] + nums[3] = target
+return [0, 5]
+```
+
+**使用双重循环**
+* 时间复杂度O(n) = n^2
+* 空间复杂度O(n) = 1
+* 执行时间: **188ms**
+* 内存消耗: **34.9MB**
+
+```js
+var twoSum = function(nums, target) {
+  for(let i = 0; i < nums.length; i++) {
+    for(let j = i + 1; j < nums.length; j++) {
+      if(nums[i] + num[j] === target) {
+        return [i, j]
+      }
+    }
+  }
+}
+```
+**使用HashMap ES6**
+* 时间复杂度O(n) = n
+* 空间复杂度O(n) = n hash表存储的元素个数
+
+* 执行时间: **72ms**
+* 内存消耗: **35.3MB**
+
+```js
+// 利用差值以及Hash表
+var twoSum = function(nums, target) {
+  let hashMap = new Map()
+  for(let i = 0; i < nums.length; i++) {
+    const val = target - nums[i]
+    if(hashMap.has(val)) {
+      return [hashMap.get(val), i]
+    }
+    hashMap.set(num[i], i)
+  }
+}
+```
+
+## 判断字符是否唯一
+测试用例
+```js
+let str = 'nate'
+isUnique(str) // true
+let str = 'nate wang'
+isUnique(str) // false
+```
+
+**暴力法 双重循环**
+
+* 时间复杂度O(n) = n^2
+* 空间复杂度O(n) = 1
+
+* 执行时间: **68ms**
+* 内存消耗: **33.7MB**
+```js
+var isUnique = function(str) {
+  for(let i = 0; i < str.length; i++) {
+    for(let j = i + 1; j < str.length; j++) {
+      if(str[i] == str[j]) return false
+    }
+  }
+  return true
+}
+isUnique('nate') // true
+isUnique('nate wang') // false
+```
+
+**数组暂存**
+
+* 时间复杂度O(n) = n
+* 空间复杂度O(n) = 1
+* 执行时间: **64ms**
+* 内存消耗: **33.8MB**
+
+```js
+var isUnique1 = function(str) {
+  let arr = []
+  for(let i = 0; i < str.length; i++) {
+    if(arr.indexOf(str[i]) > -1) return false;
+    arr.push(str[i])
+  }
+  return true
+}
+isUnique1('nate') // true
+isUnique1('nate wang') // false
+```
+**HashMap**
+* 时间复杂度O(n) = n
+* 空间复杂度O(n) = 1
+* 执行时间: **60ms**
+* 内存消耗: **33.8MB**
+
+```js
+var isUnique2 = function(str) {
+  let hashMap = new Map()
+  for(let i = 0; i < str.length; i++) {
+    if(hashMap.has(str[i])) return false;
+    hashMap.set(str[i])
+  }
+  return true
+}
+isUnique2('nate') // true
+isUnique2('nate wang') // false
+```
+## 字符串是否互为重排
+
+测试用例
+```js
+let s1 = 'abc'
+let s2 = 'bcd'
+let s3 = 'bac'
+CheckPermutation(s1, s2) // false
+CheckPermutation(s1, s3) // true
+```
+
+**两者互相循环判断**
+
+```js
+var CheckPermutation = function(s1, s2) {
+  return [...s1].every(e => {
+    return s2.includes(e)
+  }) && [...s2].every(e => {
+    return s1.includes(e)
+  })
+};
+CheckPermutation('abc', 'acb') // true
+CheckPermutation('abc', 'acbd') // false
+CheckPermutation('abc', 'acd') // false
+```
+
+**合并循环判断**
+
+```js
+var CheckPermutation = function(s1, s2) {
+  const allStr = [...s1, ...s2]
+  return allStr.every(e => {
+    return s1.includes(e) && s2.includes(e)
+  })
+};
+CheckPermutation('abc', 'acb') // true
+CheckPermutation('abc', 'acbd') // false
+CheckPermutation('abc', 'acd') // false
+```
