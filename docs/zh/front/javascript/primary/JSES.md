@@ -241,3 +241,18 @@ for(e of [2,4].entries()){
 
 **对象的扩展方法**
 
+* Object 新增的方法 
+
+1. Object.is()
+对比两个值是否**严格 ===**相等
+
+```js
+Object.is('a', 'a')  // true
+Object.is({}, {}) // false
+
+// 特殊
+-0 === +0 // true
+NaN === NaN // false
+Object.is(-0, +0) // false
+Object.is(NaN, NaN) // true
+```

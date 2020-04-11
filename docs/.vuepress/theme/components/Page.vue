@@ -202,7 +202,7 @@ export default {
           let imgDom = document.createElement("img");
           imgDom.src = this.src;
           imgDom.style = `
-            width:70%;
+            height:90%
           `;
           dom.append(imgDom);
           document.body.append(dom);

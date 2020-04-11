@@ -239,3 +239,97 @@ CheckPermutation('abc', 'acb') // true
 CheckPermutation('abc', 'acbd') // false
 CheckPermutation('abc', 'acd') // false
 ```
+
+## 删除排序数组中的重复项
+
+测试用例
+```js
+// 给定已经排好序数组
+let arr = [0,0,1,2,3,3]
+// 返回长度[0,1,2,3] 4 原地修改原数组
+removeDuplicates(arr) 
+```
+
+**暴力破解法**
+* 时间复杂度O(n) = n^2
+* 空间复杂度O(n) = 1
+
+```js
+var removeDuplicates = function(nums) {
+  if(!nums || !nums.length) return 0
+
+  for(let i = 0; i < nums.length; i++) {
+    for(let j = i + 1; j < num.length; j++) {
+      if(nums[i] == nums[j]) {
+        nums.splice(j, 1)
+        j--;
+      }
+    }
+  }
+  return nums.length
+};
+```
+
+**双指针方法**
+* 时间复杂度O(n) = n
+* 空间复杂度O(n) = 1
+
+```js
+var removeDuplicates = function(nums) {
+  if(!nums || !nums.length) return 0
+  let i = 0;
+
+  for(let j = 1; j < nums.length; j++) {
+    // 元素不一致 指针移动
+    if(nums[i] !== nums[j]) {
+      nums[i + 1] = nums[j]
+      i++
+    }
+  }
+  
+  return i 
+};
+```
+## 根据目标值移除元素
+
+测试用例
+```js
+let nums = [0,1,1,2,3,1]
+let target = 1
+// 返回 [0,2,3]的长度
+removeElement(nums, target)
+```
+
+**利用splice方法**
+* 时间复杂度O(n) = n
+* 空间复杂度O(n) = 1
+```js
+var removeElement = function(nums, val) {
+  for(let i = 0; i < nums.length; i++){
+    if(nums[i] === val) {
+      nums.splice(i, 1)
+      i--
+    }
+  }
+};
+```
+
+**双指针方法**
+
+* 时间复杂度O(n) = n
+* 空间复杂度O(n) = 1
+```js
+var removeElement = function(nums, val) {
+  // 慢指针
+  let i = 0;
+  for(let j = 0; j < nums.length; j++){
+    if(nums[j] !== val) {
+      num[i] = num[j]
+      i++
+    }
+  }
+  return i
+};
+```
+
+1

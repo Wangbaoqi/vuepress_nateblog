@@ -1,7 +1,7 @@
 module.exports = {
   '/zh/front/': [
     {
-      title: 'HTML5特性',
+      title: 'HTML',
       collapsable: false,
       children: [
         '/zh/front/html/web语义',
@@ -14,7 +14,7 @@ module.exports = {
       ]
     },
     {
-      title: 'CSS3特性',
+      title: 'CSS',
       collapsable: false,
       children: [
         '/zh/front/css/box',
@@ -78,6 +78,7 @@ module.exports = {
       collapsable: false,
       children: [
         '/zh/algorithm/programCode/arrayFlat',
+        '/zh/algorithm/programCode/ObjectFlat',
       ]
     },
   ],
