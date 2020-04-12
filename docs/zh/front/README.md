@@ -47,6 +47,7 @@ lang: zh
 ### JavaScript 知识脑图
 
 JavaScript 在前端中处在不可缺少的地位，其重要性相当于一栋建筑的地基。
+JavaScript 在维度方面可以分为```语法```, ```语义```和```运行时```，任何计算机语言都是用规定的语法去表达对应的语义，最终操作运行时的过程。
 
 ![JS mind](https://cdn.img.wenhairu.com/images/2020/04/11/Nu3Mp.png)
 

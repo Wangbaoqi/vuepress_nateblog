@@ -8,32 +8,33 @@ module.exports = [
   },
   {
     text: '数据结构算法',
-    link: '/zh/algorithm/structure/array',
+    link: '/zh/algorithm/',
   },
   {
     text: 'Web框架',
     link: '/zh/frame/mind/mvvm',
   },
   {
+    text: 'Web Api',
+    link: '/zh/webApi/',
+  },
+  {
     text: '网络协议',
     link: '/zh/network/httpProto/http'
   },
-  {
-    text: '性能优化',
-    link: '/zh/performance/frontPerformance/front',
-  },
+ 
   {
     text: '壹题攻克',
     link: '/zh/everyday/'
   },
-  {
-    text: '项目案例',
-    link: '/zh/project/react-nugget'
-  },
-  {
-    text: '构建部署',
-    link: '/zh/builddeploy/centosJenkins/jenkins'
-  },
+  // {
+  //   text: '项目案例',
+  //   link: '/zh/project/react-nugget'
+  // },
+  // {
+  //   text: '构建部署',
+  //   link: '/zh/builddeploy/centosJenkins/jenkins'
+  // },
   {
     text: "Github",
     link: "https://github.com/Wangbaoqi"

@@ -26,7 +26,7 @@ module.exports = {
       ]
     },
     {
-      title: 'JavaScript 忍者秘籍',
+      title: 'JavaScript',
       collapsable: false,
       children: [
         '/zh/front/javascript/primary/JS数据类型',
@@ -82,19 +82,20 @@ module.exports = {
       ]
     },
   ],
-  '/zh/performance/': [
+
+  '/zh/webApi/': [
     {
-      title: '浏览器相关',
+      title: '浏览器',
       collapsable: false,
       children: [
-        '/zh/performance/browser/browserLoop'
+        '/zh/webApi/browser/browserLoop'
       ]
     },
     {
-      title: '前端优化',
+      title: 'NodeJS',
       collapsable: false,
       children: [
-        '/zh/performance/frontPerformance/front'
+        '/zh/webApi/node/nodeLoop'
       ]
     },
   ],
@@ -140,22 +141,7 @@ module.exports = {
       ]
     },
   ],
-  '/zh/builddeploy/': [
-    {
-      title: '构建打包',
-      collapsable: false,
-      children: [
-        '/zh/builddeploy/buildPack/webpack'
-      ]
-    },
-    {
-      title: '构建部署',
-      collapsable: false,
-      children: [
-        '/zh/builddeploy/centosJenkins/jenkins'
-      ]
-    },
-  ],
+  
   '/zh/network/': [
     {
       title: 'HTTP协议',
@@ -172,15 +158,7 @@ module.exports = {
       ]
     },
   ],
-  '/zh/project/': [
-    {
-      title: 'React Project',
-      collapsable: false,
-      children: [
-        '/zh/project/react-nugget',
-      ]
-    },
-  ],
+
   '/zh/frame/': [
     {
       title: '框架思想',
@@ -213,8 +191,19 @@ module.exports = {
         '/zh/frame/react/reactError',
       ]
     },
+    {
+      title: '构建打包',
+      collapsable: false,
+      children: [
+        '/zh/frame/buildPack/webpack'
+      ]
+    },
+    {
+      title: '构建部署',
+      collapsable: false,
+      children: [
+        '/zh/frame/buildDeploy/jenkins'
+      ]
+    },
   ],
-  '/zh/pages/': [
-    '/zh/pages/lazyLoad'
-  ]
 }
