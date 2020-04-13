@@ -332,4 +332,3 @@ var removeElement = function(nums, val) {
 };
 ```
 
-1
