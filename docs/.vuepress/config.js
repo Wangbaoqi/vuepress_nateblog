@@ -1,6 +1,6 @@
 module.exports = {
   base: '/',
-  title: 'Nate.wang',
+  title: 'Nate前端进阶',
   description: '你写的每一行代码都是你的名片',
   dest: './dist',
   port: '8686',
