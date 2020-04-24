@@ -30,6 +30,7 @@ module.exports = {
       collapsable: false,
       children: [
         '/zh/front/javascript/primary/JSGrammar',
+        '/zh/front/javascript/primary/JSExpress',
         '/zh/front/javascript/primary/JS数据类型',
         '/zh/front/javascript/primary/JSES',
         '/zh/front/javascript/primary/JS作用域以及闭包',

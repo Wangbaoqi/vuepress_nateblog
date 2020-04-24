@@ -239,7 +239,7 @@ tokens ::
 
 > IdentifierName和ReservedWord是根据Unicode标准附件＃31，标识符和模式语法中给出的默认标识符语法进行了一些小的修改的令牌。 ReservedWord是IdentifierName的枚举子集。 语法将标识符定义为不是保留字的IdentifierName。 Unicode标识符语法基于Unicode标准指定的字符属性。 所有符合标准的ECMAScript实现都必须将Unicode标准最新版本中指定类别中的Unicode代码点视为这些类别中的Unicode代码点。 ECMAScript实现可以识别在Unicode标准的更高版本中定义的标识符代码点。
 
-**IndentifierName Syntax**
+**IndentifierName Syntax** Syntax from **ECMAScript**
 
 IndentifierName的组成部分：
 * IndentifierStart 
@@ -252,8 +252,8 @@ IndentifierName的组成部分：
      * u Hex4Digits - 4个十六进制数字
      * u {CodePoint}
 
-* IndentifierName 
-* IndentifierPart
+* IdentifierName 
+* IdentifierPart
   * UnicodeIDContinue
    * any Unicode code point with the Unicode property "ID_Continue"
   * $
@@ -320,7 +320,14 @@ Boolean 字面量有两种值: **true** 和 **false**
 
 ### Numeric Literals
 
-Number字面量有一下四种形式:
+> ECMAScript 规范中对Number值得定义: primitive value corresponding to a double-precision 64-bit binary format IEEE 754-2008 value。A Number value is a member of the Number type and is a direct representation of a number.
+
+
+在JavaScript中，Number被定义是符合64位**双精度浮点类型**[IEEE-754](https://zh.wikipedia.org/wiki/IEEE_754)的数字类型
+
+
+
+Number字面量有一下四种形式: Syntax from **ECMAScript**
 
 * DecimalLiteral
   * DecimalIntergerLiteral . DecimalDigits ExponentPart  - 小数或者小数指数部分
@@ -352,7 +359,7 @@ Number字面量有一下四种形式:
   * 1 2 3 4 5 6 7 8 9
 * DecimalDigits :: one of
   * 0 1 2 3 4 5 6 7 8 9
-* BinaryDigits ::
+* BinaryDigits :: 
   * BinaryDigit
     * 0
     * 1
@@ -369,6 +376,150 @@ Number字面量有一下四种形式:
 **为了熟知NumricLieral的类型，练习一个例子来巩固一下，写一个正则来匹配所有的Number字面量**
 
 
+### StringLiterals 
+
+> 字符串文字是用单引号或双引号引起来的零个或多个Unicode代码点。 Unicode代码点也可以由转义序列表示。 除了结束引号代码点U + 005C（REVERSE SOLIDUS），U + 000D（回车）和U + 000A（LINE FEED）外，所有代码点都可能以字符串文字形式出现。 任何代码点都可能以转义序列的形式出现。 字符串文字的计算结果为ECMAScript字符串值。 生成这些字符串值时，Unicode代码点按照UTF-16编码。 属于基本多语言平面的代码点被编码为字符串的单个代码单元元素。 所有其他代码点都被编码为字符串的两个代码单元元素。
+
+
+String字面量有一下两种形式: Syntax Syntax from **ECMAScript**
+
+* " DoubleStringCharacters "
+  * DoubleStringCharacter DoubleStringCharacter
+* ' SingleStringCharacters '
+  * SingleStringCharacter SingleStringCharacters
+
+----------------------reference---------------------
+
+* DoubleStringCharacter ::
+  * **SourceCharacter** but not one of " or \ or LineTerminator( \n \r LS PS )
+  * LS
+  * PS
+  * \ **EscapeSequence**
+  * **LineContinuation**
+* SingleStringCharacter ::
+  * **SourceCharacter** but not one of ' or \ or LineTerminator( \n \r LS PS )
+  * LS
+  * PS
+  * \ **EscapeSequence**
+  * **LineContinuation**
+* LineContinuation ::
+  * \ LineTerminatorSequence (LF CR LS PS LF)
+* EscapeSequence ::
+  * CharacterEscapeSequence
+  * 0 [lookahead ∉ DecimalDigit] 
+  * **HexEscapeSequence** 
+  * UnicodeEscapeSequence
+* CharacterEscapeSequence ::
+  * SingleEscapeCharater
+  * NonEscapeCharater
+* SingleEscapeCharater :: one of 
+  * ' " \ b f n r t v
+* NonEscapeCharater ::
+  * SourceCharacter but not one of **EscapeCharacter** or LineTerminator
+* EscapeCharacter ::
+  * SingleEscapeCharacter
+  * DecimalDigit
+  * x 
+  * u
+* HexEscapeSequence ::
+  * x HexDigit HexDigit
+* UnicodeEscapeSequence :: 
+  * u **Hex4Digits**
+  * u{ CodePoint } 
+* Hex4Digits ::
+  * HexDigit HexDigit HexDigit HexDigit
+
+**String Single Character Escape Sequences - 字符串单字符转义序列**
+
+| Escape Point  | code Unit Value         | Unicode Character Name |  Symbol                         
+| --------------|:------------------------|:-----------------------|:-----------
+| \b            | 0x0008                  | BACKSPACE              |  BS
+| \t            | 0x0009                  | CHARACTER TABULATION   |  HT
+| \n            | 0x000A                  | LINE FEED (LF)         |  LF
+| \v            | 0x000B                  | LINE TABULATION        |  VT
+| \f            | 0x000C                  | FORM FEED (FF)         |  FF
+| \r            | 0x000D                  | CARRIAGE RETURN (CR)   |  CR
+| \"            | 0x0022                  | QUOTATION MARK         |  "
+| \'            | 0x0027                  | APOSTROPHE             |  '
+| \\            | 0x005C                  | REVERSE SOLIDUS        |  \
+
+### Regular Expression Literals
+
+> 正则表达式文字是一个输入元素，每次对文字进行求值时都会将其转换为RegExp对象。程序中的两个正则表达式文字求和为正则表达式对象，即使这两个文字的内容相同，它们也永远不会以===的形式进行比较。还可以在运行时通过以下方式创建RegExp对象：新的RegExp或将RegExp构造函数作为函数调用。下面的生成描述了正则表达式文字的语法，并且被输入元素扫描程序用来查找正则表达式文字的结尾。随后，使用更严格的ECMAScript正则表达式语法，再次解析包含RegularExpressionBody和RegularExpressionFlags的源文本。一个实现可以中定义的ECMAScript正则表达式语法，但不能扩展下面定义的RegularExpressionBody和RegularExpressionFlags生成或这些生成使用的生成。
+
+String字面量的形式: Syntax Syntax from **ECMAScript**
+* RegularExpressionLiteral ::
+  * / **RegularExpressionBody** / **RegularExpressionFlags**
+
+* RegularExpressionBody ::
+  * **RegularExpressionFirstChar** **RegularExpressionChars**
+
+* RegularExpressionFirstChar ::
+  * RegularExpressionNonTerminator but not one of * or \ or / or [ 
+  * **RegularExpressionBackslashSequence**
+  * **RegularExpressionClass**
+* RegularExpressionChars ::
+  * RegularExpressionNonTerminator but not one of \ or / or [ 
+  * **RegularExpressionBackslashSequence**
+  * **RegularExpressionClass**
+* RegularExpressionBackslashSequence
+  * \ **RegularExpressionNonTerminator**
+* RegularExpressionNonTerminator
+  * SourceCharacter but not LineTerminator
+* RegularExpressionClass ::
+  * [ **RegularExpressionClassChars** ]
+* RegularExpressionClassChars ::
+  * [empty]
+  * **RegularExpressionClassChars** **RegularExpressionClassChar**
+* RegularExpressionClassChar ::
+  * RegularExpressionNonTerminator but not one of ] or \ 
+  * RegularExpressionBackslashSequence
+
+* RegularExpressionFlags ::
+  * [empty]
+  * RegularExpressionFlags **IdentifierPart** 
+
+
+### Template Literal Lexical Components
+
+Template字面量的形式: Syntax from **ECMAScript**
+* Template :: 
+  * **NoSubstitutionTemplate**
+  * **TemplateHead**
+* NoSubstitutionTemplate ::
+  * ` **TemplateCharacters** `
+* TemplateHead ::
+  * ` **TemplateCharacters** ${
+* TemplateSubstitutionTail :: 
+  * TemplateMiddle
+  * TemplateTail
+* TemplateMiddle ::
+  * } TemplateCharacters ${
+  * TemplateTail ::
+    * } TemplateCharacters `
+
+* TemplateCharacters ::
+  * **TemplateCharacter** **TemplateCharacter**
+* TemplateCharacter ::
+  * $ [lookahead ≠ {] 
+  * \ EscapeSequence
+  * \ **NotEscapeSequence**
+  * LineContinuation
+  * LineTerminatorSequence
+  * SourceCharacter but not one of ` or \ or $ or LineTerminator
+* NotEscapeSequence :: 没有转移序列
+  * 0 DecimalDigit
+  * DecimalDigit but not 0
+  * x [lookahead ∉ HexDigit]
+  * x HexDigit [lookahead ∉ HexDigit]
+  * u [lookahead ∉ HexDigit] [lookahead ≠ {]
+  * u HexDigit [lookahead ∉ HexDigit]
+  * u HexDigit HexDigit [lookahead ∉ HexDigit]
+  * u HexDigit HexDigit HexDigit [lookahead ∉ HexDigit] u { [lookahead ∉ HexDigit]
+  * u { NotCodePoint [lookahead ∉ HexDigit]
+  * u { CodePoint [lookahead ∉ HexDigit] [lookahead ≠ }]
+
+
 ## 相关文章以及规范
 
 * [FileFormat](https://www.fileformat.info/info/unicode/)
@@ -377,3 +528,5 @@ Number字面量有一下四种形式:
 * [Unicode in Javascript](https://flaviocopes.com/javascript-unicode/)
 * [阮一峰 ASCII，Unicode 和 UTF-8](http://www.ruanyifeng.com/blog/2007/10/ascii_unicode_and_utf-8.html)
 * [阮一峰 Unicode与JavaScript详解](http://www.ruanyifeng.com/blog/2014/12/unicode.html)
+* [JavaScript 浮点数陷阱及解法](https://github.com/camsong/blog/issues/9)
+* [IEEE 754双精度浮点格式和JavaScript中的Number](https://github.com/xwcoder/xwcoder.github.com/issues/19)
