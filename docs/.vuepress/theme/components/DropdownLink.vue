@@ -108,16 +108,18 @@ export default {
         border-bottom none
         font-weight 400
         margin-bottom 0
-        padding 0 1.5rem 0 1.25rem
+        padding .5rem 1.5rem .5rem 1.25rem
         &:hover
-          color $accentColor
+          color $textColor
+          background $navBackground
         &.router-link-active
-          color $accentColor
+          color $textColor
+          background $navBackground
           &::after
             content ""
             width 0
             height 0
-            border-left 5px solid $accentColor
+            border-left 5px solid $textColor
             border-top 3px solid transparent
             border-bottom 3px solid transparent
             position absolute
@@ -169,10 +171,10 @@ export default {
       position absolute
       top 100%
       right 0
-      background-color #fff
+      background-color $background
       padding 0.6rem 0
-      border 1px solid #ddd
-      border-bottom-color #ccc
+      border 0 solid #ddd
+      // border-bottom-color #ccc
       text-align left
       border-radius 0.25rem
       white-space nowrap

@@ -9,7 +9,6 @@ module.exports = {
   ],
   markdown: {
     lineNumbers: true,
-    
   },
   theme: 'reform',
   locales: {

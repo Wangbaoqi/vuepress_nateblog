@@ -93,6 +93,7 @@ function css (el, property) {
 <style lang="stylus">
 $navbar-vertical-padding = 0.7rem
 $navbar-horizontal-padding = 1.5rem
+$navbar-background = rgba(52,50,50,0.7)
 .navbar
   padding $navbar-vertical-padding $navbar-horizontal-padding
   line-height $navbarHeight - 1.4rem;
@@ -112,7 +113,7 @@ $navbar-horizontal-padding = 1.5rem
   .links
     padding-left 1.5rem
     box-sizing border-box
-    background-color white
+    background-color $navbar-background
     white-space nowrap
     font-size 0.9rem
     position absolute
@@ -122,6 +123,8 @@ $navbar-horizontal-padding = 1.5rem
     .search-box
       flex: 0 0 auto
       vertical-align top
+      input
+        background $background  0.6rem 0.5rem no-repeat
 
 @media (max-width: $MQMobile)
   .navbar
