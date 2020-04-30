@@ -375,6 +375,21 @@ Number字面量有一下四种形式: Syntax from **ECMAScript**
 
 **为了熟知NumricLieral的类型，练习一个例子来巩固一下，写一个正则来匹配所有的Number字面量**
 
+根据规范中定义NumberLiterall类型:
+```js
+// 整数
+var regInterg = /(\.\d+|(0|[0-9])\d*\.?\d*)([eE][-\+]?\d+)/
+// 二进制
+var regBinary = /0[bB]?[01]+/
+// 八进制
+var regOctal = /0[oO]?[0-7]+/
+// 十六进制
+var regHex = /0[xX]?[0-9a-fA-F]+/
+
+// Number Literals
+var number_reg = /(\.\d+|(0|[0-9])\d*\.?\d*)([eE][-\+]?\d+)|(0[bB]?[01]+)|(0[oO]?[0-7]+)|(0[xX]?[0-9a-fA-F]+)/
+
+```
 
 ### StringLiterals 
 
