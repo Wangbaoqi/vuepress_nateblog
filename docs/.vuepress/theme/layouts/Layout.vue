@@ -13,14 +13,16 @@
     <Home v-if="$page.frontmatter.home"/>
 
     <div class="blog-container">
-      <Sidebar :items="sidebarItems" @toggle-sidebar="toggleSidebar">
-        <slot name="sidebar-top" slot="top"/>
-        <slot name="sidebar-bottom" slot="bottom"/>
-      </Sidebar>
+      <NavbarLeft />
+        
       <Page v-if="!$page.frontmatter.home" :sidebar-items="sidebarItems">
         <slot name="page-top" slot="top"/>
         <slot name="page-bottom" slot="bottom"/>
       </Page>
+       <Sidebar :items="sidebarItems" @toggle-sidebar="toggleSidebar">
+        <slot name="sidebar-top" slot="top"/>
+        <slot name="sidebar-bottom" slot="bottom"/>
+      </Sidebar>
     </div> 
 
 
@@ -51,12 +53,13 @@ import Sidebar from "@theme/components/Sidebar.vue";
 import Tags from "@theme/components/Tags.vue";
 import MyHome from "@theme/components/MyHome.vue";
 import RightBar from "@theme/components/RightBar.vue";
+import NavbarLeft from "@theme/components/NavBarleft.vue";
 import { resolveSidebarItems } from "@theme/util";
 
 
 import '@theme/styles/iconfont/iconfont.css';
 export default {
-  components: { Home, Page, Sidebar, Navbar, Tags, MyHome, RightBar },
+  components: { Home, Page, Sidebar, Navbar, Tags, MyHome, RightBar, NavbarLeft },
 
   data() {
     return {

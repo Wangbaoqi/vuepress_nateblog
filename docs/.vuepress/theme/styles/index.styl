@@ -33,10 +33,10 @@ body
 
 .blog-container
   display grid
-  grid-template-columns $sidebarWidth auto
+  grid-template-columns $sidebarWidth auto $sidebarWidth
   grid-column-gap 45px
   grid-template-areas 'sidebar main'
-  max-width 1200px
+  max-width $maxContentWidth
   margin: 0 auto
 
 
@@ -50,7 +50,7 @@ body
   background-color $background 
   box-sizing border-box
   border-bottom 0 solid $borderColor
-  max-width 1200px
+  max-width $maxContentWidth
   margin: 0 auto
 
 
