@@ -1,4 +1,4 @@
-.content
+{$contentClass}
   code
     color lighten($textColor, 20%)
     padding 0.25rem 0.5rem
@@ -11,13 +11,8 @@
         color #EC5975
       &.inserted
         color $accentColor
-      &.keyword
-        color #b872ce
-        font-weight bold
-      &.function 
-        color #61afef
 
-.content
+{$contentClass}
   pre, pre[class*="language-"]
     line-height 1.4
     padding 1.25rem 1.5rem
@@ -26,7 +21,7 @@
     border-radius 6px
     overflow auto
     code
-      color #525252
+      color #fff
       padding 0
       background-color transparent
       border-radius 0
@@ -55,7 +50,7 @@ div[class*="language-"]
     top 0.8em
     right 1em
     font-size 0.75rem
-    color rgba(0, 0, 0, 0.8)
+    color rgba(255, 255, 255, 0.4)
   &:not(.line-numbers-mode)
     .line-numbers-wrapper
       display none
@@ -80,7 +75,7 @@ div[class*="language-"]
       top 0
       width $lineNumbersWrapperWidth
       text-align center
-      color rgba(0, 0, 0, 0.8)
+      color rgba(255, 255, 255, 0.3)
       padding 1.25rem 0
       line-height 1.4
       br
@@ -99,7 +94,7 @@ div[class*="language-"]
       width $lineNumbersWrapperWidth
       height 100%
       border-radius 6px 0 0 6px
-      border-right 0
+      border-right 1px solid rgba(0, 0, 0, 66%)
       background-color $codeBgColor
 
 
@@ -138,3 +133,5 @@ div[class~="language-bash"]:before
 
 div[class~="language-php"]:before
   content "php"
+
+@import '~prismjs/themes/prism-tomorrow.css'

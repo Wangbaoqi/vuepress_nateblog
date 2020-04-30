@@ -271,7 +271,7 @@ function flatten(items, res) {
 .page {
   padding-bottom: 2rem;
   display: block;
-  max-width: 75rem;
+  // max-width: 75rem;
   margin-top: 2rem;
 }
 

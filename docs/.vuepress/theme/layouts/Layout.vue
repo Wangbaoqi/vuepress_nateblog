@@ -1,28 +1,45 @@
 <template>
   <div
-    class="theme-container reform"
+    class="theme-container"
     :class="pageClasses"
-    @touchstart="onTouchStart"
-    @touchend="onTouchEnd"
+   
   >
+
+    
     <Navbar  @toggle-sidebar="toggleSidebar"/>
+
+
+
+    <Home v-if="$page.frontmatter.home"/>
+
+    <div class="blog-container">
+      <Sidebar :items="sidebarItems" @toggle-sidebar="toggleSidebar">
+        <slot name="sidebar-top" slot="top"/>
+        <slot name="sidebar-bottom" slot="bottom"/>
+      </Sidebar>
+      <Page v-if="!$page.frontmatter.home" :sidebar-items="sidebarItems">
+        <slot name="page-top" slot="top"/>
+        <slot name="page-bottom" slot="bottom"/>
+      </Page>
+    </div> 
+
+
     <!-- 这块代码是主题的头部，shouldShowNavbar是判断是否显示头部
     toggleSidebar是当屏幕出现在手机端目录隐藏或显示的判断-->
     <div class="sidebar-mask" @click="toggleSidebar(false)"></div>
     <!-- 在移动端时点击内容部分目录会隐藏 -->
-    <Sidebar :items="sidebarItems" @toggle-sidebar="toggleSidebar">
+    <!--<Sidebar :items="sidebarItems" @toggle-sidebar="toggleSidebar">
       <slot name="sidebar-top" slot="top"/>
       <slot name="sidebar-bottom" slot="bottom"/>
-    </Sidebar>
+    </Sidebar>-->
     <!-- 侧边栏 -->
 
     <!-- <RightBar></RightBar> -->
-    <Home v-if="$page.frontmatter.home"/>
-    <MyHome v-else-if="$page.frontmatter.defaultHome"></MyHome>
-    <Page v-else :sidebar-items="sidebarItems">
+    <!--<MyHome v-else-if="$page.frontmatter.defaultHome"></MyHome>-->
+     <!--<Page v-else :sidebar-items="sidebarItems">
       <slot name="page-top" slot="top"/>
       <slot name="page-bottom" slot="bottom"/>
-    </Page>
+    </Page>-->
   </div>
 </template>
 
@@ -35,6 +52,7 @@ import Tags from "@theme/components/Tags.vue";
 import MyHome from "@theme/components/MyHome.vue";
 import RightBar from "@theme/components/RightBar.vue";
 import { resolveSidebarItems } from "@theme/util";
+
 
 import '@theme/styles/iconfont/iconfont.css';
 export default {
@@ -160,4 +178,4 @@ export default {
 };
 </script>
 
-<style src="prismjs/themes/prism.css"></style>
+<style src="prismjs/themes/prism-tomorrow.css"></style>

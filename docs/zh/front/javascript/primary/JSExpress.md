@@ -169,3 +169,14 @@ Member、New、Call 是属于LeftHideSide, 相当于是 = 的左边，左边要�
 
 ## Type Convertion
 
+
+
+
+
+
+
+
+
+### StringToNumber 
+
+

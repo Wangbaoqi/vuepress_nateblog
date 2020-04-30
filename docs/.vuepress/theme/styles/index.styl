@@ -6,8 +6,8 @@
 
 
 
-#app .reform
-  font-size 1rem
+// #app .reform
+//   font-size 15px
 html, body
   padding 0
   margin 0
@@ -19,14 +19,26 @@ html, body
 }
 
 body
-  font-family 'Mirages Custom', 'Merriweather', 'Open Sans', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft Yahei', 'WenQuanYi Micro Hei',  'Segoe UI Emoji', 'Segoe UI Symbol', Helvetica, Arial, sans-serif
+  font-family system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
+  // font-family 'Mirages Custom', 'Merriweather', 'Open Sans', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft Yahei', 'WenQuanYi Micro Hei',  'Segoe UI Emoji', 'Segoe UI Symbol', Helvetica, Arial, sans-serif
+  // font-family -apple-system-font, BlinkMacSystemFont, "Helvetica Neue", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei UI", "Microsoft YaHei", Arial, sans-serif;
   -webkit-font-smoothing antialiased
   -moz-osx-font-smoothing grayscale
-  font-size 1rem
+  font-size 16px
   color $textColor
 
 .page
-  padding-left $sidebarWidth
+  padding-left 0
+
+
+.blog-container
+  display grid
+  grid-template-columns $sidebarWidth auto
+  grid-column-gap 45px
+  grid-template-areas 'sidebar main'
+  max-width 1200px
+  margin: 0 auto
+
 
 .navbar
   position fixed
@@ -35,9 +47,13 @@ body
   left 0
   right 0
   height $navbarHeight
-  background-color $navBackground 
+  background-color $background 
   box-sizing border-box
   border-bottom 0 solid $borderColor
+  max-width 1200px
+  margin: 0 auto
+
+
 
 .sidebar-mask
   position fixed
@@ -49,10 +65,10 @@ body
   display none
 
 .sidebar
-  font-size 1rem
+  font-size 15px
   background-color $background
   width $sidebarWidth
-  position fixed
+  position relative
   z-index 12
   margin 0
   top $navbarHeight
@@ -85,7 +101,7 @@ body
 
 a
   font-weight 500
-  color $accentColor
+  color $textColor
   text-decoration none
 
 p a code
@@ -169,10 +185,10 @@ table
 tr
   border-top 1px solid #dfe2e5
   &:nth-child(2n)
-    background-color #f6f8fa
+    background-color rgba(255,255,255,0.06)
 
 th, td
-  border 1px solid #dfe2e5
+  border 1px solid #504d4d
   padding .6em 1em
 
 .theme-container
