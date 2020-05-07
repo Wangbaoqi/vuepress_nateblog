@@ -32,7 +32,9 @@
         </span>
       </p>
     </div>
-    <div id="gitalk-container"></div>
+    <div id="gitalk-container" v-show="!type"></div>
+    <!-- <slot name="sider"/> -->
+
     <slot name="bottom"/>
   </main>
 </template>
@@ -269,10 +271,10 @@ function flatten(items, res) {
 @require '../styles/wrapper.styl';
 
 .page {
-  padding-bottom: 2rem;
-  display: block;
-  // max-width: 75rem;
+  position relative
   margin-top: 2rem;
+  grid-area main
+
 }
 
 

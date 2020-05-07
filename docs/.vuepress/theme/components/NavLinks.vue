@@ -1,11 +1,11 @@
 <template>
   <nav
-    v-if="userLinks.length || repoLink"
+    v-if="linkTop.length || repoLink"
     class="nav-links"
   >
     <!-- user links -->
     <div
-      v-for="item in userLinks"
+      v-for="item in linkTop"
       :key="item.link"
       class="nav-item"
     >
@@ -48,7 +48,7 @@ export default {
 
   computed: {
     userNav () {
-      return this.$themeLocaleConfig.nav || this.$site.themeConfig.nav || []
+      return this.$themeLocaleConfig.navTop || []
     },
 
     nav () {
@@ -80,15 +80,21 @@ export default {
         }
         return [...this.userNav, languageDropdown]
       }
+      
       return this.userNav
     },
 
-    userLinks () {
-      return (this.nav || []).map(link => {
+    linkTop () {
+
+      console.log(this.nav, 'navbar');
+  const result = (this.nav || []).map(link => {
         return Object.assign(resolveNavLinkItem(link), {
           items: (link.items || []).map(resolveNavLinkItem)
         })
       })
+      console.log(result, 'result');
+
+      return  result
     },
 
     repoLink () {

@@ -1,58 +1,34 @@
 <template>
   <section class="navbar-tags">
-   
 		<span v-for="item in filterNavTags" class="tag-item">
-			 	<router-link :to="item.link" class="tag">
+			 	<router-link :to="item.link" class="tag" :style="{color: item.color, background: item.background}">
 					{{item.text}}
 				</router-link>
 		</span>
-   
-
   </section>
 </template>
 
 <script>
-import AlgoliaSearchBox from '@AlgoliaSearchBox'
-import SearchBox from '@SearchBox'
-import SidebarButton from '@parent-theme/components/SidebarButton.vue'
-import NavLinks from '@parent-theme/components/NavLinks.vue'
-
 export default {
-  name: '',
-
-  components: {  },
-
-  data () {
-    return {
-      tagList: []
-    }
-  },
-
-  mounted () {
-   	console.log(this.$site, 'site');
-   	console.log(this.$page, 'page');
-
-  },
-
+  
   computed: {
     filterNavTags() {
 			const curLanguage = /\/zh/.test(this.$page.path);
 			const curTagLists = this.$site.themeConfig.locales[curLanguage ? '/zh/' : '/'].nav;
+
 			return curTagLists
     }
   }
 }
-
 </script>
 
 <style lang="stylus">
 .navbar-tags
 	.tag-item 
-		display inline-block
-		background #95dee3
-		padding 8px
-		margin 9px 
-	.tag 
-		color #000000
-	
+		.tag 
+			display inline-block
+			padding 6px 8px
+			margin 9px 14px 9px 0px
+			font-size 14px
+			border-radius 3px
 </style>

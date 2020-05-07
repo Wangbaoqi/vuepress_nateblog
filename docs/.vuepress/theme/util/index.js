@@ -139,7 +139,7 @@ export function resolveSidebarItems (page, regularPath, site, localePath) {
   if (!sidebarConfig) {
     return []
   } else {
-    const { base, config } = resolveMatchingConfig(regularPath, sidebarConfig)
+    const { base, config } = resolveMatchingConfig(regularPath, sidebarConfig, page)
     return config
       ? config.map(item => resolveItem(item, pages, base))
       : []
@@ -187,12 +187,18 @@ export function resolveNavLinkItem (linkItem) {
   })
 }
 
+function resolveFinal(list, path) {
+  return list.every(e => e.includes(path))
+}
+
 /**
  * @param { Route } route
  * @param { Array<string|string[]> | Array<SidebarGroup> | [link: string]: SidebarConfig } config
  * @returns { base: string, config: SidebarConfig }
  */
-export function resolveMatchingConfig (regularPath, config) {
+export function resolveMatchingConfig (regularPath, config, page) {
+
+  const path = ensureEndingSlash(regularPath)
   if (Array.isArray(config)) {
     return {
       base: '/',
@@ -200,7 +206,16 @@ export function resolveMatchingConfig (regularPath, config) {
     }
   }
   for (const base in config) {
-    if (ensureEndingSlash(regularPath).indexOf(encodeURI(base)) === 0) {
+    if (path.indexOf(encodeURI(base)) === 0) {
+      // again filter
+      const finalConfig = config[base].filter(e => {
+        return resolveFinal(e.children, path)
+      })
+      console.log(finalConfig, 'finalConfig');
+      console.log(config[base], 'config[base]');
+      console.log(page, 'page');
+      console.log(base, 'base');
+      
       return {
         base,
         config: config[base]

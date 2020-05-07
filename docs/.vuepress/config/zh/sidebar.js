@@ -4,25 +4,21 @@ module.exports = {
       title: 'HTML',
       collapsable: false,
       children: [
-        '/zh/front/html/web语义',
-        '/zh/front/html/web通信',
-        '/zh/front/html/web离线存储',
-        // '/zh/front/html/web多媒体',
-        // '/zh/front/html/web3D图像',
-        // '/zh/front/html/web性能集成',
-        // '/zh/front/html/web设备访问',
+        '/zh/front/html/posts/web语义',
+        '/zh/front/html/posts/web通信',
+        '/zh/front/html/posts/web离线存储',
       ]
     },
     {
       title: 'CSS',
       collapsable: false,
       children: [
-        '/zh/front/css/box',
-        '/zh/front/css/layout',
-        '/zh/front/css/centered',
-        '/zh/front/css/BFC',
-        '/zh/front/css/response',
-        '/zh/front/css/css技术收纳',
+        '/zh/front/css/posts/box',
+        '/zh/front/css/posts/layout',
+        '/zh/front/css/posts/centered',
+        '/zh/front/css/posts/BFC',
+        '/zh/front/css/posts/response',
+        '/zh/front/css/posts/css技术收纳',
       ]
     },
     {
@@ -43,51 +39,51 @@ module.exports = {
       ]
     },
     {
-      title: 'JavaScript 设计模式',
+      title: 'DesignPatterns',
       collapsable: false,
       children: [
-        '/zh/front/designModel/faceObject',
-        '/zh/front/designModel/publish',
+        '/zh/front/designModel/posts/faceObject',
+        '/zh/front/designModel/posts/publish',
         
       ]
     },
   ],
   '/zh/algorithm/': [
     {
-      title: '数据结构',
+      title: 'DataStructer',
       collapsable: false,
       children: [
-        '/zh/algorithm/structure/array',
-        '/zh/algorithm/structure/link',
-        '/zh/algorithm/structure/stack',
-        '/zh/algorithm/structure/queue',
-        '/zh/algorithm/structure/dictionary',
+        '/zh/algorithm/structure/posts/array',
+        '/zh/algorithm/structure/posts/link',
+        '/zh/algorithm/structure/posts/stack',
+        '/zh/algorithm/structure/posts/queue',
+        '/zh/algorithm/structure/posts/dictionary',
       ]
     },
     {
-      title: '前端算法',
+      title: 'Algorithm',
       collapsable: false,
       children: [
-        '/zh/algorithm/frontalgorithm/search',
-        '/zh/algorithm/frontalgorithm/recursion',
-        '/zh/algorithm/frontalgorithm/dynamic',
-        '/zh/algorithm/frontalgorithm/greedy',
-        '/zh/algorithm/frontalgorithm/timer',
+        '/zh/algorithm/frontalgorithm/posts/search',
+        '/zh/algorithm/frontalgorithm/posts/recursion',
+        '/zh/algorithm/frontalgorithm/posts/dynamic',
+        '/zh/algorithm/frontalgorithm/posts/greedy',
+        '/zh/algorithm/frontalgorithm/posts/timer',
 
       ]
     },{
-      title: '前端编程',
+      title: 'programCode',
       collapsable: false,
       children: [
-        '/zh/algorithm/programCode/arrayFlat',
-        '/zh/algorithm/programCode/ObjectFlat',
+        '/zh/algorithm/programCode/posts/arrayFlat',
+        '/zh/algorithm/programCode/posts/ObjectFlat',
       ]
     },
   ],
 
   '/zh/webApi/': [
     {
-      title: '浏览器',
+      title: 'Brower',
       collapsable: false,
       children: [
         '/zh/webApi/browser/browserLoop'
@@ -103,7 +99,7 @@ module.exports = {
   ],
   '/zh/everyday/': [
     {
-      title: 'JavaScript',
+      title: 'JavaScript day',
       collapsable: false,
       children: [
         '/zh/everyday/jsConquered/conquered',
@@ -113,14 +109,14 @@ module.exports = {
       ]
     },
     {
-      title: 'CSS',
+      title: 'CSS day',
       collapsable: false,
       children: [
         '/zh/everyday/cssConquered/css'
       ]
     },
     {
-      title: 'Vue',
+      title: 'Vue day',
       collapsable: false,
       children: [
         '/zh/everyday/vueConquered/vue',
@@ -132,7 +128,7 @@ module.exports = {
       ]
     },
     {
-      title: 'React',
+      title: 'React day',
       collapsable: false,
       children: [
         '/zh/everyday/reactConquered/react',
@@ -146,66 +142,53 @@ module.exports = {
   
   '/zh/network/': [
     {
-      title: 'HTTP协议',
+      title: 'NetWork',
       collapsable: false,
       children: [
         '/zh/network/httpProto/http',
-      ]
-    },
-    {
-      title: 'HTTP问题收纳',
-      collapsable: false,
-      children: [
-        '/zh/network/httpQuestion/question',
       ]
     },
   ],
 
   '/zh/frame/': [
     {
-      title: '框架思想',
+      title: 'Frame',
       collapsable: false,
       children: [
-        '/zh/frame/mind/mvvm',
-        '/zh/frame/mind/visualDom',
-        '/zh/frame/mind/spaPage',
+        '/zh/frame/mind/posts/mvvm',
+        '/zh/frame/mind/posts/visualDom',
+        '/zh/frame/mind/posts/spaPage',
 
       ]
     },
     {
-      title: 'Vue 全家桶',
+      title: 'Vue',
       collapsable: false,
       children: [
-        '/zh/frame/vue/component',
-        '/zh/frame/vue/router',
-        '/zh/frame/vue/vuex',
-        '/zh/frame/vue/vueResponse',
-
+        '/zh/frame/vue/posts/component',
+        '/zh/frame/vue/posts/router',
+        '/zh/frame/vue/posts/vuex',
+        '/zh/frame/vue/posts/vueResponse',
       ]
     },
     {
-      title: 'React 全家桶',
+      title: 'React',
       collapsable: false,
       children: [
-        '/zh/frame/react/component',
-        '/zh/frame/react/reduxSelf',
-        '/zh/frame/react/reactRedux',
-        '/zh/frame/react/reactError',
+        '/zh/frame/react/posts/component',
+        '/zh/frame/react/posts/reduxSelf',
+        '/zh/frame/react/posts/reactRedux',
+        '/zh/frame/react/posts/reactError',
       ]
     },
     {
-      title: '构建打包',
+      title: 'buildPack',
       collapsable: false,
       children: [
-        '/zh/frame/buildPack/webpack'
+        '/zh/frame/buildPack/posts/webpack',
+        '/zh/frame/buildPack/posts/jenkins'
       ]
     },
-    {
-      title: '构建部署',
-      collapsable: false,
-      children: [
-        '/zh/frame/buildDeploy/jenkins'
-      ]
-    },
+    
   ],
 }

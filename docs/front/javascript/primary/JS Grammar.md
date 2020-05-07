@@ -1,7 +1,7 @@
 ---
 type: front-JavaScript
 tag: JavaScript
-lang: zh
+lang: us
 excerpt: 'JavaScript Grammar'
 ---
 # JS 词汇语法

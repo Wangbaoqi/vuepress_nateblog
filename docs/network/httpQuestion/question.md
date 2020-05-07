@@ -1,7 +1,7 @@
 ---
 type: web-http
 tag: http
-lang: us
+lang: zh
 excerpt: 'Http 中的问题以及坑'
 ---
 

@@ -13,6 +13,7 @@
   "dependencies": {
     "dayjs": "^1.8.17",
     "gitalk": "^1.5.0",
+    "moment": "^2.25.3",
     "vuepress-plugin-gitalk": "^0.1.3",
     "vuepress-theme-reform": "^1.4.0"
   }

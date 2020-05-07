@@ -1,15 +1,15 @@
 ---
 type: web-topic
 subType: oneTopic
-subTag: React relative
-tag: every question
+subTag: React相关
+tag: question
 lang: us
 ---
 
-# React soul question - react
+# React灵魂之问-react
 ::: tip
 collect React interview soul questions
-::: 
+:::
 
 [[toc]]
 
@@ -116,11 +116,13 @@ handleActive() {
 ```
 
 通过上述打印，提前看下结论：
-setState 在合成事件和钩子函数中是“异步”的，在原生事件和setTimeout中是“同步的”
+1. setState 在合成事件和钩子函数中是“异步”的，在原生事件和setTimeout中是“同步的”
 
 
 ## setState为什么默认是异步
 
+
+## setState什么时候是同步的
 
 
 ## react中应用样式表
@@ -131,5 +133,16 @@ setState 在合成事件和钩子函数中是“异步”的，在原生事件�
 
 
 ## 遇到性能问题一般在哪个生命周期里解决
+
+
+
+
+
+
+
+
+
+
+
 
 

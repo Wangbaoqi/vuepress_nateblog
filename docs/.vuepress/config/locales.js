@@ -14,7 +14,8 @@ module.exports = {
     },
     algolia: {},
     nav: require('./nav.js'),
-    sidebar: require('./sidebar')
+    sidebar: require('./sidebar'),
+    navTop: require('./navTop')
   },
   '/zh/': {
     // 多语言下拉菜单的标题
@@ -33,6 +34,7 @@ module.exports = {
     // 当前 locale 的 algolia docsearch 选项
     algolia: {},
     nav: require('./zh/nav.js'),
-    sidebar: require('./zh/sidebar.js')
+    sidebar: require('./zh/sidebar.js'),
+    navTop: require('./zh/navTop')
   }
 }

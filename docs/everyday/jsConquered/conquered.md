@@ -2,7 +2,7 @@
 type: web-topic
 subType: oneTopic
 subTag: JavaScript相关
-tag: 壹题攻克
+tag: question
 lang: us
 ---
 
@@ -149,6 +149,19 @@ function foo() {
 foo()
 ```
 如果是c语言或者类似大部分语言，for循环结束之后，i变量就会销毁了，但是在JS中，并没有销毁，就是因为变量提升的原因
+
+3. 变量函数同名时，函数声明会覆盖变量声明
+
+```js
+var a = 3;
+if(1) {
+  a = 4;
+  function a() {};
+  a = 21
+  console.log(a)
+}
+console.log(a)
+```
 
 ## JS是如何支持块级作用域的
 

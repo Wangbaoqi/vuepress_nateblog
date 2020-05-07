@@ -6,23 +6,24 @@
   >
 
     
-    <Navbar  @toggle-sidebar="toggleSidebar"/>
-
+    <NavbarTop  @toggle-sidebar="toggleSidebar"/>
 
 
     <Home v-if="$page.frontmatter.home"/>
 
-    <div class="blog-container">
-      <NavbarLeft />
+    <div v-else class="blog-container">
         
       <Page v-if="!$page.frontmatter.home" :sidebar-items="sidebarItems">
         <slot name="page-top" slot="top"/>
         <slot name="page-bottom" slot="bottom"/>
+        
       </Page>
-       <Sidebar :items="sidebarItems" @toggle-sidebar="toggleSidebar">
-        <slot name="sidebar-top" slot="top"/>
-        <slot name="sidebar-bottom" slot="bottom"/>
-      </Sidebar>
+      <NavbarLeft />
+
+       <!-- <Sidebar :items="sidebarItems" @toggle-sidebar="toggleSidebar" >
+          <slot name="sidebar-top" slot="top"/>
+          <slot name="sidebar-bottom" slot="bottom"/>
+        </Sidebar> -->
     </div> 
 
 
@@ -47,7 +48,7 @@
 
 <script>
 import Home from "@parent-theme/components/Home.vue";
-import Navbar from "@theme/components/Navbar.vue";
+import NavbarTop from "@theme/components/Navbartop.vue";
 import Page from "@theme/components/Page.vue";
 import Sidebar from "@theme/components/Sidebar.vue";
 import Tags from "@theme/components/Tags.vue";
@@ -59,7 +60,7 @@ import { resolveSidebarItems } from "@theme/util";
 
 import '@theme/styles/iconfont/iconfont.css';
 export default {
-  components: { Home, Page, Sidebar, Navbar, Tags, MyHome, RightBar, NavbarLeft },
+  components: { Home, Page, Sidebar, NavbarTop, Tags, MyHome, RightBar, NavbarLeft },
 
   data() {
     return {
@@ -95,6 +96,8 @@ export default {
     },
 
     sidebarItems() {
+      console.log(this, 'this');
+      
       return resolveSidebarItems(
         this.$page,
         this.$page.regularPath,
