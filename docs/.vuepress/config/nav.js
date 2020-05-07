@@ -1,42 +1,94 @@
 module.exports = [
   {
-    text: 'Home', link: '/'
+    text: 'HTML', 
+    link: '/front/html/',
+    color: '#ffffff',
+    background: '#f2552c'
   },
   {
-    text: 'Front', 
-    link: '/front/',
+    text: 'CSS',
+    link: '/front/css/',
+    color: '#ffffff',
+    background: '#bc70a4'
   },
   {
-    text: 'Data Structure',
-    link: '/algorithm/structure/array',
+    text: 'Brower',
+    link: '/webApi/browser/',
+    color: '#000000',
+    background: '#95dee3'
   },
   {
-    text: 'Web Frame',
-    link: '/frame/mind/mvvm',
+    text: 'JavaScript',
+    link: '/front/javascript/',
+    color: '#000',
+    background: '#ecdb54'
   },
   {
-    text: 'Http',
-    link: '/network/httpProto/http'
+    text: 'DataStructer',
+    link: '/algorithm/structure/',
+    color: '#ffffff',
+    background: '#00a591'
   },
   {
-    text: 'Performance',
-    link: '/performance/frontPerformance/front',
+    text: 'Algorithm',
+    link: '/algorithm/frontalgorithm/',
+    color: '#ffffff',
+    background: '#00a591'
   },
   {
-    text: 'Every question',
-    link: '/everyday/'
+    text: 'QuestionFix',
+    link: '/everyday/',
+    color: '#ffffff',
+    background: '#5b5ea6'
   },
   {
-    text: 'Project',
-    link: '/project/react-nugget'
+    text: 'DesignPatterns',
+    link: '/front/designModel/',
+    color: '#000',
+    background: '#f7786b'
   },
   {
-    text: 'Build',
-    link: '/builddeploy/centosJenkins/jenkins'
+    text: 'Vue',
+    link: '/frame/vue/',
+    color: '#ffffff',
+    background: '#00a591'
   },
   {
-    text: "Github",
-    link: "https://github.com/Wangbaoqi"
-  }
+    text: 'NetWork',
+    link: '/network/',
+    color: '#ffffff',
+    background: '#6b5b95'
+  },
+  
+  {
+    text: 'React',
+    link: '/frame/react/',
+    color: '#61dafb',
+    background: '#282c34'
+  },
+  {
+    text: 'BuildPack',
+    link: '/frame/buildPack/',
+    color: '#ffffff',
+    background: '#ce3175'
+  },
+  {
+    text: 'Node',
+    link: '/webApi/node/',
+    color: '#ffffff',
+    background: '#026e00'
+  },
+  {
+    text: 'ProgramCode',
+    link: '/algorithm/programCode/',
+    color: '#000000',
+    background: '#bfd641'
+  },
+  {
+    text: 'Frame',
+    link: '/zh/frame/mind/',
+    color: '#ffffff',
+    background: '#b565a7'
+  },
 ]
 

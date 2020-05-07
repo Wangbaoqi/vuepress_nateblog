@@ -2,8 +2,8 @@
 type: web-topic
 subType: oneTopic
 subTag: React相关
+tag: question
 lang: us
-tag: 壹题攻克
 ---
 
 # React灵魂之问-react-router

@@ -1,6 +1,8 @@
 <template>
   <div class="classify">
-    <Tags @changeTag="changeTag" :lang="lang"/>
+    <!-- <Tags @changeTag="changeTag" :lang="lang"/> -->    
+    <h1 class="post-title">All the {{tag}} Articles ⤵️</h1>
+
     <section class="main-content">
       <div class="blog-content">
         <template v-for="(tag,index) in blog" v-if="index<infoLength">
@@ -34,7 +36,8 @@ export default {
       blog: [], //博客
       infoLength: defaultLength, //默认显示条数
       show: false,
-      lang: 'es'
+      lang: 'es',
+      tag: ''
     };
   },
   mounted() {
@@ -48,8 +51,9 @@ export default {
       this.lang = this.$page.frontmatter.lang
     },
     filerArticle() {
-      const { lang = '' } = this.$page.frontmatter
-
+      const { lang = '', tag = '' } = this.$page.frontmatter
+      console.log(this.$page, 'page');
+      
       let go = this.$site.pages.sort((pre, next) => {
         if (pre.lastUpdated === undefined) return 1;
         if (next.lastUpdated === undefined) return -1;
@@ -65,8 +69,8 @@ export default {
 
       go = go.filter(e => e.frontmatter.lang && e.frontmatter.lang === lang)
       
-      this.blog = go.filter(v => v.frontmatter.tag);
-
+      this.blog = go.filter(v => v.frontmatter.tag == tag);
+      this.tag = tag
       copyBlogs = go;
 
       if (this.blog.length > defaultLength) {
@@ -134,33 +138,28 @@ export default {
 <style lang="stylus" scoped>
 $color = #339ef4;
 
-.classify {
-  padding-top: 5rem;
-  max-width: 60rem;
-  margin:0 auto;
-  .main-content {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.classify 
+  padding-top 2rem
+  .post-title 
+    padding 0 40px
+  .main-content 
+    width 100%
+    display flex
+    flex-direction column
+    justify-content center
+    align-items center
 
-    // background-color max-width:50rem;
-    .blog-content {
-      width: 100%;
+    // background-color max-width50rem
+    .blog-content 
+      width 100%
 
-      .more {
-        color: $color;
-        text-align: center;
-        padding: 1rem 0;
-        cursor: pointer;
-        text-decoration: underline;
-      }
-    }
-  }
-}
-
-
+      .more 
+        color $color
+        text-align center
+        padding 1rem 0
+        cursor pointer
+        text-decoration underline
+      
 
 
 @media (max-width: 719px) {

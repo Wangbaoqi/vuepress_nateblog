@@ -1,32 +1,28 @@
 module.exports = {
   '/front/': [
     {
-      title: 'HTML5 Features',
+      title: 'HTML',
       collapsable: false,
       children: [
-        '/front/html/web semantic',
-        '/front/html/web communication',
-        '/front/html/web offline',
-        '/front/html/web multmedia',
-        '/front/html/web 3dimage',
-        '/front/html/web performance-integrate',
-        '/front/html/web device-access',
+        '/front/html/posts/web semantic',
+        '/front/html/posts/web communication',
+        '/front/html/posts/web offline',
       ]
     },
     {
-      title: 'CSS3 Features',
+      title: 'CSS',
       collapsable: false,
       children: [
-        '/front/css/box',
-        '/front/css/layout',
-        '/front/css/centered',
-        '/front/css/BFC',
-        '/front/css/response',
-        '/front/css/css induction',
+        '/front/css/posts/box',
+        '/front/css/posts/layout',
+        '/front/css/posts/centered',
+        '/front/css/posts/BFC',
+        '/front/css/posts/response',
+        '/front/css/posts/css induction',
       ]
     },
     {
-      title: 'JavaScript Ninja-Cheats',
+      title: 'JavaScript',
       collapsable: false,
       children: [
         '/front/javascript/primary/JS data-type',
@@ -39,44 +35,68 @@ module.exports = {
 
       ]
     },
+    {
+      title: 'DesignPatterns',
+      collapsable: false,
+      children: [
+        '/zh/front/designModel/posts/faceObject',
+        '/zh/front/designModel/posts/publish',
+        
+      ]
+    },
   ],
   '/algorithm/': [
     {
-      title: 'Data Structure',
+      title: 'DataStructer',
       collapsable: false,
       children: [
-        '/algorithm/structure/array',
-        '/algorithm/structure/link',
-        '/algorithm/structure/stack',
-        '/algorithm/structure/queue',
-        '/algorithm/structure/dictionary',
+        '/algorithm/structure/posts/array',
+        '/algorithm/structure/posts/link',
+        '/algorithm/structure/posts/stack',
+        '/algorithm/structure/posts/queue',
+        '/algorithm/structure/posts/dictionary',
       ]
     },
     {
-      title: 'Front Algorithm',
+      title: 'Algorithm',
       collapsable: false,
       children: [
-        '/algorithm/frontalgorithm/search',
-        '/algorithm/frontalgorithm/recursion',
-        '/algorithm/frontalgorithm/dynamic',
-        '/algorithm/frontalgorithm/greedy',
-        '/algorithm/frontalgorithm/timer',
+        '/algorithm/frontalgorithm/posts/search',
+        '/algorithm/frontalgorithm/posts/recursion',
+        '/algorithm/frontalgorithm/posts/dynamic',
+        '/algorithm/frontalgorithm/posts/greedy',
+        '/algorithm/frontalgorithm/posts/timer',
 
+      ]
+    },{
+      title: 'programCode',
+      collapsable: false,
+      children: [
+        '/algorithm/programCode/posts/arrayFlat',
+        '/algorithm/programCode/posts/ObjectFlat',
       ]
     },
   ],
-  '/performance/': [
+
+  '/webApi/': [
     {
-      title: 'Front Performance',
+      title: 'Brower',
       collapsable: false,
       children: [
-        '/performance/frontPerformance/front'
+        '/webApi/browser/browserLoop'
+      ]
+    },
+    {
+      title: 'NodeJS',
+      collapsable: false,
+      children: [
+        '/webApi/node/nodeLoop'
       ]
     },
   ],
   '/everyday/': [
     {
-      title: 'JavaScript',
+      title: 'JavaScript day',
       collapsable: false,
       children: [
         '/everyday/jsConquered/conquered',
@@ -86,14 +106,26 @@ module.exports = {
       ]
     },
     {
-      title: 'CSS',
+      title: 'CSS day',
       collapsable: false,
       children: [
         '/everyday/cssConquered/css'
       ]
     },
     {
-      title: 'React',
+      title: 'Vue day',
+      collapsable: false,
+      children: [
+        '/everyday/vueConquered/vue',
+        '/everyday/vueConquered/vueComponent',
+        '/everyday/vueConquered/vueRouter',
+        '/everyday/vueConquered/vuex',
+        '/everyday/vueConquered/vueSsr',
+        '/everyday/vueConquered/vuePerformance',
+      ]
+    },
+    {
+      title: 'React day',
       collapsable: false,
       children: [
         '/everyday/reactConquered/react',
@@ -104,73 +136,56 @@ module.exports = {
       ]
     },
   ],
-  '/builddeploy/': [
-    {
-      title: 'Build Pack',
-      collapsable: false,
-      children: [
-        '/builddeploy/buildPack/webpack'
-      ]
-    },
-    {
-      title: 'Build Deploy',
-      collapsable: false,
-      children: [
-        '/builddeploy/centosJenkins/jenkins'
-      ]
-    },
-  ],
+  
   '/network/': [
     {
-      title: 'HTTP Protocol',
+      title: 'NetWork',
       collapsable: false,
       children: [
         '/network/httpProto/http',
       ]
     },
-    {
-      title: 'HTTP Induction',
-      collapsable: false,
-      children: [
-        '/network/httpQuestion/question',
-      ]
-    },
   ],
-  '/project/': [
-    {
-      title: 'React Project',
-      collapsable: false,
-      children: [
-        '/project/react-nugget',
-      ]
-    },
-  ],
+
   '/frame/': [
     {
-      title: 'Frame Minf',
+      title: 'Frame',
       collapsable: false,
       children: [
-        '/frame/mind/mvvm',
-        '/frame/mind/visualDom',
+        '/frame/mind/posts/mvvm',
+        '/frame/mind/posts/visualDom',
+        '/frame/mind/posts/spaPage',
 
       ]
     },
     {
-      title: 'Vue Family-Bucket',
+      title: 'Vue',
       collapsable: false,
       children: [
-        '/frame/vue/component',
+        '/frame/vue/posts/component',
+        '/frame/vue/posts/router',
+        '/frame/vue/posts/vuex',
+        '/frame/vue/posts/vueResponse',
       ]
     },
     {
-      title: 'React Family-Bucket',
+      title: 'React',
       collapsable: false,
       children: [
-        '/frame/react/component',
-        '/frame/react/reduxSelf',
-        '/frame/react/reactRedux',
-        '/frame/react/reactError',
+        '/frame/react/posts/component',
+        '/frame/react/posts/reduxSelf',
+        '/frame/react/posts/reactRedux',
+        '/frame/react/posts/reactError',
       ]
     },
+    {
+      title: 'buildPack',
+      collapsable: false,
+      children: [
+        '/frame/buildPack/posts/webpack',
+        '/frame/buildPack/posts/jenkins'
+      ]
+    },
+    
   ],
 }

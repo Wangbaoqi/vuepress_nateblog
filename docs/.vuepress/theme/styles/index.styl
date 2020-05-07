@@ -6,26 +6,39 @@
 
 
 
-#app .reform
-  font-size 1rem
+// #app .reform
+//   font-size 15px
 html, body
   padding 0
   margin 0
-  background-color #fff
+  color #f0f0f0
+  background-color $background
 
 .page img{
   width:100%;
 }
 
 body
-  font-family -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif
+  font-family system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
+  // font-family 'Mirages Custom', 'Merriweather', 'Open Sans', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft Yahei', 'WenQuanYi Micro Hei',  'Segoe UI Emoji', 'Segoe UI Symbol', Helvetica, Arial, sans-serif
+  // font-family -apple-system-font, BlinkMacSystemFont, "Helvetica Neue", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei UI", "Microsoft YaHei", Arial, sans-serif;
   -webkit-font-smoothing antialiased
   -moz-osx-font-smoothing grayscale
-  font-size 1rem
+  font-size 1.2rem
   color $textColor
 
 .page
-  padding-left $sidebarWidth
+  padding-left 0
+
+
+.blog-container
+  display grid
+  grid-template-columns $sidebarWidth auto 
+  grid-column-gap $gridGap
+  grid-template-areas "sidebar main"
+  max-width $maxContentWidth
+  margin: 0 auto
+
 
 .navbar
   position fixed
@@ -34,9 +47,13 @@ body
   left 0
   right 0
   height $navbarHeight
-  background-color #fff
+  background-color $background 
   box-sizing border-box
-  border-bottom 1px solid $borderColor
+  border-bottom 0 solid $borderColor
+  max-width $maxContentWidth
+  margin: 0 auto
+
+
 
 .sidebar-mask
   position fixed
@@ -48,12 +65,12 @@ body
   display none
 
 .sidebar
-  font-size 1rem
-  background-color #fff
-  width $sidebarWidth
-  position fixed
+  font-size 15px
+  background-color $background
+  width $sideRightWidth
+  position relative
   z-index 12
-  margin 0
+  margin-top 2.6rem 
   top $navbarHeight
   left 0
   bottom 0
@@ -84,12 +101,31 @@ body
 
 a
   font-weight 500
-  color $accentColor
+  color $textColor
   text-decoration none
 
-p a code
-  font-weight 400
-  color $accentColor
+.page 
+  a
+    font-weight 400
+    color #42b983
+  p, code
+    font-weight 400
+    color $textColor
+  h1, h2, h3, h4, h5, h6
+    color $textColor
+    font-weight bold
+    line-height 1.25
+    .content:not(.custom) > &
+      margin-top (0.5rem - $navbarHeight)
+      padding-top ($navbarHeight + 1rem)
+      margin-bottom 0
+      &:first-child
+        margin-top -1.5rem
+        margin-bottom 1rem
+        + p, + pre, + .custom-block
+          margin-top 2rem
+    &:hover .header-anchor
+      opacity: 1
 
 kbd
   background #eee
@@ -99,11 +135,12 @@ kbd
   padding 0 0.15em
 
 blockquote
-  font-size .9rem
-  color #999
-  border-left .5rem solid #dfe2e5
+  font-size 14px
+  color #cccccc
+  border-left .5rem solid #42b983
   margin 1.5rem 0
   padding .55rem 0 .55rem 1rem
+  word-spacing 2px
   & > p
     margin 0
 
@@ -112,21 +149,8 @@ ul, ol
 
 strong
   font-weight 600
+  color $strongColor
 
-h1, h2, h3, h4, h5, h6
-  font-weight 600
-  line-height 1.25
-  .content:not(.custom) > &
-    margin-top (0.5rem - $navbarHeight)
-    padding-top ($navbarHeight + 1rem)
-    margin-bottom 0
-    &:first-child
-      margin-top -1.5rem
-      margin-bottom 1rem
-      + p, + pre, + .custom-block
-        margin-top 2rem
-  &:hover .header-anchor
-    opacity: 1
 
 h1
   font-size 2.2rem
@@ -137,7 +161,7 @@ h2
   border-bottom 1px solid $borderColor
 
 h3
-  font-size 1.35rem
+  font-size 1.55rem
 
 a.header-anchor
   font-size 0.85em
@@ -168,10 +192,10 @@ table
 tr
   border-top 1px solid #dfe2e5
   &:nth-child(2n)
-    background-color #f6f8fa
+    background-color rgba(255,255,255,0.06)
 
 th, td
-  border 1px solid #dfe2e5
+  border 1px solid #504d4d
   padding .6em 1em
 
 .theme-container
@@ -184,6 +208,10 @@ th, td
         padding-top 0
     .sidebar
       top 0
+
+.global-ui 
+  .go-to-top 
+    color #ffffff
 
 
 @media (min-width: ($MQMobile + 1px))

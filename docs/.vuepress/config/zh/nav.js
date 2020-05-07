@@ -1,43 +1,95 @@
 module.exports = [
   {
-    text: '首页', link: '/zh/'
+    text: 'HTML', 
+    link: '/zh/front/html/',
+    color: '#ffffff',
+    background: '#f2552c'
   },
   {
-    text: '前端技术', 
-    link: '/zh/front/',
+    text: 'CSS',
+    link: '/zh/front/css/',
+    color: '#ffffff',
+    background: '#bc70a4'
   },
   {
-    text: '数据结构算法',
-    link: '/zh/algorithm/',
+    text: 'Brower',
+    link: '/zh/webApi/browser/',
+    color: '#000000',
+    background: '#95dee3'
   },
   {
-    text: 'Web框架',
-    link: '/zh/frame/mind/mvvm',
+    text: 'JavaScript',
+    link: '/zh/front/javascript/',
+    color: '#000',
+    background: '#ecdb54'
   },
   {
-    text: 'Web Api',
-    link: '/zh/webApi/',
+    text: 'DataStructer',
+    link: '/zh/algorithm/structure/',
+    color: '#ffffff',
+    background: '#00a591'
   },
   {
-    text: '网络协议',
-    link: '/zh/network/httpProto/http'
+    text: 'Algorithm',
+    link: '/zh/algorithm/frontalgorithm/',
+    color: '#ffffff',
+    background: '#00a591'
   },
- 
   {
     text: '壹题攻克',
-    link: '/zh/everyday/'
+    link: '/zh/everyday/',
+    color: '#ffffff',
+    background: '#5b5ea6'
   },
-  // {
-  //   text: '项目案例',
-  //   link: '/zh/project/react-nugget'
-  // },
-  // {
-  //   text: '构建部署',
-  //   link: '/zh/builddeploy/centosJenkins/jenkins'
-  // },
   {
-    text: "Github",
-    link: "https://github.com/Wangbaoqi"
-  }
+    text: 'DesignPatterns',
+    link: '/zh/front/designModel/',
+    color: '#000',
+    background: '#f7786b'
+  },
+  {
+    text: 'Vue',
+    link: '/zh/frame/vue/',
+    color: '#ffffff',
+    background: '#00a591'
+  },
+  {
+    text: 'NetWork',
+    link: '/zh/network/',
+    color: '#ffffff',
+    background: '#6b5b95'
+  },
+  
+  {
+    text: 'React',
+    link: '/zh/frame/react/',
+    color: '#61dafb',
+    background: '#282c34'
+  },
+  {
+    text: 'BuildPack',
+    link: '/zh/frame/buildPack/',
+    color: '#ffffff',
+    background: '#ce3175'
+  },
+  {
+    text: 'Node',
+    link: '/zh/webApi/node/',
+    color: '#ffffff',
+    background: '#026e00'
+  },
+  {
+    text: 'ProgramCode',
+    link: '/zh/algorithm/programCode/',
+    color: '#000000',
+    background: '#bfd641'
+  },
+  {
+    text: 'Frame',
+    link: '/zh/frame/mind/',
+    color: '#ffffff',
+    background: '#b565a7'
+  },
+  
 ]
 
