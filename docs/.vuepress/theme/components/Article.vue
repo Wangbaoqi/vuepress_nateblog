@@ -10,7 +10,7 @@
       </router-link>
 
       <div class="post-tag">
-        <span class="post-time" v-if="tag.lastUpdated" >{{handleDate(tag.lastUpdated)}}</span>
+        <span class="post-time" v-if="tag.lastUpdated" >{{handleDate(tag, tag.lastUpdated)}}</span>
         <span class="tags">
           {{tag.frontmatter.tag}}
         </span>
@@ -23,6 +23,8 @@
 
 <script>
 import * as moment from 'moment';
+import dayJs from 'dayjs';
+
 export default {
   props: {
     tag: {}, //索引到的数据
@@ -30,12 +32,18 @@ export default {
     lang: ""
   },
   methods: {
-    handleDate(date) {
+    handleDate(tag, date) {
+      console.log(tag, 'tag');
+
+      console.log(dayJs(date), 'dayjs');
       console.log(moment(date), 'moment');
       
-      console.log(moment(date).format('MMM D, YYYY'));
+      // console.log(moment(date).format('MMM D, YYYY'));
+
+      // console.log(dayJs('2020/5/7 上午6:19:59'), 'dayjs');
       
-      return moment(date).format('MMM D, YYYY')
+      
+      return dayJs(date).format('MMM D, YYYY')
     }
   }
 };
