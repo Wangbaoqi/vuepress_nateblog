@@ -59,7 +59,7 @@ export default {
   },
   computed: {
     lastUpdated() {
-      return this.$page.lastUpdated || dayJs().format('YYYY-MM-DD HH:mm:ss');
+      return dayJs(this.$page.lastUpdated).format('YYYY-MM-DD');
     },
     
     lastUpdatedText() {
