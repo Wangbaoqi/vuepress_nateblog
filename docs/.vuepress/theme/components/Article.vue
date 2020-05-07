@@ -31,6 +31,8 @@ export default {
   },
   methods: {
     handleDate(date) {
+      console.log(moment(date), 'moment');
+      
       console.log(moment(date).format('MMM D, YYYY'));
       
       return moment(date).format('MMM D, YYYY')

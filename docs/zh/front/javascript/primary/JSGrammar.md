@@ -8,9 +8,9 @@ excerpt: 'JavaScript Grammar'
 
 ::: tip
 JS 词汇语法在ECMAScript 规范中定义了以下几种: 
-SourceCharacter: 源字符; 
+SourceCharacter: 源字符;
 
-InputElementDiv: 顶级输入元素; 
+InputElementDiv: 顶级输入元素;
 
 InputElementRegExp: 顶级输入正则元素;
 
