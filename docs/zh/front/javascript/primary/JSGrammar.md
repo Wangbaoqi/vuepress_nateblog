@@ -7,27 +7,23 @@ excerpt: 'JavaScript Grammar'
 # JS 词汇语法
 
 ::: tip
-JS 词汇语法在ECMAScript 规范中定义了以下几种: 
-SourceCharacter: 源字符;
-
-InputElementDiv: 顶级输入元素;
-
-InputElementRegExp: 顶级输入正则元素;
-
-InputElementRegExpOrTemplateTail: 顶级输入正则模板字符串; 
-
-InputElementTemplateTail: 顶级输入元素模板字符串;
+JS 词汇语法在ECMAScript 规范中的定义: ECMAScript的模块或者脚本的源文本首先会被转换成一系列的`输入元素`，比如`tokens`、`line terminators`、`white space`和 `comment`，从左到右扫描源文本，反复的将最长的代码点序列作为下一个输入元素。
 :::
 
-[[toc]]
 
-根据上图，顶级输入元素基本有一下几种：
+根据JavaScript知识体系脑图中的`Lexical Grammar`分支
+
+![lexical grammar](https://cdn.img.wenhairu.com/images/2020/05/07/YDvzN.png)
+
+
+根据上图，输入元素基本有一下几种：
 * whiteSpace
 * lineTerminator 
 * comment
 * token
 
 首先看下 ECMAScript中的源字符 SourceCharacter。
+
 ## SourceCharacter 
 
 **SourceCharacter**在规范中的定义是 **any Unicode code point**（任何Unicode码点）。这里重新科普一下计算机中的字符编码（Character Encoding）。
@@ -36,7 +32,7 @@ InputElementTemplateTail: 顶级输入元素模板字符串;
 在ECMAScript代码是使用Unicode来表示的，ECMAScript源文本是一系列的码点，所有的码点的值的范围是
 U+0000 - U+10FFFF （16进制表示） 
 
-**[Character Encoding](https://zh.wikipedia.org/zh/%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81)**: 字集碼是把字符集中的字符编码为指定集合中某一对象（例如：比特模式、自然数序列、8位元组或者电脉冲），以便文本在计算机中存储和通过通信网络的传递。常见的例子包括将拉丁字母表编码成摩斯电码和ASCII。其中，**ASCII将字母、数字和其它符号編號，並用7位元的二进制來表示这个整数**。通常會額外使用一个扩充的位元，以便于以1个字节的方式存储。
+**[Character Encoding](https://zh.wikipedia.org/zh/%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81)**: 字集碼是把字符集中的字符编码为指定集合中某一对象（例如：比特模式、自然数序列、8位元组或者电脉冲），以便文本在计算机中存储和通过通信网络的传递。常见的例子包括将拉丁字母表编码成摩斯电码和ASCII。其中，**ASCII将字母、数字和其它符号编号，并用7位元的二进制來表示这个整数**。通常会额外使用一个扩充的位元，以便于以1个字节的方式存储。
 
 **[ASCII](https://zh.wikipedia.org/wiki/ASCII)**: 是基于拉丁字母的一套电脑编码系统。它主要用于显示现代英语，而其扩展版本延伸美国标准信息交换码则可以部分支持其他西欧语言，并等同于国际标准ISO/IEC 646。
 ASCII码的表达方式：使用指定的7位或者8位二进制组合来表示128或者256中可能的字符（字符一般是字母、数字、符号的统称）。
@@ -161,6 +157,21 @@ UTF8Encoding('严')
 // {binary_utf_8: "111001001011100010100101", hex_utf_8: "e4b8a5"}
 ```
 
+**UTF16Encoding - 数字代码点值cp的UTF16Encoding如下确定：**
+  1. Assert: 0 ≤ codePoint ≤ 0x10FFFF.
+  2. If codePoint ≤ 0xFFFF, return codePoint.
+  3. Let cu1 be floor((codePoint - 0x10000) / 0x400) + 0xD800.
+  4. Let cu2 be ((codePoint - 0x10000) modulo 0x400) + 0xDC00.
+  5. Return the code unit sequence consisting of cu1 followed by cu2.
+
+**UTF16Decode - 通过执行以下操作将形成UTF-16代理对的两个代码单元（前导和尾随）转换为代码点：**
+  1. Assert: lead is a leading surrogate and trail is a trailing surrogate. 
+  2. Let cp be (lead - 0xD800) × 0x400 + (trail - 0xDC00) + 0x10000. 
+  3. Return the code point cp.
+
+
+
+
 
 ## WhiteSpace 
 
@@ -195,7 +206,7 @@ UTF8Encoding('严')
 
 ## LineTerminator
 
-像whitespace和lineTerminator的```码点```都是为了提升代码可读性而存在的。lineTerminator将有效的tokens分开。跟whitespa不同的是，行终止符对语法有一定的影响，
+像whitespace和lineTerminator的```码点```都是为了提升代码可读性而存在的。lineTerminator将有效的tokens分开。跟whitespace不同的是，行终止符对语法有一定的影响，
 一般来讲，行终止符可以出现在两个tokens中间，但是有一些地方是禁止的根据语法，行终止符也会影响```;```的自动插入，行终止符不能出现在```StringLiteral```,```Template```等。
 
 
@@ -224,58 +235,34 @@ UTF8Encoding('严')
 
 ## Tokens
 
-Tokens 可以表示JavaScript中一切有效的东西。根据```ECAMScript 2019```的标准语法定义，包含以下几种类型
+Tokens 可以表示JavaScript中一切有效的东西。根据```ECAMScript```的标准语法定义，包含以下几种类型
 
 ```js
 // BNF 产生式语法
 tokens ::
   IdentifierName
-  keyWords
   Punctuator
-  Literals 
+  NumericLiteral 
+  StringLiteral 
+  Template
 ```
 
 ### IdentifierName
 
-> IdentifierName和ReservedWord是根据Unicode标准附件＃31，标识符和模式语法中给出的默认标识符语法进行了一些小的修改的令牌。 ReservedWord是IdentifierName的枚举子集。 语法将标识符定义为不是保留字的IdentifierName。 Unicode标识符语法基于Unicode标准指定的字符属性。 所有符合标准的ECMAScript实现都必须将Unicode标准最新版本中指定类别中的Unicode代码点视为这些类别中的Unicode代码点。 ECMAScript实现可以识别在Unicode标准的更高版本中定义的标识符代码点。
+> IdentifierName和ReservedWord是根据Unicode标准，标识符和模式语法中给出的默认标识符语法进行了一些小的修改的令牌。 ReservedWord是IdentifierName的枚举子集。 语法将标识符定义为不是保留字的IdentifierName。 Unicode标识符语法基于Unicode标准指定的字符属性。 所有符合标准的ECMAScript实现都必须将Unicode标准最新版本中指定类别中的Unicode代码点视为这些类别中的Unicode代码点。 ECMAScript实现可以识别在Unicode标准的更高版本中定义的标识符代码点。
 
 **IndentifierName Syntax** Syntax from **ECMAScript**
 
 IndentifierName的组成部分：
-* IndentifierStart 
-  * UnicodeIDStart
-    * any Unicode code point with the Unicode property "ID_Start"
-  * $
-  * _
-  * \ + UnicodeEscapeSequence
-    * UnicodeEscapeSequence 
-     * u Hex4Digits - 4个十六进制数字
-     * u {CodePoint}
 
-* IdentifierName 
-* IdentifierPart
-  * UnicodeIDContinue
-   * any Unicode code point with the Unicode property "ID_Continue"
-  * $
-  * \ 
-  * ```<ZWNJ>``` ZERO WIDTH NON-JOINER | U+200C
-  * ```<ZWJ>``` ZERO WIDTH JOINER | U+200D 
+```js
+// 伪代码
+IndentifierName = IndentifierStart + IdentifierName
+// 标识符只能以$或者_或者Unicode序列开头
+IndentifierStart = $ or _ or \0233  
+```
 
-**IndentifierName的静态语义**
 
-> 返回由IdentifierName对应的代码单元序列组成的String值。在确定序列时，首先用UnicodeEscapeSequence表示的代码点替换\ UnicodeEscapeSequence的出现，然后通过UTF16Encoding每个代码点将整个IdentifierName的代码点转换为代码单元。
-
-**UTF16Encoding - 数字代码点值cp的UTF16Encoding如下确定：**
-  1. Assert: 0 ≤ cp ≤ 0x10FFFF.
-  2. If cp ≤ 0xFFFF, return cp.
-  3. Let cu1 be floor((cp - 0x10000) / 0x400) + 0xD800.
-  4. Let cu2 be ((cp - 0x10000) modulo 0x400) + 0xDC00.
-  5. Return the code unit sequence consisting of cu1 followed by cu2.
-
-**UTF16Decode - 通过执行以下操作将形成UTF-16代理对的两个代码单元（前导和尾随）转换为代码点：**
-  1. Assert: lead is a leading surrogate and trail is a trailing surrogate. 
-  2. Let cp be (lead - 0xD800) × 0x400 + (trail - 0xDC00) + 0x10000. 
-  3. Return the code point cp.
 
 ### Reserved Words 保留字
 
@@ -323,55 +310,18 @@ Boolean 字面量有两种值: **true** 和 **false**
 > ECMAScript 规范中对Number值得定义: primitive value corresponding to a double-precision 64-bit binary format IEEE 754-2008 value。A Number value is a member of the Number type and is a direct representation of a number.
 
 
-在JavaScript中，Number被定义是符合64位**双精度浮点类型**[IEEE-754](https://zh.wikipedia.org/wiki/IEEE_754)的数字类型
+Number字面量有一下四种形式: Syntax from **[ECMAScript 262](https://tc39.es/ecma262/#sec-literals-numeric-literals)**
+
+* DecimalLiteral - 整数小数
+* BinaryIntegerLiteral - 二进制整数字面量 表示方式 `0b0101`or`0B0101`
+* OctalIntegerLiteral - 八进制整数字面量 表示方式 `0o1771`or`0O1771`
+* HexIntegerLiteral - 十六进制整数字面量 表示方式 `0x200A`or`0X200A`
+ 
+
+在JavaScript中，Number被定义是符合[64位双精度浮点类型 IEEE-754](https://zh.wikipedia.org/wiki/IEEE_754)的数字类型
 
 
 
-Number字面量有一下四种形式: Syntax from **ECMAScript**
-
-* DecimalLiteral
-  * DecimalIntergerLiteral . DecimalDigits ExponentPart  - 小数或者小数指数部分
-  * . DecimalDigits ExponentPart - 小数没有整数部分
-  * DecimalIntergerLiteral ExponentPart - 整数部分或者整数整数
-* BinaryIntegerLiteral - 二进制整数字面量
-  * 0b BinaryDigits
-  * 0B BinaryDigits
-* OctalIntegerLiteral - 八进制整数字面量
-  * 0o OctalDigits
-  * 0O OctalDigits
-* HexIntegerLiteral - 十六进制整数字面量
-  * 0x HexDigits 
-  * 0X HexDigits
-
-------------------reference------------------
-* DecimalIntergerLiteral
-  * 0
-  * NonZeroDigit DecimalDigits
-* ExponentPart
-  * ExponentIndicator
-    * e
-    * E
-  * SignedInteger
-    * DecimalDigits
-    * + DecimalDigits
-    * - DecimalDigits
-* NonZeroDigit :: one of
-  * 1 2 3 4 5 6 7 8 9
-* DecimalDigits :: one of
-  * 0 1 2 3 4 5 6 7 8 9
-* BinaryDigits :: 
-  * BinaryDigit
-    * 0
-    * 1
-  * BinaryDigits BinaryDigit
-* OctalDigits ::
-  * OctalDigit :: one of
-    * 0 1 2 3 4 5 6 7
-  * OctalDigits OctalDigit
-* HexDigits ::
-  * HexDigit one of ::
-    * 0 1 2 3 4 5 6 7 8 9 a b c d e f A B C D E F
-  * HexDigits HexDigit
 
 **为了熟知NumricLieral的类型，练习一个例子来巩固一下，写一个正则来匹配所有的Number字面量**
 
@@ -396,7 +346,7 @@ var number_reg = /(\.\d+|(0|[0-9])\d*\.?\d*)([eE][-\+]?\d+)|(0[bB]?[01]+)|(0[oO]
 > 字符串文字是用单引号或双引号引起来的零个或多个Unicode代码点。 Unicode代码点也可以由转义序列表示。 除了结束引号代码点U + 005C（REVERSE SOLIDUS），U + 000D（回车）和U + 000A（LINE FEED）外，所有代码点都可能以字符串文字形式出现。 任何代码点都可能以转义序列的形式出现。 字符串文字的计算结果为ECMAScript字符串值。 生成这些字符串值时，Unicode代码点按照UTF-16编码。 属于基本多语言平面的代码点被编码为字符串的单个代码单元元素。 所有其他代码点都被编码为字符串的两个代码单元元素。
 
 
-String字面量有一下两种形式: Syntax Syntax from **ECMAScript**
+String字面量有一下两种形式: Syntax from [ECMAScript 262](https://tc39.es/ecma262/#sec-literals-string-literals)
 
 * " DoubleStringCharacters "
   * DoubleStringCharacter DoubleStringCharacter
@@ -540,7 +490,7 @@ Template字面量的形式: Syntax from **ECMAScript**
 * [FileFormat](https://www.fileformat.info/info/unicode/)
 * [Unicode](http://www.unicode.org/)
 * [UTF-8 a transformation format of ISO 10646](https://tools.ietf.org/html/rfc3629)
-* [Unicode in Javascript](https://flaviocopes.com/javascript-unicode/)
+<!-- * [Unicode in Javascript](https://flaviocopes.com/javascript-unicode/) -->
 * [阮一峰 ASCII，Unicode 和 UTF-8](http://www.ruanyifeng.com/blog/2007/10/ascii_unicode_and_utf-8.html)
 * [阮一峰 Unicode与JavaScript详解](http://www.ruanyifeng.com/blog/2014/12/unicode.html)
 * [JavaScript 浮点数陷阱及解法](https://github.com/camsong/blog/issues/9)

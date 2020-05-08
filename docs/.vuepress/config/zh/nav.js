@@ -12,7 +12,7 @@ module.exports = [
     background: '#bc70a4'
   },
   {
-    text: 'Brower',
+    text: 'Browser',
     link: '/zh/webApi/browser/',
     color: '#000000',
     background: '#95dee3'
