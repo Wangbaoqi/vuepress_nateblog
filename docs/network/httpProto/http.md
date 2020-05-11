@@ -19,7 +19,7 @@ excerpt: 'Http'
 
 在浏览器中输入地址，浏览器是如何把URL转换成页面的呢 
 
-![url](https://cdn.img.wenhairu.com/images/2020/03/23/qMN8s.png)
+![url](https://cdn.img.wenhairu.com/images/2020/05/11/YpkEH.png)
 
 比如输入**https://wangbaoqi.github.io**
 
@@ -34,6 +34,9 @@ excerpt: 'Http'
 渲染流程会在性能文章中体现，此篇文章中会针对学习HTTP
 
 接下来简单的了解一下网络五层网络模型
+
+![seven model](https://cdn.img.wenhairu.com/images/2020/05/11/YpQhd.png)
+
 ![model](https://cdn.img.wenhairu.com/images/2020/03/23/qMf4N.jpg)
 
 ## http协议
