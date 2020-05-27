@@ -86,8 +86,11 @@ module.exports = {
       title: 'Brower',
       collapsable: false,
       children: [
-        '/zh/webApi/browser/browserLoop',
-        '/zh/webApi/browser/statusMachine'
+        '/zh/webApi/browser/posts/statusMachine',
+        '/zh/webApi/browser/posts/statusHttp',
+        '/zh/webApi/browser/posts/domTree'
+        // '/zh/webApi/browser/posts/browserLoop',
+
 
       ]
     },

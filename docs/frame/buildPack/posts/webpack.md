@@ -2,7 +2,7 @@
 type: webpack
 subType: oneTopic
 subTag: webpack
-tag: build
+tag: BuildPack
 lang: us
 ---
 

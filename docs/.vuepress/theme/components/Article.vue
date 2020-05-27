@@ -11,7 +11,7 @@
 
       <div class="post-tag">
         <span class="post-time" v-if="tag.lastUpdated" >{{handleDate(tag, tag.lastUpdated)}}</span>
-        <span class="tags">
+        <span class="tags" :style="tagStyle(tag)">
           {{tag.frontmatter.tag}}
         </span>
       </div>
@@ -31,19 +31,20 @@ export default {
     tg: "",
     lang: ""
   },
+  computed: {
+    
+  },
   methods: {
     handleDate(tag, date) {
-      console.log(tag, 'tag');
-
-      console.log(dayJs(date), 'dayjs');
-      console.log(moment(date), 'moment');
-      
-      // console.log(moment(date).format('MMM D, YYYY'));
-
-      // console.log(dayJs('2020/5/7 上午6:19:59'), 'dayjs');
-      
-      
       return dayJs(date).format('MMM D, YYYY')
+    },
+    tagStyle(tag) {
+      const navList = this.$themeLocaleConfig.nav;
+      const curItem = navList.filter(e => e.text.toLowerCase() === tag.frontmatter.tag.toLowerCase())[0];
+      return {
+        background: curItem.background,
+        color: curItem.color
+      }
     }
   }
 };

@@ -1,6 +1,6 @@
 ---
 type: front-html
-tag: html
+tag: HTML
 lang: us
 excerpt: Provides an application caching mechanism so that web-based applications can run offline. Developers can use the Application Cache (AppCache) interface to set resources that the browser should cache and make them available to offline users. When offline, the app can load and work normally even if the user clicks the refresh button.
 ---

@@ -1,6 +1,6 @@
 ---
 type: front-JavaScript
-tag: designModel
+tag: DesignModel
 lang: zh
 excerpt: '面向对象编程'
 ---

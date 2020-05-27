@@ -36,6 +36,7 @@ module.exports = {
         buttonText: 'Refresh'
       }
     },
+    sidebarDepth: 2,
     editLinks: true,
     editLinkText: '在 GitHub 上编辑此页 ！',
     gitalk: {

@@ -1,5 +1,5 @@
 ---
 type: typeHome
 lang: zh
-tag: build
+tag: BuildPack
 ---

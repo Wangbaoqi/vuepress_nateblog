@@ -1,6 +1,6 @@
 ---
 type: web-framework
-tag: frame
+tag: Frame
 lang: us
 excerpt: 'SPA application'
 ---

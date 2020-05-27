@@ -1,6 +1,6 @@
 ---
 type: data-structure
-tag: structure 
+tag: DataStructure 
 lang: zh
 excerpt: '链表结构以及链表的使用'
 ---

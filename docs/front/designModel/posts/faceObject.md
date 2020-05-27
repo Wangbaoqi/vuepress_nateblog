@@ -1,6 +1,6 @@
 ---
 type: front-JavaScript
-tag: designModel
+tag: DesignPatterns
 lang: us
 excerpt: '面向对象编程'
 ---

@@ -1,6 +1,6 @@
 ---
 type: data-structure & algorithm
-tag: algorithm 
+tag: Algorithm 
 excerpt: '时钟类似算法归纳'
 lang: zh
 ---

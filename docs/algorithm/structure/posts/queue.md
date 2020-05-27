@@ -1,6 +1,6 @@
 ---
 type: data-structure
-tag: structure 
+tag: DataStructure 
 lang: us
 excerpt: '队列结构以及队列的使用'
 ---

@@ -1,18 +1,11 @@
 <template>
   <aside class="sidebar">
-
-    <section class="sticky-sider">
-      <slot name="top" />
-        <SidebarLinks
-          :depth="0"
-          :items="items"
-        />
-      <slot name="bottom" />
-    </section>
-    
-    <!-- <NavLinks /> -->
-
-    
+    <slot name="top" />
+      <SidebarLinks
+        :depth="0"
+        :items="items"
+      />
+    <slot name="bottom" />
   </aside>
 </template>
 
@@ -56,7 +49,7 @@ export default {
   & > .sidebar-links
     padding 1.5rem 0
     & > li > a.sidebar-link
-      font-size 1.1em
+      // font-size 1.1em
       line-height 1.7
       font-weight bold
     & > li:not(:first-child)

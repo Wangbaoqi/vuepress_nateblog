@@ -24,14 +24,14 @@ module.exports = [
     background: '#ecdb54'
   },
   {
-    text: 'DataStructer',
-    link: '/zh/algorithm/structure/',
+    text: 'Algorithm',
+    link: '/zh/algorithm/frontalgorithm/',
     color: '#ffffff',
     background: '#00a591'
   },
   {
-    text: 'Algorithm',
-    link: '/zh/algorithm/frontalgorithm/',
+    text: 'DataStructure',
+    link: '/zh/algorithm/structure/',
     color: '#ffffff',
     background: '#00a591'
   },

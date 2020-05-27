@@ -22,6 +22,7 @@ export default {
     }) {
     // use custom active class matching logic
     // due to edge case of paths ending with / + hash
+    
     const selfActive = isActive($route, item.path)
     // for sidebar: auto pages, a hash link should be active if one of its child
     // matches
@@ -111,17 +112,17 @@ a.sidebar-link
   font-weight 400
   display inline-block
   color $textColor
-  border-left 0.25rem solid transparent
-  padding 0.35rem 1rem 0.35rem 1.25rem
+  // border-left 0.25rem solid transparent
+  // padding 0.35rem 1rem 0.35rem 1.25rem
   line-height 1.4
   width: 100%
   box-sizing: border-box
   &:hover
-    color $accentColor
+    color $strongColor
   &.active
     font-weight 600
-    color $accentColor
-    border-left-color $accentColor
+    color $strongColor
+    border-left-color $strongColor
   .sidebar-group &
     padding-left 2rem
   .sidebar-sub-headers &

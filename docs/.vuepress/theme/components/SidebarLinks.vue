@@ -4,19 +4,19 @@
     class="sidebar-links"
   >
     <li
+      v-if="item.title"
       v-for="(item, i) in items"
       :key="i"
     >
-      <SidebarGroup
+      <!-- <SidebarGroup
         v-if="item.type === 'group'"
         :item="item"
         :open="i === openGroupIndex"
         :collapsable="item.collapsable || item.collapsible"
         :depth="depth"
         @toggle="toggleGroup(i)"
-      />
+      /> -->
       <SidebarLink
-        v-else
         :sidebar-depth="sidebarDepth"
         :item="item"
       />

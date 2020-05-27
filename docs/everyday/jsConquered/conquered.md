@@ -2,7 +2,7 @@
 type: web-topic
 subType: oneTopic
 subTag: JavaScript相关
-tag: question
+tag: QuestionFix
 lang: us
 ---
 

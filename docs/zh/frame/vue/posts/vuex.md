@@ -1,6 +1,6 @@
 ---
 type: web-vue
-tag: vue
+tag: Vue
 lang: zh
 excerpt: 'vuex'
 ---

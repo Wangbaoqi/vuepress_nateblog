@@ -1,6 +1,6 @@
 ---
 type: web-browser
-tag: browser
+tag: Browser
 lang: zh
 excerpt: '有限状态机将复杂对象状态进行建数学模型，以一种更加工程化的方式来处理状态'
 ---

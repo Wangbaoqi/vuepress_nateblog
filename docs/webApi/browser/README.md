@@ -1,5 +1,5 @@
 ---
 type: typeHome
-tag: browser
+tag: Browser
 lang: us
 ---

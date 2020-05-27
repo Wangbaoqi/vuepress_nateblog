@@ -1,5 +1,5 @@
 ---
 type: typeHome
-tag: algorithm 
+tag: Algorithm 
 lang: us
 ---

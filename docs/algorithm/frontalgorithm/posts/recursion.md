@@ -1,6 +1,6 @@
 ---
 type: data-structure & algorithm
-tag: algorithm 
+tag: Algorithm 
 excerpt: '递归算法模式'
 lang: us
 ---

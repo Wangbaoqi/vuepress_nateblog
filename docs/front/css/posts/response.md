@@ -1,6 +1,6 @@
 ---
 type: front-css
-tag: css
+tag: CSS
 lang: us
 excerpt: 'Responsive Design'
 ---

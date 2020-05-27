@@ -132,7 +132,7 @@ $navbar-background = rgba(52,50,50,0.7)
         // &:foucs 
         //   border 1px solid $borderFoucsColor
       .suggestions
-        background rgba(255,255,255,0.06)
+        background #282c34
         color #ffffff
 
 @media (max-width: $MQMobile)

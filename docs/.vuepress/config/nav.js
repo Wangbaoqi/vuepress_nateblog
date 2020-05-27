@@ -12,7 +12,7 @@ module.exports = [
     background: '#bc70a4'
   },
   {
-    text: 'Brower',
+    text: 'Browser',
     link: '/webApi/browser/',
     color: '#000000',
     background: '#95dee3'
@@ -24,22 +24,34 @@ module.exports = [
     background: '#ecdb54'
   },
   {
-    text: 'DataStructer',
-    link: '/algorithm/structure/',
-    color: '#ffffff',
-    background: '#00a591'
-  },
-  {
     text: 'Algorithm',
     link: '/algorithm/frontalgorithm/',
     color: '#ffffff',
     background: '#00a591'
   },
   {
+    text: 'DataStructure',
+    link: '/algorithm/structure/',
+    color: '#ffffff',
+    background: '#00a591'
+  },
+  {
+    text: 'Frame',
+    link: '/zh/frame/mind/',
+    color: '#ffffff',
+    background: '#b565a7'
+  },
+  {
     text: 'QuestionFix',
     link: '/everyday/',
     color: '#ffffff',
     background: '#5b5ea6'
+  },
+  {
+    text: 'NetWork',
+    link: '/network/',
+    color: '#ffffff',
+    background: '#6b5b95'
   },
   {
     text: 'DesignPatterns',
@@ -53,12 +65,7 @@ module.exports = [
     color: '#ffffff',
     background: '#00a591'
   },
-  {
-    text: 'NetWork',
-    link: '/network/',
-    color: '#ffffff',
-    background: '#6b5b95'
-  },
+  
   
   {
     text: 'React',
@@ -84,11 +91,6 @@ module.exports = [
     color: '#000000',
     background: '#bfd641'
   },
-  {
-    text: 'Frame',
-    link: '/zh/frame/mind/',
-    color: '#ffffff',
-    background: '#b565a7'
-  },
+  
 ]
 

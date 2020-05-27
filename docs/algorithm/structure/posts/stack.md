@@ -1,6 +1,6 @@
 ---
 type: data-structure
-tag: structure 
+tag: DataStructure 
 lang: us
 excerpt: '栈结构以及栈的使用'
 ---

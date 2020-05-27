@@ -1,6 +1,6 @@
 ---
 type: typeHome
-tag: react
+tag: React
 lang: us
 excerpt: ''
 ---

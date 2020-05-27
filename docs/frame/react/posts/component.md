@@ -1,6 +1,6 @@
 ---
 type: web-react
-tag: react
+tag: React
 lang: us
 excerpt: 'React 组件化, 理解React组件, 如何创建一个React组件, 组件的生命周期....'
 ---

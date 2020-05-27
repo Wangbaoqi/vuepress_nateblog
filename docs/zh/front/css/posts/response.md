@@ -1,6 +1,6 @@
 ---
 type: front-css
-tag: css
+tag: Css
 lang: zh
 excerpt: '响应式设计。。。'
 ---

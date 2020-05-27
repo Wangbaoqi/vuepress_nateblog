@@ -1,6 +1,6 @@
 ---
 type: front-JavaScript
-tag: designModel
+tag: DesignModel
 lang: zh
 excerpt: '发布-订阅 模式'
 ---

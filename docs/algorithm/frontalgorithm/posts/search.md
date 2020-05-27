@@ -1,6 +1,6 @@
 ---
 type: data-structure & algorithm
-tag: algorithm 
+tag: Algorithm 
 excerpt: '搜索算法'
 lang: us
 ---

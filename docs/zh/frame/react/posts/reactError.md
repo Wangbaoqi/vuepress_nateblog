@@ -1,6 +1,6 @@
 ---
 type: web-react
-tag: react
+tag: React
 lang: zh
 excerpt: React 开发中采坑问题收集...
 ---

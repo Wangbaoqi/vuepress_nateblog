@@ -1,5 +1,5 @@
 ---
 type: typeHome
 lang: us
-tag: frame
+tag: Frame
 ---

@@ -12,26 +12,14 @@
       <div class="follow-pic"></div>
     </section>
 
-    <!-- <router-link
-      :to="$localePath"
-      class="home-link"
-    >
-      <img
-        class="logo"
-        v-if="$site.themeConfig.logo"
-        :src="$site.themeConfig.logo"
-        :alt="$siteTitle"
-      >
-      <span
-        ref="siteName"
-        class="site-name"
-        v-if="$siteTitle"
-      >{{ $siteTitle }}</span>
-    </router-link> -->
-   
 
-
-
+    <section class="navbar-sidebar">
+      <Sidebar :items="sidebarItems"  >
+        <slot name="sidebar-top" slot="top"/>
+        <slot name="sidebar-bottom" slot="bottom"/>
+      </Sidebar>
+    </section>
+    
 
   </section>
 </template>
@@ -43,11 +31,13 @@ import AlgoliaSearchBox from '@AlgoliaSearchBox'
 import SearchBox from '@SearchBox'
 import SidebarButton from '@parent-theme/components/SidebarButton.vue'
 import NavLinks from '@parent-theme/components/NavLinks.vue'
+import Sidebar from "@theme/components/Sidebar.vue";
+import { resolveSidebarItems } from "@theme/util";
 
 export default {
   name: '',
 
-  components: { NavTags, Advisement },
+  components: { NavTags, Advisement, Sidebar },
 
   data () {
     return {
@@ -56,12 +46,37 @@ export default {
   },
 
   mounted () {
-  
+    // this.sidebarItems()
    
   },
 
   computed: {
-   
+    sidebarItems() {
+      const sidebar = resolveSidebarItems(
+        this.$page,
+        this.$page.regularPath,
+        this.$site,
+        this.$localePath
+      );
+      console.log(sidebar, 'sidebar');
+      console.log(this, 'sidebar this');
+      const newSidebar = this.$site.pages.filter(e => e.regularPath == this.$page.regularPath)
+      return newSidebar
+    },
+  },
+  methods: {
+    // sidebarItems() {
+    //   const sidebar = resolveSidebarItems(
+    //     this.$page,
+    //     this.$page.regularPath,
+    //     this.$site,
+    //     this.$localePath
+    //   );
+    //   console.log(sidebar, 'sidebar');
+    //   console.log(this, 'sidebar this');
+
+    //   return 
+    // },
   }
 }
 
@@ -80,4 +95,7 @@ export default {
         height 129px
       .follow-info 
         font-size 13px
+    .navbar-sidebar
+      position sticky
+      top 0
 </style>

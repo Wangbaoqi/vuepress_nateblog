@@ -3,7 +3,7 @@ type: web-topic
 subType: oneTopic
 subTag: JavaScript相关
 lang: us
-tag: question
+tag: QuestionFix
 ---
 
 # 谈谈数组去重

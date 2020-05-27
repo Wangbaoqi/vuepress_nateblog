@@ -1,6 +1,6 @@
 ---
 type: web-server
-tag: jenkins 
+tag: BuildPack 
 lang: zh
 excerpt: '使用Docker、Jenkins、GitHub在centos中部署Vue'
 ---

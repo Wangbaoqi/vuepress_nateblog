@@ -1,6 +1,6 @@
 ---
 type: front-html
-tag: html
+tag: HTML
 lang: us
 excerpt: WebSockets is an advanced technology. It can open an interactive communication session between the user's browser and the server. Using this API, you can send messages to the server and receive event-driven responses without having to poll the server for a response.
 ---
