@@ -1,6 +1,6 @@
 ---
 type: front-css
-tag: Css
+tag: CSS
 lang: zh
 excerpt: 'CSS 编译语言, less scss。。。'
 ---

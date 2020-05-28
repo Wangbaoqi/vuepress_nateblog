@@ -1,5 +1,5 @@
 ---
-type: typeTopic
+type: typeHome
 tag: QuestionFix
 excerpt: ''
 lang: us

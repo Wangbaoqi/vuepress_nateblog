@@ -2,9 +2,13 @@
   <main class="page">
     <slot name="top"/>
 
-    <Classify v-if="type" />
+    <Classify v-if="type == 'typeHome'" />
+
+    <Books v-else-if="type == 'typeBook'"/>
 
     <Content v-else class="content theme-default-content"/>
+
+
 
     <Issue v-if="issueType"/>
 
@@ -32,7 +36,7 @@
         </span>
       </p>
     </div>
-    <div id="gitalk-container" v-show="!type"></div>
+    <div id="gitalk-container" v-show="isShow()"></div>
     <!-- <slot name="sider"/> -->
 
     <slot name="bottom"/>
@@ -46,9 +50,10 @@ import dayJs from 'dayjs';
 import Classify from "@theme/components/classify.vue";
 import Issue from "@theme/components/GoodIssue.vue";
 import imagesZoom from "@theme/util/imageScale";
+import Books from '@theme/components/Books.vue';
 import "gitalk/dist/gitalk.css";
 export default {
-  components: { Classify, Issue },
+  components: { Classify, Issue, Books },
   props: ["sidebarItems"],
   data() {
     return {
@@ -128,10 +133,14 @@ export default {
 
   
   methods: {
+    isShow() {
+      return !(this.type == 'typeHome' || this.type == 'typeBook')
+    },
     updated() {
       const { frontmatter = {} } = this.$page;
       const types = ['typeHome', 'typeTopic']
-      this.type = types.includes(frontmatter.type) 
+
+      this.type = frontmatter.type
       this.issueType = frontmatter.subType == 'oneTopic'
       this.initGitalk();
     },

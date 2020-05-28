@@ -141,7 +141,7 @@ $color = #339ef4;
 .classify 
   padding-top 2rem
   .post-title 
-    padding 0 40px
+    padding 0 30px
   .main-content 
     width 100%
     display flex

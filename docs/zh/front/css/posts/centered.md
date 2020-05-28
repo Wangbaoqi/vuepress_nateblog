@@ -1,6 +1,6 @@
 ---
 type: front-css
-tag: Css
+tag: CSS
 lang: zh
 excerpt: '居中的场景在业务中是很常见的...'
 ---

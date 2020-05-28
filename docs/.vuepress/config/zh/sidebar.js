@@ -196,4 +196,7 @@ module.exports = {
     },
     
   ],
+  '/zh/archive/': [
+    'index'
+  ]
 }
