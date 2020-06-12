@@ -6,6 +6,8 @@
 
     <Books v-else-if="type == 'typeBook'"/>
 
+    <Archive v-else-if="type == 'typeArchive'"/>
+
     <Content v-else class="content theme-default-content"/>
 
 
@@ -51,9 +53,10 @@ import Classify from "@theme/components/classify.vue";
 import Issue from "@theme/components/GoodIssue.vue";
 import imagesZoom from "@theme/util/imageScale";
 import Books from '@theme/components/Books.vue';
+import Archive from '@theme/components/Archive.vue';
 import "gitalk/dist/gitalk.css";
 export default {
-  components: { Classify, Issue, Books },
+  components: { Classify, Issue, Books, Archive },
   props: ["sidebarItems"],
   data() {
     return {

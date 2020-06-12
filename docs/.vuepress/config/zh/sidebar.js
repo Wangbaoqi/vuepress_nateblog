@@ -196,7 +196,10 @@ module.exports = {
     },
     
   ],
-  '/zh/archive/': [
-    'index'
-  ]
+  // '/zh/archive/': [
+  //   'index'
+  // ],
+  // '/zh/books/': [
+  //   'index'
+  // ],
 }
