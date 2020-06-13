@@ -17,7 +17,7 @@ module.exports = {
         '/zh/front/css/posts/layout',
         '/zh/front/css/posts/centered',
         '/zh/front/css/posts/BFC',
-        '/zh/front/css/posts/response',
+        '/zh/front/css/posts/css_syntax',
         '/zh/front/css/posts/css技术收纳',
       ]
     },
