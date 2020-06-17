@@ -2,7 +2,7 @@
 type: front-css
 tag: CSS
 lang: zh
-excerpt: ''
+excerpt: 'CSS(Cascading Style Sheets) 允许创建漂亮的网站。它也是一门语言，所谓语言，也是具有语法特性的。'
 ---
 
 # CSS系列(一) - CSS语法机制
@@ -54,7 +54,7 @@ p > div {
 /* 导入对应的样式表 */
 @import "style.less";
 
-/* 可选的页选择器 */4
+/* 可选的页选择器 */
 @page :left {
   margin-left: 3px;
 }
@@ -80,9 +80,9 @@ p > div {
 
 从上述的脑图中可以看到`@rule`的种类。
 
-**@charset**字符集 
+**@charset字符集**
 
-`@charset` 是指定样式表中使用的字符编码。必须是样式表中的第一个元素，前面不得有任何字符。若有多个`@charset`被声明，只有第一个起作用。
+[@charset](https://www.w3.org/TR/CSS2/syndata.html#x57) 是指定样式表中使用的字符编码。必须是样式表中的第一个元素，前面不得有任何字符。若有多个`@charset`被声明，只有第一个起作用。
 
 * 当样式表嵌入到另一个文档(HTML中style元素或者style属性)中时，样式表中会共享整个文档中字符编码
 * 当样式表驻留在单独的文件中，用户代理在确定样式表的字符编码时的优先级
@@ -92,10 +92,62 @@ p > div {
   4. 假设 UTF-8
 
 
+[@import](https://www.w3.org/TR/css-cascade-4/#at-import)rule,用于从其他样式表导入其他样式规则。这些规则必须先于所有其他类型的规则，`@charset`规则除外，并且不能在条件规则中使用。
+
+**@import 规则引入的方式有2种**
+
+* @import `url` 
+* @import `url list-of-media-queries`
+
+`url`是一个表示要引入资源位置的`<string>`或者`<url>`，这个路径可以是绝对路径或者是相对路径，可以只指明包名，会自动选择。
+
+`url list-of-media-queries`是一个逗号分隔的`媒体查询`的列表，决定通过URL引入的CSS规则在什么条件下应用。
+
+```css
+/* */
+@import 'style.css';
+
+@import url('style.css');
+
+/* 一个特定的样式表(example.css)应用于具有特定特性的特定媒体类型(‘ screen’)的设备(它必须是一个彩色屏幕)。 */
+@import url(color.css) screen and (color);
+```
+
+[@media](https://www.w3.org/TR/css3-conditional/)媒体查询
+
+可用于基于一个或多个媒体查询的结果来应用样式表的一部分。 使用它，您可以指定一个媒体查询和一个CSS块，当且仅当该媒体查询与正在使用其内容的设备匹配时，该CSS块才能应用于该文档。可置于您代码的顶层或位于其它任何@条件规则组内。
+
+媒体查询的主要应用方式有两种。
+  
+```html
+<!--  第一种方式  -->
+<style>
+@media all {}
+</style>
+<!--  第二种方式  -->
+<link rel='stylesheet' media='screen and (color)' href='index.css'/>
+```
+
+**媒体类型**
+
+1. all - 适用于所有设备
+2. print - 使用于在打印预览模式下在屏幕上查看的文档
+3. screen - 主要用于屏幕
+4. speech - 主要用于语音合成器
 
 
 
+**媒体查询规范**
 
+`[Media Queries Level 5](https://www.w3.org/TR/mediaqueries-5/)`
+
+`[Media Queries Level 4](https://www.w3.org/TR/2017/CR-mediaqueries-4-20170905/)`
+
+`[Media Queries Level 3](https://www.w3.org/TR/css3-conditional/)`
+
+`[Media Queries](https://www.w3.org/TR/2012/REC-css3-mediaqueries-20120619/)`
+
+`[CSS Level 2 (Revision 1)@media ](https://www.w3.org/TR/CSS2/media.html#at-media-rule)`
 
 ## Reference
 
