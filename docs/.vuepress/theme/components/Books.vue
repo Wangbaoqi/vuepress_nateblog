@@ -67,8 +67,8 @@ $color = #339ef4;
       justify-content flex-start
     .book-item
       // max-width 120px
-      flex auto
-      margin 1rem 3rem 1rem 0
+      // flex auto
+      margin 1rem 4rem 1rem 0
       .item-img 
         width 120px
         height 160px

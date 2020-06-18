@@ -48,20 +48,13 @@ export default {
   mounted() {
     const allNav = this.handleNavType(this.$site.themeConfig.sidebar || []);
     const allActive = this.$site.pages || [];
-
     this.activeGroup = this.groupMonth(allActive, allNav);
-
-    console.log(this.activeGroup);
   },
   methods: {
 
     checkCommit(item, index) {
-
       this.$set(this.activeGroup[index], "show", !item.show)      
-
-      
     },
- 
 
     handleProportion(prot, allProt) {
       return {

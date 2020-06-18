@@ -58,8 +58,6 @@ export default {
         this.$site,
         this.$localePath
       );
-      console.log(sidebar, 'sidebar');
-      console.log(this, 'sidebar this');
       const newSidebar = this.$site.pages.filter(e => e.regularPath == this.$page.regularPath)
       return newSidebar
     },

@@ -52,8 +52,6 @@ export default {
     },
     filerArticle() {
       const { lang = '', tag = '' } = this.$page.frontmatter
-      console.log(this.$page, 'page');
-      
       let go = this.$site.pages.sort((pre, next) => {
         if (pre.lastUpdated === undefined) return 1;
         if (next.lastUpdated === undefined) return -1;
@@ -90,9 +88,6 @@ export default {
           return e.frontmatter.tag === tag
         }
       })
-      console.log(this.blog, 'filter blog');
-
-
     },
     format(timer) {
       //shijianchuo是整数，否则要parseInt转换
