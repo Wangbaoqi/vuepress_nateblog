@@ -93,8 +93,6 @@ export default {
     },
 
     sidebarItems() {
-      console.log(this, 'this');
-      
       return resolveSidebarItems(
         this.$page,
         this.$page.regularPath,

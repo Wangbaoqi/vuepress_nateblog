@@ -137,7 +137,7 @@ export default {
   
   methods: {
     isShow() {
-      return !(this.type == 'typeHome' || this.type == 'typeBook')
+      return !(this.type == 'typeHome' || this.type == 'typeBook' || this.type == 'typeArchive')
     },
     updated() {
       const { frontmatter = {} } = this.$page;

@@ -102,6 +102,9 @@ $navbar-background = rgba(52,50,50,0.7)
   height $navbarHeight
   a, span, img
     display inline-block
+
+    .icon.outbound 
+      display none 
   .logo
     height $navbarHeight - 1.4rem
     min-width $navbarHeight - 1.4rem
