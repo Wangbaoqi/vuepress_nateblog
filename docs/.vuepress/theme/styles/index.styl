@@ -104,31 +104,32 @@ a
   text-decoration none
 
 .page 
-  a
-    font-weight 400
-    color #42b983
-  p, code
-    font-weight 400
-    color $textColor
-  h1, h2, h3, h4, h5, h6
-    color $textColor
-    font-weight bold
-    line-height 1.25
-    .content:not(.custom) > &
-      margin-top (0.5rem - $navbarHeight)
-      padding-top ($navbarHeight + 1rem)
-      margin-bottom 0
-      &:first-child
-        margin-top -1.5rem
-        margin-bottom 1rem
-        + p, + pre, + .custom-block
-          margin-top 2rem
-    &:hover .header-anchor
-      opacity: 1
-  li 
-    line-height 2.3
-  .icon.outbound 
-    display none
+  .theme-default-content
+    a
+      font-weight 400
+      color #42b983
+    p, code
+      font-weight 400
+      color $textColor
+    h1, h2, h3, h4, h5, h6
+      color $textColor
+      font-weight bold
+      line-height 1.25
+      .content:not(.custom) > &
+        margin-top (0.5rem - $navbarHeight)
+        padding-top ($navbarHeight + 1rem)
+        margin-bottom 0
+        &:first-child
+          margin-top -1.5rem
+          margin-bottom 1rem
+          + p, + pre, + .custom-block
+            margin-top 2rem
+      &:hover .header-anchor
+        opacity: 1
+    li 
+      line-height 2.3
+    .icon.outbound 
+      display none
 
 kbd
   background #eee

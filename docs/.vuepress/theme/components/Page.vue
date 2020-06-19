@@ -38,9 +38,12 @@
         </span>
       </p>
     </div>
-    <div id="gitalk-container" v-show="isShow()"></div>
+    <!-- <div id="gitalk-container" v-show="isShow()"></div> -->
     <!-- <slot name="sider"/> -->
-
+    <Vssue 
+      v-show="isShow()"
+      :title="vssue"
+      :options="options" />
     <slot name="bottom"/>
   </main>
 </template>
@@ -48,21 +51,36 @@
 <script>
 import { resolvePage, outboundRE, endingSlashRE } from "@parent-theme/util";
 import Gitalk from "gitalk";
+import { VssueComponent } from 'vssue';
+import GithubV4 from '@vssue/api-github-v4';
 import dayJs from 'dayjs';
-import Classify from "@theme/components/classify.vue";
+import Classify from "@theme/components/classify.vue"; 
 import Issue from "@theme/components/GoodIssue.vue";
 import imagesZoom from "@theme/util/imageScale";
 import Books from '@theme/components/Books.vue';
 import Archive from '@theme/components/Archive.vue';
-import "gitalk/dist/gitalk.css";
+// import "gitalk/dist/gitalk.css";
+
+import "../styles/vssue.css";
+
+// import 'vssue/dist/vssue.css';
 export default {
-  components: { Classify, Issue, Books, Archive },
+  components: { Classify, Issue, Books, Archive, 'Vssue': VssueComponent },
   props: ["sidebarItems"],
   data() {
     return {
       path: "",
       type: "",
-      issueType: ""
+      issueType: "",
+      vssue: '',
+      options: {
+        api: GithubV4,
+        owner: 'Wangbaoqi',
+        repo: 'vuepress_nateblog',
+        clientId: 'a23f205915aa92389c63',
+        clientSecret: '50c3b3127e01f7f17c582b38f64fd721faae1688',
+        // labels: ''
+      }
     };
   },
   computed: {
@@ -140,12 +158,13 @@ export default {
       return !(this.type == 'typeHome' || this.type == 'typeBook' || this.type == 'typeArchive')
     },
     updated() {
-      const { frontmatter = {} } = this.$page;
+      const { frontmatter = {}, title = '' } = this.$page;
       const types = ['typeHome', 'typeTopic']
 
       this.type = frontmatter.type
       this.issueType = frontmatter.subType == 'oneTopic'
-      this.initGitalk();
+      this.vssue = title;
+      // this.initGitalk();
     },
     createEditLink(repo, docsRepo, docsDir, docsBranch, path) {
       const bitbucket = /bitbucket.org/;
@@ -281,7 +300,12 @@ function flatten(items, res) {
 
 <style lang="stylus" scoped>
 @require '../styles/wrapper.styl';
-
+// @require '../styles/vssue.styl';
+// $vssue-theme-color = red
+// $vssue-border-color = #666
+// // 引入 Vssue 的样式主文件和 github-markdown-css
+// @import '~vssue/src/styles/index'
+// @import '~github-markdown-css/github-markdown.css'
 .page {
   position relative
   margin-top: 2rem;

@@ -85,15 +85,11 @@ export default {
     },
 
     linkTop () {
-
-      console.log(this.nav, 'navbar');
-  const result = (this.nav || []).map(link => {
+      const result = (this.nav || []).map(link => {
         return Object.assign(resolveNavLinkItem(link), {
           items: (link.items || []).map(resolveNavLinkItem)
         })
       })
-      console.log(result, 'result');
-
       return  result
     },
 
