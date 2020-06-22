@@ -15,7 +15,7 @@
           <li class="tl" v-for="post in item.lists" :key="post.key">
               <div class="post-item post-title">
                 <!-- <a :href="`${post.regularPath}`"></a> -->
-                <router-link :to="post.regularPath">{{post.title}}</router-link>
+                <router-link :to="post.regularPath" class="post-link">{{post.title}}</router-link>
                 <span class="post-commit" :style="{color: tagColor(post), background: tagBgColor(post)}">
                   {{tagTitle(post)}}
                 </span>
@@ -244,6 +244,9 @@ export default {
             border-radius: 3px;
             font-size: 0.7rem;
           }
+        }
+        .post-link {
+          color #42b983
         }
 
         .post-data {

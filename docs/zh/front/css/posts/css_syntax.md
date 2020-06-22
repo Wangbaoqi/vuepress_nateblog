@@ -17,7 +17,7 @@ CSS(Cascading Style Sheets) 允许创建漂亮的网站。它也是一门语言�
 ![css-mind](https://cdn.img.wenhairu.com/images/2020/06/12/f5GDG.png)
 
 
-## CSS 语法描述
+## CSS 语法描述 
 
 关于CSS的语法规范目前可以在[CSS2.1 specification](https://www.w3.org/TR/CSS21)和[CSS Syntax Module Level 3](https://www.w3.org/TR/css-syntax-3/)规范中查到。
 
