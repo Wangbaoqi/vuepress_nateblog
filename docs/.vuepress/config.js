@@ -25,7 +25,7 @@ module.exports = {
     }
   },
   themeConfig: {
-   
+    author: 'nate.wang',
     locales: require('./config/locales'),
     logo: '/favion.png',
     lastUpdated: 'Last Updated',
@@ -71,6 +71,16 @@ module.exports = {
       }
     ],
     ['@vuepress/back-to-top'],
+    [
+      'seo',
+      {
+        siteTitle: (_, $site) => $site.title,
+        title: $page => $page.title,
+        description: $page => $page.frontmatter.excerpt,
+        author: (_, $site) => $site.themeConfig.author,
+        tags: $page => $page.frontmatter.tag,
+      }
+    ]
   ]
   
 }
