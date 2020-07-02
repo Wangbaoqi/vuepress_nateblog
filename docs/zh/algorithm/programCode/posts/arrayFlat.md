@@ -332,3 +332,52 @@ var removeElement = function(nums, val) {
 };
 ```
 
+## 合并两个有序数组
+
+测试用例
+```js
+let nums1 = [1,2,3,0,0,0]
+let nums2 = [2,5,6]
+// 返回 [1,2,2,3,5,6]的长度
+merge(nums1, 3, nums2, 3)
+```
+
+**双指针 从前往后**
+
+```js
+var merge1 = function(nums1, m, nums2, n) {
+  let num1_copy = [].concat(nums1)
+  let p = 0; // new array
+  let p1 = 0;
+  let p2 = 0; // num1 and num2 index
+
+  while(p1 < m && p2 < n) {
+    num1_copy[p++] = nums1[p1] < nums2[p2] ? nums1[p1++] : nums2[p2++];
+  }
+
+  while(p1 < m) {
+    num1_copy[p++] = nums1[p1++]
+  }
+
+  while(p2 < n) {
+    num1_copy[p++] = nums2[p2++]
+  }
+  // while()
+  return  [].concat(num1_copy)
+};
+```
+
+**双指针 从后往前**
+
+```js
+var merge1 = function(nums1, m, nums2, n) {
+  let len = m + n - 1;
+  while(n > 0) {
+    if(m <= 0) {
+      nums1[len--] = nums2[--n];
+      continue
+    }
+    nums1[len--] = nums1[m - 1] >= nums2[n - 1] ? nums1[--m] : nums2[--n]
+  }
+};
+```

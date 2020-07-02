@@ -4,7 +4,7 @@ tag: JavaScript
 lang: zh
 excerpt: 'JavaScript Grammar'
 ---
-# JS 词汇语法
+# ECMAScript Specification 系列 - 词汇语法
 
 ::: tip
 JS 词汇语法在ECMAScript 规范中的定义: ECMAScript的模块或者脚本的源文本首先会被转换成一系列的`输入元素`，比如`tokens`、`line terminators`、`white space`和 `comment`，从左到右扫描源文本，反复的将最长的代码点序列作为下一个输入元素。

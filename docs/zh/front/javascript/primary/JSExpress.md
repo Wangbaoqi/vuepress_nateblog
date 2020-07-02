@@ -4,7 +4,7 @@ tag: JavaScript
 lang: zh
 excerpt: 'JavaScript Expressions and Statement'
 ---
-# JS 表达式和语句
+# ECMAScript Specification 系列 - 表达式和语句
 
 
 ::: tip
