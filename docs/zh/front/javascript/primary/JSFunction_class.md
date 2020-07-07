@@ -78,7 +78,7 @@ var fooa = () => {}
 
 ### Generator 函数
 
-`function *` 定义了一个generator函数，返回一个`Generator`对象，`Generator`对象由`Generator`构造函数返回，符合*迭代协议*和*迭代器协议*
+`function *` 定义了一个generator函数，返回一个`Generator`对象，`Generator`对象由`Generator`构造函数返回，符合*迭代协议*和*迭代器协议*，它是一个可以退出又重新进入的函数
 
 *迭代协议（iterable protocol）*允许JS定制自身的迭代行为，可以通过`for of`来遍历，JS也有一些内置的具有迭代器的类型，比如`Array`和`Map`，要实现迭代，必须实现`@@iterator`方法，也就意外着该对象或者其原型上有`@iteraor`属性。
 该属性可以通过`[Symbol.iterator]`来获取.
@@ -113,3 +113,55 @@ iterator.next(); // { done: false, value: '0'}
 iterator.next(); // { done: true, value: undefined }
 ```
 
+调用`Generator`函数不会立即执行，而是会返回该函数的迭代器对象，当调用迭代器对象的`next()`方法，会执行生成器函数的函数体，直到`yield`表达式，该表达式指定从迭代器返回的值，或者`yield*`将值委托给另一个生成器函数。
+
+
+```js
+// 简单的生成器函数
+function *generator () {
+  let index = 0;
+  while(true) {
+    yield index ++
+  }
+}
+let gen = generator()
+gen.next(); // { value: 0, done: false }
+gen.next(); // { value: 1, done: false }
+gen.next(); // { value: 2, done: false }
+// ...
+
+// yield* 委托
+function *anGenerator(i) {
+  yield i + 1;
+  yield i + 2;
+  yield i + 3;
+}
+
+function *generators(i) {
+  yield i;
+  yield* anGenerator(i);
+  yield i + 10;
+}
+let gen1 = generators(1)
+gen1.next(); // { value: 1, done: false }
+// excute anGenerator function 
+gen1.next(); // { value: 2, done: false }
+gen1.next(); // { value: 3, done: false }
+gen1.next(); // { value: 4, done: false }
+// go on excute genarators 
+gen1.next(); // { value: 11, done: false }
+gen1.next(); // { value: undefined, done: true }
+
+// 传参数到generator function
+function *generatorParam() {
+  console.log(0)
+  console.log(1, yield)
+  console.log(2, yield)
+  console.log(3, yield)
+}
+let parGen = generatorParam()
+parGen.next();
+parGen.next('nate'); // 1, nate { value: 'undefined', done: false }
+parGen.next('nate wang'); // 2, nate wang { value: 'undefined', done: false }
+parGen.next('nate wangbao'); // 3 nate wangbao { value: 'undefined', done: false }
+```
