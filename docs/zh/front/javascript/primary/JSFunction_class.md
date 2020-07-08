@@ -164,4 +164,65 @@ parGen.next();
 parGen.next('nate'); // 1, nate { value: 'undefined', done: false }
 parGen.next('nate wang'); // 2, nate wang { value: 'undefined', done: false }
 parGen.next('nate wangbao'); // 3 nate wangbao { value: 'undefined', done: false }
+
+// 函数体中使用return 语句
+function *reGenetator() {
+  yield 'baoqi';
+  return 'nate';
+  yield 'wang';
+}
+let reGen = reGenetator();
+reGen.next(); // { value: 'baoqi', done: false}
+reGen.next(); // { value: 'nate', done: true}
+reGen.next(); // { value: 'undefiend', done: true}
 ```
+
+### Async 函数
+
+async 函数是由构造函数`AsyncFunction`的实例，函数体内可以使用关键字`await`，返回一个`promise`，如果返回值不是显示的`promise`，则会返回一个隐式的`promise`。当函数体中有多个
+`await`表达式时，整个进度会被暂时挂起，同步的执行`await`表达式，等待异步的执行结果，异步执行结束之后，进度会被恢复。
+
+可以在异步函数周围使用`try catch`块，捕捉异常。
+
+```js
+// async Function
+async function foo() {
+  return 1
+}
+foo(); // Promise{<resolved>: 2}
+
+// 等同于
+function bar() {
+  return Promise.resolve(1)
+}
+bar(); //Promise{<resolved>: 2}
+```
+
+每个`await`表达式后面的代码可以认为存在于`.then`回调中，也就是说`await`表达式返回的是一个`promise`.
+
+```js
+async function foo() {
+  const resNor = await 1;
+  const resAwa = await new Promise((resolve, reject) => setTimeout(() => resolve('setTime')));
+  console.log(resNor)
+  console.log(resAwa)
+}
+foo(); // 1, 'setTime'
+```
+
+在执行`foo`异步函数时，会返回*Promise*，因此在遇到异常时，可以使用`catch`来捕捉错误。
+
+```js
+async function bar() {
+  const p1 = new Promise((resolve, reject) => setTimeout(() => resolve('setTime1')));
+  // 发生异常
+  const p2 = new Promise((resolve, reject) => setTimeout(() => reject('setTime2')));
+  const res = [await p1, await p2]
+}
+// 捕捉异常
+bar().catch(res => console.log(res))；
+```
+
+*async function 执行顺序*
+
+
