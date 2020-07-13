@@ -311,4 +311,107 @@ async function getProcess() {
 let pro = getProcess(); // Promise { [[PromiseStatus]]: "resolved", [[PromiseValue]]: "slow"}
 ```
 
-## Class
+## Class 类
+
+**Class** 的出现会让JS的面向对象编程更像传统语言，是一种语法糖，让面向对象的实现更加清晰一点。
+
+### constructor 
+
+**constructor**构造函数是类默认的方法，可以通过`new`命令生成实例时，自动调用此方法，如果没有显示定义该方法，空的**constructor**会被默认添加。
+
+```js
+class Foo{
+  constructor() {
+
+  }
+}
+let foo = new Foo(); 
+Foo.prototype === foo.__proto__; //true
+```
+
+### 类的实例
+
+类的实例通过调用`new`关键字产生的，实例上的属性除非是**显式**在构造函数中定义的，否则实例是获取不到的。只能从实例的原型中获取。
+
+```js
+class Foo{
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+  }
+  toString() {
+    return `x-${this.x},y-${this.y}`
+  }
+  getValue() {
+    return this.x
+  }
+}
+let foo = new Foo(3,4);
+foo.getValue(); // 3 调用原型中的方法
+foo; // {x: 3, y: 4}
+foo.__proto__; // { construtor: class Foo, toString: f, getValue: f}
+foo.hasOwnProperty('x');
+foo.hasOwnProperty('toString');
+foo.hasOwnProperty('getValue');
+```
+
+### this的指向
+
+一般来讲，this的指向是实例，但是有时结果就不一样了。
+
+```js
+class Foo{
+  constructor() {
+    // bind 方式绑定
+    this.getBar = this.getBar.bind(this);
+  }
+  getBar() {
+    return this.getRes()
+  }
+  
+  getRes() {
+    return 'result'
+  }
+}
+let foo = new Foo();
+foo.getBar(); // 'result' 显式调用，this就是 当前实例 foo
+
+const { getBar } = new Foo();
+getBar(); // TypeError Cannot read property 'getRes' of undefined
+```
+后者显然是找不到当前的this了，因此可以在声明的时候，可以给对应的方法绑定**this**。React中是不是也是这种方式呢？
+
+```js
+class Foo{
+  constructor() {
+    // bind 方式绑定
+    this.getBar = this.getBar.bind(this);
+  } 
+  getBar() {
+    return this.getRes()
+  }
+
+  getRes() {
+    return 'result'
+  }
+}
+
+// Arrow 函数 绑定this
+class Foo {
+  // class Field
+  getBar = () => {
+    return this.getRes()
+  }
+  getRes() {
+    return 'result'
+  }
+}
+
+const { getBar } = new Foo();
+getBar();  // result
+
+```
+
+### 静态方法 
+
+
