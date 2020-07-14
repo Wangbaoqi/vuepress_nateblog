@@ -134,6 +134,70 @@ var twoSum = function(nums, target) {
 }
 ```
 
+## 两数之和 II
+
+[算法描述](https://leetcode-cn.com/problems/two-sum-ii-input-array-is-sorted/)以及测试用例
+
+```js
+const nums = [2, 7, 11, 15]
+const target = 9
+return [1, 2]
+```
+
+**双指针 嵌套循环**
+
+* 时间复杂度O(n) = n*n
+* 空间复杂度O(n) = 1
+
+* 执行时间: **344ms**
+* 内存消耗: **34.7MB**
+
+```js
+var twoSum = function(numbers, target) {
+  let p = 0;
+  let q = 1;
+  let len = numbers.length
+
+  while(p < len) {
+    q = p + 1
+    while(q < len) {
+      if(numbers[p] + numbers[q++] === target) return [ p + 1, q ]
+    }
+    p++
+  }
+};
+
+let numbers = [5,25,75], target = 100;
+twoSumN(numbers, target)
+```
+
+**双指针 二分法**
+
+* 时间复杂度O(n) = n
+* 空间复杂度O(n) = 1
+
+* 执行时间: **72ms**
+* 内存消耗: **34.7MB**
+```js
+var twoSumN = function(numbers, target) {
+  let len = numbers.length
+  let p = 0;
+  let q = len - 1
+  ;
+  while(p < q) {
+    let sum = numbers[p] + numbers[q]
+    if(sum === target) return [p + 1, q + 1];
+
+    if(sum > target) {
+      --q
+    }else {
+      ++p
+    }
+  }
+};
+```
+
+
 ## 判断字符是否唯一
 测试用例
 ```js
