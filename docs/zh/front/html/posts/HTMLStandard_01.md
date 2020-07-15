@@ -2,10 +2,10 @@
 type: front-html
 tag: HTML
 lang: zh
-excerpt: ''
+excerpt: 'HTML语法系列之编写HTML文档，HTML（Hyper Text Markup Language）简称超文本标记语言，是用于构造网页以及其内容的代码。。。'
 ---
 
-# HTML Standard 系列 - 你不知道的HTML 
+# HTML Standard 系列 - HTML语法-编写HTML文档
 
 ::: tip
 HTML（Hyper Text Markup Language）简称超文本标记语言，是用于构造网页以及其内容的代码，但是它不是一门编程语言，是定义内容结构话的标记语言。
@@ -67,7 +67,7 @@ HTML包含了一系列的元素，这些元素可以包装不同类型的内容�
 
 *area*, *base*, *br*, *col*, *embed*, *hr*, *img*, *input*, *link*, *meta*, *param*, *source*, *track*, *wbr*
 
-这种元素的`Tag`没有结束标记，比如`<br/>`, 元素之间不能出现内容
+这种元素的`Tag`没有结束标记，比如`<br>`, 元素之间不能出现内容
 
 **Template Elements**
 
@@ -100,7 +100,7 @@ HTML包含了一系列的元素，这些元素可以包装不同类型的内容�
 普通元素可以包含文本、字符引用、其他元素和注释，但文本不能包含字符 u + 003 c LESS-THAN SIGN (<)或含义不明确的符号。除了内容模型和本段中描述的限制之外，一些常规元素还对它们允许包含的内容有更多的限制。
 
 
-**Start Tag 起始标签** 
+#### Start Tag 起始标签
 
 开始标签遵循以下的格式：
 
@@ -110,7 +110,7 @@ HTML包含了一系列的元素，这些元素可以包装不同类型的内容�
 4. 属性之后，如果该元素是**Void Elements** 或者 **Foreign Elements**，则可能存在单个字符`/`，该字符对**Void Element** 没有影响，对于**Foreign Element**，则是起到自闭合标签的作用
 5. 最后，开始标签闭合通过使用字符`>`
 
-**End Tag 结束标签** 
+#### End Tag 结束标签
 
 结束标签遵循以下的格式：
 
@@ -120,7 +120,7 @@ HTML包含了一系列的元素，这些元素可以包装不同类型的内容�
 4. 标签名之后，可能有一个或多个空格字符
 5. 最后，结束标签通过字符`>`关闭
 
-**Attributes 属性**
+#### Attributes 属性
 
 元素的属性在开始标签中表示。
 
@@ -130,9 +130,53 @@ HTML包含了一系列的元素，这些元素可以包装不同类型的内容�
 
 `value`是文本和字符引用的混合体，除了文本不能包含含义不明确的符号以外。
 
-属性可以通过四种方式来指定
+*属性可以通过四种方式来指定*
+
+**空属性语法**
+
+只有属性名称，其值为空字符串
+
+```html
+<input disable >
+```
+
+**无引号属性语法**
+
+如果使用非引号属性语法的属性后面跟着另一个属性，或者在上面开始标记语法的步骤6中允许使用可选的 u + 002 f SOLIDUS 字符(/) ，那么这两个属性之间必须有 ASCII 空白。
+
+```html
+<input value=true>
+```
+
+**单引号属性语法**
+
+如果使用单引号属性语法的属性后面跟着另一个属性，那么这两个属性之间必须有 ASCII 空格。
+
+```html
+<input type='text'>
+```
+
+**双引号属性语法**
+
+如果使用双引号属性语法的属性后面跟着另一个属性，那么这两个属性之间必须有 ASCII 空格。
 
 
+```html
+<input type="text">
+```
+
+#### 可选的Tags
+
+某些tags是可以忽略的。但是省略的元素的开始标记并不意味着该元素不存在; 它是隐含的，但仍然存在。
+
+* 如果 html 元素内的第一个东西不是注释，则可以省略 html 元素的开始标记。
+* 如果 html 元素后面没有立即跟上注释，那么 html 元素的结束标记可能会被省略。
+* 如果 head 元素是空的，或者 head 元素内的第一个东西是一个元素，那么 head 元素的开始标记可以省略。
+* 如果 head 元素后面没有立即跟随 ASCII 空格或注释，那么 head 元素的结束标记可能会被省略。
+* 如果 body 元素是空的，或者 body 元素中的第一个元素不是 ASCII 空格或注释，则 body 元素的开始标记可以省略，除非 body 元素中的第一个元素是 meta、 link、 script、 style 或 template 元素。
+* 如果 body 元素后面没有立即跟注释，则 body 元素的 end 标记可能会被省略。
+
+还有其他可以[忽略的场景](https://html.spec.whatwg.org/multipage/syntax.html#optional-tags)。
 
 
 

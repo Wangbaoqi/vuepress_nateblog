@@ -445,3 +445,106 @@ var merge1 = function(nums1, m, nums2, n) {
   }
 };
 ```
+
+## 存在重复元素
+
+测试用例以及[LeetCode](https://leetcode-cn.com/problems/contains-duplicate/)
+```js
+let nums = [1,2,3,1];
+// 存在两个及以上 return true 否则 return false
+containsDuplicate(nums)
+```
+
+**双指针 双重循环**
+
+* 时间复杂度O(n) = n^2
+* 空间复杂度O(n) = 1
+
+```js
+var containsDuplicate = function(nums) {
+  let p = 0, q = 1;
+  let len = nums.length;
+  while(p < len) {
+    q = p + 1;
+    while(q < len) {
+      if(nums[p] === nums[q++]) return true;
+    }
+    p++;
+  }
+  return false;
+};
+```
+
+**散列表 唯一**
+
+* 时间复杂度O(n) = n
+* 空间复杂度O(n) = n
+
+```js
+var containsDuplicate = function(nums) {
+  let set = new Set();
+  let p = 0;
+  let len = nums.length;
+  while(p < len) {
+    if(set.has(nums[p])) return true;
+    set.add(nums[p]);
+    p++;
+  }
+  return false;
+};
+```
+
+## 存在重复元素 II
+
+测试用例以及[LeetCode](https://leetcode-cn.com/problems/contains-duplicate-ii/)
+```js
+let nums = [1,2,3,1], k = 3;
+containsNearbyDuplicate(nums, k)
+```
+
+**双指针 双重循环**
+
+* 时间复杂度O(n) = n^2
+* 空间复杂度O(n) = 1
+  
+
+```js
+var containsNearbyDuplicate = function(nums, k) {
+  let p = 0, q = 0;
+  let len = nums.length;
+  while(p < len) {
+    q = p + 1;
+    while(q < len) {
+      if((nums[p] === nums[q]) && (Math.abs((p - q)) <= k)) {
+        return true;
+      } 
+      q++;
+    }
+    p++
+  }
+  return false
+};
+```
+
+**Map**
+
+* 时间复杂度O(n) = n
+* 空间复杂度O(n) = n
+
+```js
+var containsNearbyDuplicate = function(nums, k) {
+  let p = 0;
+  let map = new Map()
+  let len = nums.length;
+
+  while(p < len) {
+    const mapIndex = !isNaN(map.get(nums[p])) && (Math.abs( map.get(nums[p]) - p ) <= k);
+    const isExist = map.has(nums[p])
+    if(mapIndex && isExist) return true;
+    map.set(nums[p], p);
+    p++;
+  }
+  return false;
+};
+```
+  
