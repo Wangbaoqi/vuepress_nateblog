@@ -547,4 +547,60 @@ var containsNearbyDuplicate = function(nums, k) {
   return false;
 };
 ```
-  
+
+## 买卖股票最佳时机
+
+测试用例以及[LeetCode](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/)
+```js
+let nums = [1,2,3,1]
+maxProfit(nums); // return 2 
+```
+
+**暴力解法 双循环**
+
+* 时间复杂度O(n) = n^2
+* 空间复杂度O(1) = 1
+
+```js
+var maxProfit = function(prices) {
+  let p = 0;
+  let q = 1;
+  let len = prices.length;
+  let price = 0;
+  while(p < len) {
+    q = p + 1;
+    while(q < len) {
+      // 保存当前
+      const curPrice = prices[q++] - prices[p];
+      price = curPrice > price ? curPrice : price
+    }
+    p++
+  }
+  return price
+};
+```
+
+**一次循环**
+
+一次循环，记录价格最低的一天，如果每一天的价格比前一天的都低，则最好的利润是0；
+否则记录每天与最低价的一天的利润差，最终就会得到最好利润。
+
+* 时间复杂度O(n) = n
+* 空间复杂度O(1) = 1
+
+```js
+var maxProfit = function(prices) {
+  let minPrice = Number.MAX_VALUE;
+  let maxPrice = 0;
+  let p = 0;
+  let len = prices.length;
+  while(p < len) {
+    if(prices[p] < minPrice) {
+      minPrice = prices[p]
+    }else if(prices[p] - minPrice > maxPrice) {
+      maxPrice = prices[p] - minPrice
+    }
+  }
+  return maxPrice
+};
+```
