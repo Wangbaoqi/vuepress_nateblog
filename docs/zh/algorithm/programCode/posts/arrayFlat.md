@@ -4,7 +4,7 @@ tag: ProgramCode
 excerpt: '常见的数组处理算法以及收集面试题'
 lang: zh
 ---
-# 数组编程
+# 数组算法系列（简单）
 
 ::: tip
 有关数组的所有算法操作以及收集关于数组的面试题
@@ -602,5 +602,78 @@ var maxProfit = function(prices) {
     }
   }
   return maxPrice
+};
+```
+
+## 买卖股票最佳时机II
+
+测试用例以及[LeetCode](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii/)
+```js
+let nums = [7,1,5,3,6,4]
+maxProfit(nums); // 7
+```
+
+**暴力 递归法**
+
+*此方法巨耗时*
+
+* 时间复杂度O(n) = n*n
+* 空间复杂度O(n) = n
+
+```js
+var maxProfit = function(prices) {
+  return caculate(prices, 0)
+};
+  
+function caculate(prices, start = 0) {
+  let len = prices.length;
+  if(start >= len ) return 0;
+  let max = 0;
+  while(start < len) {
+    let index = start + 1;
+    let maxPrice = 0;
+    while(index < len) {
+      let curProfit = prices[index] - prices[start]
+      if(curProfit > 0) {
+        let profit = caculate(prices, index + 1) + curProfit
+        if(profit > maxPrice) {
+          maxPrice = profit
+        }
+      }
+      index++
+    }
+    start++
+    if(maxPrice > max) {
+      max = maxPrice
+    }
+  }
+  return max;
+} 
+```
+**峰谷法 一次循环**
+
+* 时间复杂度O(n) = n
+* 空间复杂度O(1) = 1
+
+```js
+var maxProfits = function(prices) {
+  let p = 0;
+  let low = prices[0];
+  let high = prices[0];
+  let len = prices.length - 1;
+  let maxProfit = 0
+
+  while(p < len) {
+    while(p < len && prices[p] >= prices[p+1]) {
+      p++
+    }
+    low = prices[p]
+    while(p < len && prices[p] <= prices[p+1]) {
+      p++
+    }
+    high = prices[p]
+    maxProfit += high - low
+  }
+  return maxProfit
 };
 ```
