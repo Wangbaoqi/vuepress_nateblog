@@ -313,19 +313,17 @@ let pro = getProcess(); // Promise { [[PromiseStatus]]: "resolved", [[PromiseVal
 
 ## Class 类
 
-**Class** 的出现会让JS的面向对象编程更像传统语言，是一种语法糖，让面向对象的实现更加清晰一点。
+**Class** 的出现会让 JS 的面向对象编程更像传统语言，是一种语法糖，让面向对象的实现更加清晰一点。
 
-### constructor 
+### constructor
 
 **constructor**构造函数是类默认的方法，可以通过`new`命令生成实例时，自动调用此方法，如果没有显示定义该方法，空的**constructor**会被默认添加。
 
 ```js
-class Foo{
-  constructor() {
-
-  }
+class Foo {
+  constructor() {}
 }
-let foo = new Foo(); 
+let foo = new Foo();
 Foo.prototype === foo.__proto__; //true
 ```
 
@@ -334,43 +332,44 @@ Foo.prototype === foo.__proto__; //true
 类的实例通过调用`new`关键字产生的，实例上的属性除非是**显式**在构造函数中定义的，否则实例是获取不到的。只能从实例的原型中获取。
 
 ```js
-class Foo{
+class Foo {
+  _bar = "bar"; // 实例属性新写法
   constructor(x, y) {
     this.x = x;
     this.y = y;
   }
   toString() {
-    return `x-${this.x},y-${this.y}`
+    return `x-${this.x},y-${this.y}`;
   }
   getValue() {
-    return this.x
+    return this.x;
   }
 }
-let foo = new Foo(3,4);
+let foo = new Foo(3, 4);
 foo.getValue(); // 3 调用原型中的方法
 foo; // {x: 3, y: 4}
 foo.__proto__; // { construtor: class Foo, toString: f, getValue: f}
-foo.hasOwnProperty('x');
-foo.hasOwnProperty('toString');
-foo.hasOwnProperty('getValue');
+foo.hasOwnProperty("x");
+foo.hasOwnProperty("toString");
+foo.hasOwnProperty("getValue");
 ```
 
-### this的指向
+### this 的指向
 
-一般来讲，this的指向是实例，但是有时结果就不一样了。
+一般来讲，this 的指向是实例，但是有时结果就不一样了。
 
 ```js
-class Foo{
+class Foo {
   constructor() {
     // bind 方式绑定
     this.getBar = this.getBar.bind(this);
   }
   getBar() {
-    return this.getRes()
+    return this.getRes();
   }
-  
+
   getRes() {
-    return 'result'
+    return "result";
   }
 }
 let foo = new Foo();
@@ -379,20 +378,21 @@ foo.getBar(); // 'result' 显式调用，this就是 当前实例 foo
 const { getBar } = new Foo();
 getBar(); // TypeError Cannot read property 'getRes' of undefined
 ```
-后者显然是找不到当前的this了，因此可以在声明的时候，可以给对应的方法绑定**this**。React中是不是也是这种方式呢？
+
+后者显然是找不到当前的 this 了，因此可以在声明的时候，可以给对应的方法绑定**this**。React 中是不是也是这种方式呢？
 
 ```js
-class Foo{
+class Foo {
   constructor() {
     // bind 方式绑定
     this.getBar = this.getBar.bind(this);
-  } 
+  }
   getBar() {
-    return this.getRes()
+    return this.getRes();
   }
 
   getRes() {
-    return 'result'
+    return "result";
   }
 }
 
@@ -400,18 +400,68 @@ class Foo{
 class Foo {
   // class Field
   getBar = () => {
-    return this.getRes()
-  }
+    return this.getRes();
+  };
   getRes() {
-    return 'result'
+    return "result";
   }
 }
 
 const { getBar } = new Foo();
-getBar();  // result
-
+getBar(); // result
 ```
 
-### 静态方法 
+### 静态方法
 
+类的定义中，定义的方法都会被实例继承，而如果在方法前面加上`static`，则这个方法只有类本身可以访问。
+静态方法中的**this**指向是当前类。静态方法可以通过**extends**来继承，静态方法也可以从**super**上调用的。
 
+```js
+class Foo {
+  static bar() {
+    return this.baz();
+  }
+  baz() {
+    return "baz";
+  }
+  static baz() {
+    return "static baz";
+  }
+}
+
+class Bar extends Foo {
+  constructor(props) {
+    super(props);
+    this.barProps = props;
+  }
+  static getBar() {
+    return super.bar();
+  }
+}
+Foo.bar(); //
+let foo = new Foo();
+let bar = new Bar();
+```
+
+### 静态属性
+
+类的定义中，有了静态方法，那静态属性是怎么定义的，在**ES6**中明确确定，是没有静态属性的，不过在*提案*中，有了一种新方式，也是用`static`
+
+```js
+class Foo {
+  fooName = "foo";
+  // 新 静态属性
+  static fooAge = 30;
+
+  constructor() {
+    this.bav = "bav";
+  }
+  bac() {}
+  static bar() {
+    return "bar";
+  }
+}
+
+// 旧 静态属性
+Foo.fooAge; // foo
+```
