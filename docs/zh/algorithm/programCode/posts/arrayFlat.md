@@ -859,3 +859,40 @@ function reverse(nums, start, end) {
   }
 }
 ```
+
+## 缺失数字
+
+
+测试用例以及[LeetCode](https://leetcode-cn.com/problems/missing-number/)
+
+
+```js
+// 输入: [3,0,1]
+// 输出: 2
+```
+
+**排序法**
+
+- 时间复杂度 O(nlogn) = nlogn
+- 空间复杂度 O(n) = n
+
+```js
+var missingNumber = function(nums) {
+  let cur = 0;
+  let p = 0;
+  let len = nums.length;
+  // sort() arr 超过一定长度会有问题 
+  nums.sort((a, b) => a - b);
+
+  // 
+  if(nums[len - 1] != nums.length) {
+    return nums.length
+  }else if(nums[0] != 0) {
+    return 0
+  }
+
+  while(p < len) {
+    if(cur++ !== nums[p++]) return --cur
+  }
+};
+```
