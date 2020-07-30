@@ -884,7 +884,7 @@ var missingNumber = function(nums) {
   // sort() arr 超过一定长度会有问题 
   nums.sort((a, b) => a - b);
 
-  // 
+  // 特殊场景处理
   if(nums[len - 1] != nums.length) {
     return nums.length
   }else if(nums[0] != 0) {
@@ -894,5 +894,154 @@ var missingNumber = function(nums) {
   while(p < len) {
     if(cur++ !== nums[p++]) return --cur
   }
+};
+```
+
+**散列表**
+
+- 时间复杂度 O(n) = n
+- 空间复杂度 O(n) = n
+
+
+```js
+var missingNumber = function(nums) {
+  let set = new Set();
+  let p = 0, q = 0, len = nums.length;
+
+  while(p < len) {
+    set.add(nums[p++])
+  }
+  // len + 1 
+  while(q < len + 1) {
+    if(!set.has(nums[q])) {
+      return q
+    }
+    q++
+  }
+  return -1;
+}
+```
+
+
+**高斯求和**
+
+  n
+  ∑ i = n * (n + 1) / 2
+i = 0
+
+
+- 时间复杂度 O(n) = n
+- 空间复杂度 O(1) = 1
+
+
+```js
+var missingNumbers = function(nums) {
+  let len = nums.length;
+  let p = 0;
+  let highNum = len * (len + 1) / 2;
+  let allNum = 0;
+  while( p < len) {
+    allNum += nums[p++]
+  }
+  return highNum - allNum
+}
+```
+
+## 移动零
+
+测试用例以及[LeetCode](https://leetcode-cn.com/problems/move-zeroes/)
+
+```js
+// 输入: [0,1,0,3,12]
+// 输出: [1,3,12,0,0]
+```
+**双指针**
+
+- 时间复杂度 O(n) = n
+- 空间复杂度 O(1) = 1
+
+```js
+var moveZeroes = function(nums) {
+  let p = 0, q = 0, len = nums.length;
+  while(p < len) {
+    if(nums[p] !== 0) {
+      let tmp = nums[p];
+      nums[p] = nums[q]
+      nums[q] = tmp;
+      q++
+    }
+    p++
+  }
+};
+```
+
+## 第三大的数
+
+测试用例以及[LeetCode](https://leetcode-cn.com/problems/third-maximum-number/)
+
+```js
+// 输入: [3, 2, 1]
+// 输出: 1
+```
+
+最简单的方式就是 排序去重就可以获取到
+
+**排序栈**
+
+- 时间复杂度 O(n) = n
+- 空间复杂度 O(1) = 1
+  
+```js
+var thirdMax = function(nums) {
+  let p = 0, len = nums.length;
+  let map = [];
+  nums.sort((a, b) => b - a);
+
+  while(p < len && map.length < 3) {
+    if(map[map.length - 1] !== nums[p]) {
+      map.push(nums[p])
+    }
+    // map.set(p, nums[p])
+    p++
+  }
+  if(map.length < 3) {
+    return map[0]
+  }
+  return map.pop()
+};
+```
+
+## 找到数组中所有消失的数字
+
+
+测试用例以及[LeetCode](https://leetcode-cn.com/problems/find-all-numbers-disappeared-in-an-array/)
+
+```js
+// 输入: [3, 2, 1]
+// 输出: 1
+```
+
+**散列表/哈希表**
+
+- 时间复杂度 O(n) = n
+- 空间复杂度 O(n) = n
+
+
+```js
+var findDisappearedNumbers = function(nums) {
+  let p = 0, q = 1, len = nums.length, res = [];
+  let map = new Set();
+  while(p < len) {
+    map.add(nums[p++], true)
+  } 
+
+  while(q < len) {
+    if(!map.has(q)) {
+      res.push(q)
+    }
+    q++
+  }
+
+  return res;
 };
 ```
