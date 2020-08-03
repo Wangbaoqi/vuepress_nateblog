@@ -6,11 +6,9 @@ excerpt: 'ECMAScript 6.0 '
 ---
 # JS ES6 知识手册
 
-
 ::: tip
 学习JavaScript新标准的语法
 :::
-[[toc]]
 
 ## let 和 const
 

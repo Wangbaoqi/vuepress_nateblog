@@ -1045,3 +1045,38 @@ var findDisappearedNumbers = function(nums) {
   return res;
 };
 ```
+
+## 数组中K-diff数对
+
+测试用例以及[LeetCode](https://leetcode-cn.com/problems/k-diff-pairs-in-an-array/)
+
+```js
+// 输入: [3, 1, 4, 1, 5], k = 2
+// 输出: 2
+// 解释: 数组中有两个 2-diff 数对, (1, 3) 和 (3, 5)。
+// 尽管数组中有两个1，但我们只应返回不同的数对的数量。
+
+```
+
+**哈希/散列**
+
+- 时间复杂度 O(n) = n
+- 空间复杂度 O(n) = n
+
+```js
+var findPairs = function(nums, k) {
+  let p = 0, len = nums.length, map = new Set(), set = new Set();
+  
+  if(k < 0) {
+    return 0
+  }
+
+  while(p < len) {
+    if(set.has(nums[p] - k)) map.add(nums[p] - k);
+    if(set.has(nums[p] + k)) map.add(nums[p]);
+    set.add(nums[p++])
+  }
+  return map.size
+};
+
+```

@@ -29,13 +29,14 @@ module.exports = {
         '/zh/front/javascript/primary/JSExpress',
         '/zh/front/javascript/primary/JS数据类型',
         '/zh/front/javascript/primary/JSES',
+        '/zh/front/javascript/primary/JSArray',
+        '/zh/front/javascript/primary/JSFunction_class',
+        '/zh/front/javascript/primary/JSReg',
         '/zh/front/javascript/primary/JS作用域以及闭包',
         '/zh/front/javascript/primary/JSthis以及原型',
         '/zh/front/javascript/primary/JSeventLoop',
         '/zh/front/javascript/intermediate/JS内存机制',
         '/zh/front/javascript/primary/JS异步',
-        '/zh/front/javascript/intermediate/JS函数式编程',
-
       ]
     },
     {
