@@ -84,7 +84,7 @@ module.exports = {
 
   '/zh/webApi/': [
     {
-      title: 'Brower',
+      title: 'Browser',
       collapsable: false,
       children: [
         '/zh/webApi/browser/posts/statusMachine',
@@ -99,7 +99,7 @@ module.exports = {
       title: 'NodeJS',
       collapsable: false,
       children: [
-        '/zh/webApi/node/nodeLoop'
+        '/zh/webApi/node/posts/nodeLoop'
       ]
     },
   ],

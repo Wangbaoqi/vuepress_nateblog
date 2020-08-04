@@ -1,33 +1,107 @@
 <template>
   <div class="array-specication">
-    <div id="container"></div>
+    <div id="container" ref="container"></div>
   </div>
 </template>
 
 <script>
-import G6 from "@antv/g6";
-import { graphRealm } from "./utils";
 export default {
   data() {
     return {};
   },
   mounted() {
-    this.initG6Array();
-    this.initG6Array1();
+
+    import('@antv/g6').then(module => {
+      // use code
+      console.log(module, 'module');
+      this.initG6Array1(module);
+
+    })
   },
 
   methods: {
-    initG6Array1() {
+    graphRealm(objects) {
+      const set = new Set();
+
+      const globalObject = {
+        id: "Global Object",
+        children: [],
+      };
+
+      for (let i of objects) {
+        globalObject.children.push({
+          children: [],
+          id: i,
+        });
+      }
+
+      for (let i = 0; i < objects.length; i++) {
+        const current = objects[i];
+        if (set.has(objects[i])) continue;
+        set.add(objects[i]);
+        for (let p of Object.getOwnPropertyNames(window[objects[i]])) {
+          let d = Object.getOwnPropertyDescriptor(window[objects[i]], p);
+          if (
+            d.hasOwnProperty("value") &&
+            ((d.value !== null && typeof d.value === "object") ||
+              typeof d.value === "function") &&
+            d.value instanceof Object
+          ) {
+            let childrenThird = [];
+            for (let k of Object.getOwnPropertyNames(d.value)) {
+              if (k !== "name" && k !== "length") {
+                childrenThird.push({
+                  id: k.replace(/^\S/, (s) => s.toUpperCase()),
+                });
+              }
+            }
+            globalObject["children"][i].children.push({
+              children: childrenThird,
+              id: p,
+            });
+          }
+          if (d.hasOwnProperty("get") && typeof d.get === "function") {
+            let childrenThird = [];
+            for (let k of Object.getOwnPropertyNames(d.get)) {
+              if (k !== "name" && k !== "length") {
+                childrenThird.push({
+                  id: k.replace(/^\S/, (s) => s.toUpperCase()),
+                });
+              }
+            }
+            globalObject["children"][i].children.push({
+              children: childrenThird,
+              id: p.replace(/^\S/, (s) => s.toUpperCase()),
+            });
+          }
+          if (d.hasOwnProperty("set") && typeof d.set === "function") {
+            let childrenThird = [];
+            for (let k of Object.getOwnPropertyNames(d.set)) {
+              if (k !== "name" && k !== "length") {
+                childrenThird.push({
+                  id: k.replace(/^\S/, (s) => s.toUpperCase()),
+                });
+              }
+            }
+            globalObject["children"][i].children.push({
+              children: childrenThird,
+              id: p.replace(/^\S/, (s) => s.toUpperCase()),
+            });
+          }
+        }
+      }
+      return globalObject;
+    },
+    initG6Array1(G6) {
       fetch(
         "https://gw.alipayobjects.com/os/antvdemo/assets/data/algorithm-category.json"
       )
         .then((res) => res.json())
         .then((data) => {
-          data = graphRealm(["Array"]);
-
-          const width = document.getElementById("container").scrollWidth;
-          const height =
-            document.getElementById("container").scrollHeight || 500;
+          data = this.graphRealm(["Array"]);
+          console.log(this, 'this');
+          const width = this.$refs.container.scrollWidth;
+          const height = this.$refs.container.scrollHeight || 800;
           const graph = new G6.TreeGraph({
             container: "container",
             width,
@@ -79,10 +153,10 @@ export default {
                 return 100;
               },
               getSide: (d) => {
-                if (d.id === 'prototype') {
-                  return 'right';
+                if (d.id === "prototype") {
+                  return "right";
                 }
-                return 'left';
+                return "left";
               },
             },
           });
@@ -112,98 +186,12 @@ export default {
           graph.fitView();
         });
     },
-    initG6Array() {
-      const arrayRealm = graphRealm(["Array"]);
-      console.log(arrayRealm);
-
-      // const width = 920 || window.devicePixelRatio * window.screen.width * 0.5; // 高清显示
-      // const height = 600 || window.devicePixelRatio * window.screen.height;
-      // const graph = new G6.TreeGraph({
-      //   container: "container",
-      //   width,
-      //   height,
-      //   modes: {
-      //     default: [
-      //       {
-      //         type: "collapse-expand",
-      //         onChange: function onChange(item, collapsed) {
-      //           console.log(item, "item");
-
-      //           const data = item.get("model");
-      //           data.collapsed = collapsed;
-      //           return true;
-      //         },
-      //       },
-      //       // 'drag-canvas',
-      //       "zoom-canvas",
-      //     ],
-      //   },
-      //   defaultNode: {
-      //     size: 26,
-      //     anchorPoints: [
-      //       [0, 0.5],
-      //       [1, 0.5],
-      //     ],
-      //     // color: "#000",
-      //     style: {
-      //       fill: "#C6E5FF",
-      //       stroke: "#5B8FF9",
-      //     },
-      //   },
-      //   defaultEdge: {
-      //     type: "cubic-horizontal",
-      //     style: {
-      //       stroke: "#A3B1BF",
-      //     },
-      //   },
-      //   layout: {
-      //     type: "compactBox",
-      //     direction: "LR",
-      //     getId: function getId(d) {
-      //       return d.id;
-      //     },
-      //     getHeight: function getHeight() {
-      //       return 16;
-      //     },
-      //     getWidth: function getWidth() {
-      //       return 16;
-      //     },
-      //     getVGap: function getVGap() {
-      //       return 10;
-      //     },
-      //     getHGap: function getHGap() {
-      //       return 100;
-      //     },
-      //   },
-      // });
-      // let centerX = 0;
-      // graph.node(function(node) {
-      //   if (node.id === "Modeling Methods") {
-      //     centerX = node.x;
-      //   }
-
-      //   return {
-      //     label: node.id,
-      //     labelCfg: {
-      //       position:
-      //         node.children && node.children.length > 0
-      //           ? "right"
-      //           : node.x > centerX
-      //           ? "right"
-      //           : "left",
-      //       offset: 5,
-      //     },
-      //   };
-      // });
-      // graph.data(arrayRealm);
-      // graph.render();
-      // graph.fitView();
-    },
   },
 };
 </script>
 
 <style lang="stylus">
 .array-specication
+  color #333
   background #fff
 </style>

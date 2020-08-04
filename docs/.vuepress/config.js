@@ -1,5 +1,5 @@
 module.exports = {
-  base: '/',
+  base: '/nate.wang/',
   title: 'Nate前端进阶',
   description: '你写的每一行代码都是你的名片',
   dest: './dist',
@@ -27,7 +27,7 @@ module.exports = {
   themeConfig: {
     author: 'nate.wang',
     locales: require('./config/locales'),
-    logo: '/favion.png',
+    logo: '/nate.wang/favion.png',
     lastUpdated: 'Last Updated',
     searchMaxSuggestoins: 10,
     serviceWorker: {
