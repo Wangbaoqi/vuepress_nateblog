@@ -138,7 +138,7 @@ module.exports = function parseHtml(html) {
 这里初始化了标识`EOF`（其实是文件结束的token）、`dataState`（状态机入口），以及遍历字节流字符，处理每个不同的*token*会返回下一个处理对应类型的*token*，最后结束状态机。
 
 
-#### 解析标签
+### 解析标签
 
 在这一步，主要实现解析标签的状态机，比如`startTag`、 `endTag`、`tagName`、`selfCloseStartTag`以及`beforeAttributeName`等状态。
 
@@ -221,17 +221,237 @@ function tagOpenState(c) {
     })
   }
 }
+```
 
-function endTagOpenState() {
-  
+第一个状态`tagOpenState`是解析开始标签的，例如`<div>`，如果消费的字符是`d`，就会进入到解析标签name名称状态`tagNameState`，下面看如何解析标签名称的。
+
+```js
+function tagNameState(c) {
+  // 匹配到 Tab LF FF whiteSpace
+  // 处理标签的属性
+  if(c.match(/^[\t\n\f ]$/)) {
+    return beforeAttributeName
+  }else if(c == '/') {
+    // 处理自闭合标签
+    return selfClosingStartTag
+  }else if(c == '>') {
+    // 开始标签处理结束，重新进入入口状态，处理标签内容
+    emit(currentToken);
+    return dataState
+  }else if(c.match(/^[a-xA-Z]$/)) {
+    // 处理标签字符名称
+    currentToken.tagName += c;
+    return tagNameState
+  }else if(c == 'EOF') {
+    emit({
+      type: 'EOF'
+    })
+  }else {
+    currentToken.tagName += c;
+    return tagNameState
+  }
+}
+// 处理自闭合标签
+function selfClosingStartTag(c) {
+  if(c == ">") {
+    currentToken.isSelfClosing = true;
+    emit(currentToken)
+    return dataState
+  }else if(c == "EOF") {
+
+  }else {
+
+  }
 }
 ```
 
+标签名的解析主要包括，tagName 标签名称，attributeName 属性名称以及自闭合标签。根据上述的用来测试的HTML文档为例子，首先接收的标签为`<html maaa=a>`，它包含了`tagName`、`beforeAttributeName`和`attributeName`状态
+
+紧接着看`beforeAttributeName`状态的处理
 
 
- 
+```js
+function beforeAttributeName(c) {
+  // 如果是 Tab LF FF whiteSpace 则忽略字符
+  if(c.match(/^[\t\n\f ]$/)) {
+    return beforeAtributeName
+  }else if(c == "=") {
+    // 这是一个意外的先等号后属性的分析错误，在当前标记中启动一个新属性，将该属性的名称设置为当前输入字符，将其值设置为空字符串，切换到属性名(attributeName)状态
+    currentAttribute = {
+      name: "",
+      value: ""
+    }
+    return attributeName(c)
+
+  }else if(c == ">" || c == "/" || c == EOF) {
+    // 当前标签 新增一个属性
+    return afterAttributeName(c)
+  }else {
+    currentAttribute = {
+      name: "",
+      value: ""
+    }
+    return attributeName(c)
+  }
+}
+// 处理属性名称
+function attributeName(c) {
+  if(c.match(/^[\t\n\f ]$/) || c == "/" || c == EOF || c == ">") {
+    return afterAttributeName(c)
+  }else if(c == "=") {
+    // 处理属性值
+    return beforeAtributeValue
+  }else if(c == '\u0000') {
+    currentAttribute.name += '\ufffd'
+  }else if(c == "\"" || c == "'" || c == "<") {
+    //  Treat it as per the "anything else" entry below.
+    currentAttribute.name += c
+    return attributeName
+  }else {
+    c.name += c
+    return attributeName
+  }
+}
+// 处理属性之后的操作
+function afterAttributeName(c) {
+  if(c.match(/^[\t\n\f ]$/)) {
+    return afterAttributeName
+  }else if(c == "/") {
+    return selfClosingStartTag;
+  }else if(c == "=") {
+    return beforeAtributeValue
+  }else if(c == ">") {
+    // 遇到字符 > , emit 当前token 添加到DOM中
+    currentToken[currentAttribute.name] = currentAttribute.value;
+    emit(currentToken)
+    return data
+  }else if(c == EOF) {
+    emit({
+      type: "EOF"
+    })
+  }else {
+    currentToken[currentAttribute.name] = currentAttribute.value;
+    currentAttribute = {
+      name: "",
+      value: ""
+    }
+    return attributeName(c)
+  }
+}
+```
+
+到此为止，已经解析到了`<html maaa=a>`中的标签名称以及其属性名称。
+
+```js
+// currentToken
+currentToken = {
+  type: 'startTag',
+  tagName: 'html'
+}
+currentAttribute = {
+  name: 'maaa',
+  value: ''
+}
+```
+属性名称解析结束状态机就进入到了属性值解析，接下来看属性值解析的状态机。
+
+```js
+function beforeAttributeValue(c) {
+  if(c.match(/^[\t\n\f ]$/) || c == "/" || c == ">" || c == EOF) {
+    return beforeAttributeValue
+  }else if(c == "\"") {
+    return doubleQuotedAttributeValue;
+  }else if(c == "\'") {
+    return singleQuotedAttributeValue
+  }else if(c == ">") {
+    // 标签解析结束，重新进入入口状态机解析下一个字节流
+    emit(currentToken)
+    return dataState
+  }else {
+    // 解析属性值
+    return UnquotedAttibutedValue(c)
+  }
+}
+// 属性值解析
+function UnquotedAttibutedValue(c) {
+  // Tab LF FF whitespace 
+  if(c.match(/^[\t\n\f ]$/)) {
+    currentToken[currentAttribute.name] = currentAttribute.value;
+    return beforeAttributeName
+  }else if(c == "/") {
+    currentToken[currentAttribute.name] = currentAttribute.value;
+    return selfClosingStartTag
+  }else if(c == ">") {
+    // 属性值处理完成 标签处理结束，重新进入入口状态机
+    currentToken[currentAttribute.name] = currentAttribute.value;
+    emit(currentToken)
+    return dataState
+  }else if(c == "\u0000") {
+
+  }else if(c == "\'" || c == "\"" || c == "<" || c == "=" || c == "`") {
+    // 这是一个意外的非引号字符属性值分析错误。请将其视为下面的“ anything else”条目。
+  }else if(c == EOF) {
+    emit({
+      type: 'EOF'
+    })
+  }else {
+    currentAttribute.value += c;
+    return UnquotedAttibutedValue
+  }
+}
+// 处理双引号属性值
+function doubleQuotedAttributeValue(c) {
+  if(c == "\"") {
+    currentToken[currentAttribute.name] = currentAttribute.value
+    return afterQuotedAttributeValue
+  }else if(c == "&") {
+    // TODO
+  }else if(c == "\u0000") {
+    // TODO
+  }else if(c == EOF) {
+    emit({
+      type: EOF
+    })
+  }else {
+    currentAttribute.value += c;
+    return doubleQuotedAttributeValue
+  }
+}
+// 处理单引号属性值
+function singleQuotedAttributeValue(c) {
+  if(c == "\'") {
+    currentToken[currentAttribute.name] = currentAttribute.value
+    return afterQuotedAttributeValue
+  }else if(c == "&") {
+    // TODO
+  }else if(c == "\u0000") {
+    // TODO
+  }else if(c == EOF) {
+    emit({
+      type: EOF
+    })
+  }else {
+    currentAttribute.value += c;
+    return doubleQuotedAttributeValue
+  }
+}
+```
+这一步就相当于将`<html maaa=a>`处理完成了，*currentAttribute*的值也补充完成了。最后遇到`>`字符，表明该**html**标签已经处理完成了，后续操作就是将当前的属性挂载到当前的**currentToken**中，然后通过*emit*方式将此**token**添加到**DOM**树中。
 
 
+接下来看**HTML-parsing**是如何将`token`添加到DOM树中的
+
+### emitToken 
+
+```js
+// emit 添加token到DOM树中
+function emit(token) {
+  // 获取栈顶的元素，给其添加子元素
+  let top = stack[stack.length - 1];
+
+}
+
+```
 
 
 
