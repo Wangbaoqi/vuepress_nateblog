@@ -441,7 +441,9 @@ function singleQuotedAttributeValue(c) {
 
 接下来看**HTML-parsing**是如何将`token`添加到DOM树中的
 
-### emitToken 
+### emitToken以及构造DOM树
+
+每解析完一个标签，就会将改token添加到DOM树中，下面*emit*主要负责的就这部分内容。
 
 ```js
 // emit 添加token到DOM树中
@@ -449,6 +451,60 @@ function emit(token) {
   // 获取栈顶的元素，给其添加子元素
   let top = stack[stack.length - 1];
 
+  if(token.type == 'startTag') {
+    // 创建一个元素节点
+    let el = {
+      type: 'element',
+      children: [],
+      attributes: []
+    }
+    // 给元素添加 tagName
+    el.tagName = token.tagName;
+
+    // 给元素添加属性
+    for(let p in token) {
+      if(p != 'type' && p != 'tagName') {
+        el.attributes.push({
+          name: p,
+          value: token[p]
+        })
+      }
+    }
+    // 父元素与子元素之间的绑定
+    top.children.push(el)
+    el.parent = top
+
+    // 自闭合标签不需要入栈
+    if(!token.isSelfClosing) {
+      stack.push(el)
+    }
+
+    currentTextNode = null
+
+  }else if(token.type == 'endTag') {
+    // 处理结束标签 对应的标签从栈中弹出
+
+    // 异常处理 
+    if(top.tagName !== token.tagName) {
+      throw new Error('tagType does not match')
+    }else {
+      // 弹出栈中对应的开始标签
+      stack.pop()
+    }
+
+    currentTextNode = null
+
+  }else if(token.type == 'text') {
+    // 处理文本节点
+    if(currentTextNode == null) {
+      currentTextNode = {
+        type: 'text',
+        content: ''
+      }
+      top.children.push(currentTextNode)
+    }
+    currentTextNode.content += token.content
+  }
 }
 
 ```
