@@ -2,7 +2,7 @@
 type: web-vue
 tag: Vue
 lang: zh
-excerpt: 'Vue 响应式原理'
+excerpt: 'Vue 源码阅读以及笔记'
 ---
 
-# Vue 响应式原理解析
+# Vue 源码系列 
