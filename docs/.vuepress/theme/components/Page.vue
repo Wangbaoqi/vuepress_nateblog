@@ -164,6 +164,8 @@ export default {
       this.type = frontmatter.type
       this.issueType = frontmatter.subType == 'oneTopic'
       this.vssue = title;
+      this.initImgZoom();
+
       // this.initGitalk();
     },
     createEditLink(repo, docsRepo, docsDir, docsBranch, path) {
@@ -194,7 +196,6 @@ export default {
     initGitalk() {
       let path = this.$route.path;
       if (path !== this.path) {
-        this.initImgZoom();
         this.path = path;
         let a = document.getElementById("gitalk-container");
         if (a && a.children.length > 0) a.innerHTML = "";
