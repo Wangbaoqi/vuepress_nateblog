@@ -13,7 +13,7 @@ excerpt: 'Vue 源码系列一之响应式原理'
 
 首先看下面的流程图，包含了上述描述的几个模块，接下来的篇幅中会对每一个模块在源码层面进行剖析。
 
-![Vue-run](https://user-gold-cdn.xitu.io/2017/12/19/1606e7eaa2a664e8?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)
+![Vue-run](https://cdn.img.wenhairu.com/images/2020/08/12/wGCd6.png)
 
 这里看的[vue 源码](https://github.com/vuejs/vue)是*v2.6.11*
 
@@ -71,3 +71,6 @@ excerpt: 'Vue 源码系列一之响应式原理'
 * *renderMixin(Vue)* - 初始化 **Vue.prototype.$nextTick**，**Vue.prototype._render**等
 
 
+接下来逐步的分析每一个**mixin**。
+
+### initMixin(Vue)
