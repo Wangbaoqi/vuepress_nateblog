@@ -4,10 +4,8 @@
     :class="pageClasses"
    
   >
-
     
     <NavbarTop  @toggle-sidebar="toggleSidebar"/>
-
 
     <Home v-if="$page.frontmatter.home"/>
 
@@ -44,7 +42,7 @@
 </template>
 
 <script>
-import Home from "@parent-theme/components/Home.vue";
+import Home from "@theme/components/Home.vue";
 import NavbarTop from "@theme/components/Navbartop.vue";
 import Page from "@theme/components/Page.vue";
 import Sidebar from "@theme/components/Sidebar.vue";

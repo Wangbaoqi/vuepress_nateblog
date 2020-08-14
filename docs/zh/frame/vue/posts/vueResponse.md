@@ -70,7 +70,7 @@ excerpt: 'Vue 源码系列一之响应式原理'
 * *lifecycleMixin(Vue)* - 初始化 **Vue.prototype._update**，**Vue.prototype.$forceUpdate**，**Vue.prototype.$destroy**等
 * *renderMixin(Vue)* - 初始化 **Vue.prototype.$nextTick**，**Vue.prototype._render**等
 
-
 接下来逐步的分析每一个**mixin**。
 
 ### initMixin(Vue)
+

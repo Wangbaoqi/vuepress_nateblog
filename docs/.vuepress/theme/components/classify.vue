@@ -20,7 +20,7 @@
 <script>
 import Article from "@theme/components/Article.vue";
 import Tags from "@theme/components/Tags.vue";
-let defaultLength = 10; //默认显示条数
+let defaultLength = 20; //默认显示条数
 let copyBlogs = []; //缓存所有博客
 
 export default {
@@ -53,17 +53,16 @@ export default {
     filerArticle() {
       const { lang = '', tag = '' } = this.$page.frontmatter
       let go = this.$site.pages.sort((pre, next) => {
-        if (pre.lastUpdated === undefined) return 1;
-        if (next.lastUpdated === undefined) return -1;
+        if (pre.lastUpdated === undefined) pre.lastUpdated = this.$page.lastUpdated;
+        if (next.lastUpdated === undefined) next.lastUpdated = this.$page.lastUpdated;
         return (
-          new Date(next.lastUpdated).getTime() -
-          new Date(pre.lastUpdated).getTime()
+          new Date(next.lastUpdated).getTime() - new Date(pre.lastUpdated).getTime()
         );
       });
       // 每一壹题
-      if(this.$page.frontmatter.type && this.$page.frontmatter.type === 'typeTopic') {
-        go = go.filter(e => e.frontmatter.type === 'web-topic' )
-      }
+      // if(this.$page.frontmatter.type && this.$page.frontmatter.type === 'typeTopic') {
+      //   go = go.filter(e => e.frontmatter.type === 'web-topic' )
+      // }
 
       go = go.filter(e => e.frontmatter.lang && e.frontmatter.lang === lang)
       

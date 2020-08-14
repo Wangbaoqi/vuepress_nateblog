@@ -66,6 +66,7 @@ module.exports = {
       collapsable: false,
       children: [
         '/zh/algorithm/frontalgorithm/posts/search',
+        '/zh/algorithm/frontalgorithm/posts/slideWindow',
         '/zh/algorithm/frontalgorithm/posts/recursion',
         '/zh/algorithm/frontalgorithm/posts/dynamic',
         '/zh/algorithm/frontalgorithm/posts/greedy',
