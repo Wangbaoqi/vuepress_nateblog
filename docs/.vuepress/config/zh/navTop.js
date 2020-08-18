@@ -5,7 +5,7 @@ module.exports = [
     link: '/zh/archive/',
   },
   {
-    text: 'Books',
+    text: '书籍',
     link: '/zh/books/',
   },
   {
