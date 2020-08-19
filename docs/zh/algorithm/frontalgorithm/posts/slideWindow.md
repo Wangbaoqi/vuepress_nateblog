@@ -201,8 +201,7 @@ function slideWindow(str, tar) {
 
 ## 找到字符串中所有字母异位词
 
-[找到字符串中所有字母异位词 - LeetCode](https://leetcode-cn.com/problems/find-all-anagrams-in-a-string/) 是属于**hard level**，不过使用滑动窗口技巧就不会那么困难了。
-
+[找到字符串中所有字母异位词 - LeetCode](https://leetcode-cn.com/problems/find-all-anagrams-in-a-string/) 是属于**hard level**
 算法描述:
 
 ```md
@@ -216,6 +215,9 @@ function slideWindow(str, tar) {
 输出："[0, 6]"
 
 # 解析
+
+这个跟最小覆盖子串比较类似，其是找到符合最短的满足目标字符的字符长度。
+而这个找到字符串中所有字母异位词是寻找完全符合目标字符长度
 ```
 
 下面看下完整的 code:
@@ -262,6 +264,53 @@ var findAnagrams = function(s, p) {
       }
       left++;
     }
+  }
+  return res;
+};
+```
+
+## 无重复字符的最长子串
+
+[无重复字符的最长子串 - LeetCode](https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/) 是属于**middle level**
+算法描述:
+
+```md
+# 给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。
+
+# 字符串只包含小写英文字母，并且字符串  s  和 p  的长度都不超过 20100。
+
+# 示例
+
+输入：s: "abcabcbb"
+输出：3
+解释: 因为无重复字符的最长子串是 "abc"，所以其长度为 3。
+
+# 解析
+```
+
+下面看下完整的 code:
+
+```js
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var lengthOfLongestSubstring = function(s) {
+  let left = 0, right = 0, res = 0, len = s.length;
+  let map_window = {};
+
+  while (right < len) {
+    let charR = s[right];
+    map_window[charR] ? map_window[charR]++ : (map_window[charR] = 1);
+    right++;
+
+    while (map_window[charR] > 1) {
+      let charL = s[left];
+      map_window[charL]--;
+      left++;
+    }
+
+    res = Math.max(res, right - left);
   }
   return res;
 };
