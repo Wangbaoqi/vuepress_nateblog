@@ -147,6 +147,11 @@ pqueue.enqueue(new QueueElement('natebaoqi', 2))
 pqueue.enqueue(new QueueElement('john', 2))
 ```
 
+## 单调队列
+
+单调队列是一种特殊的队列，也是一种**双端队列**。**单调**的含义是单调递增(递减)；
+
+
 ## 队列的使用 
 
 **队列的使用其实很广泛，例如消息队列、上述讲的优先队列（可用于急诊优先级等）**

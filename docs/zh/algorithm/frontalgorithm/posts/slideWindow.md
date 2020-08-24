@@ -1,7 +1,7 @@
 ---
 type: data-structure & algorithm
 tag: Algorithm
-excerpt: "滑动窗口"
+excerpt: "滑动窗口技巧采用双指针模式巧妙解决多重循环问题，减少了时间复杂度"
 lang: zh
 ---
 
