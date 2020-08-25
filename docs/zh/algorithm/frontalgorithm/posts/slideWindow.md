@@ -296,7 +296,10 @@ var findAnagrams = function(s, p) {
  * @return {number}
  */
 var lengthOfLongestSubstring = function(s) {
-  let left = 0, right = 0, res = 0, len = s.length;
+  let left = 0,
+    right = 0,
+    res = 0,
+    len = s.length;
   let map_window = {};
 
   while (right < len) {
@@ -314,4 +317,164 @@ var lengthOfLongestSubstring = function(s) {
   }
   return res;
 };
+```
+
+## 最大连续1的个数 III
+
+[最大连续1的个数 III - LeetCode](https://leetcode-cn.com/problems/max-consecutive-ones-iii/) 是属于**middle level**
+算法描述:
+
+```md
+# 给定一个由若干 0 和 1 组成的数组 A，我们最多可以将 K 个值从 0 变成 1 。
+
+# 返回仅包含 1 的最长（连续）子数组的长度。
+
+# 示例
+
+输入：A = [1,1,1,0,0,0,1,1,1,1,0], K = 2
+输出：6
+解释: [1,1,1,0,0,1,1,1,1,1,1]，粗体数字从 0 翻转到 1，最长的子数组长度为 6。
+
+# 解析
+
+这个算法解法跟**无重复字符的最长子串**类似，窗口每滑动一次，都要更新一遍窗口的大小（窗口没有收缩），在窗口每缩小之后，也要更新一遍窗口的大小
+```
+完整解题算法
+
+```js
+var longestOnes = function(A, K) {
+  let left = 0, right = 0, sum = 0, len = A.length;
+  let res = 0;
+
+  while(right < len) {
+    let charR = A[right];
+    (charR === 0 ) && sum++;
+    right++;
+
+    while(sum > K) {
+      let chatL = A[left];
+      (charL === 0) && sum--;
+      left++
+    }
+    res = Math.max(res, right - left)
+  }
+  return res;
+}
+```
+
+
+## 滑动窗口的最大值
+
+[滑动窗口的最大值 - LeetCode](https://leetcode-cn.com/problems/hua-dong-chuang-kou-de-zui-da-zhi-lcof/) 是属于**easy level**
+算法描述:
+
+```md
+# 给定一个数组 nums 和滑动窗口的大小 k，请找出所有滑动窗口里的最大值。
+
+# 示例
+
+输入: nums = [1,3,-1,-3,5,3,6,7], 和 k = 3
+输出: [3,3,5,5,6,7]
+解释:
+
+滑动窗口的位置 最大值
+
+---
+
+[1 3 -1] -3 5 3 6 7 3
+1 [3 -1 -3] 5 3 6 7 3
+1 3 [-1 -3 5] 3 6 7 5
+1 3 -1 [-3 5 3] 6 7 5
+1 3 -1 -3 [5 3 6] 7 6
+1 3 -1 -3 5 [3 6 7] 7
+
+# 解析
+
+该算法主要解决的是某一个窗口中最大值，用到了单调队列特殊的数据结构
+```
+
+掌握了[单调队列](/zh/algorithm/structure/posts/queue.html#单调队列)之后，就可以解决这道算法了，下面解题的大概框架
+
+```js
+var maxSlidingWindow = function(nums, k) {
+  let res = [];
+  // 初始化单调队列滑动窗口
+  let queue_window = new MonotonicQueue();
+
+  for (let i = 0; i < nums.length; i++) {
+    // 先将窗口中 k - 1 个元素入队
+    if (i < k - 1) {
+      queue_window.push(nums[i]);
+    } else {
+      // 窗口滑动
+      queue_window.push(nums[i]);
+      // 获取当前窗口中的最大值
+      res.push(queue_window.max());
+      // 窗口首位元素出队
+      queue_window.pop(nums[i - k + 1]);
+    }
+  }
+};
+```
+
+接下来看下单调队列的实现
+
+```js
+class MonotonicQueue {
+  constructor() {
+    this.queue = [];
+  }
+
+  empty() {
+    return !this.queue.length;
+  }
+
+  size() {
+    return this.queue.length || 0;
+  }
+
+  // 返回队尾的元素
+  back() {
+    return this.size() && this.queue[this.size() - 1];
+  }
+  // 删除队尾元素
+  popBack() {
+    this.queue.pop();
+  }
+  // 队尾新增元素
+  pushBack(n) {
+    this.queue.push(n);
+  }
+
+  // 元素入队
+  push(n) {
+    while (!this.empty() && this.back() < n) {
+      this.popBack();
+    }
+    this.pushBack(n);
+  }
+  // 返回队首的元素
+  front() {
+    return this.queue[0];
+  }
+  // 删除队首元素
+  popFront() {
+    this.queue.shift();
+  }
+  // 队首新增元素
+  pushFront(n) {
+    this.queue.unshift(n);
+  }
+
+  // 返回最大元素
+  max() {
+    return this.front();
+  }
+  // 删除元素
+  pop(n) {
+    if (!this.empty() && this.front() === n) {
+      this.popFront();
+    }
+  }
+}
 ```
