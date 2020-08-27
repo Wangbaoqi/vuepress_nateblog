@@ -196,6 +196,7 @@ function slideWindow(str, tar) {
       left++;
     }
   }
+  return minLen === Number.MAX_SAFE_INTEGER ? '' : str.substr(start, minLen) 
 }
 ```
 
