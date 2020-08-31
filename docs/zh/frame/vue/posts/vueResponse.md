@@ -135,7 +135,7 @@ Vue.prototype._init = function(options?: Object) {
   initState(vm);
   initProvide(vm); // resolve provide after data/props
   // 调用 created 钩子函数
-  callHook(vm, "created");
+  callHook(vm, "created");  
 
   /* istanbul ignore if */
   if (process.env.NODE_ENV !== "production" && config.performance && mark) {
@@ -155,7 +155,7 @@ Vue.prototype._init = function(options?: Object) {
 ```js
 function initState (vm: Component) {
   vm._watchers = []
-  const opts = vm.$options
+  const opts = vm.$options;
   if (opts.props) initProps(vm, opts.props)
   if (opts.methods) initMethods(vm, opts.methods)
   if (opts.data) {
