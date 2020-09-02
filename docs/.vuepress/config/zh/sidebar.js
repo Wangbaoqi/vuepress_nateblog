@@ -40,7 +40,7 @@ module.exports = {
       ]
     },
     {
-      title: 'DesignPatterns',
+      title: 'DesignModel',
       collapsable: false,
       children: [
         '/zh/front/designModel/posts/faceObject',

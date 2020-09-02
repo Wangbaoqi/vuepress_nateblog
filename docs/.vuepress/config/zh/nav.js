@@ -42,7 +42,7 @@ module.exports = [
     background: '#5b5ea6'
   },
   {
-    text: 'DesignPatterns',
+    text: 'DesignModel',
     link: '/zh/front/designModel/',
     color: '#000',
     background: '#f7786b'

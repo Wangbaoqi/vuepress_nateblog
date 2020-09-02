@@ -7,9 +7,6 @@ module.exports = [{
     "url": "https://i.loli.net/2019/06/25/5d120452a9c3f15289.jpg",
     "name": "响应式Web设计 : HTML5和CSS3实战"
   }, {
-    "url": "https://i.loli.net/2019/06/25/5d12044a44e5d88208.jpg",
-    "name": "响应式Web设计 : HTML5和CSS3实战"
-  }, {
     "url": "https://i.loli.net/2019/06/25/5d117f12f255c95526.jpg",
     "name": "HTML5与WebGL编程"
   }, {
@@ -21,12 +18,6 @@ module.exports = [{
   }, {
     "url": "https://i.loli.net/2019/06/26/5d12c1c6125bf91181.jpg",
     "name": "CSS世界"
-  }, {
-    "url": "https://i.loli.net/2019/06/25/5d120452a9c3f15289.jpg",
-    "name": "响应式Web设计 : HTML5和CSS3实战"
-  }, {
-    "url": "https://i.loli.net/2019/06/25/5d12044a44e5d88208.jpg",
-    "name": "响应式Web设计 : HTML5和CSS3实战"
   }, {
     "url": "https://i.loli.net/2019/06/25/5d117f10aa16745954.jpg",
     "name": "HTML5与CSS3基础教程（第8版）"

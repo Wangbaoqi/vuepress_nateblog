@@ -15,12 +15,12 @@ module.exports = {
     // 作为特例，默认语言可以使用 '/' 作为其路径。
     '/': {
       lang: 'en-US', // 将会被设置为 <html> 的 lang 属性
-      title: 'FrontEnd Advanced',
+      title: 'FrontEnd Is Not Fun',
       description: 'The business card of code that you write'
     },
     '/zh/': {
       lang: 'zh-CN',
-      title: '前端进阶',
+      title: '前端不好玩',
       description: '你写的每一行代码都是你的名片'
     }
   },
