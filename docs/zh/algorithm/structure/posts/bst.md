@@ -15,7 +15,7 @@ excerpt: 'BST 二叉树、二叉搜索树 '
 二叉树是树中的一种特殊结构，它的叶子节点不超过两个，使得操作起来效率更加高效。
 
 
-## 实现二叉树 
+## 实现二叉树、二叉搜索树 
 
 每个树都是由不同的叶子（节点）组成，Node的定义：
 
@@ -30,6 +30,160 @@ function Node(data, left, right) {
   this.right = right;
   this.show = show;
 }
+function show() {
+  return this.data
+}
+```
+Node对象可以保存对象，其left和right可以保存左右节点的链接，*show*可以展示节点的值。
+
+接下来**BST**二叉搜索树的实现，包括了根节点*root*，用来保存二叉树的节点，**insert**，用来为树添加节点，以及遍历二叉搜索树等。
 
 
+```js
+function BST() {
+  this.root = null;
+  // 插入数据
+  this.insert = insert;
+  // 先序遍历
+  this.preOrder = preOrder;
+  // 中序遍历
+  this.inOrder = inOrder;
+  // 后序遍历
+  this.postOrder = postOrder;
+} 
+/**
+ * 插入节点
+ * @params data 
+ **/
+function insert(data) {
+  let node = new Node(data, null, null);
+  // 添加根节点
+  if(!this.root) {
+    this.root = node
+  }else {
+    // 添加子节点
+    let curNode = this.root;
+    let parent;
+    while(true) {
+      parent = curNode;
+      if(data < curNode.data) {
+        cueNode = curNode.left
+        if(curNode === null) {
+          parent.left = node;
+          break;
+        }
+      }else {
+        curNode = curNode.right;
+        if(curNode === null) {
+          parent.right = node;
+          break;
+        }
+      }
+    }
+  }
+}
+```
+*insert* 主要是给BST添加节点，BST特点是左节点分布是较小的值，而右节点分组是较大的值，这样的特性在遍历以及查找特定值的时候效率会很高。
+
+## 遍历BST
+
+目前基本的BST已经成型，可以简单的构造出一颗二叉树搜索树，不过也需要遍历，输出其每个节点上的值。
+
+目前有三种方式可以遍历二叉树搜索树，**先序遍历**，**中序遍历**，**后序遍历**
+
+### 先序遍历
+
+先序遍历 - 先访问根节点，再访问左子树，最后访问右子树，如下图：
+
+![preOrder](https://raw.githubusercontent.com/Wangbaoqi/blogImgs/master/nateImgs/structure/tree/BST_preOrder.png)
+
+```js
+/**
+ * 先序遍历
+ * @param node
+ **/
+function preOrder(node) {
+  if(node !== null) {
+    // 当前节点值
+    console.log(node.data);
+    preOrder(node.left);
+    preOrder(node.right);
+  }
+}
+
+// test 
+let bst = new BST();
+
+bst.insert(23);
+bst.insert(45);
+bst.insert(16);
+bst.insert(37);
+bst.insert(3);
+bst.insert(99);
+bst.insert(22);
+
+bst.preOrder(bst.root); // 23 16 3 22 45 37 99
+```
+
+### 中序遍历
+
+中序遍历 - BST 节点排序（小-大），按照节点上的键值，以升序访问BST上的所有节点，先访问左子树，在访问根节点，最后访问右子树。
+
+```js
+/**
+ * 中序遍历
+ * @param node
+ **/
+function inOrder(node) {
+  if(node !== null) {
+    inOrder(node.left);
+    console.log(node.data);
+    inOrder(node.right)
+  }
+}
+
+// test
+let bst = new BST();
+
+bst.insert(23);
+bst.insert(45);
+bst.insert(16);
+bst.insert(37);
+bst.insert(3);
+bst.insert(99);
+bst.insert(22);
+
+bst.inOrder(bst.root); // 3 16 22 23 37 45 99 
+```
+
+### 后序遍历
+
+后序遍历 - 先访问叶子节点，从左子树到右子树，再到根节点
+
+
+```js
+/**
+ * 后序遍历
+ * @param node
+ **/
+function postOrder(node) {
+  if(node !== null) {
+    postOrder(node.left);
+    postOrder(node.right);
+    console.log(node.data);
+  }
+}
+
+// test
+let bst = new BST();
+
+bst.insert(23);
+bst.insert(45);
+bst.insert(16);
+bst.insert(37);
+bst.insert(3);
+bst.insert(99);
+bst.insert(22);
+
+bst.postOrder(bst.root); // 3 22 16 37 99 45 23
 ```
