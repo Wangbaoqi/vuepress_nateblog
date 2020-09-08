@@ -129,6 +129,9 @@ bst.preOrder(bst.root); // 23 16 3 22 45 37 99
 
 中序遍历 - BST 节点排序（小-大），按照节点上的键值，以升序访问BST上的所有节点，先访问左子树，在访问根节点，最后访问右子树。
 
+![inOrder](https://raw.githubusercontent.com/Wangbaoqi/blogImgs/master/nateImgs/structure/tree/BST_inOrder.png)
+
+
 ```js
 /**
  * 中序遍历
@@ -160,6 +163,7 @@ bst.inOrder(bst.root); // 3 16 22 23 37 45 99
 
 后序遍历 - 先访问叶子节点，从左子树到右子树，再到根节点
 
+![postOrder](https://raw.githubusercontent.com/Wangbaoqi/blogImgs/master/nateImgs/structure/tree/BST_postOrder.png)
 
 ```js
 /**
@@ -187,3 +191,81 @@ bst.insert(22);
 
 bst.postOrder(bst.root); // 3 22 16 37 99 45 23
 ```
+
+## 二叉搜索树查找
+
+在二叉搜索树上查到节点的方式有三种：
+
+* 查找最小值 - 左子树上搜索
+* 查找最大值 - 右子树上搜索
+* 查找特定值 - 左子树和右子树上节点对比
+
+
+### 查找最小值 
+
+根据二叉搜索树的特性（较小值分布在左子树），所以直接遍历左子树就可以查找到最小值
+
+```js
+/**
+ * 查找最小值
+ * @return minData
+ **/
+function getMin() {
+  let curNode = this.root;
+  while(curNode.left !== null) {
+    curNode = curNode.left
+  }
+  return curNode.data
+}
+```
+
+
+### 查找最大值
+
+根据二叉搜索树的特性（较大值分布在右子树），所以直接遍历右子树就可以查找到最大值
+
+```js
+/**
+ * 查找最大值 
+ * @returns maxData
+ */
+function getMax() {
+  let curRoot = this.root;
+  while(curRoot.right !== null) {
+    curRoot.right = curRoot
+  }
+  return curRoot.data
+}
+```
+
+### 查找特定值
+
+查找特定值，需要定位该值在二叉树的左子树还是右子树
+
+```js
+/**
+ * 查找特定值
+ * @returns findData
+ */
+function find(data) {
+  let current = this.root;
+  while(current != null) {
+    if(current.data === data) {
+      return current
+    }else if(current.data < data) {
+      current = current.right
+    }else {
+      current = current.left
+    }
+  }
+}
+```
+
+## 二叉搜索树删除节点
+
+
+
+## 计数
+
+
+
