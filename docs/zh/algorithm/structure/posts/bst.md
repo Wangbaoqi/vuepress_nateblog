@@ -263,9 +263,123 @@ function find(data) {
 
 ## 二叉搜索树删除节点
 
+删除节点主要有两种方式，一种是叶子节点（没有子节点的节点），另一种是有子节点的节点。
+
+* 删除叶子节点 - 没有子节点，直接删除就可以
+* 删除有子节点的节点 
+  - 左节点存在，没有右子节点
+  - 右节点存在，没有左子节点
+  - 左右节点都存在 
 
 
-## 计数
+这里整理出删除节点的一套框架，采用递归的方式。
+
+```js
+/**
+ * 删除节点
+ * @param node data
+ * @return node
+ */
+function deleteNode(node, data) {
+  if(node == null) return null;
+  // 查找到待删除的节点
+  if(node.data === data) {
+    // 进行删除
+  }else if(node.data < data){
+    node.right = deleteNode(node.right, data)
+  }else {
+    node.left = deleteNode(node.left, data)
+  }
+  return node
+}
+```
+
+1. 删除叶子节点（没有左右子节点的节点）
+
+![leet-code_pic](https://raw.githubusercontent.com/Wangbaoqi/blogImgs/master/nateImgs/structure/tree/bst_deletion_case_1.png)
+
+```js
+// 删除没有子节点的节点
+if(node.data === data) {
+  if(!node.left && !node.right) return null
+}
+```
+
+2. 删除只有一个子节点的节点
+
+![leet-code_pic](https://raw.githubusercontent.com/Wangbaoqi/blogImgs/master/nateImgs/structure/tree/bst_deletion_case_2.png)
+```js
+// 删除只有一个子节点的节点
+if(node.data === data) {
+  if(node.left == null) return node.right;
+  if(node.right == null) return node.left;
+}
+```
+
+3. 删除左右子节点都存在的节点
+
+![leet-code_pic](https://raw.githubusercontent.com/Wangbaoqi/blogImgs/master/nateImgs/structure/tree/bst_deletion_case_3.png)
+```js
+// 删除左右子节点都存在的节点
+if(node.data === data) {
+  // 获取右子树的最小的节点
+  let tmpNode = getMinNode(node.right);
+  node.data = tmpNode.data;
+  node.right = deleteNode(node.right, tmpNode.data)
+}
+```
+
+完整代码:
+
+```js
+/**
+ * 删除节点
+ * @param node data
+ * @return node
+ */
+function deleteNode(node, data) {
+  if(node == null) return null;
+  // 查找到待删除的节点
+  if(node.data === data) {
+    // 进行删除
+    if(!node.left && !node.right) return null;
+    if(node.left == null) return node.right;
+    if(node.right == null) return node.left;
+
+    let tmpNode = getMinNode(node.right);
+    node.data = tmpNode.data;
+    node.right = deleteNode(node.right, tmpNode.data);
+  }else if(node.data < data){
+    node.right = deleteNode(node.right, data)
+  }else {
+    node.left = deleteNode(node.left, data)
+  }
+  return node
+}
+
+// test 
+let bst = new BST();
+
+bst.insert(23);
+bst.insert(45);
+bst.insert(16);
+bst.insert(37);
+bst.insert(3);
+bst.insert(99);
+bst.insert(22);
+
+// inorder
+bst.inOrder(bst.root); // 3 16 22 23 37 45 99
+
+// remove 
+bst.remove(16);
+bst.inOrder(bst.root); // 3 22 23 37 45 99
+```
+
+## 二叉搜索树计数
+
+
+
 
 
 

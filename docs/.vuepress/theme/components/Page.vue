@@ -1,60 +1,61 @@
 <template>
-  <main class="page">
-    <slot name="top"/>
+<main class="page">
+  <slot name="top" />
 
-    <Classify v-if="type == 'typeHome'" />
+  <Classify v-if="type == 'typeHome'" />
 
-    <Books v-else-if="type == 'typeBook'"/>
+  <Books v-else-if="type == 'typeBook'" />
 
-    <Archive v-else-if="type == 'typeArchive'"/>
+  <Archive v-else-if="type == 'typeArchive'" />
 
-    <Content v-else class="content theme-default-content"/>
+  <Content v-else class="content theme-default-content" />
 
+  <Issue v-if="issueType" />
 
-
-    <Issue v-if="issueType"/>
-
-    <footer class="page-edit">
-      <div class="edit-link" v-if="editLink">
-        <a :href="editLink" target="_blank" rel="noopener noreferrer">{{ editLinkText }}</a>
-        <OutboundLink/>
-      </div>
-
-      <div class="last-updated" v-if="lastUpdated">
-        <span class="prefix">{{ lastUpdatedText }}:</span>
-        <span class="time">{{ lastUpdated }}</span>
-      </div>
-    </footer>
-
-    <div class="page-nav" v-if="prev || next">
-      <p class="inner">
-        <span v-if="prev" class="prev">
-          ←
-          <router-link v-if="prev" class="prev" :to="prev.path">{{ prev.title || prev.path }}</router-link>
-        </span>
-
-        <span v-if="next" class="next">
-          <router-link v-if="next" :to="next.path">{{ next.title || next.path }}</router-link>→
-        </span>
-      </p>
+  <footer class="page-edit">
+    <div class="edit-link" v-if="editLink">
+      <a :href="editLink" target="_blank" rel="noopener noreferrer">{{ editLinkText }}</a>
+      <OutboundLink />
     </div>
-    <!-- <div id="gitalk-container" v-show="isShow()"></div> -->
-    <!-- <slot name="sider"/> -->
-    <Vssue 
-      v-show="isShow()"
-      :title="vssue"
-      :options="options" />
-    <slot name="bottom"/>
-  </main>
+
+    <div class="last-updated" v-if="lastUpdated">
+      <span class="prefix">{{ lastUpdatedText }}:</span>
+      <span class="time">{{ lastUpdated }}</span>
+    </div>
+  </footer>
+
+  <div class="page-nav" v-if="prev || next">
+    <p class="inner">
+      <span v-if="prev" class="prev">
+        ←
+        <router-link v-if="prev" class="prev" :to="prev.path">{{ prev.title || prev.path }}</router-link>
+      </span>
+
+      <span v-if="next" class="next">
+        <router-link v-if="next" :to="next.path">{{ next.title || next.path }}</router-link>→
+      </span>
+    </p>
+  </div>
+  <!-- <div id="gitalk-container" v-show="isShow()"></div> -->
+  <!-- <slot name="sider"/> -->
+  <Vssue v-show="isShow()" :title="vssue" :options="options" />
+  <slot name="bottom" />
+</main>
 </template>
 
 <script>
-import { resolvePage, outboundRE, endingSlashRE } from "@parent-theme/util";
+import {
+  resolvePage,
+  outboundRE,
+  endingSlashRE
+} from "@parent-theme/util";
 import Gitalk from "gitalk";
-import { VssueComponent } from 'vssue';
+import {
+  VssueComponent
+} from 'vssue';
 import GithubV4 from '@vssue/api-github-v4';
 import dayJs from 'dayjs';
-import Classify from "@theme/components/classify.vue"; 
+import Classify from "@theme/components/classify.vue";
 import Issue from "@theme/components/GoodIssue.vue";
 import imagesZoom from "@theme/util/imageScale";
 import Books from '@theme/components/Books.vue';
@@ -65,7 +66,13 @@ import "../styles/vssue.css";
 
 // import 'vssue/dist/vssue.css';
 export default {
-  components: { Classify, Issue, Books, Archive, 'Vssue': VssueComponent },
+  components: {
+    Classify,
+    Issue,
+    Books,
+    Archive,
+    'Vssue': VssueComponent
+  },
   props: ["sidebarItems"],
   data() {
     return {
@@ -87,7 +94,7 @@ export default {
     lastUpdated() {
       return dayJs(this.$page.lastUpdated).format('YYYY-MM-DD');
     },
-    
+
     lastUpdatedText() {
       if (typeof this.$themeLocaleConfig.lastUpdated === "string") {
         return this.$themeLocaleConfig.lastUpdated;
@@ -152,13 +159,14 @@ export default {
     }
   },
 
-  
   methods: {
     isShow() {
       return !(this.type == 'typeHome' || this.type == 'typeBook' || this.type == 'typeArchive')
     },
     updated() {
-      const { frontmatter = {}, title = '' } = this.$page;
+      const {
+        frontmatter = {}, title = ''
+      } = this.$page;
       const types = ['typeHome', 'typeTopic']
 
       this.type = frontmatter.type
@@ -182,9 +190,9 @@ export default {
         );
       }
 
-      const base = outboundRE.test(docsRepo)
-        ? docsRepo
-        : `https://github.com/${docsRepo}`;
+      const base = outboundRE.test(docsRepo) ?
+        docsRepo :
+        `https://github.com/${docsRepo}`;
       return (
         base.replace(endingSlashRE, "") +
         `/edit` +
@@ -217,7 +225,7 @@ export default {
         v.style = `
           cursor: zoom-in;
         `;
-        v.addEventListener("click", function(e) {
+        v.addEventListener("click", function (e) {
           let dom = document.createElement("div");
           dom.style = `
             position:fixed;
@@ -236,7 +244,7 @@ export default {
           let imgDom = document.createElement("img");
           imgDom.src = this.src;
           imgDom.style = `
-            height:90%
+            max-width:85%
           `;
           dom.append(imgDom);
           document.body.append(dom);
@@ -249,7 +257,7 @@ export default {
             console.log(e);
           }
 
-          dom.addEventListener("click", function() {
+          dom.addEventListener("click", function () {
             document.body.removeChild(dom);
           });
         });
@@ -258,15 +266,14 @@ export default {
   },
   mounted() {
     this.updated();
-    
+
   },
   watch: {
-    $route: function(params) {
+    $route: function (params) {
       this.updated();
     }
   },
 
-  
 };
 
 function resolvePrev(page, items) {
@@ -301,6 +308,7 @@ function flatten(items, res) {
 
 <style lang="stylus" scoped>
 @require '../styles/wrapper.styl';
+
 // @require '../styles/vssue.styl';
 // $vssue-theme-color = red
 // $vssue-border-color = #666
@@ -308,13 +316,8 @@ function flatten(items, res) {
 // @import '~vssue/src/styles/index'
 // @import '~github-markdown-css/github-markdown.css'
 .page {
-  position relative
-  margin-top: 2rem;
-  grid-area main
-
+  position relative margin-top 2rem grid-area main
 }
-
-
 
 .page-edit {
   @extend $wrapper;
@@ -366,7 +369,6 @@ function flatten(items, res) {
 }
 
 @media (max-width: $MQMobile) {
-  
 
   .page-edit {
     .edit-link {
@@ -386,5 +388,4 @@ function flatten(items, res) {
   margin: 0 auto;
   padding: 2rem 2.5rem;
 }
-
 </style>
