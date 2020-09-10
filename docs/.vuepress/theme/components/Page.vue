@@ -316,7 +316,9 @@ function flatten(items, res) {
 // @import '~vssue/src/styles/index'
 // @import '~github-markdown-css/github-markdown.css'
 .page {
-  position relative margin-top 2rem grid-area main
+  position relative;
+  margin-top 2rem;
+  grid-area main;
 }
 
 .page-edit {

@@ -28,6 +28,7 @@ function Node(data, left, right) {
   this.left = left;
   // 节点的右节点
   this.right = right;
+  // 展示节点val
   this.show = show;
 }
 function show() {
@@ -50,6 +51,14 @@ function BST() {
   this.inOrder = inOrder;
   // 后序遍历
   this.postOrder = postOrder;
+  // 获取BST最小值
+  this.getMin = getMin;
+  // 获取BST最大值
+  this.getMax = getMax;
+  // 寻找节点
+  this.find = find;
+  // 寻找节点的次数
+  this.findCount = findCount;
 } 
 /**
  * 插入节点
@@ -378,8 +387,49 @@ bst.inOrder(bst.root); // 3 22 23 37 45 99
 
 ## 二叉搜索树计数
 
+计数需要在节点新增一个属性*count*，遍历一组数据时，可以判断该值是否存在树中，存在的话，其*count*加`1`，否则，将该值插入到树中。
+
+```js
+// 节点类定义
+function Node(data, left, right) {
+  // 节点value
+  this.data = data;
+  // 节点的左节点
+  this.left = left;
+  // 节点的右节点
+  this.right = right;
+  // 展示节点val
+  this.show = show;
+  // 节点数量
+  this.count = 1;
+}
+
+// 寻找节点次数 BST 方法 
+function findCount(data) {
+  return this.find(data).count || 0
+}
+
+
+// test case
+let arr = [20, 19, 30, 22, 4, 20, 18, 22]
+let bst = new BST();
+
+for (const key of arr) {
+  if(!bst.find(key)) {
+    bst.insert(key)
+  }else {
+    let curNode = bst.find(key)
+    curNode.count++;
+  }
+}
+```
 
 
 
 
+## LeetCode 算法题
 
+学完有关二叉搜索树的概念以及操作，就可以去**LeetCode**上刷题了，下面是有关二叉搜索树的所有题目
+
+* [701. 二叉搜索树中的插入操作](https://leetcode-cn.com/problems/insert-into-a-binary-search-tree/)
+* [450. 删除二叉搜索树中的节点](https://leetcode-cn.com/problems/delete-node-in-a-bst/)
