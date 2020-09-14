@@ -268,6 +268,22 @@ function find(data) {
     }
   }
 }
+
+/**
+ * 查找特定值 递归写法 也是LeetCode-700的解法
+ * @returns findData
+ */
+function searchBst(root, data) {
+  if(root == null) return null;
+
+  if(root.data == data) {
+    return root;
+  }else if(root.data < data) {
+    return searchBst(root.right, data)
+  }else {
+    return searchBst(root.left, data)
+  }
+}
 ```
 
 ## 二叉搜索树删除节点
@@ -424,7 +440,101 @@ for (const key of arr) {
 }
 ```
 
+## 相同的树
 
+如果对比两颗二叉搜索树完全相同，就要递归遍历两棵树的每个节点都要相同。
+
+```js
+function sameBST(root1, root2) {
+  // 两个为空
+  if(root1 == null && root2 == null) return true;
+  // 一个为空 一个非空
+  if(root1 == null || root2 == null) return false;
+  // 后判断节点的值是否相等
+  if(root1.data != root2.data) return false;
+  
+  return sameBST(root1.left, root2.left) && sameBST(root1.right, root2.right)
+}
+
+// test 
+let bst1 = new BST()
+bst1.insert(23);
+bst1.insert(45);
+bst1.insert(16);
+bst1.insert(37);
+bst1.insert(3);
+bst1.insert(99);
+bst1.insert(22);
+
+let bst2 = new BST();
+bst2.insert(23);
+bst2.insert(45);
+bst2.insert(16);
+bst2.insert(37);
+bst2.insert(3);
+bst2.insert(99);
+bst2.insert(22);
+
+sameBST(bst1.root, bst2.root)
+```
+
+## 验证BST的合法性
+
+如何验证一个BST的合法性，跟前面如何实现一个BST还是有关联的，在实现一个BST的时候，只要新加入一个节点就会跟左子树（或者右子树）上的所有节点值相比较。
+
+而验证一个BST，跟实现BST的思路类似，比如判断一根节点的左子树，必须判断左子树中所有的节点都要比根节点小，除此之外，就是每个节点跟其左右子节点之间的比较。
+
+**1. 循环递归的方式**
+
+
+```js
+function isValidBST(root) {
+
+  if(root == null) return true;
+
+  if(root.left) {
+    let nodeLeft = root.left;
+
+    while(nodeLeft.right) {
+      nodeLeft = nodeLeft.right
+    }
+    if(nodeLeft.data <= root.data) return false;
+  }
+
+  if(root.right) {
+    let nodeLeft = root.right;
+
+    while(nodeLeft.left) {
+      nodeLeft = nodeLeft.left
+    }
+    if(nodeLeft.data >= root.data) return false;
+  }
+
+  return isValidBST(root.left) && isValidBST(root.right)
+}
+```
+
+**2. 纯递归的方式**
+
+
+```js
+function validBST(root) {
+  return isValidBST(root, null, null);
+}
+
+function isValidBST(root, min, max) {
+
+  if(root == null) return true;
+
+  if(min !== null && min.data >= root.data) return false;
+
+  if(max !== null && max.data <= root.data) return false;
+
+
+  return isValidBST(root.left, min, root) && isValidBST(root.right, root, max)
+}
+
+```
 
 
 ## LeetCode 算法题
@@ -433,3 +543,5 @@ for (const key of arr) {
 
 * [701. 二叉搜索树中的插入操作](https://leetcode-cn.com/problems/insert-into-a-binary-search-tree/)
 * [450. 删除二叉搜索树中的节点](https://leetcode-cn.com/problems/delete-node-in-a-bst/)
+* [700. 二叉搜索树中的搜索](https://leetcode-cn.com/problems/search-in-a-binary-search-tree/)
+* [100. 相同的树](https://leetcode-cn.com/problems/same-tree/)
