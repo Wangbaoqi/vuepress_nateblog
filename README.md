@@ -1,2 +1,2 @@
-# Nate Wang's blog on vuePress 
+# Nate Wang's blog on vuePress
 

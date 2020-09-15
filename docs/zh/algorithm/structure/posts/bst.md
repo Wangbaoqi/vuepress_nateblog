@@ -7,15 +7,13 @@ excerpt: 'BST 二叉树、二叉搜索树 '
 
 # BST 二叉搜索树
 
-
 ::: tip
 树是一种常用到的数据结构，不是线性存储数据的结构，它的结构比较类似组织的架构图，是一种倒过来的“树”，叶子也就是其节点，树根就是跟节点，没有子节点的节点被称为叶子节点。
 :::
 
 二叉树是树中的一种特殊结构，它的叶子节点不超过两个，使得操作起来效率更加高效。
 
-
-## 实现二叉树、二叉搜索树 
+## 实现二叉树、二叉搜索树
 
 每个树都是由不同的叶子（节点）组成，Node的定义：
 
@@ -35,10 +33,10 @@ function show() {
   return this.data
 }
 ```
+
 Node对象可以保存对象，其left和right可以保存左右节点的链接，*show*可以展示节点的值。
 
 接下来**BST**二叉搜索树的实现，包括了根节点*root*，用来保存二叉树的节点，**insert**，用来为树添加节点，以及遍历二叉搜索树等。
-
 
 ```js
 function BST() {
@@ -92,6 +90,7 @@ function insert(data) {
   }
 }
 ```
+
 *insert* 主要是给BST添加节点，BST特点是左节点分布是较小的值，而右节点分组是较大的值，这样的特性在遍历以及查找特定值的时候效率会很高。
 
 ## 遍历BST
@@ -120,7 +119,7 @@ function preOrder(node) {
   }
 }
 
-// test 
+// test
 let bst = new BST();
 
 bst.insert(23);
@@ -406,7 +405,12 @@ bst.inOrder(bst.root); // 3 22 23 37 45 99
 计数需要在节点新增一个属性*count*，遍历一组数据时，可以判断该值是否存在树中，存在的话，其*count*加`1`，否则，将该值插入到树中。
 
 ```js
-// 节点类定义
+/**
+ * 节点类定义
+ * @param node data
+ * @param node left
+ * @param node right
+ */
 function Node(data, left, right) {
   // 节点value
   this.data = data;
@@ -445,6 +449,11 @@ for (const key of arr) {
 如果对比两颗二叉搜索树完全相同，就要递归遍历两棵树的每个节点都要相同。
 
 ```js
+/**
+ * 相同的树
+ * @param node root1
+ * @param node root2
+ */
 function sameBST(root1, root2) {
   // 两个为空
   if(root1 == null && root2 == null) return true;
@@ -456,7 +465,7 @@ function sameBST(root1, root2) {
   return sameBST(root1.left, root2.left) && sameBST(root1.right, root2.right)
 }
 
-// test 
+// test
 let bst1 = new BST()
 bst1.insert(23);
 bst1.insert(45);
@@ -486,8 +495,11 @@ sameBST(bst1.root, bst2.root)
 
 **1. 循环递归的方式**
 
-
 ```js
+/**
+ * 验证树的合法性
+ * @param node root
+ */
 function isValidBST(root) {
 
   if(root == null) return true;
@@ -516,7 +528,6 @@ function isValidBST(root) {
 
 **2. 纯递归的方式**
 
-
 ```js
 function validBST(root) {
   return isValidBST(root, null, null);
@@ -533,9 +544,73 @@ function isValidBST(root, min, max) {
 
   return isValidBST(root.left, min, root) && isValidBST(root.right, root, max)
 }
-
 ```
 
+## 二叉搜索树的镜像
+
+二叉树的镜像定义：交换节点的左右子节点，如下图：*来自LeetCode*
+
+![bst_mirror](https://raw.githubusercontent.com/Wangbaoqi/blogImgs/master/nateImgs/structure/tree/BST_mirror.png)
+
+如果采用递归的方式：
+
+* 结束条件；当节点指向`null`，返回`null`.
+* 递推公式（交换节点）；
+  * 暂存左节点
+  * 当前右节点赋值到左节点
+  * 将暂存的左节点赋值到右节点
+  * 返回当前节点
+
+下面看代码：
+
+```js
+/**
+ * 树的镜像
+ * @param node root
+ */
+function mirrorBST(root) {
+
+  // 结束条件
+  if(root == null) return null;
+
+  // 递推公式
+  let tmp = root.left;
+  root.left = mirrorBST(root.right);
+  root.right = mirrorBST(tmp);
+  return root;
+}
+```
+
+## 二叉搜索树的第K大节点
+
+题目来自*LeetCode*，[剑指 Offer 54. 二叉搜索树的第k大节点](https://leetcode-cn.com/problems/er-cha-sou-suo-shu-de-di-kda-jie-dian-lcof/)。
+
+要获取二叉搜索树中第K大的节点，可以间接的获取中序遍历后反转的第*k-1*的值
+
+![k-node](https://raw.githubusercontent.com/Wangbaoqi/blogImgs/master/nateImgs/structure/tree/BST_KNode.png)
+
+下面看代码：
+
+```js
+/**
+ * 树的镜像
+ * @param node root
+ * @param int k
+ */
+function kthLargest(root, k) {
+  let result = [];
+  // 中序遍历
+  function inOrder(root) {
+    if(root !== null) {
+      inOrder(root.left);
+      result.push(root.data);
+      inOrder(root.right);
+    }
+  }
+  inOrder(root)
+  return result.reverse()[k-1];
+}
+```
 
 ## LeetCode 算法题
 
@@ -545,3 +620,5 @@ function isValidBST(root, min, max) {
 * [450. 删除二叉搜索树中的节点](https://leetcode-cn.com/problems/delete-node-in-a-bst/)
 * [700. 二叉搜索树中的搜索](https://leetcode-cn.com/problems/search-in-a-binary-search-tree/)
 * [100. 相同的树](https://leetcode-cn.com/problems/same-tree/)
+* [98. 验证二叉搜索树](https://leetcode-cn.com/problems/validate-binary-search-tree/)
+* [剑指 Offer 27. 二叉树的镜像](https://leetcode-cn.com/problems/er-cha-shu-de-jing-xiang-lcof/)

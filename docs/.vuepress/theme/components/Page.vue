@@ -172,7 +172,6 @@ export default {
       this.type = frontmatter.type
       this.issueType = frontmatter.subType == 'oneTopic'
       this.vssue = title;
-      this.initImgZoom();
 
       // this.initGitalk();
     },
@@ -266,7 +265,7 @@ export default {
   },
   mounted() {
     this.updated();
-
+    this.initImgZoom();
   },
   watch: {
     $route: function (params) {
