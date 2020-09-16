@@ -95,9 +95,13 @@ function insert(data) {
 
 ## 遍历BST
 
+树的遍历一般分为`DFS`(深度优先遍历)，`BFS`（广度优先遍历）
+
 目前基本的BST已经成型，可以简单的构造出一颗二叉树搜索树，不过也需要遍历，输出其每个节点上的值。
 
-目前有三种方式可以遍历二叉树搜索树，**先序遍历**，**中序遍历**，**后序遍历**
+目前`DFS`有三种方式可以遍历二叉树搜索树，**先序遍历**，**中序遍历**，**后序遍历**
+
+`BFS`一般是层序遍历
 
 ### 先序遍历
 
@@ -548,9 +552,12 @@ function isValidBST(root, min, max) {
 
 ## 二叉搜索树的镜像
 
-二叉树的镜像定义：交换节点的左右子节点，如下图：*来自LeetCode*
+二叉树的镜像定义(也是二叉树的交换)：交换节点的左右子节点，如下图：*来自LeetCode*
 
 ![bst_mirror](https://raw.githubusercontent.com/Wangbaoqi/blogImgs/master/nateImgs/structure/tree/BST_mirror.png)
+
+[LeetCode - 二叉树交换](https://leetcode-cn.com/problems/invert-binary-tree/),
+[LeetCode - 剑指 Offer 27. 二叉树的镜像](https://leetcode-cn.com/problems/er-cha-shu-de-jing-xiang-lcof/)这两道题是一个意思
 
 如果采用递归的方式：
 
@@ -593,7 +600,7 @@ function mirrorBST(root) {
 
 ```js
 /**
- * 树的镜像
+ * 二叉搜索树的第K大节点
  * @param node root
  * @param int k
  */
@@ -612,6 +619,36 @@ function kthLargest(root, k) {
 }
 ```
 
+## 二叉树的深度
+
+计算二叉树的深度，可以采用前面讲的树的遍历方式。
+
+* DFS(深度优先遍历): 后序遍历
+* BFS(广度优先遍历): 层序遍历
+
+**DFS 后序遍历**
+
+看下图示（来自LeetCode）
+
+![DFS - depth](https://raw.githubusercontent.com/Wangbaoqi/blogImgs/master/nateImgs/structure/tree/BST_depth.png)
+
+递归方式：
+
+* 递归结束条件 - 节点指向`null`，则深度为**0**
+* 递归公式
+  * 计算左子树的深度
+  * 计算右子树的深度
+  * 返回树的深度
+
+```js
+function depthBST(root) {
+  // 结束条件
+  if(root == null) return 0;
+  // 递推公式
+  return Math.max(depthBST(root.left), depthBST(root.right)) + 1
+}
+```
+
 ## LeetCode 算法题
 
 学完有关二叉搜索树的概念以及操作，就可以去**LeetCode**上刷题了，下面是有关二叉搜索树的所有题目
@@ -622,3 +659,5 @@ function kthLargest(root, k) {
 * [100. 相同的树](https://leetcode-cn.com/problems/same-tree/)
 * [98. 验证二叉搜索树](https://leetcode-cn.com/problems/validate-binary-search-tree/)
 * [剑指 Offer 27. 二叉树的镜像](https://leetcode-cn.com/problems/er-cha-shu-de-jing-xiang-lcof/)
+* [226. 翻转二叉树](https://leetcode-cn.com/problems/invert-binary-tree/)
+* [剑指 Offer 55 - I. 二叉树的深度](https://leetcode-cn.com/problems/er-cha-shu-de-shen-du-lcof/)
