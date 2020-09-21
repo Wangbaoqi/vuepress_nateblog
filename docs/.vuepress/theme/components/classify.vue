@@ -9,7 +9,7 @@
           <Article :tag="tag" @turnTo="change" :lang="lang"></Article>
         </template>
         <div class="more" v-if="show" @click="infoLength=blog.length;show=false">
-          {{ lang == 'zh' ? '查看全部' : 'show all'}}
+          查看全部
           <span class="reform-xiala"></span>
         </div>
       </div>
@@ -64,7 +64,7 @@ export default {
       //   go = go.filter(e => e.frontmatter.type === 'web-topic' )
       // }
 
-      go = go.filter(e => e.frontmatter.lang && e.frontmatter.lang === lang)
+      // go = go.filter(e => e.frontmatter.lang && e.frontmatter.lang === lang)
       
       this.blog = go.filter(v => v.frontmatter.tag == tag);
       this.tag = tag

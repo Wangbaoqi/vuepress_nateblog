@@ -1,7 +1,7 @@
 ---
 type: data-structure
 tag: DataStructure 
-lang: us
+lang: zh
 excerpt: '队列结构以及队列的使用'
 ---
 # 队列结构以及队列的使用
@@ -146,6 +146,76 @@ pqueue.enqueue(new QueueElement('nate', 5))
 pqueue.enqueue(new QueueElement('natebaoqi', 2))
 pqueue.enqueue(new QueueElement('john', 2))
 ```
+
+## 单调队列
+
+单调队列是一种特殊的队列，也是一种**双端队列**。**单调**的含义是单调递增(递减)；就是队列中每新增一个新元素，就要把之前比新元素小的(或大的)都要删掉，队列中的队首就会是最大或者最小的元素。
+
+实现单调队列结构
+
+```js
+class MonotonicQueue {
+  constructor() {
+    this.queue = []
+  }
+
+  empty() {
+    return !this.queue.length
+  }
+
+  size() {
+    return this.queue.length || 0
+  }
+
+  // 返回队尾的元素
+  back() {
+    return this.size() && this.queue[this.size() - 1]
+  }
+  // 删除队尾元素
+  popBack() {
+    this.queue.pop()
+  }
+  // 队尾新增元素
+  pushBack(n) {
+    this,queue.push(n)
+  }
+
+  // 元素入队
+  push(n) {
+    while(!this.empty() && this.back() < n) {
+      this.popBack()
+    }
+    this.pushBack(n)
+  }
+  // 返回队首的元素
+  front() {
+    return this.queue[0]
+  }
+  // 删除队首元素
+  popFront() {
+    this.queue.shift()
+  }
+  // 队首新增元素
+  pushFront(n) {
+    this.queue.unshift(n)
+  }
+
+  // 返回最大元素
+  max() {
+    return this.front()
+  }
+  // 删除元素
+  pop(n) {
+    if(!this.size() && this.front() === n) {
+      this.popFront()
+    }
+  }
+}
+```
+
+单调队列的应用可以计算某个区域之间的最值，同时时间复杂度为O(1)
+
+
 
 ## 队列的使用 
 

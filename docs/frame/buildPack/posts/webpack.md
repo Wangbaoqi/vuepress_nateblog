@@ -3,7 +3,7 @@ type: webpack
 subType: oneTopic
 subTag: webpack
 tag: BuildPack
-lang: us
+lang: zh
 ---
 
 # Webpack 打包

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>lazy-load</title>
+  <style>
+    .img {
+      width: 200px;
+      height: 200px;
+      background: #eeeeee;
+    }
+    .img img {
+      width: 200px;
+      height: 200px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="img">
+      <img data-src="./img/1.jpg" alt="">
+    </div>
+    <div class="img">
+      <img data-src="./img/2.jpg" alt="加载中">
+    </div><div class="img">
+      <img data-src="./img/3.jpg" alt="加载中">
+    </div><div class="img">
+      <img data-src="./img/4.png" alt="加载中">
+    </div><div class="img">
+      <img data-src="./img/5.jpg" alt="加载中">
+    </div><div class="img">
+      <img data-src="./img/6.jpeg" alt="加载中">
+    </div><div class="img">
+      <img data-src="./img/7.jpg" alt="加载中">
+    </div><div class="img">
+      <img data-src="./img/8.jpg" alt="加载中">
+    </div><div class="img">
+      <img data-src="./img/9.jpeg" alt="加载中">
+    </div><div class="img">
+      <img data-src="./img/10.jpeg" alt="加载中">
+    </div>
+  </div>
+
+
+  <script>
+    var img = document.getElementsByTagName('img');
+
+    var viewHeight = window.innerHeight || document.documentElement.clientHeight
+
+    var num = 0;
+
+    function lazy() {
+      console.log('load')
+      for(var i = num; i < img.length; i++) {
+        var distance = viewHeight - img[i].getBoundingClientRect().top;
+
+        if(distance >= 0) {
+          img[i].src = img[i].getAttribute('data-src');
+          num ++
+        }
+      }
+    }
+
+    function throttle(fn, wait) {
+      let last = 0;
+      let timer = null;
+
+      return (...args) => {
+        let now = +new Date();
+
+        if(now - last > wait) {
+          last = now;
+          fn.apply(this, args)
+        }else {
+          clearTimeout(timer);
+          timer = setTimeout(() => {
+            last = now;
+            fn.apply(this, args)
+          }, wait)
+        }
+      }
+    }
+
+
+    const lazyLoad = throttle(lazy, 2000)
+
+    window.addEventListener('scroll', lazyLoad, false)
+  </script>
+</body>
+</html>

@@ -2,8 +2,8 @@
 type: web-topic
 subType: oneTopic
 subTag: JavaScript相关
-lang: us
-tag: QuestionFix
+lang: zh
+tag: 壹题攻克
 ---
 
 # 谈谈数组去重

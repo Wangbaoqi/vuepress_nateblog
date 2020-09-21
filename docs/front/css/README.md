@@ -1,16 +1,6 @@
 ---
 type: typeHome
-lang: us
+excerpt: 'CSS'
+lang: zh
 tag: CSS
 ---
-
-
-<!-- <commit /> -->
-
-
-
-
-
-
-
-

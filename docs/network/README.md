@@ -1,5 +1,5 @@
 ---
 type: typeHome
 tag: NetWork
-lang: us
+lang: zh
 ---

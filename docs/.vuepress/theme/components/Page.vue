@@ -96,8 +96,8 @@ export default {
     },
 
     lastUpdatedText() {
-      if (typeof this.$themeLocaleConfig.lastUpdated === "string") {
-        return this.$themeLocaleConfig.lastUpdated;
+      if (typeof this.$themeConfig.lastUpdated === "string") {
+        return this.$themeConfig.lastUpdated;
       }
       if (typeof this.$site.themeConfig.lastUpdated === "string") {
         return this.$site.themeConfig.lastUpdated;

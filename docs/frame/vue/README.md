@@ -1,6 +1,6 @@
 ---
 type: typeHome
 tag: Vue
-lang: us
+lang: zh
 excerpt: ''
 ---

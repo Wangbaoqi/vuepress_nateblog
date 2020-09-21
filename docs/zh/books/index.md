@@ -1,4 +1,0 @@
----
-type: typeBook
-lang: zh
----

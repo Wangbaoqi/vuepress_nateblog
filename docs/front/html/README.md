@@ -1,16 +1,6 @@
 ---
 type: typeHome
-lang: us
+excerpt: 'HTML'
+lang: zh
 tag: HTML
 ---
-
-
-<!-- <commit /> -->
-
-
-
-
-
-
-
-

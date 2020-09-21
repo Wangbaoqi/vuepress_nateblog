@@ -1,7 +1,7 @@
 ---
 type: web-react
 tag: React
-lang: us
+lang: zh
 excerpt: 'Redux 手动实现, Context的使用，store，reducer，dispatch的实现。。。。'
 ---
 

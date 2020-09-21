@@ -1,5 +1,5 @@
 ---
 type: typeHome
-lang: us
+lang: zh
 tag: Frame
 ---

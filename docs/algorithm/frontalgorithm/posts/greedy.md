@@ -2,6 +2,6 @@
 type: data-structure & algorithm
 tag: Algorithm 
 excerpt: '贪心算法模式'
-lang: us
+lang: zh
 ---
 # 贪心算法模式

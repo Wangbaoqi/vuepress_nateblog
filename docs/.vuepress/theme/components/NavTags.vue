@@ -13,8 +13,7 @@ export default {
   
   computed: {
     filterNavTags() {
-			const curLanguage = /\/zh/.test(this.$page.path);
-			const curTagLists = this.$site.themeConfig.locales[curLanguage ? '/zh/' : '/'].nav;
+			const curTagLists = this.$site.themeConfig.nav;
 
 			return curTagLists
     }

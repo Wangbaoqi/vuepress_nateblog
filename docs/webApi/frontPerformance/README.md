@@ -1,5 +1,5 @@
 ---
 type: typeHome
 tag: performance
-lang: us
+lang: zh
 ---

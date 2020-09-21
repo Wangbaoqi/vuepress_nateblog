@@ -2,7 +2,7 @@
 type: data-structure
 tag: ProgramCode 
 excerpt: '常见的对象处理算法以及收集面试题'
-lang: us
+lang: zh
 ---
 # 对象编程
 

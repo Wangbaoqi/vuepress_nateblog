@@ -4,9 +4,9 @@ module.exports = {
       title: 'HTML',
       collapsable: false,
       children: [
-        '/front/html/posts/web semantic',
-        '/front/html/posts/web communication',
-        '/front/html/posts/web offline',
+        '/front/html/posts/web语义',
+        '/front/html/posts/web通信',
+        '/front/html/posts/web离线存储',
       ]
     },
     {
@@ -17,30 +17,34 @@ module.exports = {
         '/front/css/posts/layout',
         '/front/css/posts/centered',
         '/front/css/posts/BFC',
-        '/front/css/posts/response',
-        '/front/css/posts/css induction',
+        '/front/css/posts/css_syntax',
+        '/front/css/posts/css技术收纳',
       ]
     },
     {
       title: 'JavaScript',
       collapsable: false,
       children: [
-        '/front/javascript/primary/JS data-type',
-        '/front/javascript/primary/JS scope-Closure',
-        '/front/javascript/primary/JS this-prototype',
-        '/front/javascript/primary/JS eventLoop',
-        '/front/javascript/intermediate/JS memory-mechanism',
-        '/front/javascript/primary/JS async',
-        '/front/javascript/intermediate/JS Functional-program',
-
+        '/front/javascript/primary/JSGrammar',
+        '/front/javascript/primary/JSExpress',
+        '/front/javascript/primary/JS数据类型',
+        '/front/javascript/primary/JSES',
+        '/front/javascript/primary/JSArray',
+        '/front/javascript/primary/JSFunction_class',
+        '/front/javascript/primary/JSReg',
+        '/front/javascript/primary/JS作用域以及闭包',
+        '/front/javascript/primary/JSthis以及原型',
+        '/front/javascript/primary/JSeventLoop',
+        '/front/javascript/intermediate/JS内存机制',
+        '/front/javascript/primary/JS异步',
       ]
     },
     {
-      title: 'DesignPatterns',
+      title: 'DesignModel',
       collapsable: false,
       children: [
-        '/zh/front/designModel/posts/faceObject',
-        '/zh/front/designModel/posts/publish',
+        '/front/designModel/posts/faceObject',
+        '/front/designModel/posts/publish',
         
       ]
     },
@@ -62,6 +66,7 @@ module.exports = {
       collapsable: false,
       children: [
         '/algorithm/frontalgorithm/posts/search',
+        '/algorithm/frontalgorithm/posts/slideWindow',
         '/algorithm/frontalgorithm/posts/recursion',
         '/algorithm/frontalgorithm/posts/dynamic',
         '/algorithm/frontalgorithm/posts/greedy',
@@ -80,17 +85,22 @@ module.exports = {
 
   '/webApi/': [
     {
-      title: 'Brower',
+      title: 'Browser',
       collapsable: false,
       children: [
-        '/webApi/browser/browserLoop'
+        '/webApi/browser/posts/statusMachine',
+        '/webApi/browser/posts/statusHttp',
+        '/webApi/browser/posts/domTree'
+        // '/webApi/browser/posts/browserLoop',
+
+
       ]
     },
     {
       title: 'NodeJS',
       collapsable: false,
       children: [
-        '/webApi/node/nodeLoop'
+        '/webApi/node/posts/nodeLoop'
       ]
     },
   ],
@@ -188,4 +198,5 @@ module.exports = {
     },
     
   ],
+
 }

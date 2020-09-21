@@ -44,10 +44,8 @@ export default {
     
   },
   mounted() {
-    
-    const allNav = this.handleNavType(this.$site.themeConfig.locales[this.$localePath].sidebar || []);
-    const allActive = this.handleFilterPages(this.$site.pages);
-    this.activeGroup = this.groupMonth(allActive, allNav);
+    const allNav = this.handleNavType(this.$site.themeConfig.sidebar || []);
+    this.activeGroup = this.groupMonth(this.$site.pages, allNav);
 
   },
   methods: {
@@ -65,7 +63,7 @@ export default {
       return this.handleFilterTag(post).text || '';
     },
     handleFilterTag(post) {
-      const allNav = this.$themeLocaleConfig.nav;
+      const allNav = this.$themeConfig.nav;
       const tag = allNav.filter(e => e.text == post.frontmatter.tag)[0] || {};
       return tag
     },
@@ -73,12 +71,6 @@ export default {
     handlePostDate(post) {
       return dayJs(post.lastUpdated).format('YYYY-MM-DD')
     },
-
-    handleFilterPages(list) {
-      const curLan = this.$localePath == '/zh/' ? 'zh' : 'us';
-      return list.filter(el => el.frontmatter.lang == curLan)
-    },
- 
 
     handleProportion(prot, allProt) {
       return {
@@ -115,23 +107,13 @@ export default {
         if (monthGroup.hasOwnProperty(key)) {
           groupMonth[key] = {}
           groupMonth[key].commits = monthGroup[key].length
-          groupMonth[key].lists = monthGroup[key].filter(el => !typeList.includes(el.frontmatter.type)) || []
+          groupMonth[key].lists = monthGroup[key].filter(el => !typeList.includes(el.frontmatter.type)) || [],
+          groupMonth[key].show = true
         }
       }
 
 
-      // for (let it in groupMonth) {
-        
-      //   groupMonth[it].lists = nav.map(e =>
-      //     groupMonth[it].lists.filter(el => el.path.includes(e) && (!typeList.includes(el.frontmatter.type)))
-      //   ).map(el => {
-      //     return {
-      //       ...el[0],
-      //       commit: el.length
-      //     }
-      //   });
-        
-      // }
+   
       return groupMonth;
     }
   }

@@ -1,6 +1,6 @@
 ---
 type: typeHome
 tag: DataStructure 
-lang: us
+lang: zh
 excerpt: ''
 ---

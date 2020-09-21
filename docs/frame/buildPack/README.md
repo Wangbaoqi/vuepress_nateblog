@@ -1,6 +1,5 @@
 ---
 type: typeHome
+lang: zh
 tag: BuildPack
-lang: us
-excerpt: ''
 ---

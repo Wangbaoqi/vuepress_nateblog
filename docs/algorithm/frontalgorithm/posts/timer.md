@@ -2,7 +2,7 @@
 type: data-structure & algorithm
 tag: Algorithm 
 excerpt: '时钟类似算法归纳'
-lang: us
+lang: zh
 ---
 # 时钟类似算法归纳
 

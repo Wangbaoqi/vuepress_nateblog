@@ -1,17 +1,17 @@
 ---
 type: front-css
 tag: CSS
-lang: us
+lang: zh
 excerpt: '当对一个文档进行布局（lay out）的时候，浏览器的渲染引擎会根据标准之一的 CSS 基础框盒模型（CSS basic box model），将所有元素表示为一个个矩形的盒子（box）。CSS 决定这些盒子的大小、位置以及属性（例如颜色、背景、边框尺寸…）'
 ---
-# Box model
+# 盒子模型
 
 > 当对一个文档进行布局（lay out）的时候，浏览器的渲染引擎会根据标准之一的 CSS 基础框盒模型（CSS basic box model），将所有元素表示为一个个矩形的盒子（box）。CSS 决定这些盒子的大小、位置以及属性（例如颜色、背景、边框尺寸…）
 
 每个盒子都有四部分组成，content（内容宽度），内边距（padding），边框（border），外边距（margin）
 
 
-## box width
+## 盒子的宽度
 
 * 标准的盒子宽度 width = 内容宽度（content）+ padding + border + margin
 * IE低版本盒子宽度 width = 内容宽度（content + padding + border）+ margin
@@ -23,7 +23,7 @@ box-sizing 可以指定一个盒子的总宽度和总高度是什么方式
 2. border-box: 设置的border和padding会在元素的宽度里面
 
 
-## out margin merge
+## 外边距合并
 
 块级元素的上外边距和下外边距有时会合并（或折叠）为一个外边距，其大小取其中的最大者，这种行为称为外边距折叠（margin collapsing），有时也翻译为外边距合并。
 注意浮动元素和绝对定位元素的外边距不会折叠。

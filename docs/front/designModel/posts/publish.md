@@ -1,7 +1,7 @@
 ---
 type: front-JavaScript
-tag: DesignPatterns
-lang: us
+tag: DesignModel
+lang: zh
 excerpt: '发布-订阅 模式'
 ---
 
@@ -145,7 +145,7 @@ var observer = {
 ## 小结
 
 发布-订阅模式的使用非常广泛，可以用在异步编程中，也可以帮助完成松耦合的代码编写。
-在架构方面来看，无论[MVC](/zh/frame/mind/mvvm.html#mvc架构模式)、[MVP](zh/frame/mind/mvvm.html#mvp模式架构)和[MVVM](zh/frame/mind/mvvm.html#mvvm架构模式)中，都会有观察者模式的参与
+在架构方面来看，无论[MVC](/frame/mind/mvvm.html#mvc架构模式)、[MVP](/frame/mind/mvvm.html#mvp模式架构)和[MVVM](/frame/mind/mvvm.html#mvvm架构模式)中，都会有观察者模式的参与
 
 发布-订阅模式的优点：
 * 时间上的解耦

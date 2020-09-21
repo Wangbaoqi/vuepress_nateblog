@@ -2,7 +2,7 @@
 type: data-structure & algorithm
 tag: Algorithm 
 excerpt: '递归算法模式'
-lang: us
+lang: zh
 ---
 # 递归算法模式
 
@@ -62,13 +62,10 @@ function f(n) {
 // 1. 采用散列表 解决重复调用
 function f(n) {
   // 终止条件
-  if(n === 1) return 1
-  if(n === 2) return 2
-
-  let weakMap = new Map()
-
-  if(weakMap.has(n)) return weakMap.get(n)
-
+  if(n === 1) return 1;
+  if(n === 2) return 2;
+  let weakMap = new Map();
+  if(weakMap.has(n)) return weakMap.get(n);
   const res = f(n-1) + f(n-2)
   weakMap.set(n, res)
   return res
@@ -80,7 +77,6 @@ function f(n) {
   if(n === 2) return 2
 
   let result = 0
-
   let pre = 1
   let next = 2
 

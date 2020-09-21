@@ -39,7 +39,7 @@ export default {
       return dayJs(date).format('MMM D, YYYY')
     },
     tagStyle(tag) {
-      const navList = this.$themeLocaleConfig.nav;
+      const navList = this.$themeConfig.nav;
       const curItem = navList.filter(e => e.text.toLowerCase() === tag.frontmatter.tag.toLowerCase())[0];
       return {
         background: curItem.background,

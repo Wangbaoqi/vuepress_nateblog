@@ -93,9 +93,7 @@ export default {
       return globalObject;
     },
     initG6Array1(G6) {
-      fetch(
-        "https://gw.alipayobjects.com/os/antvdemo/assets/data/algorithm-category.json"
-      )
+      fetch("https://gw.alipayobjects.com/os/antvdemo/assets/data/algorithm-category.json")
         .then((res) => res.json())
         .then((data) => {
           data = this.graphRealm(["Array"]);
@@ -185,9 +183,9 @@ export default {
           graph.render();
           graph.fitView();
         });
+      },
     },
-  },
-};
+  };
 </script>
 
 <style lang="stylus">

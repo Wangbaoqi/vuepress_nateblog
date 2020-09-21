@@ -1,7 +1,7 @@
 ---
 type: data-structure
 tag: DataStructure 
-lang: us
+lang: zh
 excerpt: '栈结构以及栈的使用'
 ---
 # 栈结构以及栈的使用

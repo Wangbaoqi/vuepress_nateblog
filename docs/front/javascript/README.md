@@ -1,6 +1,6 @@
 ---
 type: typeHome
 excerpt: 'JavaScript'
-lang: us
+lang: zh
 tag: JavaScript
 ---

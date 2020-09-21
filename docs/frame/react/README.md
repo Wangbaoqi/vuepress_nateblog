@@ -1,6 +1,6 @@
 ---
 type: typeHome
 tag: React
-lang: us
+lang: zh
 excerpt: ''
 ---

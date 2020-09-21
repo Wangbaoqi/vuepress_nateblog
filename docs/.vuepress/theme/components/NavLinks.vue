@@ -48,7 +48,8 @@ export default {
 
   computed: {
     userNav () {
-      return this.$themeLocaleConfig.navTop || []
+      debugger
+      return this.$themeConfig.navTop || []
     },
 
     nav () {

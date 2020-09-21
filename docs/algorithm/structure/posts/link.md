@@ -1,7 +1,7 @@
 ---
 type: data-structure
 tag: DataStructure 
-lang: us
+lang: zh
 excerpt: '链表结构以及链表的使用'
 ---
 

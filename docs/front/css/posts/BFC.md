@@ -1,14 +1,14 @@
 ---
 type: front-css
 tag: CSS
-lang: us
+lang: zh
 excerpt: 'float 的破坏性 —— float 破坏了父标签的原本结构，使得父标签出现了坍塌现象。导致这一现象的最根本原因在于：被设置了 float 的元素会脱离文档流。其根本原因在于 float 的设计初衷是解决文字环绕图片的问题'
 ---
-# Float and using of BFC
+# 浮动以及BFC的使用
 
 > 引入 float 属性是为了能让 web 开发人员实现简单的布局，包括在一列文本中浮动的图像，文字环绕在它的左边或右边
 
-## float features
+## 浮动的特性
 
 float 的破坏性 —— float 破坏了父标签的原本结构，使得父标签出现了坍塌现象。导致这一现象的最根本原因在于：被设置了 float 的元素会脱离文档流。其根本原因在于 float 的设计初衷是解决文字环绕图片的问题
 
@@ -30,7 +30,7 @@ float 的破坏性 —— float 破坏了父标签的原本结构，使得父标
 
 [JSRun 中查看](http://jsrun.pro/L6XKp)
 
-## clear float (clear hack)
+## 清除浮动(clear hack)
 
 举个🌰: 正常情况 容器中有图片跟文字，图片向左浮动，此时会有文字环绕效果，现在清除浮动效果，让下方的文字不会环绕图片，在图片下方呈现
 

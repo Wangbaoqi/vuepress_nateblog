@@ -1,7 +1,7 @@
 ---
 type: web-react
 tag: React
-lang: us
+lang: zh
 excerpt: React 开发中采坑问题收集...
 ---
 

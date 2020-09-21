@@ -36,25 +36,13 @@ module.exports = [
     background: '#00a591'
   },
   {
-    text: 'Frame',
-    link: '/zh/frame/mind/',
-    color: '#ffffff',
-    background: '#b565a7'
-  },
-  {
-    text: 'QuestionFix',
+    text: '壹题攻克',
     link: '/everyday/',
     color: '#ffffff',
     background: '#5b5ea6'
   },
   {
-    text: 'NetWork',
-    link: '/network/',
-    color: '#ffffff',
-    background: '#6b5b95'
-  },
-  {
-    text: 'DesignPatterns',
+    text: 'DesignModel',
     link: '/front/designModel/',
     color: '#000',
     background: '#f7786b'
@@ -65,7 +53,12 @@ module.exports = [
     color: '#ffffff',
     background: '#00a591'
   },
-  
+  {
+    text: 'NetWork',
+    link: '/network/',
+    color: '#ffffff',
+    background: '#6b5b95'
+  },
   
   {
     text: 'React',
@@ -90,6 +83,12 @@ module.exports = [
     link: '/algorithm/programCode/',
     color: '#000000',
     background: '#bfd641'
+  },
+  {
+    text: 'Frame',
+    link: '/frame/mind/',
+    color: '#ffffff',
+    background: '#b565a7'
   },
   
 ]

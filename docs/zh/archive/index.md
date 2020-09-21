@@ -1,4 +1,0 @@
----
-type: typeArchive
-lang: zh
----

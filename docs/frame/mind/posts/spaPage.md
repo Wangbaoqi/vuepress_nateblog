@@ -1,7 +1,7 @@
 ---
 type: web-framework
 tag: Frame
-lang: us
+lang: zh
 excerpt: 'SPA application'
 ---
 

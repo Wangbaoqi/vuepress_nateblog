@@ -1,11 +1,10 @@
 ---
 type: front-css
 tag: CSS
-lang: us
+lang: zh
 excerpt: 'CSS 编译语言, less scss。。。'
 ---
-
-# CSS translater
+# CSS 编译语言
 
 ## Less
 

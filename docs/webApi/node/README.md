@@ -1,5 +1,5 @@
 ---
 type: typeHome
 tag: Node
-lang: us
+lang: zh
 ---

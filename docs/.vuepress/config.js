@@ -1,6 +1,6 @@
 module.exports = {
   base: '/',
-  title: 'Nate前端进阶',
+  title: '前端不好玩',
   description: '你写的每一行代码都是你的名片',
   dest: './dist',
   port: '8686',
@@ -10,23 +10,15 @@ module.exports = {
   markdown: {
     lineNumbers: true,
   },
-  locales: {
-    // 键名是该语言所属的子路径
-    // 作为特例，默认语言可以使用 '/' 作为其路径。
-    '/': {
-      lang: 'en-US', // 将会被设置为 <html> 的 lang 属性
-      title: 'FrontEnd Is Not Fun',
-      description: 'The business card of code that you write'
-    },
-    '/zh/': {
-      lang: 'zh-CN',
-      title: '前端不好玩',
-      description: '你写的每一行代码都是你的名片'
-    }
-  },
   themeConfig: {
     author: 'nate.wang',
-    locales: require('./config/locales'),
+
+    sidebarDepth: 2,
+    nav: require('./config/nav.js'),
+    sidebar: require('./config/sidebar.js'),
+    navTop: require('./config/navTop'),
+
+    // locales: require('./config/locales'),
     logo: '/favion.png',
     lastUpdated: 'Last Updated',
     searchMaxSuggestoins: 10,

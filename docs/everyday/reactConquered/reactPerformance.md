@@ -2,8 +2,8 @@
 type: web-topic
 subType: oneTopic
 subTag: React相关
-tag: QuestionFix
-lang: us
+tag: 壹题攻克
+lang: zh
 ---
 
 # React灵魂之问-react性能优化
