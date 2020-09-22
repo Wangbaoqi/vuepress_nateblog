@@ -10,20 +10,16 @@ export default {
   data() {
     return {};
   },
+  props: ['collectionType'],
   mounted() {
-    // import("@antv/g6").then((module) => {
-    //   // use code
-      
-    //   console.log(module, "module");
-    //   initG6(module, ["Array"]);
-    // });
     let that = this;
+    
     import("./utils").then((module) => {
       // use code
       console.log(module, "modulesss");
       import("@antv/g6").then((g6Module) => {
         // use code
-        module.default.initG6(g6Module, ["Object", "Boolean"], that);
+        module.default.initG6(g6Module, that.collectionType, that);
       });
     });
   },
