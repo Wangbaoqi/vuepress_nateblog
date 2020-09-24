@@ -27,4 +27,12 @@ excerpt: 'ECMAScript Object'
 * Error
 * RegExg
 
-<!-- <Object collectionType='String,Boolean'/> -->
+## object 内容
+
+object的内容无非有属性（可计算属性）、方法、对象的复制、属性描述符（数据属性和访问属性）、对象遍历等
+
+### 可计算属性
+
+
+
+
