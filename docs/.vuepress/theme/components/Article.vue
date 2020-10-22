@@ -76,7 +76,7 @@ $color = $accentColor;
       min-width 140px
       .post-time 
         font-family 'Inconsolata', monospace
-        font-size 18px
+        font-size 1.2rem
       .tags 
         margin-top 15px
         background #5b5ea6

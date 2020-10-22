@@ -26,7 +26,38 @@ $mobileSidebarWidth = $sidebarWidth * 0.82
     transition transform .2s ease
   .page
     padding-left 0
+
+  .abstract
+    .post-item
+      h3 
+        font-size 1.2rem
+        text-overflow ellipsis;
+        z-index -1;
+        display -webkit-box;
+        word-break break-all;
+        -webkit-box-orient vertical;
+        -webkit-line-clamp 1;
+        overflow hidden;
+      .post-desc 
+        font-size 1rem !important
+        text-overflow ellipsis;
+        z-index -1;
+        display -webkit-box;
+        word-break break-all;
+        -webkit-box-orient vertical;
+        -webkit-line-clamp 2;
+        overflow hidden;
   .theme-container
+    .blog-container 
+      display flex
+      flex-direction column
+    .navbar-left 
+      padding 1.5rem
+    .navbar-sidebar
+      display none
+
+    
+        
     &.sidebar-open
       .sidebar
         transform translateX(0)

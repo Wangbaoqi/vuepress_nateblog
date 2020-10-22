@@ -707,6 +707,47 @@ function maxDepth_BFS(root) {
 
 ```
 
+## 二叉树总结
+
+从上述二叉树的结构以及其实现，包含了`left`、`right`以及`data`。由于二叉搜索树是一个特殊的二叉树结构，所以有了以下一系列对二叉树的操作，包括`节点插入(insert)`、`遍历二叉树`(中序、先序、后序)、`二叉树查找`(最小、最大以及特定值)、`二叉树节点删除`、`二叉树的节点计数`、`二叉树的深度`(深度遍历以及广度遍历)以及其他的操作，可以到[leetCode-二叉树](https://leetcode-cn.com/problemset/all/?search=%E4%BA%8C%E5%8F%89%E6%A0%91)查看。
+
+### 二叉树中算法思想
+
+可以看到，在众多的二叉树算法中，用到最多的算法模式是**递归**的思想，当然也可以用**迭代**的方式解决。**递归**是纵向看待问题的，不会去看细节，也就是过程是如何处理的。而**迭代**是横向解决的，也就是需要注重细节的。
+
+写了这么多的算法，怎么保证随着时间的推移而不会忘记，其他从中可以看出，这些算法也是有所谓的**框架**的，也就是常说的**套路**。
+
+### 二叉树Insert Frame
+
+二叉树的实现，也就是节点**insert**，这个是二叉树的基本算法，根据二叉搜索树的特性，采用递归的方式，生成框架:
+
+```js
+/**
+ * 节点构造函数 Node
+ * @param data
+ */
+function Node(data) {
+  this.data = data;
+  this.left = null;
+  this.right = null;
+}
+/**
+ * BST Insert
+ * @param root
+ * @param data
+ */
+function BSTInsert(root, data) {
+  if(root == null) return new Node(data);
+
+  if(root.data < data) return root.right = BSTInsert(root.right, data);
+
+  if(root.data > data) return root.left = BSTInsert(root.left, data);
+}
+```
+
+
+
+
 ## LeetCode 算法题
 
 学完有关二叉搜索树的概念以及操作，就可以去**LeetCode**上刷题了，下面是有关二叉搜索树的所有题目

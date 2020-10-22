@@ -1,6 +1,5 @@
 <template>
   <header class="navbar">
-    <SidebarButton @toggle-sidebar="$emit('toggle-sidebar')"/>
     <!-- 适配移动端，展示隐藏目录的按钮，默认主题对移动端的适配下足了
     功夫，这也是我改造默认主题而不是自定义主题的原因，自己写主题当然也
     能实现，但是无疑会花上加倍的时间，很多第三方主题都不支持移动端 -->
@@ -140,9 +139,10 @@ $navbar-background = rgba(52,50,50,0.7)
 
 @media (max-width: $MQMobile)
   .navbar
-    padding-left 4rem
+    padding-left 2rem
     .can-hide
       display none
     .links
-      padding-left 1.5rem
+      // padding-left 1.5rem
+      right 2.5rem
 </style>
