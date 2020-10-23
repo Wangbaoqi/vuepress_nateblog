@@ -37,7 +37,7 @@ object的内容无非有属性（可计算属性）、方法、对象的复制�
 
 ```js
 let obj = {
-    a: 1,s
+    a: 1,
     'b': 2,
     // 可计算属性名
     ['b'+'c']: 3,
@@ -52,8 +52,10 @@ obj['bc'] // 3
 obj.foo(); // foo
 ```
 
-### 属性访问器
+### 属性描述器
 
+属性描述器是从**ES5**开始才有的，可以看到对象中某个属性的特性，比如`writable`(可访问性)、`configurable`（可配置性）、`enumerable`（可枚举性）以及 `value`(值)
 
+获取对象的某个特性 *Object* 也提供了方法 *Object.getOwnPropertyDescriptor(obj, 'a')*
 
-
+同时也有定义对象的某个特性的方式 *Object.definedProperty*
