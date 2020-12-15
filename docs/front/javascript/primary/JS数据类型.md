@@ -1,10 +1,12 @@
 ---
 type: front-JavaScript
 tag: JavaScript
+subTag: JavaScript 基础
 lang: zh
+sort: 1
 excerpt: 'ECMAScript 语言中所有的值都有一个对应的语言类型。ECMAScript 语言类型包 括 Undefined、Null、Boolean、String、Number 和 Object。'
 ---
-# JS 数据类型
+# JS 基础 - 数据类型
 ::: tip
 ECMAScript 语言中所有的值都有一个对应的语言类型。ECMAScript 语言类型包 括 Undefined、Null、Boolean、String、Number 和 Object。
 :::

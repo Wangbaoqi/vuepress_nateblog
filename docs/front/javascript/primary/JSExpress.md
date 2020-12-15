@@ -1,7 +1,9 @@
 ---
 type: front-JavaScript
 tag: JavaScript
+subTag: JavaScript Specification
 lang: zh
+sort: 2
 excerpt: 'JavaScript Expressions and Statement'
 ---
 # ECMAScript Specification 系列 - 表达式和语句

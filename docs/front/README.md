@@ -20,7 +20,7 @@ lang: zh
 
 
 
-![html mind](https://cdn.img.wenhairu.com/images/2020/04/10/NUGkh.png)
+![html mind](https://raw.githubusercontent.com/Wangbaoqi/blogImgs/master/nateImgs/index/htmlModel.png)
 
 
 **标记语言**: 特指用约定好的一系列标记对电子文档进行标记，来实现电子文档的语义、结构和格式的定义，定义什么样的标记是允许的，什么样的标记是必须的
@@ -41,7 +41,7 @@ lang: zh
 
 重新建立一份关于CSS的知识脑图，CSS在大部分开发者中是处于比较低的位置的，因此，为了能更好的掌握前端，CSS是必不可少的一环。
 
-![css mind](https://cdn.img.wenhairu.com/images/2020/04/11/NugpG.png)
+![css mind](https://raw.githubusercontent.com/Wangbaoqi/blogImgs/master/nateImgs/index/css_model.png)
 
 
 ### JavaScript 知识脑图
@@ -49,7 +49,7 @@ lang: zh
 JavaScript 在前端中处在不可缺少的地位，其重要性相当于一栋建筑的地基。
 JavaScript 在维度方面可以分为```语法```, ```语义```和```运行时```，任何计算机语言都是用规定的语法去表达对应的语义，最终操作运行时的过程。
 
-![JS mind](https://cdn.img.wenhairu.com/images/2020/04/11/Nu3Mp.png)
+![JS mind](https://raw.githubusercontent.com/Wangbaoqi/blogImgs/master/nateImgs/index/JavaScript.png)
 
 
 

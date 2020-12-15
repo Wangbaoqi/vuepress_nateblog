@@ -1,6 +1,8 @@
 ---
 type: front-JavaScript
 tag: JavaScript
+subTag: JavaScript Specification
+sort: 6
 lang: zh
 excerpt: 'JavaScript Regular Expression'
 ---

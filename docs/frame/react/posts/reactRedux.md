@@ -80,7 +80,7 @@ class Header extends Component {
 
 先看一个使用react-redux实现的效果图, 业务需求是点击不同颜色的按钮，改变整个APP组件的主题颜色 
 
-![react-component](https://cdn.img.wenhairu.com/images/2019/10/23/AY8mA.png)
+![react-component](https://raw.githubusercontent.com/Wangbaoqi/blogImgs/master/nateImgs/react/redux_1.png)
 
 看下父组件的结构:
 

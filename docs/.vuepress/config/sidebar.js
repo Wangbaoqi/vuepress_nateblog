@@ -49,39 +49,39 @@ module.exports = {
       ]
     },
   ],
-  '/algorithm/': [
-    {
-      title: 'DataStructer',
-      collapsable: false,
-      children: [
-        '/algorithm/structure/posts/array',
-        '/algorithm/structure/posts/link',
-        '/algorithm/structure/posts/stack',
-        '/algorithm/structure/posts/queue',
-        '/algorithm/structure/posts/dictionary',
-      ]
-    },
-    {
-      title: 'Algorithm',
-      collapsable: false,
-      children: [
-        '/algorithm/frontalgorithm/posts/search',
-        '/algorithm/frontalgorithm/posts/slideWindow',
-        '/algorithm/frontalgorithm/posts/recursion',
-        '/algorithm/frontalgorithm/posts/dynamic',
-        '/algorithm/frontalgorithm/posts/greedy',
-        '/algorithm/frontalgorithm/posts/timer',
+  // '/algorithm/': [
+  //   {
+  //     title: 'DataStructer',
+  //     collapsable: false,
+  //     children: [
+  //       '/algorithm/structure/posts/array',
+  //       '/algorithm/structure/posts/link',
+  //       '/algorithm/structure/posts/stack',
+  //       '/algorithm/structure/posts/queue',
+  //       '/algorithm/structure/posts/dictionary',
+  //     ]
+  //   },
+  //   {
+  //     title: 'Algorithm',
+  //     collapsable: false,
+  //     children: [
+  //       '/algorithm/frontalgorithm/posts/search',
+  //       '/algorithm/frontalgorithm/posts/slideWindow',
+  //       '/algorithm/frontalgorithm/posts/recursion',
+  //       '/algorithm/frontalgorithm/posts/dynamic',
+  //       '/algorithm/frontalgorithm/posts/greedy',
+  //       '/algorithm/frontalgorithm/posts/timer',
 
-      ]
-    },{
-      title: 'programCode',
-      collapsable: false,
-      children: [
-        '/algorithm/programCode/posts/arrayFlat',
-        '/algorithm/programCode/posts/ObjectFlat',
-      ]
-    },
-  ],
+  //     ]
+  //   },{
+  //     title: 'programCode',
+  //     collapsable: false,
+  //     children: [
+  //       '/algorithm/programCode/posts/arrayFlat',
+  //       '/algorithm/programCode/posts/ObjectFlat',
+  //     ]
+  //   },
+  // ],
 
   '/webApi/': [
     {
@@ -147,16 +147,6 @@ module.exports = {
     },
   ],
   
-  '/network/': [
-    {
-      title: 'NetWork',
-      collapsable: false,
-      children: [
-        '/network/httpProto/http',
-      ]
-    },
-  ],
-
   '/frame/': [
     {
       title: 'Frame',

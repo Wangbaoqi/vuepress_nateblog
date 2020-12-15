@@ -1,7 +1,9 @@
 ---
 type: front-JavaScript
 tag: JavaScript
+subTag: JavaScript Specification
 lang: zh
+sort: 3
 excerpt: "JavaScript Function and Class"
 ---
 

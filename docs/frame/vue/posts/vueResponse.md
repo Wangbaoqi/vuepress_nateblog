@@ -13,7 +13,7 @@ excerpt: "Vue 源码系列一之响应式原理"
 
 首先看下面的流程图，包含了上述描述的几个模块，接下来的篇幅中会对每一个模块在源码层面进行剖析。
 
-![Vue-run](https://cdn.img.wenhairu.com/images/2020/08/12/wGCd6.png)
+![Vue-run](https://raw.githubusercontent.com/Wangbaoqi/blogImgs/master/nateImgs/vue/vueMvvm.png)
 
 这里看的[vue 源码](https://github.com/vuejs/vue)是*v2.6.11*
 

@@ -1,7 +1,7 @@
 ---
 type: web-server
-tag: BuildPack 
-lang: zh
+tag: jenkins 
+lang: us
 excerpt: '使用Docker、Jenkins、GitHub在centos中部署Vue'
 ---
 # Docker、Jenkins部署Vue
@@ -31,7 +31,7 @@ ssh root@ip # ip 是公网IP地址
 **注意**
 服务器需要添加安全组（这里除了系统默认添加的，如果在服务器中安装了Jenkins，需要给Jenkins配置端口号的话，需要额外添加一项），如图：
 
-![server-security](https://cdn.img.wenhairu.com/images/2019/11/25/A5O2u.png)
+![server-security](https://raw.githubusercontent.com/Wangbaoqi/blogImgs/master/nateImgs/build/jenkin_0.png) 
 
 这个新增的端口分配给Jenkins配置页面，（这个是后话）。。。
 
@@ -71,7 +71,7 @@ $ sudo systemctl restart docker
 $ docker info
 ```
 配置正确的话，如下图:
-![docker-register](https://cdn.img.wenhairu.com/images/2019/11/26/A5i4C.png)
+![docker-register](https://raw.githubusercontent.com/Wangbaoqi/blogImgs/master/nateImgs/build/jenkin_1.png)
 
 
 ## Jenkins 安装
@@ -114,42 +114,42 @@ $ docker exec jenkins_nate cat /var/jenkins_home/secrets/initialAdminPassword
 
 顺利的话，已经进入到Jenkins系统页面。
 
-![jenkins-home](https://cdn.img.wenhairu.com/images/2019/11/26/A5heT.png)
+![jenkins-home](https://raw.githubusercontent.com/Wangbaoqi/blogImgs/master/nateImgs/build/jenkin_2.png) 
 
 **接下来我们要配置部署，需要安装插件 publish over SSH，和node**
 
-![jenkin-conf](https://cdn.img.wenhairu.com/images/2019/11/26/AnmDj.png)
+![jenkin-conf](https://raw.githubusercontent.com/Wangbaoqi/blogImgs/master/nateImgs/build/jenkin_3.png) 
 选择插件管理-可选插件里搜索 publish over SSH，和node 安装后重启
 
-![jenkin-conf](https://cdn.img.wenhairu.com/images/2019/11/26/AnWIq.png)
+![jenkin-conf](https://raw.githubusercontent.com/Wangbaoqi/blogImgs/master/nateImgs/build/jenkin_5.png) 
 
 接下来，配置**publish over SSH** 
 
-![jenkin-conf](https://cdn.img.wenhairu.com/images/2019/11/26/An640.png)
+![jenkin-conf](https://raw.githubusercontent.com/Wangbaoqi/blogImgs/master/nateImgs/build/jenkin_4.png) 
 
 填完之后，可以点击**Test Configuration** 是否连接成功
 
 配置node
-![jenkin-conf](https://cdn.img.wenhairu.com/images/2019/11/26/A5xGv.png)
+![jenkin-conf](https://raw.githubusercontent.com/Wangbaoqi/blogImgs/master/nateImgs/build/jenkin_6.png) 
 
 配置完之后，新建一个任务，选择自由风格
-![jenkin-conf](https://cdn.img.wenhairu.com/images/2019/11/26/A5vAG.png)
+![jenkin-conf](https://raw.githubusercontent.com/Wangbaoqi/blogImgs/master/nateImgs/build/jenkin_7.png) 
 
 完成之后，就会有一个工程
 
-![jenkin-conf](https://cdn.img.wenhairu.com/images/2019/11/26/AnK1H.png)
+![jenkin-conf](https://raw.githubusercontent.com/Wangbaoqi/blogImgs/master/nateImgs/build/jenkin_8.png) 
 
 配置这个工程, 首先是项目介绍以及源码地址
 
-![jenkin-conf](https://cdn.img.wenhairu.com/images/2019/11/26/Anqcg.png)
+![jenkin-conf](https://raw.githubusercontent.com/Wangbaoqi/blogImgs/master/nateImgs/build/jenkin_9.png) 
 
 其次是构建方式
 
-![jenkin-conf](https://cdn.img.wenhairu.com/images/2019/11/26/AnF3K.png)
+![jenkin-conf](https://raw.githubusercontent.com/Wangbaoqi/blogImgs/master/nateImgs/build/jenkin_10.png) 
 
 之后构建脚本
 
-![jenkin-conf](https://cdn.img.wenhairu.com/images/2019/11/26/AnYf3.png)
+![jenkin-conf](https://raw.githubusercontent.com/Wangbaoqi/blogImgs/master/nateImgs/build/jenkin_11.png) 
 
 **构建脚本**
 
@@ -248,10 +248,10 @@ EXPOSE 80
 
 **控制台输出**
 
-![jenkin-conf](https://cdn.img.wenhairu.com/images/2019/11/26/AnJAd.png)
+![jenkin-conf](https://raw.githubusercontent.com/Wangbaoqi/blogImgs/master/nateImgs/build/jenkin_12.png) 
 
 **部署成功**
-![jenkin-conf](https://cdn.img.wenhairu.com/images/2019/11/26/AnwBf.png)
-
+![jenkin-conf](https://raw.githubusercontent.com/Wangbaoqi/blogImgs/master/nateImgs/build/jenkin_13.png) 
+ 
 **访问公网IP**
 [nate.wang's home](http://49.233.132.251/)

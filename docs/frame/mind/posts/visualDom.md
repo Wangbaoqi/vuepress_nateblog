@@ -16,7 +16,7 @@ visual-dom 产生是为了解决DOM操作的性能损耗大的手段。将真实
 ## 真实DOM和其解析流程 
 
 ```webkit```渲染引擎渲染DOM 
-![real-dom](https://cdn.img.wenhairu.com/images/2020/03/11/mOhyT.png)
+![real-dom](https://raw.githubusercontent.com/Wangbaoqi/blogImgs/master/nateImgs/browser/domLayout.png)
 
 浏览器的渲染过程大致分为:
 创建```DOM```树 -> 创建```style rules``` -> 构建```render``` 树 -> 布局```Layout``` -> 绘制```painting```

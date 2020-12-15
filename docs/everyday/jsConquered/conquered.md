@@ -188,7 +188,7 @@ function foo() {
 foo()
 ```
 
-![foo-执行上下文](https://cdn.img.wenhairu.com/images/2019/12/12/APUUn.png)
+![foo-执行上下文](https://raw.githubusercontent.com/Wangbaoqi/blogImgs/master/nateImgs/JavaScript/ctx/ctx.png)
 
 
 通过图发现，在编译foo函数阶段，所有通过var声明的变量都在变量环境对象中，而通过let声明的变量只有

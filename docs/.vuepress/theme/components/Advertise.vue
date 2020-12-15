@@ -38,7 +38,7 @@ export default {
       cursor pointer
       .item-pic
         display block
-        background url('https://cdn.img.wenhairu.com/images/2020/05/05/Ywx9g.png') no-repeat
+        background url('https://raw.githubusercontent.com/Wangbaoqi/blogImgs/master/nateImgs/index/ecma.png') no-repeat
         background-size 100%
         width 100%
         height 53px

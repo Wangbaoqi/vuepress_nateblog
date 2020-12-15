@@ -14,7 +14,7 @@ CSS(Cascading Style Sheets) 允许创建漂亮的网站。它也是一门语言�
 
 首先看一下整理的CSS脑图
 
-![css-mind](https://cdn.img.wenhairu.com/images/2020/06/12/f5GDG.png)
+![css-mind](https://raw.githubusercontent.com/Wangbaoqi/blogImgs/master/nateImgs/index/css_model.png)
 
 
 ## CSS 语法描述 

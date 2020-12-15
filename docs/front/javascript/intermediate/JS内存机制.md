@@ -2,6 +2,8 @@
 type: front-JavaScript
 tag: JavaScript
 lang: zh
+sort: 3
+subTag: JavaScript 进阶
 excerpt: 'JS 内存机制'
 ---
 
@@ -25,7 +27,7 @@ JS的数据类型有7种，null、undefined、number、string、boolean、object
 2. 栈空间 - 调用栈的存在空间
 3. 堆空间 - 引用类型的存在空间
 
-![内存模型](https://cdn.img.wenhairu.com/images/2019/12/16/A4fRd.png)
+![内存模型](https://raw.githubusercontent.com/Wangbaoqi/blogImgs/master/nateImgs/JavaScript/memory/mem_1.png)
 
 这是一段简单的code：
 ```js
@@ -42,7 +44,7 @@ foo();
 ```
 利用执行上下文分析foo函数中变量的存储方式
 
-![调用栈和堆空间](https://cdn.img.wenhairu.com/images/2019/12/16/A4Jqq.png)
+![调用栈和堆空间](https://raw.githubusercontent.com/Wangbaoqi/blogImgs/master/nateImgs/JavaScript/ctx/ctx_1.png)
 
 可以看到，基本类型（原始类型）的数据基本都存在栈空间里，而引用类型数据在栈中只是其堆空间的地址，数据其实在堆空间中。
 
@@ -79,7 +81,7 @@ bar.getName() //
 
 **foo函数执行到return的时候，调用栈是如何执行的**
 
-![闭包-执行栈](https://cdn.img.wenhairu.com/images/2019/12/16/A4Dv6.png)
+![闭包-执行栈](https://raw.githubusercontent.com/Wangbaoqi/blogImgs/master/nateImgs/JavaScript/ctx/ctx_2.png)
 
 
 **总而言之：产生闭包Clourse的核心两步**
@@ -124,7 +126,7 @@ function foo() {
 foo()
 ```
 利用这个例子通过调用栈来阐述一下栈中的垃圾回收
-![栈中的垃圾回收](https://cdn.img.wenhairu.com/images/2019/12/17/A4nqS.png)
+![栈中的垃圾回收](https://raw.githubusercontent.com/Wangbaoqi/blogImgs/master/nateImgs/JavaScript/ctx/ctx_3.png)
 
 可以看到，当foo函数执行完成，ESP指针就会指向全局执行上下文，此时foo函数中的数据就会被回收掉。此时会有个问题，foo函数的执行上下文被弹出了，但是其对象b的引用还在堆空间中，这个就是堆空间的垃圾回收了
 
@@ -146,7 +148,7 @@ foo()
 
 **新生代区**采用的是**Scavenge算法**
 
-![新生代区](https://cdn.img.wenhairu.com/images/2019/12/18/A4050.png)
+![新生代区](https://raw.githubusercontent.com/Wangbaoqi/blogImgs/master/nateImgs/JavaScript/ctx/ctx_4.png)
 Scavenge算法是将新生代区分成两个区域：对象区域和空闲区域。
 当对象区域写满时，副垃圾回收器会进行一下垃圾回收，对对象区域中的垃圾进行标记，然后将未标记的对象一次性复制到空闲区域，对标记的对象区域中的垃圾进行清理，然后将空闲区域和对象区域的角色进行互换。这样还能让新生代中的两块区域无限循环下去。
 
@@ -159,7 +161,7 @@ Scavenge算法是将新生代区分成两个区域：对象区域和空闲区域
 **老生代区**采用的是 **标记** - **清除**的算法
 
 
-![老生代区](https://cdn.img.wenhairu.com/images/2019/12/18/A44TU.png)
+![老生代区](https://raw.githubusercontent.com/Wangbaoqi/blogImgs/master/nateImgs/JavaScript/ctx/ctx_5.png)
 
 首先是标记阶段，当ESP从foo执行上文下移到全局执行上下文，这时遍历调用栈，是不会找到0100的地址的，因此这块地址会被标记。
 其次是清除阶段，主垃圾回收器会将标记的内存块进行清除，但是这样就会产生了不连续的内存，产生了内存碎片。

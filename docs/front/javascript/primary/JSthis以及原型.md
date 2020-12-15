@@ -1,10 +1,12 @@
 ---
 type: front-JavaScript
 tag: JavaScript
+subTag: JavaScript 基础
 lang: zh
+sort: 3
 excerpt: 'this 是在运行时绑定的，不是在编写时绑定的（词法作用域），上下文取决于调用的条件。创建的每一个函数都有一个prototype（原型）属性，它是一个指针，指向一个对象（包含了所有的实例共享的属性和方法）；字面意思来讲，prototype就是通过构造函数创建的对象实例的原型对象。'
 ---
-# JS this以及原型、原型链
+# JS 基础 - this以及原型、原型链
 
 ## this 全面解析
 
@@ -410,7 +412,7 @@ person1.name; // nate
 
 创建一个函数，根据特定的规则会给函数创建一个prototype属性，这个属性指向了函数的原型的对象, 如下图：
 
-![function-prototype](https://cdn.img.wenhairu.com/images/2019/11/13/Auaco.png)
+![function-prototype](https://raw.githubusercontent.com/Wangbaoqi/blogImgs/master/nateImgs/JavaScript/prototype/proto_1.png)
 
 
 可以看到指针指向了一个对象（原型对象），它包含了一个constructor属性，而这个属性指向创建的函数。初次之外，原型对象默认只会取得constructor属性，其他属性都是继承于Object的
@@ -419,7 +421,7 @@ person1.name; // nate
 接下来，通过构造函数创建一个对象实例，该对象实例也会包含一个指针（__proto__），该指针也指向了构造函数的原型对象。这个__proto__连接存在于实例于构造函数的原型对象之间。如下图：
 
 
-![object-proto](https://cdn.img.wenhairu.com/images/2019/11/13/AuHI6.png)
+![object-proto](https://raw.githubusercontent.com/Wangbaoqi/blogImgs/master/nateImgs/JavaScript/prototype/proto_2.png)
 
 
 **检测原型和实例的方法**
@@ -448,7 +450,7 @@ let p1 = new Person()
 ```
 在这里特意加了contructor属性，并指定了其值是Person，但是这样一来，constructor就是原型上的属性了，通过Object.keys(Person.prototype)就可以枚举出来,默认情况下，原生constructor是不可枚举的。但是可以通过object.defineProperty()修改constructor的enumerable值.如下图：
 
-![simple-proto](https://cdn.img.wenhairu.com/images/2019/11/14/A9CCP.png)
+![simple-proto](https://raw.githubusercontent.com/Wangbaoqi/blogImgs/master/nateImgs/JavaScript/prototype/proto_3.png)
 
 **原型的动态性**
 先看一个🌰：
@@ -487,7 +489,7 @@ p1.getName() // error
 ```
 这个例子是首先创建了实例，之后再重写原型，其结果琢磨之后，会发现跟前者是不同的, 可以看下来自红皮书中的截图：
 
-![custom-proto](https://cdn.img.wenhairu.com/images/2019/11/14/A9JkD.png)
+![custom-proto](https://raw.githubusercontent.com/Wangbaoqi/blogImgs/master/nateImgs/JavaScript/prototype/proto_4.png)
 
 **原型对象的问题**
 原型对象省略了为构造函数初始化参数的过程，导致了所有的实例共享同一属性值，如果这种共享对于函数来讲，可能会有一定的方便性，如果对引用类型的值来讲，可能会存在一定的问题。看个例子：
@@ -647,11 +649,11 @@ let child = new Child();
 可以看下Parent和Child之间的关系：
 构造函数Child的原型对象是没有constructor的，它的原型对象被重写了，直接被Parent的实例覆盖了，因此，child.constructor指向了Parent
 
-![simple-extends](https://cdn.img.wenhairu.com/images/2019/11/20/A11QT.png)
+![simple-extends](https://raw.githubusercontent.com/Wangbaoqi/blogImgs/master/nateImgs/JavaScript/prototype/proto_5.png)
 
 这个例子通过原型链简单的实现了继承，下面引用一张红皮书(6.3.1)的原型链的图
 
-![prototype-chain](https://cdn.img.wenhairu.com/images/2019/11/20/A10pq.png)
+![prototype-chain](https://raw.githubusercontent.com/Wangbaoqi/blogImgs/master/nateImgs/JavaScript/prototype/proto_6.png)
 
 
 **确定原型和实例的关系**

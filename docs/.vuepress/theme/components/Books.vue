@@ -1,7 +1,6 @@
 <template>
   <div class="books">
     <h1 class="book-title">All the Books About IT ⤵️</h1>
-    <h2> 图书提取码请看页面底部</h2>
     <section class="book-group">
       <div v-for="book in books" class="book-type">
         <h3>{{book.bookType}}</h3>

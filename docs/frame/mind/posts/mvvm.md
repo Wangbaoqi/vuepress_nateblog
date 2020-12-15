@@ -44,7 +44,7 @@ excerpt: 'framework mind'
 
 ## MVC架构模式
 
-![mvc](https://cdn.img.wenhairu.com/images/2020/03/04/moOLD.png)
+![mvc](https://raw.githubusercontent.com/Wangbaoqi/blogImgs/master/nateImgs/frame/mvc.png)
 
 
 如图，箭头代表事件调用，圆箭头代表事件通知
@@ -136,7 +136,7 @@ function Controller() {
 
 ## MVP模式架构
 
-![mvc](https://cdn.img.wenhairu.com/images/2020/03/05/m7VI3.png)
+![mvc](https://raw.githubusercontent.com/Wangbaoqi/blogImgs/master/nateImgs/frame/mvp.png)
 
 如图, 跟MVC模式不同，model层跟view之间没有任何联系了，而所有的操作都放在了Presenter中
 
@@ -214,7 +214,7 @@ MVP模式虽然将view和model解耦了，解决了MVC模式弊端中的2、3点
 
 ## MVVM架构模式 
 
-![mvvm](https://cdn.img.wenhairu.com/images/2020/03/05/m73bp.png)
+![mvvm](https://raw.githubusercontent.com/Wangbaoqi/blogImgs/master/nateImgs/frame/mvvm_model.png)
 
 如图，MVVM将数据同步化，MVP中的Presenter是手动进行数据同步，MVVM中则是采用数据绑定进行同步数据
 

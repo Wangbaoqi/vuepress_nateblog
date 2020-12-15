@@ -87,7 +87,7 @@ export default {
     .follow 
       margin-top $sideLeftMargin
       .follow-pic
-        background url('https://cdn.img.wenhairu.com/images/2020/05/05/Ywv6j.jpg') no-repeat
+        background url('https://raw.githubusercontent.com/Wangbaoqi/blogImgs/master/nateImgs/share/wechat.jpg') no-repeat
         background-size 100%
         width 129px
         height 129px

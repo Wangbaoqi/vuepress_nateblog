@@ -1,6 +1,8 @@
 ---
 type: front-JavaScript
 tag: JavaScript
+subTag: JavaScript 进阶
+sort: 1
 lang: zh
 excerpt: 'JS EventLoop 机制'
 ---
@@ -22,11 +24,11 @@ JS是单线程的语言，如果在执行过程中遇到异步的代码，不可
 在遇到一段JS代码时，它的执行顺序表面看是按照顺序执行，但是内部其实不然。
 **一段JS在执行之前，首先会被编译器进行编译，之后会在JS引擎的控制下执行代码**
 
-![JS执行顺序](https://cdn.img.wenhairu.com/images/2019/12/11/AcypI.png)
+![JS执行顺序](https://raw.githubusercontent.com/Wangbaoqi/blogImgs/master/nateImgs/JavaScript/ctx/event_1.png)
 
 **执行上下文**
 
-![执行上下文](https://cdn.img.wenhairu.com/images/2019/12/16/A48lg.png)
+![执行上下文](https://raw.githubusercontent.com/Wangbaoqi/blogImgs/master/nateImgs/JavaScript/ctx/event_2.png)
 
 ### 编译阶段
 
@@ -135,8 +137,7 @@ function MainThread() {
 
 **要在线程运行的过程中处理新加入的任务，就需要采用事件循环机制了**
 
-![循环机制](https://cdn.img.wenhairu.com/images/2020/03/04/mou70.png)
-新加入的任务是线程内部的，无法处理其他线程的任务
+![循环机制](https://raw.githubusercontent.com/Wangbaoqi/blogImgs/master/nateImgs/JavaScript/ctx/event_3.png)
 ```js
 function getInput(val) {
   return val
@@ -151,18 +152,18 @@ function MainThread() {
 }
 ```
 
-3. 在单线程中处理其他线程发送的任务
+1. 在单线程中处理其他线程发送的任务
 
 **用第二版线程是无法处理其他线程发送的任务的，因此，消息队列就产生了**
 
 
 <font color=#ff502c bgcolor=#fff5f5 size=4 >**消息队列**</font> 
 
-![消息队列](https://cdn.img.wenhairu.com/images/2020/03/04/moEjG.png)
+![消息队列](https://raw.githubusercontent.com/Wangbaoqi/blogImgs/master/nateImgs/JavaScript/ctx/event_4.png)
 消息队列中有很多的任务类型（输入事件-鼠标滚动、点击、移动，微任务，文件读写、websocket、定时器等）, 每当有新的线程的任务来的时候，就会进入到消息队列中，等待主线程中的任务执行完成之后再执行。
 
 
-![eventLoop](https://cdn.img.wenhairu.com/images/2020/03/04/moaKv.png)
+![eventLoop](https://raw.githubusercontent.com/Wangbaoqi/blogImgs/master/nateImgs/JavaScript/ctx/event_5.png)
 **页面使用单线程的缺点**
 
 1. 处理优先级高的任务 
@@ -301,7 +302,7 @@ main(foo)
 ```
 **XMLHttpRequest 运行机制**
 
-![xmlHttpRequest](https://cdn.img.wenhairu.com/images/2020/03/24/qMH3f.png)
+![xmlHttpRequest](https://raw.githubusercontent.com/Wangbaoqi/blogImgs/master/nateImgs/JavaScript/ctx/event_6.png)
 
 上图是XMLHttpRequest的总执行图, 下面看XMLHttpRequest的详细用法
 
@@ -404,9 +405,9 @@ HTTPs页面中使用了HTTP资源，包括图片，视频等，这时浏览器�
 如果在执行微任务的同时，产生了新的微任务，则将改微任务添加到微任务队列中，V8引擎会循环执行微任务队列
 
 直观的看个例子
-![微任务执行时机](https://static001.geekbang.org/resource/image/83/88/839f468be3d683019c309e0acd8cd788.png)
+![微任务执行时机](https://raw.githubusercontent.com/Wangbaoqi/blogImgs/master/nateImgs/JavaScript/ctx/event_7.png)
 
-![微任务执行时机](https://static001.geekbang.org/resource/image/1d/92/1db319c879610816c0cfea22723fc492.png)
+![微任务执行时机](https://raw.githubusercontent.com/Wangbaoqi/blogImgs/master/nateImgs/JavaScript/ctx/event_8.png)
 
 从上述可以得到以下结论：
 
@@ -444,7 +445,7 @@ promise已经成为了前端解决异步的主力，接下来具体的学习prom
 **异步编程的问题-代码逻辑不连续**
 
 
-![异步编程模型](https://static001.geekbang.org/resource/image/01/85/01e40e30db7e8a91eb70ce02fd8a6985.png)
+![异步编程模型](https://raw.githubusercontent.com/Wangbaoqi/blogImgs/master/nateImgs/JavaScript/ctx/event_9.png)
 
 上述是web异步编程模型 接下来看下传统的异步回调带来的问题
 
@@ -672,9 +673,8 @@ console.log(gen.next().value)
 5. 通过return退出协程
 
 可以看一下协程的执行图
-![协程流程图](https://static001.geekbang.org/resource/image/5e/37/5ef98bd693bcd5645e83418b0856e437.png)
-
-![协程调用栈](https://static001.geekbang.org/resource/image/92/40/925f4a9a1c85374352ee93c5e3c41440.png)
+![协程流程图](https://raw.githubusercontent.com/Wangbaoqi/blogImgs/master/nateImgs/JavaScript/ctx/event_10.png)
+![协程调用栈](https://raw.githubusercontent.com/Wangbaoqi/blogImgs/master/nateImgs/JavaScript/ctx/event_11.png)
 
 
 

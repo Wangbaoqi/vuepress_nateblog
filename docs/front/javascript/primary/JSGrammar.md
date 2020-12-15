@@ -1,7 +1,9 @@
 ---
 type: front-JavaScript
 tag: JavaScript
+subTag: JavaScript Specification
 lang: zh
+sort: 1
 excerpt: 'JavaScript Grammar'
 ---
 # ECMAScript Specification 系列 - 词汇语法
@@ -13,7 +15,7 @@ JS 词汇语法在ECMAScript 规范中的定义: ECMAScript的模块或者脚本
 
 根据JavaScript知识体系脑图中的`Lexical Grammar`分支
 
-![lexical grammar](https://cdn.img.wenhairu.com/images/2020/05/07/YDvzN.png)
+![lexical grammar](https://raw.githubusercontent.com/Wangbaoqi/blogImgs/master/nateImgs/JavaScript/grammar/grammar_1.png)
 
 
 根据上图，输入元素基本有一下几种：
@@ -46,10 +48,10 @@ ASCII码的表达方式：使用指定的7位或者8位二进制组合来表示1
 **32-126**(95个) 是字符，32是空格，**48-57**是十个阿拉伯数字，**65-90**为26个大写英文字母，**97-122**是26个小写英文字母。
 
 **Basic ACSII Table**
-![basic ascii](http://www.asciitable.com/index/asciifull.gif)
+![basic ascii](https://raw.githubusercontent.com/Wangbaoqi/blogImgs/master/nateImgs/JavaScript/grammar/grammar_2.gif)
 
 **Extended ACSII Table**
-![extended table](http://www.asciitable.com/index/extend.gif)
+![extended table](https://raw.githubusercontent.com/Wangbaoqi/blogImgs/master/nateImgs/JavaScript/grammar/grammar_3.gif)
 
 ASCII的局限就是只能显示基本的26个英文字符、阿拉伯数字以及英式标点符号，为了解决这个问题，现在基本都使用Unicode编码。
 

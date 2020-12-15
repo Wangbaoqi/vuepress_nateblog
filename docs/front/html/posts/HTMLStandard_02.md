@@ -32,7 +32,7 @@ DOM树的生成大概可以看下面的图。
 首先网络进程接收到响应头中的`Content-type`，如果是`text/html`，就会判断是`html`文件，会选择创建一个渲染进程，*网络进程和渲染进程之间会有一个共享的管道*，网络进程获取到数据之后，会通过这管道传输到渲染进程，渲染进程拿到数据之后就会进行`解析`，也就是通过**HTML Parsing**，结束之后就会产生DOM对象。
 
 
-![DOM-parsing](https://cdn.img.wenhairu.com/images/2020/07/16/frznG.png)
+![DOM-parsing](https://raw.githubusercontent.com/Wangbaoqi/blogImgs/master/nateImgs/browser/dom_parse.png)
 
 
 

@@ -2,6 +2,8 @@
 type: front-JavaScript
 tag: JavaScript
 lang: zh
+sort: 2
+subTag: JavaScript 进阶
 excerpt: 'JavaScript 异步编程'
 ---
 # JS 异步编程

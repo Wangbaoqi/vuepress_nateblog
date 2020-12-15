@@ -4,9 +4,9 @@
       <span
         v-for="taginfo in tags"
         :style="{backgroundColor:color()}"
-        @click="change(taginfo.tag)"
-        :class="taginfo.tag===tg?'active':''"
-      >{{taginfo.tag}}({{taginfo.number}})</span>
+        @click="change(taginfo)"
+        :class="taginfo===tg?'active':''"
+      >{{taginfo}}</span>
     </div>
   </div>
 </template>
@@ -18,43 +18,17 @@ export default {
     Article
   },
   props: {
-    lang: ''
+    lang: '',
+    tags: {
+      type: Array,
+      value: []
+    }
   },
   data() {
     return {
       info: [],
       tg: "全部",
     };
-  },
-  computed: {
-    tags() {
-      let allTags = [];
-      let hasTags = [];
-
-
-      if(this.$page.frontmatter.type === 'typeTopic') {
-        hasTags = this.$site.pages.filter(e => e.frontmatter.subTag && e.frontmatter.lang === this.lang)
-        allTags = hasTags.map(e => e.frontmatter.subTag)
-      }else {
-        hasTags = this.$site.pages.filter(e => e.frontmatter.tag && e.frontmatter.lang === this.lang)
-        allTags = hasTags.map(e => e.frontmatter.tag)
-      }
-      
-      let flatTags = Array.from(new Set(allTags));
-      let all = [
-        {
-          tag: "全部",
-          number: allTags.length
-        }
-      ];
-      return flatTags.reduce((res, v) => {
-        let o = {};
-        o.tag = v;
-        o.number = allTags.filter(value => value === v).length;
-        res.push(o);
-        return res;
-      }, all);
-    }
   },
   methods: {
     change(tag) {
@@ -83,9 +57,7 @@ export default {
 
 <style lang='stylus' scoped>
 .tag {
-  max-width: 60rem;
-  margin: 0 auto;
-  padding: 1rem 0.5rem;
+  padding: 2rem 20px;
 
   .items {
     margin-bottom: 2rem;
@@ -95,13 +67,15 @@ export default {
       cursor: pointer;
       margin: 0.5rem 0.5rem 0.2rem;
       padding: 0.4rem 0.7rem;
+      margin: 1.5rem 1rem 0.2rem;
+      padding: 9px 0.7rem;
       display: -webkit-inline-box;
       display: -ms-inline-flexbox;
       display: inline-flex;
       border-radius: 0.2rem;
       background: #fff;
       color: #fff;
-      font-size: 1rem;
+      font-size: 13px;
       box-shadow: 0 1px 0.25rem 0 hsla(0, 0%, 57%, 0.21);
       transition: all 0.3s;
       background-color: red;

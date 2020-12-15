@@ -25,14 +25,9 @@ module.exports = [
   },
   {
     text: 'Algorithm',
-    link: '/algorithm/frontalgorithm/',
+    link: 'https://wangbaoqi.gitbook.io/algo/',
     color: '#ffffff',
-    background: '#00a591'
-  },
-  {
-    text: 'DataStructure',
-    link: '/algorithm/structure/',
-    color: '#ffffff',
+    outLink: true,
     background: '#00a591'
   },
   {
@@ -55,8 +50,9 @@ module.exports = [
   },
   {
     text: 'NetWork',
-    link: '/network/',
+    link: 'https://wangbaoqi.gitbook.io/http/',
     color: '#ffffff',
+    outLink: true,
     background: '#6b5b95'
   },
   
@@ -77,12 +73,6 @@ module.exports = [
     link: '/webApi/node/',
     color: '#ffffff',
     background: '#026e00'
-  },
-  {
-    text: 'ProgramCode',
-    link: '/algorithm/programCode/',
-    color: '#000000',
-    background: '#bfd641'
   },
   {
     text: 'Frame',

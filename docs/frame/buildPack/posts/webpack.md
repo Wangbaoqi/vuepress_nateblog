@@ -2,8 +2,8 @@
 type: webpack
 subType: oneTopic
 subTag: webpack
-tag: BuildPack
-lang: zh
+tag: 构建打包
+lang: us
 ---
 
 # Webpack 打包
@@ -12,9 +12,7 @@ lang: zh
 webpack 是一个现代 JavaScript 应用程序的静态模块打包器(module bundler)。当 webpack 处理应用程序时，它会递归地构建一个依赖关系图(dependency graph)，其中包含应用程序需要的每个模块，然后将所有这些模块打包成一个或多个 bundle
 ::: 
 
-![webpack](https://cdn.img.wenhairu.com/images/2020/02/13/mATBP.png)
-
-[[toc]]
+![webpack](https://raw.githubusercontent.com/Wangbaoqi/blogImgs/master/nateImgs/build/webpack.png)
 
 
 ## webpack 核心概念
@@ -299,7 +297,7 @@ glob.sync(path.join(__dirname), './src/*/index.js')
 
 source map 类型
 
-![sourcemap](https://cdn.img.wenhairu.com/images/2020/02/16/muJxp.png)
+![sourcemap](https://raw.githubusercontent.com/Wangbaoqi/blogImgs/master/nateImgs/build/sourcemap.png)
 
 
 ### 提取公共资源 
@@ -429,27 +427,5 @@ tree shaking 摇树优化  ES6 ， 静态的分析代码是不是有用到，没
 
 ```
 
-
-
-## ESLint 和 webpack的结合
-
-1. [eslint-config-airbnb](https://www.npmjs.com/package/eslint-config-airbnb)
-
-```js
-// use eslint-config-airbnb
-npm i eslint-config-airbnb eslint eslint-plugin-import eslint-plugin-react eslint-plugin-react-hooks eslint-plugin-jsx-a11y eslint-loader 
-```
-新建 .eslintrc.js 文件
-
-```js
-module.exports = {
-  "parser": "babel-eslint",
-  "extends": "airbnb",
-  "env": {
-    "browser": true,
-    "node": true
-  }
-}
-```
 
 

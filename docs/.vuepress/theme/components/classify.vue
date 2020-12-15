@@ -1,6 +1,6 @@
 <template>
   <div class="classify">
-    <!-- <Tags @changeTag="changeTag" :lang="lang"/> -->    
+    <Tags v-if="tag === 'JavaScript'" @changeTag="changeTag" :tags="tags" :lang="lang"/>    
     <h1 class="post-title">All the {{tag}} Articles ⤵️</h1>
 
     <section class="main-content">
@@ -34,6 +34,7 @@ export default {
   data() {
     return {
       blog: [], //博客
+      tags: [], 
       infoLength: defaultLength, //默认显示条数
       show: false,
       lang: 'es',
@@ -52,6 +53,7 @@ export default {
     },
     filerArticle() {
       const { lang = '', tag = '' } = this.$page.frontmatter
+
       let go = this.$site.pages.sort((pre, next) => {
         if (pre.lastUpdated === undefined) pre.lastUpdated = this.$page.lastUpdated;
         if (next.lastUpdated === undefined) next.lastUpdated = this.$page.lastUpdated;
@@ -59,14 +61,24 @@ export default {
           new Date(next.lastUpdated).getTime() - new Date(pre.lastUpdated).getTime()
         );
       });
-      // 每一壹题
-      // if(this.$page.frontmatter.type && this.$page.frontmatter.type === 'typeTopic') {
-      //   go = go.filter(e => e.frontmatter.type === 'web-topic' )
-      // }
+      go = go.filter(v => {
+        if(v.frontmatter.tag) {
+          return v.frontmatter.tag == tag
+        }
+      });
 
-      // go = go.filter(e => e.frontmatter.lang && e.frontmatter.lang === lang)
-      
-      this.blog = go.filter(v => v.frontmatter.tag == tag);
+      // JavaScript 
+      if(tag == 'JavaScript') {
+        go.sort((a , b) => {
+          return a.frontmatter.sort - b.frontmatter.sort
+        })
+        this.tags = go.map(e => {
+          if( e.frontmatter.subTag) return  e.frontmatter.subTag
+        }) 
+        this.tags = [...new Set(this.tags)]
+        console.log(this.tags, 'tagssss');
+      }
+      this.blog = go
       this.tag = tag
       copyBlogs = go;
 
@@ -74,6 +86,7 @@ export default {
         this.show = true;
       }
     },
+
     changeTag(tag) {
       const { type = ''} = this.$page.frontmatter
       if(tag == '全部') {
@@ -81,11 +94,7 @@ export default {
         return
       }
       this.blog = copyBlogs.filter(e => {
-        if(type == 'typeTopic') {
-          return e.frontmatter.subTag === tag
-        }else {
-          return e.frontmatter.tag === tag
-        }
+        return e.frontmatter.subTag === tag
       })
     },
     format(timer) {

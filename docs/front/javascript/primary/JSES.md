@@ -2,6 +2,8 @@
 type: front-JavaScript
 tag: JavaScript
 lang: zh
+subTag: JavaScript 基础
+sort: 5
 excerpt: 'ECMAScript 6.0 '
 ---
 # JS ES6 知识手册

@@ -1,6 +1,8 @@
 ---
 type: front-JavaScript
 tag: JavaScript
+subTag: JavaScript Specification
+sort: 5
 lang: zh
 excerpt: 'ECMAScript Array 是对特定类别的属性值进行特殊处理的特殊对象，Array也是对象的一种。'
 ---

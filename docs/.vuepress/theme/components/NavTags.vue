@@ -1,14 +1,25 @@
 <template>
   <section class="navbar-tags">
 		<span v-for="item in filterNavTags" class="tag-item">
-			 	<router-link :to="item.link" class="tag" :style="{color: item.color, background: item.background}">
+			 	<router-link :to="item.link" v-if="!item.outLink" class="tag" :style="{color: item.color, background: item.background}">
 					{{item.text}}
 				</router-link>
+				<a
+					v-else
+					:href="item.link"
+					:style="{color: item.color, background: item.background}"
+					class="tag"
+					:target="'_blank'"
+				>
+					{{ item.text }}
+				</a>
 		</span>
   </section>
 </template>
 
 <script>
+import { isExternal, isMailto, isTel, ensureExt } from '../util'
+
 export default {
   
   computed: {

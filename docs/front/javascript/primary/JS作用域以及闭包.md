@@ -1,10 +1,12 @@
 ---
 type: front-JavaScript
 tag: JavaScript
+subTag: JavaScript 基础
 lang: zh
+sort: 2
 excerpt: '我们将“作用域”定义为一套规则，这套规则用来管理引擎如何在当前作用域以及嵌套的子作用域中根据标识符名称进行变量查找'
 ---
-# JS 作用域以及闭包
+# JS 基础 - 作用域以及闭包
 
 ::: tip
 我们将“作用域”定义为一套规则，这套规则用来管理引擎如何在当前作用域以及嵌套的子作用域中根据标识符名称进行变量查找
@@ -177,7 +179,7 @@ checkScope2()();
 
 使用执行上下文的概念来用图解释下作用域链
 
-![词法作用域](https://cdn.img.wenhairu.com/images/2019/12/13/APkU3.png)
+![词法作用域](https://raw.githubusercontent.com/Wangbaoqi/blogImgs/master/nateImgs/JavaScript/ctx/scope_1.png) scope_1
 
 ```js
 var fn;

@@ -8,7 +8,7 @@ excerpt: 'React 组件化, 理解React组件, 如何创建一个React组件, 组
 # React 组件化
 
 ## 理解React组件
-![react-component](https://cdn.img.wenhairu.com/images/2019/10/23/ANsAP.png)
+![react-component](https://raw.githubusercontent.com/Wangbaoqi/blogImgs/master/nateImgs/react/compoent.png)
 
 * react组件可以说是内部维护的状态和外部传入的props组成的
 * react组件也可以说是一个纯函数(返回的值完全由传入的值决定)
@@ -33,11 +33,11 @@ excerpt: 'React 组件化, 理解React组件, 如何创建一个React组件, 组
 **受控组件**
 这两中一般在表单元素中使用的多
 受控组件一般是由使用者控制维护
-![react-component](https://cdn.img.wenhairu.com/images/2019/10/23/AN34t.png)
+![react-component](https://raw.githubusercontent.com/Wangbaoqi/blogImgs/master/nateImgs/react/component_1.png) 
 
 非受控组件一般是由DOM自身维护
 **和非受控组件**
-![react-component](https://cdn.img.wenhairu.com/images/2019/10/23/ANzEC.png)
+![react-component](https://raw.githubusercontent.com/Wangbaoqi/blogImgs/master/nateImgs/react/component_2.png) 
 
 
 
@@ -45,7 +45,7 @@ excerpt: 'React 组件化, 理解React组件, 如何创建一个React组件, 组
 
 在掌握的react的生命周期之前可以看下生命周期图谱 
 
-![react-component-lifeCycle](https://cdn.img.wenhairu.com/images/2019/11/05/ADSX6.png)
+![react-component-lifeCycle](https://raw.githubusercontent.com/Wangbaoqi/blogImgs/master/nateImgs/react/component_3.png) 
 
 
 #### 组件挂载
